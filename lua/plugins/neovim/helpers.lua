@@ -1,0 +1,26 @@
+return {
+    -- Which key
+    -- TODO: Customize opts
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+        end,
+        opts = {},
+    },
+
+    -- Precognition shows keys for movements
+    {
+        "tris203/precognition.nvim",
+        event = "VeryLazy",
+        opts = {},
+    },
+
+    -- Vim training
+    {
+        "ThePrimeagen/vim-be-good",
+        lazy = true,
+    },
+}
