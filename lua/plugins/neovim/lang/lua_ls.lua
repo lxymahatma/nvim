@@ -6,16 +6,16 @@ return {
                 "lua",
                 "luadoc",
                 "luap",
-            }
+            },
         },
     },
 
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         opts = {
             ensure_installed = {
                 "lua_ls",
-            }
+            },
         },
     },
 
@@ -49,8 +49,8 @@ return {
                         },
                     },
                 },
-            }
-        }
+            },
+        },
     },
 
     {
@@ -59,6 +59,6 @@ return {
             formatters_by_ft = {
                 lua = { "stylua" },
             },
-        }
-    }
+        },
+    },
 }

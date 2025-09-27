@@ -4,17 +4,17 @@ return {
         opts = {
             ensure_installed = {
                 "rust",
-                "ron"
-            }
+                "ron",
+            },
         },
     },
 
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         opts = {
             ensure_installed = {
                 "rust_analyzer",
-            }
+            },
         },
     },
 
@@ -22,11 +22,9 @@ return {
         "neovim/nvim-lspconfig",
         opts = {
             servers = {
-                rust_analyzer = {
-
-                }
-            }
-        }
+                rust_analyzer = {},
+            },
+        },
     },
 
     {
@@ -35,6 +33,6 @@ return {
             formatters_by_ft = {
                 rust = { "rustfmt" },
             },
-        }
-    }
+        },
+    },
 }

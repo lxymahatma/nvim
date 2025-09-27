@@ -5,16 +5,16 @@ return {
             ensure_installed = {
                 "c",
                 "cpp",
-            }
+            },
         },
     },
 
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         opts = {
             ensure_installed = {
                 "clangd",
-            }
+            },
         },
     },
 
@@ -27,18 +27,18 @@ return {
                         offsetEncoding = { "utf-8", "utf-16" },
                         textDocument = {
                             completion = {
-                                editsNearCursor = true
-                            }
-                        }
+                                editsNearCursor = true,
+                            },
+                        },
                     },
                     cmd = {
                         "clangd",
                         "--background-index",
                         "--clang-tidy",
                     },
-                }
-            }
-        }
+                },
+            },
+        },
     },
 
     {
@@ -48,6 +48,6 @@ return {
                 c = { "clang-format" },
                 cpp = { "clang-format" },
             },
-        }
-    }
+        },
+    },
 }

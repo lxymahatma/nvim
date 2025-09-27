@@ -3,7 +3,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         opts = {
             ensure_installed = {
-                "hyprlang",
+                "yaml",
             },
         },
     },
@@ -12,7 +12,7 @@ return {
         "mason-org/mason-lspconfig.nvim",
         opts = {
             ensure_installed = {
-                "hyprls",
+                "yamlls",
             },
         },
     },
