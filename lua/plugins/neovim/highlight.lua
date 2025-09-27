@@ -2,6 +2,7 @@ return {
     -- Syntax Highlighting
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "main",
         event = "VeryLazy",
         opts = {
             highlight = { enable = true },

@@ -4,8 +4,8 @@ return {
         "neovim/nvim-lspconfig",
         event = "VeryLazy",
         dependencies = {
-            "williamboman/mason-lspconfig.nvim",
-            "williamboman/mason.nvim",
+            "mason-org/mason-lspconfig.nvim",
+            "mason-org/mason.nvim",
         },
         opts = {
             inlay_hints = {
@@ -13,7 +13,7 @@ return {
             },
             codelens = {
                 enabled = false,
-            }
+            },
         },
         config = function(_, opts)
             for server, config in pairs(opts.servers) do
@@ -21,12 +21,12 @@ return {
                 vim.lsp.config(server, config)
                 vim.lsp.enable(server)
             end
-        end
+        end,
     },
 
     -- Mason
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         cmd = "Mason",
         keys = {
             { "<Leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
@@ -36,18 +36,16 @@ return {
                 icons = {
                     package_installed = "✓",
                     package_pending = "➜",
-                    package_uninstalled = "✗"
-                }
-            }
-        }
+                    package_uninstalled = "✗",
+                },
+            },
+        },
     },
 
     -- Mason-lspconfig
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         event = "VeryLazy",
-        opts = {
-            automatic_installation = true,
-        }
+        opts = {},
     },
 }
