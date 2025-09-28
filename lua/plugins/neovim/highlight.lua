@@ -3,16 +3,20 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         branch = "main",
-        event = "VeryLazy",
+        lazy = false,
+        build = ":TSUpdate",
         opts = {
             highlight = { enable = true },
             indent = { enable = true },
             ensure_installed = {
+                "bash",
                 "diff",
                 "markdown",
                 "markdown_inline",
                 "query",
                 "regex",
+                "vim",
+                "vimdoc",
             },
         },
     },

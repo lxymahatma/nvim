@@ -8,23 +8,17 @@ return {
             "echasnovski/mini.icons",
             "MunifTanjim/nui.nvim",
         },
-        deactivate = function()
-            vim.cmd([[Neotree close]])
-        end,
+        deactivate = function() vim.cmd([[Neotree close]]) end,
         init = function()
             local stats = vim.uv.fs_stat(vim.fn.argv(0))
-            if stats and stats.type == "directory" then
-                require("neo-tree")
-            end
+            if stats and stats.type == "directory" then require("neo-tree") end
         end,
         opts = function(_, opts)
-            local function on_move(data)
-                Snacks.rename.on_rename_file(data.source, data.destination)
-            end
+            local function on_move(data) Snacks.rename.on_rename_file(data.source, data.destination) end
             local events = require("neo-tree.events")
             opts.event_handlers = opts.event_handlers or {}
             vim.list_extend(opts.event_handlers, {
-                { event = events.FILE_MOVED,   handler = on_move },
+                { event = events.FILE_MOVED, handler = on_move },
                 { event = events.FILE_RENAMED, handler = on_move },
             })
             return vim.tbl_deep_extend("force", opts, {
@@ -67,7 +61,7 @@ return {
                     icon = {
                         provider = function(icon, node)
                             local text, hl
-                            local mini_icons = require "mini.icons"
+                            local mini_icons = require("mini.icons")
                             if node.type == "file" then
                                 text, hl = mini_icons.get("file", node.name)
                             elseif node.type == "directory" then
@@ -121,35 +115,37 @@ return {
         dependencies = {
             "echasnovski/mini.icons",
         },
-        opts = function(_, opts)
-            return vim.tbl_deep_extend("force", opts, {
-                options = {
-                    offsets = {
-                        {
-                            filetype = "neo-tree",
-                            text = "Neo-tree",
-                            highlight = "Directory",
-                            text_align = "left",
-                            separator = true,
-                        },
+        opts = {
+            options = {
+                close_command = function(n) Snacks.bufdelete(n) end,
+                diagnostics = "nvim_lsp",
+                offsets = {
+                    {
+                        filetype = "neo-tree",
+                        text = "Neo-tree",
+                        highlight = "Directory",
+                        text_align = "left",
+                        separator = true,
                     },
-                    color_icons = true,
+                    {
+                        filetype = "snacks_layout_box",
+                    },
                 },
-                highlights = require("catppuccin.special.bufferline").get_theme(),
-            })
-        end,
+                color_icons = true,
+            },
+            highlights = require("catppuccin.special.bufferline").get_theme(),
+        },
         keys = {
             { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
             { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+            { "<Leader>bp", "<cmd>BufferLineTogglePin<cr>", desc = "Toggle Pin Buffer" },
             {
-                "<Leader>dc",
-                function()
-                    Snacks.bufdelete()
-                end,
+                "<Leader>bd",
+                function() Snacks.bufdelete() end,
                 desc = "Delete Current Buffer",
             },
-            { "<Leader>dr", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers on the Right" },
-            { "<Leader>dl", "<Cmd>BufferLineCloseLeft<CR>",  desc = "Delete Buffers on the Left" },
+            { "<Leader>br", "<cmd>BufferLineCloseRight<cr>", desc = "Delete Buffers on the Right" },
+            { "<Leader>bl", "<cmd>BufferLineCloseLeft<cr>", desc = "Delete Buffers on the Left" },
         },
     },
 
@@ -184,14 +180,15 @@ return {
                 override = {
                     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
                     ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true,
                 },
             },
             presets = {
-                bottom_search = true,         -- use a classic bottom cmdline for search
-                command_palette = true,       -- position the cmdline and popupmenu together
-                long_message_to_split = true, -- long messages will be sent to a split
-                inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-                lsp_doc_border = true,        -- add a border to hover docs and signature help
+                bottom_search = false,
+                command_palette = false,
+                long_message_to_split = true,
+                inc_rename = true,
+                lsp_doc_border = true,
             },
         },
     },
