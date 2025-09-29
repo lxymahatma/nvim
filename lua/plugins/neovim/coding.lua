@@ -7,6 +7,10 @@ return {
         dependencies = "rafamadriz/friendly-snippets",
         version = "*",
         opts = {
+            cmdline = {
+                keymap = { preset = "inherit" },
+                completion = { menu = { auto_show = true } },
+            },
             completion = {
                 keyword = { range = "full" },
                 accept = {

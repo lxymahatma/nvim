@@ -12,8 +12,6 @@ return {
             ensure_installed = {
                 "bash",
                 "diff",
-                "markdown",
-                "markdown_inline",
                 "query",
                 "regex",
                 "vim",
@@ -21,18 +19,6 @@ return {
             },
         },
         config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
-    },
-
-    -- Markdown Syntax Highlighting
-    {
-        "MeanderingProgrammer/render-markdown.nvim",
-        event = "VeryLazy",
-        ft = { "markdown", "norg", "rmd", "org" },
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "echasnovski/mini.icons",
-        },
-        opts = {},
     },
 
     -- Rainbow Brackets

@@ -183,6 +183,9 @@ return {
                     ["cmp.entry.get_documentation"] = true,
                 },
             },
+            popupmenu = {
+                backend = "cmp",
+            },
             presets = {
                 bottom_search = false,
                 command_palette = false,
