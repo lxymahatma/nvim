@@ -46,6 +46,7 @@ return {
     {
         "mason-org/mason-lspconfig.nvim",
         event = "VeryLazy",
+        opts_extend = { "ensure_installed" },
         opts = {},
     },
 }

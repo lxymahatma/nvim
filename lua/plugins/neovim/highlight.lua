@@ -2,9 +2,10 @@ return {
     -- Syntax Highlighting
     {
         "nvim-treesitter/nvim-treesitter",
-        branch = "main",
+        branch = "master",
         lazy = false,
         build = ":TSUpdate",
+        opts_extend = { "ensure_installed" },
         opts = {
             highlight = { enable = true },
             indent = { enable = true },
@@ -19,6 +20,7 @@ return {
                 "vimdoc",
             },
         },
+        config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
     },
 
     -- Markdown Syntax Highlighting
