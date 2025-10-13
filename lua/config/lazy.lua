@@ -18,8 +18,7 @@ require("config.keymaps")
 
 require("lazy").setup({
     spec = {
-        { import = "plugins.common",      cond = true },
-        { import = "plugins.neovim",      cond = (function() return not vim.g.vscode end) },
-        { import = "plugins.neovim.lang", cond = (function() return not vim.g.vscode end) },
+        { import = "plugins", },
+        { import = "plugins.lang" },
     },
 })
