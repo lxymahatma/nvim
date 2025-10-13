@@ -1,6 +1,5 @@
 return {
     -- File Explorer
-    -- TODO: Customize keymaps
     {
         "nvim-neo-tree/neo-tree.nvim",
         dependencies = {
@@ -14,7 +13,6 @@ return {
             if stats and stats.type == "directory" then require("neo-tree") end
         end,
         opts = {
-            sources = { "filesystem", "buffers", "git_status" },
             open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
             default_component_configs = {
                 indent = {
@@ -65,11 +63,10 @@ return {
                     },
                     ["P"] = {
                         "toggle_preview",
-                        config =
-                        {
+                        config = {
                             use_float = false,
                             use_snacks_image = true,
-                        }
+                        },
                     },
                 },
             },
@@ -89,7 +86,7 @@ return {
             local events = require("neo-tree.events")
             opts.event_handlers = opts.event_handlers or {}
             vim.list_extend(opts.event_handlers, {
-                { event = events.FILE_MOVED,   handler = on_move },
+                { event = events.FILE_MOVED, handler = on_move },
                 { event = events.FILE_RENAMED, handler = on_move },
             })
             require("neo-tree").setup(opts)
@@ -99,6 +96,25 @@ return {
                 callback = function() require("neo-tree.sources.git_status").refresh() end,
             })
         end,
+        keys = {
+            {
+                "<leader>fe",
+                function()
+                    require("neo-tree.command").execute({ source = "filesystem", toggle = true, dir = vim.uv.cwd() })
+                end,
+                desc = "Explorer NeoTree (Root Dir)",
+            },
+            {
+                "<leader>ge",
+                function() require("neo-tree.command").execute({ source = "git_status", toggle = true }) end,
+                desc = "Git Explorer",
+            },
+            {
+                "<leader>be",
+                function() require("neo-tree.command").execute({ source = "buffers", toggle = true }) end,
+                desc = "Buffer Explorer",
+            },
+        },
     },
 
     -- File Operations with LSP
@@ -108,7 +124,7 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-neo-tree/neo-tree.nvim",
         },
-        opts = {}
+        opts = {},
     },
 
     -- Window Picker
@@ -123,6 +139,6 @@ return {
                     buftype = { "terminal", "quickfix" },
                 },
             },
-        }
+        },
     },
 }
