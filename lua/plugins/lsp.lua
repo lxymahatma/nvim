@@ -39,6 +39,10 @@ return {
                     package_uninstalled = "✗",
                 },
             },
+            keymaps = {
+                toggle_package_expand = "l",
+                toggle_package_install_log = "l",
+            },
         },
     },
 
