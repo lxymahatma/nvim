@@ -8,16 +8,12 @@ local function get_available_langs_for_enable()
 
     local available_langs = {}
     for _, lang in ipairs(all_langs) do
-        if not vim.tbl_contains(enabled_langs, lang) then
-            table.insert(available_langs, lang)
-        end
+        if not vim.tbl_contains(enabled_langs, lang) then table.insert(available_langs, lang) end
     end
     return available_langs
 end
 
-local function get_available_langs_for_disable()
-    return lang_loader.get_extra_langs()
-end
+local function get_available_langs_for_disable() return lang_loader.get_extra_langs() end
 
 vim.api.nvim_create_user_command("LangEnable", function(opts)
     local langs_to_add = opts.fargs
@@ -42,7 +38,8 @@ vim.api.nvim_create_user_command("LangEnable", function(opts)
 
     vim.notify(
         ("LangEnable: Added languages: %s. Restart Neovim to apply changes."):format(table.concat(langs_to_add, ", ")),
-        vim.log.levels.INFO)
+        vim.log.levels.INFO
+    )
 end, {
     nargs = "+",
     complete = get_available_langs_for_enable,
@@ -66,12 +63,9 @@ vim.api.nvim_create_user_command("LangDisable", function(opts)
 
     for _, lang in ipairs(langs_to_remove) do
         if vim.tbl_contains(default_langs, lang) then
-            vim.notify(("LangDisable: '%s' is a default language and cannot be disabled."):format(lang),
-                vim.log.levels.WARN)
+            vim.notify(("LangDisable: '%s' cannot be disabled."):format(lang), vim.log.levels.WARN)
         elseif vim.tbl_contains(extra_langs, lang) then
-            extra_langs = vim.tbl_filter(function(v)
-                return v ~= lang
-            end, extra_langs)
+            extra_langs = vim.tbl_filter(function(v) return v ~= lang end, extra_langs)
             table.insert(removed_langs, lang)
         else
             vim.notify(("LangDisable: '%s' is not enabled."):format(lang), vim.log.levels.WARN)
@@ -82,7 +76,8 @@ vim.api.nvim_create_user_command("LangDisable", function(opts)
 
     vim.notify(
         ("LangDisable: Removed languages: %s. Restart Neovim to apply changes."):format(table.concat(removed_langs, ", ")),
-        vim.log.levels.INFO)
+        vim.log.levels.INFO
+    )
 end, {
     nargs = "+",
     complete = get_available_langs_for_disable,

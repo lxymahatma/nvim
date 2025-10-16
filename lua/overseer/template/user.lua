@@ -1,3 +1,3 @@
 return {
-    "clangd_build"
+    "clangd_build",
 }

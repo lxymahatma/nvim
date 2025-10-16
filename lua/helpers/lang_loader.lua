@@ -30,9 +30,7 @@ function M.get_enabled_langs()
     local enabled_langs = {}
     vim.list_extend(enabled_langs, default_langs)
     for _, lang in ipairs(extra_langs) do
-        if not vim.tbl_contains(enabled_langs, lang) then
-            table.insert(enabled_langs, lang)
-        end
+        if not vim.tbl_contains(enabled_langs, lang) then table.insert(enabled_langs, lang) end
     end
     return enabled_langs
 end
@@ -41,9 +39,7 @@ function M.save_extra_langs(extra_langs)
     table.sort(extra_langs)
     local content = "return " .. vim.inspect({ extra_langs = extra_langs }) .. "\n"
     local ok = vim.fn.writefile(vim.split(content, "\n"), local_config_path)
-    if ok ~= 0 then
-        vim.notify("Failed to write to " .. local_config_path, vim.log.levels.ERROR)
-    end
+    if ok ~= 0 then vim.notify("Failed to write to " .. local_config_path, vim.log.levels.ERROR) end
 end
 
 return M
