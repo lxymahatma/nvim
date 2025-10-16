@@ -2,10 +2,6 @@ return {
     -- File Explorer
     {
         "nvim-neo-tree/neo-tree.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "MunifTanjim/nui.nvim",
-        },
         lazy = false,
         deactivate = function() vim.cmd([[Neotree close]]) end,
         init = function()
@@ -86,7 +82,7 @@ return {
             local events = require("neo-tree.events")
             opts.event_handlers = opts.event_handlers or {}
             vim.list_extend(opts.event_handlers, {
-                { event = events.FILE_MOVED, handler = on_move },
+                { event = events.FILE_MOVED,   handler = on_move },
                 { event = events.FILE_RENAMED, handler = on_move },
             })
             require("neo-tree").setup(opts)
@@ -121,7 +117,6 @@ return {
     {
         "antosha417/nvim-lsp-file-operations",
         dependencies = {
-            "nvim-lua/plenary.nvim",
             "nvim-neo-tree/neo-tree.nvim",
         },
         opts = {},
