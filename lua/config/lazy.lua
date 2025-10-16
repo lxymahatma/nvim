@@ -1,3 +1,5 @@
+local M = {}
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -5,7 +7,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     if vim.v.shell_error ~= 0 then
         vim.api.nvim_echo({
             { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out,                            "WarningMsg" },
+            { out, "WarningMsg" },
             { "\nPress any key to exit..." },
         }, true, {})
         vim.fn.getchar()
@@ -16,9 +18,13 @@ vim.opt.rtp:prepend(lazypath)
 
 require("config.keymaps")
 
-require("lazy").setup({
-    spec = {
-        { import = "plugins", },
-        { import = "plugins.lang" },
-    },
-})
+function M.setup(enabled_langs)
+    local spec = { { import = "plugins" } }
+    for _, lang in ipairs(enabled_langs) do
+        table.insert(spec, { import = "plugins.lang." .. lang })
+    end
+
+    require("lazy").setup({ spec = spec })
+end
+
+return M
