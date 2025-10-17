@@ -93,9 +93,6 @@ return {
     -- TODO: Customize opts
     {
         "ibhagwan/fzf-lua",
-        dependencies = {
-            "echasnovski/mini.icons",
-        },
         opts = {},
     },
 
@@ -193,8 +190,8 @@ return {
 
     -- Go forward/backward with square brackets
     {
-        "echasnovski/mini.bracketed",
-        event = "VeryLazy",
+        "nvim-mini/mini.bracketed",
+        event = "BufEdit",
         opts = {
             buffer = { suffix = "b", options = {} },
             comment = { suffix = "c", options = {} },
@@ -216,7 +213,7 @@ return {
     -- Show code context
     {
         "nvim-treesitter/nvim-treesitter-context",
-        event = "VeryLazy",
+        event = "BufEdit",
         opts = {
             enable = true,
             multiwindow = false,      -- Enable multiwindow support.
@@ -260,6 +257,7 @@ return {
         },
     },
 
+    -- Rename
     {
         "smjonas/inc-rename.nvim",
         opts = {

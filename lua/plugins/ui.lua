@@ -4,9 +4,6 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         lazy = false,
-        dependencies = {
-            "echasnovski/mini.icons",
-        },
         opts = {
             options = {
                 theme = "auto",
@@ -28,9 +25,6 @@ return {
     {
         "akinsho/bufferline.nvim",
         event = "VeryLazy",
-        dependencies = {
-            "echasnovski/mini.icons",
-        },
         opts = {
             options = {
                 close_command = function(n) Snacks.bufdelete(n) end,
@@ -67,7 +61,7 @@ return {
 
     -- Icons
     {
-        "echasnovski/mini.icons",
+        "nvim-mini/mini.icons",
         lazy = true,
         opts = {
             file = {
@@ -76,9 +70,9 @@ return {
             },
             filetype = {
                 dotenv = { glyph = "", hl = "MiniIconsYellow" },
-            }
+            },
         },
-        init = function() require("mini.icons").mock_nvim_web_devicons() end
+        init = function() require("mini.icons").mock_nvim_web_devicons() end,
     },
 
     -- Noice notification

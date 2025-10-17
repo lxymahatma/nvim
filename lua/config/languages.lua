@@ -26,9 +26,9 @@ vim.api.nvim_create_user_command("LangEnable", function(opts)
 
     for _, lang in ipairs(langs_to_add) do
         if vim.tbl_contains(default_langs, lang) then
-            vim.notify(("LangEnable: Language '%s' is enabled by default."):format(lang), vim.log.levels.WARN)
+            vim.notify(string.format("LangEnable: Language '%s' is enabled by default.", lang), vim.log.levels.WARN)
         elseif vim.tbl_contains(extra_langs, lang) then
-            vim.notify(("LangEnable: Language '%s' is already enabled."):format(lang), vim.log.levels.WARN)
+            vim.notify(string.format("LangEnable: Language '%s' is already enabled.", lang), vim.log.levels.WARN)
         else
             table.insert(extra_langs, lang)
         end
@@ -37,7 +37,10 @@ vim.api.nvim_create_user_command("LangEnable", function(opts)
     lang_loader.save_extra_langs(extra_langs)
 
     vim.notify(
-        ("LangEnable: Added languages: %s. Restart Neovim to apply changes."):format(table.concat(langs_to_add, ", ")),
+        string.format(
+            "LangEnable: Added languages: %s. Restart Neovim to apply changes.",
+            table.concat(langs_to_add, ", ")
+        ),
         vim.log.levels.INFO
     )
 end, {
@@ -75,7 +78,10 @@ vim.api.nvim_create_user_command("LangDisable", function(opts)
     lang_loader.save_extra_langs(extra_langs)
 
     vim.notify(
-        ("LangDisable: Removed languages: %s. Restart Neovim to apply changes."):format(table.concat(removed_langs, ", ")),
+        string.format(
+            "LangDisable: Removed languages: %s. Restart Neovim to apply changes.",
+            table.concat(removed_langs, ", ")
+        ),
         vim.log.levels.INFO
     )
 end, {

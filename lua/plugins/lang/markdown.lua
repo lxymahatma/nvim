@@ -14,10 +14,6 @@ return {
         "MeanderingProgrammer/render-markdown.nvim",
         event = "VeryLazy",
         ft = { "markdown", "norg", "rmd", "org" },
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "echasnovski/mini.icons",
-        },
         opts = {},
     },
 }

@@ -24,7 +24,7 @@ return {
     -- Rainbow Brackets
     {
         "HiPhish/rainbow-delimiters.nvim",
-        event = "VeryLazy",
+        event = "BufEdit",
         main = "rainbow-delimiters.setup",
         opts = function()
             local rb = require("rainbow-delimiters")
@@ -57,7 +57,7 @@ return {
     -- Highlight colors
     {
         "brenoprata10/nvim-highlight-colors",
-        event = "VeryLazy",
+        event = "BufEdit",
         opts = {
             render = "background",
 

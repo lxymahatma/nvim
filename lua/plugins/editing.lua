@@ -1,8 +1,8 @@
 return {
     -- Extend and create a/i textobjects
     {
-        "echasnovski/mini.ai",
-        event = "VeryLazy",
+        "nvim-mini/mini.ai",
+        event = "BufEdit",
         opts = {
             custom_textobjects = nil,
             mappings = {
@@ -28,8 +28,8 @@ return {
 
     -- Comment lines
     {
-        "echasnovski/mini.comment",
-        event = "VeryLazy",
+        "nvim-mini/mini.comment",
+        event = "BufEdit",
         opts = {
             options = {
                 ignore_blank_line = true,
@@ -58,8 +58,8 @@ return {
 
     -- Move any selection in any direction
     {
-        "echasnovski/mini.move",
-        event = "VeryLazy",
+        "nvim-mini/mini.move",
+        event = "BufEdit",
         opts = {
             mappings = {
                 -- Move visual selection in Visual mode
@@ -83,8 +83,8 @@ return {
 
     -- Fast and feature-rich surround actions
     {
-        "echasnovski/mini.surround",
-        event = "VeryLazy",
+        "nvim-mini/mini.surround",
+        event = "BufEdit",
         opts = {
             highlight_duration = 500,
             mappings = {
@@ -138,8 +138,8 @@ return {
 
     -- Auto pairs
     {
-        "echasnovski/mini.pairs",
-        event = "VeryLazy",
+        "nvim-mini/mini.pairs",
+        event = "BufEdit",
         opts = {
             modes = { insert = true, command = true, terminal = false },
         },

@@ -2,11 +2,7 @@ return {
     -- Lsp config
     {
         "neovim/nvim-lspconfig",
-        event = "VeryLazy",
-        dependencies = {
-            "mason-org/mason-lspconfig.nvim",
-            "mason-org/mason.nvim",
-        },
+        event = "BufEdit",
         opts = {
             inlay_hints = {
                 enabled = true,
@@ -19,7 +15,6 @@ return {
             for server, config in pairs(opts.servers) do
                 config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
                 vim.lsp.config(server, config)
-                vim.lsp.enable(server)
             end
         end,
     },

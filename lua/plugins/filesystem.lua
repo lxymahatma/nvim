@@ -2,12 +2,7 @@ return {
     -- File Explorer
     {
         "nvim-neo-tree/neo-tree.nvim",
-        lazy = false,
-        deactivate = function() vim.cmd([[Neotree close]]) end,
-        init = function()
-            local stats = vim.uv.fs_stat(vim.fn.argv(0))
-            if stats and stats.type == "directory" then require("neo-tree") end
-        end,
+        cmd = "Neotree",
         opts = {
             open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
             default_component_configs = {
@@ -77,6 +72,16 @@ return {
             },
             use_libuv_file_watcher = true,
         },
+        init = function()
+            vim.api.nvim_create_autocmd("BufEnter", {
+                once = true,
+                callback = function()
+                    local stats = vim.uv.fs_stat(vim.fn.argv(0))
+                    if stats and stats.type == "directory" then require("neo-tree") end
+                end,
+            })
+        end,
+        deactivate = function() vim.cmd([[Neotree close]]) end,
         config = function(_, opts)
             local function on_move(data) Snacks.rename.on_rename_file(data.source, data.destination) end
             local events = require("neo-tree.events")
