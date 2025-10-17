@@ -14,6 +14,9 @@ return {
             ensure_installed = {
                 "jsonls",
             },
+            automatic_enable = {
+                "jsonls",
+            },
         },
     },
 }

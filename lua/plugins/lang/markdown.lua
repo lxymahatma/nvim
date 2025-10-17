@@ -12,7 +12,7 @@ return {
     -- Markdown Syntax Highlighting
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        event = "VeryLazy",
+        event = "BufEdit",
         ft = { "markdown", "norg", "rmd", "org" },
         opts = {},
     },

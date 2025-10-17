@@ -14,6 +14,9 @@ return {
             ensure_installed = {
                 "yamlls",
             },
+            automatic_enable = {
+                "yamlls",
+            },
         },
     },
 }

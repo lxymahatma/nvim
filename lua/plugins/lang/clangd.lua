@@ -15,6 +15,9 @@ return {
             ensure_installed = {
                 "clangd",
             },
+            automatic_enable = {
+                "clangd",
+            },
         },
     },
 

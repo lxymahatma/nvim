@@ -3,7 +3,7 @@ return {
     -- TODO: Customize sections
     {
         "nvim-lualine/lualine.nvim",
-        lazy = false,
+        event = "VeryLazy",
         opts = {
             options = {
                 theme = "auto",

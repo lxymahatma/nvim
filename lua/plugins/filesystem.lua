@@ -121,9 +121,6 @@ return {
     -- File Operations with LSP
     {
         "antosha417/nvim-lsp-file-operations",
-        dependencies = {
-            "nvim-neo-tree/neo-tree.nvim",
-        },
         opts = {},
     },
 

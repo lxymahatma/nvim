@@ -15,6 +15,9 @@ return {
             ensure_installed = {
                 "rust_analyzer",
             },
+            automatic_enable = {
+                "rust_analyzer",
+            },
         },
     },
 
