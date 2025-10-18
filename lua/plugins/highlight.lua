@@ -18,7 +18,6 @@ return {
                 "vimdoc",
             },
         },
-        config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
     },
 
     -- Rainbow Brackets
@@ -26,32 +25,29 @@ return {
         "HiPhish/rainbow-delimiters.nvim",
         event = "BufEdit",
         main = "rainbow-delimiters.setup",
-        opts = function()
-            local rb = require("rainbow-delimiters")
-            return {
-                strategy = {
-                    [""] = rb.strategy["global"],
-                    vim = rb.strategy["local"],
-                },
-                query = {
-                    [""] = "rainbow-delimiters",
-                    lua = "rainbow-blocks",
-                },
-                priority = {
-                    [""] = 110,
-                    lua = 210,
-                },
-                highlight = {
-                    "RainbowDelimiterRed",
-                    "RainbowDelimiterYellow",
-                    "RainbowDelimiterBlue",
-                    "RainbowDelimiterOrange",
-                    "RainbowDelimiterGreen",
-                    "RainbowDelimiterViolet",
-                    "RainbowDelimiterCyan",
-                },
-            }
-        end,
+        opts = {
+            strategy = {
+                [""] = "rainbow-delimiters.strategy.global",
+                vim = "rainbow-delimiters.strategy.local",
+            },
+            query = {
+                [""] = "rainbow-delimiters",
+                lua = "rainbow-blocks",
+            },
+            priority = {
+                [""] = 110,
+                lua = 210,
+            },
+            highlight = {
+                "RainbowDelimiterRed",
+                "RainbowDelimiterYellow",
+                "RainbowDelimiterBlue",
+                "RainbowDelimiterOrange",
+                "RainbowDelimiterGreen",
+                "RainbowDelimiterViolet",
+                "RainbowDelimiterCyan",
+            },
+        },
     },
 
     -- Highlight colors
