@@ -14,9 +14,6 @@ return {
             ensure_installed = {
                 "taplo",
             },
-            automatic_enable = {
-                "taplo",
-            },
         },
     },
 

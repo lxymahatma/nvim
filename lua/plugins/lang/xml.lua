@@ -14,9 +14,6 @@ return {
             ensure_installed = {
                 "lemminx",
             },
-            automatic_enable = {
-                "lemminx",
-            },
         },
     },
 }

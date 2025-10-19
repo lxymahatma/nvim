@@ -44,8 +44,9 @@ return {
     -- Mason-lspconfig
     {
         "mason-org/mason-lspconfig.nvim",
-        event = "VeryLazy",
-        opts_extend = { "ensure_installed", "automatic_enable" },
+        event = "BufEdit",
+        opts_extend = { "ensure_installed" },
         opts = {},
+        config = vim.schedule_wrap(function(_, opts) require("mason-lspconfig").setup(opts) end),
     },
 }

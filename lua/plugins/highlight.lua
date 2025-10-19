@@ -3,7 +3,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         branch = "master",
-        lazy = false,
+        event = { "BufEdit", "VeryLazy" },
         build = ":TSUpdate",
         opts_extend = { "ensure_installed" },
         opts = {

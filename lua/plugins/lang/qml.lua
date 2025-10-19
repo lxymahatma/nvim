@@ -14,9 +14,6 @@ return {
             ensure_installed = {
                 "qmlls",
             },
-            automatic_enable = {
-                "qmlls",
-            },
         },
     },
 }

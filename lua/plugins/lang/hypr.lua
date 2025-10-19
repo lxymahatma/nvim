@@ -14,9 +14,6 @@ return {
             ensure_installed = {
                 "hyprls",
             },
-            automatic_enable = {
-                "hyprls",
-            },
         },
     },
 }
