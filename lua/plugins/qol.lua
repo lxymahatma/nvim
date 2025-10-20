@@ -189,60 +189,7 @@ return {
         },
     },
 
-    -- Go forward/backward with square brackets
-    {
-        "nvim-mini/mini.bracketed",
-        event = "BufEdit",
-        opts = {
-            buffer = { suffix = "b", options = {} },
-            comment = { suffix = "c", options = {} },
-            conflict = { suffix = "x", options = {} },
-            diagnostic = { suffix = "d", options = {} },
-            file = { suffix = "f", options = {} },
-            indent = { suffix = "i", options = {} },
-            jump = { suffix = "j", options = {} },
-            location = { suffix = "l", options = {} },
-            oldfile = { suffix = "o", options = {} },
-            quickfix = { suffix = "q", options = {} },
-            treesitter = { suffix = "t", options = {} },
-            undo = { suffix = "u", options = {} },
-            window = { suffix = "w", options = {} },
-            yank = { suffix = "y", options = {} },
-        },
-    },
-
-    -- Show code context
-    {
-        "nvim-treesitter/nvim-treesitter-context",
-        event = "BufEdit",
-        opts = {
-            enable = true,
-            multiwindow = false,      -- Enable multiwindow support.
-            max_lines = 3,            -- How many lines the window should span. Values <= 0 mean no limit.
-            min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-            line_numbers = true,
-            multiline_threshold = 20, -- Maximum number of lines to show for a single context
-            trim_scope = "outer",     -- Which context lines to discard if `max_lines` is exceeded.
-            mode = "cursor",          -- Line used to calculate context. Choices: 'cursor', 'topline'
-            -- Separator between context and content. Should be a single character string, like '-'.
-            -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-            separator = nil,
-            zindex = 20,     -- The Z-index of the context window
-            on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-        },
-    },
-
-    {
-        "hedyhli/outline.nvim",
-        lazy = true,
-        keys = {
-            cmd = { "Outline", "OutlineOpen" },
-            { "<leader>cs", "<cmd>Outline<CR>", desc = "Toggle outline" },
-        },
-        opts = {},
-    },
-
-    -- TODO: Implement Git Stuff
+    -- Git integration
     {
         "kdheepak/lazygit.nvim",
         lazy = true,
@@ -255,23 +202,6 @@ return {
         },
         keys = {
             { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
-        },
-    },
-
-    -- Rename
-    {
-        "smjonas/inc-rename.nvim",
-        opts = {
-            input_buffer_type = "snacks",
-        },
-        keys = {
-            {
-                "<leader>rn",
-                mode = "n",
-                function() return ":IncRename " .. vim.fn.expand("<cword>") end,
-                expr = true,
-                desc = "Inc Rename",
-            },
         },
     },
 }

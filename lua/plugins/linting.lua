@@ -1,5 +1,5 @@
 return {
-    -- Finish Configuration
+    -- TODO: Finish Configuration
     {
         "mfussenegger/nvim-lint",
         event = "BufWritePost",

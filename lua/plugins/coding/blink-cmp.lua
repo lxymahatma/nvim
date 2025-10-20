@@ -1,5 +1,5 @@
+-- Code Completion
 return {
-    -- Code Completion
     {
         "saghen/blink.cmp",
         event = { "InsertEnter", "CmdlineEnter" },
@@ -105,12 +105,5 @@ return {
                     },
                 })
         end,
-    },
-
-    -- Auto Completion Menu Highlight
-    {
-        "xzbdmw/colorful-menu.nvim",
-        lazy = true,
-        opts = {},
-    },
+    }
 }
