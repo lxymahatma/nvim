@@ -14,6 +14,11 @@ return {
         "MeanderingProgrammer/render-markdown.nvim",
         event = "BufEdit",
         ft = { "markdown", "norg", "rmd", "org" },
-        opts = {},
+
+        ---@module 'render-markdown'
+        ---@type render.md.UserConfig
+        opts = {
+            completions = { lsp = { enabled = true } },
+        },
     },
 }
