@@ -50,6 +50,7 @@ return {
             notifier = {
                 enabled = true,
                 timeout = 3000,
+                top_down = true,
             },
             quickfile = { enabled = true },
             scroll = { enabled = true },

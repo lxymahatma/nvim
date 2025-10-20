@@ -1,6 +1,6 @@
-indent_type  = "Spaces"
+indent_type = "Spaces"
 indent_width = 4
-column_width = 120
+column_width = 140
 collapse_simple_statement = "Always"
 [sort_requires]
-    enabled = true
+enabled = true

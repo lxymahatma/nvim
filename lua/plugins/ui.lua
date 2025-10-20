@@ -59,7 +59,7 @@ return {
         },
     },
 
-    -- Icons
+    -- Mini Icons
     {
         "nvim-mini/mini.icons",
         lazy = true,

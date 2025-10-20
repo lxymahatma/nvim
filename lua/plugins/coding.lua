@@ -1,12 +1,15 @@
 return {
     -- Code Completion
-    -- TODO: Try to Combine two stuff together
     {
         "saghen/blink.cmp",
-        event = "VeryLazy",
+        event = { "InsertEnter", "CmdlineEnter" },
         dependencies = "rafamadriz/friendly-snippets",
         version = "*",
+
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
         opts = {
+            appearance = { nerd_font_variant = "normal" },
             cmdline = {
                 keymap = { preset = "inherit" },
                 completion = { menu = { auto_show = true } },
@@ -14,56 +17,12 @@ return {
             completion = {
                 keyword = { range = "full" },
                 accept = {
-                    auto_brackets = { enabled = false },
+                    auto_brackets = { enabled = true },
                 },
                 menu = {
                     auto_show = true,
                     draw = {
-                        treesitter = { "lsp" },
-                        columns = { { "kind_icon" }, { "label", "label_description", gap = 1 }, { "kind" } },
-                        components = {
-                            kind_icon = {
-                                ellipsis = false,
-                                text = function(ctx)
-                                    local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-                                    return kind_icon
-                                end,
-                                highlight = function(ctx)
-                                    local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-                                    return hl
-                                end,
-                            },
-
-                            -- nvim-highlight-colors
-                            --[[ kind_icon = {
-                                text = function(ctx)
-                                    -- default kind icon
-                                    local icon = ctx.kind_icon
-                                    -- if LSP source, check for color derived from documentation
-                                    if ctx.item.source_name == "LSP" then
-                                        local color_item = require("nvim-highlight-colors").format(
-                                        ctx.item.documentation, { kind = ctx.kind })
-                                        if color_item and color_item.abbr then
-                                            icon = color_item.abbr
-                                        end
-                                    end
-                                    return icon .. ctx.icon_gap
-                                end,
-                                highlight = function(ctx)
-                                    -- default highlight group
-                                    local highlight = "BlinkCmpKind" .. ctx.kind
-                                    -- if LSP source, check for color derived from documentation
-                                    if ctx.item.source_name == "LSP" then
-                                        local color_item = require("nvim-highlight-colors").format(
-                                        ctx.item.documentation, { kind = ctx.kind })
-                                        if color_item and color_item.abbr_hl_group then
-                                            highlight = color_item.abbr_hl_group
-                                        end
-                                    end
-                                    return highlight
-                                end,
-                            }, ]]
-                        },
+                        columns = { { "kind_icon" }, { "label", gap = 1 }, { "kind" } },
                     },
                 },
                 documentation = {
@@ -93,7 +52,65 @@ return {
                 ["<Tab>"] = { "select_and_accept", "fallback" },
                 ["<Up>"] = { "select_prev", "fallback" },
                 ["<Down>"] = { "select_next", "fallback" },
+                ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+                ["<C-d>"] = { "scroll_documentation_down", "fallback" },
             },
         },
+    },
+
+    -- Completion Icon and Highlighting
+    {
+        "saghen/blink.cmp",
+        opts = function(_, opts)
+            local mini_icons = require("mini.icons")
+            local highlight_colors = require("nvim-highlight-colors")
+            local colorful_menu = require("colorful-menu")
+
+            opts.completion.menu.draw.components = vim.tbl_extend("force", opts.completion.menu.draw.components or {},
+                {
+                    kind_icon = {
+                        ellipsis = false,
+                        text = function(ctx)
+                            local icon
+                            if ctx.source_name == "Path" then
+                                icon, _ = mini_icons.get(ctx.item.data.type, ctx.label)
+                                return icon .. ctx.icon_gap
+                            elseif ctx.source_name == "LSP" then
+                                local color_item = highlight_colors.format(ctx.item.documentation, { kind = ctx.kind })
+                                if color_item and color_item.abbr then return color_item.abbr .. ctx.icon_gap end
+                                icon, _ = mini_icons.get("lsp", ctx.kind)
+                                return icon .. ctx.icon_gap
+                            else
+                                return ctx.kind_icon .. ctx.icon_gap
+                            end
+                        end,
+                        highlight = function(ctx)
+                            local hl
+                            if ctx.source_name == "Path" then
+                                _, hl = mini_icons.get(ctx.item.data.type, ctx.label)
+                                return hl
+                            elseif ctx.source_name == "LSP" then
+                                local color_item = highlight_colors.format(ctx.item.documentation, { kind = ctx.kind })
+                                if color_item and color_item.abbr_hl_group then return color_item.abbr_hl_group end
+                                _, hl = mini_icons.get("lsp", ctx.kind)
+                                return hl
+                            else
+                                return ctx.kind_hl
+                            end
+                        end,
+                    },
+                    label = {
+                        text = function(ctx) return colorful_menu.blink_components_text(ctx) end,
+                        highlight = function(ctx) return colorful_menu.blink_components_highlight(ctx) end,
+                    },
+                })
+        end,
+    },
+
+    -- Auto Completion Menu Highlight
+    {
+        "xzbdmw/colorful-menu.nvim",
+        lazy = true,
+        opts = {},
     },
 }
