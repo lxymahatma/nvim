@@ -26,10 +26,4 @@ return {
         event = "VeryLazy",
         opts = {},
     },
-
-    -- Vim training
-    {
-        "ThePrimeagen/vim-be-good",
-        lazy = true,
-    },
 }

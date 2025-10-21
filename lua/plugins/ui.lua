@@ -46,8 +46,8 @@ return {
             highlights = require("catppuccin.special.bufferline").get_theme(),
         },
         keys = {
-            { "<S-h>",      "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-            { "<S-l>",      "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+            { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+            { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
             { "<Leader>bp", "<cmd>BufferLineTogglePin<cr>", desc = "Toggle Pin Buffer" },
             {
                 "<Leader>bd",
@@ -55,7 +55,7 @@ return {
                 desc = "Delete Current Buffer",
             },
             { "<Leader>br", "<cmd>BufferLineCloseRight<cr>", desc = "Delete Buffers on the Right" },
-            { "<Leader>bl", "<cmd>BufferLineCloseLeft<cr>",  desc = "Delete Buffers on the Left" },
+            { "<Leader>bl", "<cmd>BufferLineCloseLeft<cr>", desc = "Delete Buffers on the Left" },
         },
     },
 
@@ -101,5 +101,12 @@ return {
                 lsp_doc_border = true,
             },
         },
+    },
+
+    -- Git integration for buffers
+    {
+        "lewis6991/gitsigns.nvim",
+        event = "BufEdit",
+        opts = {},
     },
 }
