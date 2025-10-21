@@ -6,7 +6,7 @@ return {
         dependencies = "rafamadriz/friendly-snippets",
         version = "*",
 
-        ---@module 'blink.cmp'
+        ---@module "blink.cmp"
         ---@type blink.cmp.Config
         opts = {
             appearance = { nerd_font_variant = "normal" },
@@ -66,44 +66,43 @@ return {
             local highlight_colors = require("nvim-highlight-colors")
             local colorful_menu = require("colorful-menu")
 
-            opts.completion.menu.draw.components = vim.tbl_extend("force", opts.completion.menu.draw.components or {},
-                {
-                    kind_icon = {
-                        ellipsis = false,
-                        text = function(ctx)
-                            local icon
-                            if ctx.source_name == "Path" then
-                                icon, _ = mini_icons.get(ctx.item.data.type, ctx.label)
-                                return icon .. ctx.icon_gap
-                            elseif ctx.source_name == "LSP" then
-                                local color_item = highlight_colors.format(ctx.item.documentation, { kind = ctx.kind })
-                                if color_item and color_item.abbr then return color_item.abbr .. ctx.icon_gap end
-                                icon, _ = mini_icons.get("lsp", ctx.kind)
-                                return icon .. ctx.icon_gap
-                            else
-                                return ctx.kind_icon .. ctx.icon_gap
-                            end
-                        end,
-                        highlight = function(ctx)
-                            local hl
-                            if ctx.source_name == "Path" then
-                                _, hl = mini_icons.get(ctx.item.data.type, ctx.label)
-                                return hl
-                            elseif ctx.source_name == "LSP" then
-                                local color_item = highlight_colors.format(ctx.item.documentation, { kind = ctx.kind })
-                                if color_item and color_item.abbr_hl_group then return color_item.abbr_hl_group end
-                                _, hl = mini_icons.get("lsp", ctx.kind)
-                                return hl
-                            else
-                                return ctx.kind_hl
-                            end
-                        end,
-                    },
-                    label = {
-                        text = function(ctx) return colorful_menu.blink_components_text(ctx) end,
-                        highlight = function(ctx) return colorful_menu.blink_components_highlight(ctx) end,
-                    },
-                })
+            opts.completion.menu.draw.components = vim.tbl_extend("force", opts.completion.menu.draw.components or {}, {
+                kind_icon = {
+                    ellipsis = false,
+                    text = function(ctx)
+                        local icon
+                        if ctx.source_name == "Path" then
+                            icon, _ = mini_icons.get(ctx.item.data.type, ctx.label)
+                            return icon .. ctx.icon_gap
+                        elseif ctx.source_name == "LSP" then
+                            local color_item = highlight_colors.format(ctx.item.documentation, { kind = ctx.kind })
+                            if color_item and color_item.abbr then return color_item.abbr .. ctx.icon_gap end
+                            icon, _ = mini_icons.get("lsp", ctx.kind)
+                            return icon .. ctx.icon_gap
+                        else
+                            return ctx.kind_icon .. ctx.icon_gap
+                        end
+                    end,
+                    highlight = function(ctx)
+                        local hl
+                        if ctx.source_name == "Path" then
+                            _, hl = mini_icons.get(ctx.item.data.type, ctx.label)
+                            return hl
+                        elseif ctx.source_name == "LSP" then
+                            local color_item = highlight_colors.format(ctx.item.documentation, { kind = ctx.kind })
+                            if color_item and color_item.abbr_hl_group then return color_item.abbr_hl_group end
+                            _, hl = mini_icons.get("lsp", ctx.kind)
+                            return hl
+                        else
+                            return ctx.kind_hl
+                        end
+                    end,
+                },
+                label = {
+                    text = function(ctx) return colorful_menu.blink_components_text(ctx) end,
+                    highlight = function(ctx) return colorful_menu.blink_components_highlight(ctx) end,
+                },
+            })
         end,
-    }
+    },
 }

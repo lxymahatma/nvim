@@ -1,6 +1,8 @@
 -- Search and Navigation
 return {
     "folke/flash.nvim",
+
+    ---@type Flash.Config
     opts = {},
     keys = {
         {
@@ -16,13 +18,13 @@ return {
             desc = "Flash Treesitter",
         },
         {
-            "<Leader>r",
+            "r",
             mode = "o",
             function() require("flash").remote() end,
             desc = "Remote Flash",
         },
         {
-            "<Leader>R",
+            "R",
             mode = { "o", "x" },
             function() require("flash").treesitter_search() end,
             desc = "Treesitter Search",

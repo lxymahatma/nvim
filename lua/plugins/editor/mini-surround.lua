@@ -7,9 +7,9 @@ return {
         mappings = {
             add = "sa",            -- Add surrounding in Normal and Visual modes
             delete = "sd",         -- Delete surrounding
-            find = "sf",           -- Find surrounding (to the right)
-            find_left = "sF",      -- Find surrounding (to the left)
-            highlight = "sh",      -- Highlight surrounding
+            find = "",             -- Find surrounding (to the right)
+            find_left = "",        -- Find surrounding (to the left)
+            highlight = "",        -- Highlight surrounding
             replace = "sr",        -- Replace surrounding
             update_n_lines = "sn", -- Update `n_lines`
 

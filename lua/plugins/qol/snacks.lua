@@ -3,6 +3,7 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
+
     ---@type snacks.Config
     opts = {
         bigfile = { enabled = true },
@@ -10,7 +11,11 @@ return {
         image = { enabled = true },
         indent = { enabled = true },
         input = { enabled = true },
+
+        ---@type snacks.lazygit.Config
         lazygit = { enabled = true, configure = false },
+
+        ---@type snacks.notifier.Config
         notifier = {
             enabled = true,
             timeout = 3000,
@@ -18,7 +23,14 @@ return {
         },
         quickfile = { enabled = true },
         scroll = { enabled = true },
-        statuscolumn = { enabled = true },
+        ---@type snacks.statuscolumn.Config
+        statuscolumn = {
+            enabled = true,
+            folds = {
+                open = true,
+                git_hl = true,
+            },
+        },
         words = { enabled = true },
     },
     keys = {
