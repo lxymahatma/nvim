@@ -2,7 +2,6 @@
 -- TODO: Customize Keymaps
 return {
     "folke/trouble.nvim",
-    lazy = true,
     opts = {
         modes = {
             lsp = {
@@ -11,4 +10,5 @@ return {
         },
     },
     cmd = "Trouble",
+    keys = {},
 }

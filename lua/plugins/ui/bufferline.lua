@@ -2,8 +2,13 @@
 return {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
+
+    ---@module "bufferline.config"
+    ---@type bufferline.Config
     opts = {
+        ---@type bufferline.Options
         options = {
+            color_icons = true,
             close_command = function(n) Snacks.bufdelete(n) end,
             diagnostics = "nvim_lsp",
             offsets = {
@@ -13,7 +18,7 @@ return {
                     text_align = "left",
                 },
             },
-            color_icons = true,
+            themable = true,
         },
         highlights = require("catppuccin.special.bufferline").get_theme(),
     },
