@@ -23,6 +23,7 @@ return {
         },
         quickfile = { enabled = true },
         scroll = { enabled = true },
+
         ---@type snacks.statuscolumn.Config
         statuscolumn = {
             enabled = true,

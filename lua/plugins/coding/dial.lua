@@ -23,8 +23,6 @@ return {
                     only_valid = true,
                     word = false,
                 }),
-                augend.constant.alias.alpha,
-                augend.constant.alias.Alpha,
                 augend.semver.alias.semver,
                 augend.misc.alias.markdown_header,
             },
