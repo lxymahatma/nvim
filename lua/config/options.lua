@@ -24,16 +24,21 @@ opt.showmode = false   -- Don't show mode since we have a statusline
 
 -- Split Window from below and right
 opt.splitkeep = "screen"
-opt.splitbelow = true    -- Put new windows below current
-opt.splitright = true    -- Put new windows right of current
+opt.splitbelow = true   -- Put new windows below current
+opt.splitright = true   -- Put new windows right of current
 
-opt.signcolumn = "yes"   -- Always show the signcolumn
-opt.list = true          -- Show some invisible characters
-opt.scrolloff = 4        -- Lines of context
-opt.smoothscroll = true  -- Enable smooth scrolling
+opt.signcolumn = "yes"  -- Always show the signcolumn
+opt.list = true         -- Show some invisible characters
+opt.scrolloff = 4       -- Lines of context
+opt.smoothscroll = true -- Enable smooth scrolling
 opt.jumpoptions = "view"
-opt.laststatus = 3       -- global statusline
-opt.linebreak = true     -- Wrap lines at convenient points
-opt.wrap = false         -- Disable line wrap
+opt.laststatus = 3      -- global statusline
+opt.linebreak = true    -- Wrap lines at convenient points
+opt.wrap = false        -- Disable line wrap
+
+-- Folding
+opt.foldlevel = 99
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 opt.termguicolors = true -- True color support

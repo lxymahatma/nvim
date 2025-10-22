@@ -21,6 +21,9 @@ map("i", "<C-l>", "<END>", { desc = "Go to the end of the line", remap = true })
 map("n", "<Leader>o", "o<Esc>", { desc = "Open a new line below", remap = true })
 map("n", "<Leader>O", "O<Esc>", { desc = "Open a new line above", remap = true })
 
+map("n", "<Leader>z", "za", { desc = "Toggle fold", remap = true })
+map("n", "<Leader>Z", "zA", { desc = "Toggle all folds", remap = true })
+
 -- Don't copy the replaced text
 -- map("n", "<Leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
 -- map("x", "<Leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
