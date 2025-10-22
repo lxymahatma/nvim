@@ -100,9 +100,7 @@ return {
         keys = {
             {
                 "<leader>fe",
-                function()
-                    require("neo-tree.command").execute({ source = "filesystem", toggle = true, dir = vim.uv.cwd() })
-                end,
+                function() require("neo-tree.command").execute({ source = "filesystem", toggle = true, dir = vim.uv.cwd() }) end,
                 desc = "Explorer NeoTree (Root Dir)",
             },
             {
@@ -116,12 +114,6 @@ return {
                 desc = "Buffer Explorer",
             },
         },
-    },
-
-    -- File Operations with LSP
-    {
-        "antosha417/nvim-lsp-file-operations",
-        opts = {},
     },
 
     -- Window Picker
