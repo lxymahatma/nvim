@@ -18,13 +18,13 @@ map("i", "<C-h>", "<HOME>", { desc = "Go to the beginning of the line", remap = 
 map("i", "<C-l>", "<END>", { desc = "Go to the end of the line", remap = true })
 
 -- Space Line
-map("n", "<Leader>o", "o<Esc>", { desc = "Open a new line below", remap = true })
-map("n", "<Leader>O", "O<Esc>", { desc = "Open a new line above", remap = true })
+map("n", "<leader>o", "o<Esc>", { desc = "Open a new line below", remap = true })
+map("n", "<leader>O", "O<Esc>", { desc = "Open a new line above", remap = true })
 
-map("n", "<Leader>z", "za", { desc = "Toggle fold", remap = true })
-map("n", "<Leader>Z", "zA", { desc = "Toggle all folds", remap = true })
+map("n", "<leader>z", "za", { desc = "Toggle fold", remap = true })
+map("n", "<leader>Z", "zA", { desc = "Toggle all folds", remap = true })
 
 -- Don't copy the replaced text
--- map("n", "<Leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
--- map("x", "<Leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
--- map("x", "<Leader>p", "\"_dP", { desc = "Paste without replacing the clipboard", remap = true })
+-- map("n", "<leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
+-- map("x", "<leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
+-- map("x", "<leader>p", "\"_dP", { desc = "Paste without replacing the clipboard", remap = true })

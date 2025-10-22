@@ -23,7 +23,7 @@ return {
         "mason-org/mason.nvim",
         cmd = "Mason",
         keys = {
-            { "<Leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
+            { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
         },
         opts = {
             ui = {

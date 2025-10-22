@@ -1,6 +1,6 @@
 return {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    event = "VeryLazy",
+    event = "BufEdit",
     main = "nvim-treesitter.configs",
     opts = {},
 }

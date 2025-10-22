@@ -12,17 +12,23 @@ return {
         name = "catppuccin",
         lazy = true,
         opts = {
+            flavour = "mocha",
             integrations = {
-                blink_cmp = true,
+                blink_cmp = {
+                    style = "bordered",
+                },
+                copilot_vim = true,
                 dashboard = true,
                 flash = true,
-                fzf = true,
-                gitsigns = true,
+                gitsigns = {
+                    enabled = true,
+                    transparent = false,
+                },
                 grug_far = true,
-                lsp_trouble = true,
-                markdown = true,
                 mason = true,
-                mini = true,
+                mini = {
+                    enabled = true,
+                },
                 native_lsp = {
                     enabled = true,
                     virtual_text = {
@@ -43,16 +49,18 @@ return {
                         background = true,
                     },
                 },
-                neotree = true,
                 noice = true,
                 notify = true,
                 overseer = true,
                 rainbow_delimiters = true,
                 render_markdown = true,
-                snacks = true,
+                snacks = {
+                    enabled = true,
+                },
                 symbols_outline = true,
                 treesitter = true,
                 treesitter_context = true,
+                lsp_trouble = true,
                 which_key = true,
             },
         },
