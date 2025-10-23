@@ -1,9 +1,14 @@
 -- Search and Navigation
 return {
     "folke/flash.nvim",
+    event = "VeryLazy",
 
     ---@type Flash.Config
-    opts = {},
+    opts = {
+        jump = {
+            autojump = true,
+        },
+    },
     keys = {
         { "gs",    function() require("flash").jump() end,              desc = "Flash",               mode = { "n", "x", "o" } },
         { "gS",    function() require("flash").treesitter() end,        desc = "Flash Treesitter",    mode = { "n", "x", "o" } },
