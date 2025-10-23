@@ -3,6 +3,8 @@ local M = {}
 M.default_langs = {
     "git",
     "json",
+    "html",
+    "latex",
     "lua",
     "markdown",
     "nushell",

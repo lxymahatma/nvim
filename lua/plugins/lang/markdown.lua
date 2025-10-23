@@ -19,6 +19,9 @@ return {
         ---@type render.md.UserConfig
         opts = {
             completions = { lsp = { enabled = true } },
+            anti_conceal = {
+                disabled_modes = { "n" },
+            },
         },
     },
 }
