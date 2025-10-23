@@ -15,7 +15,7 @@ return {
                 lualine_y = { "progress" },
                 lualine_z = { "location" },
             },
-            extensions = { "fzf", "lazy", "mason", "neo-tree", "trouble" },
+            extensions = { "lazy", "man", "mason", "overseer", "trouble" },
         },
     },
 }
