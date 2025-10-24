@@ -116,9 +116,8 @@ return {
         { "<leader>fe", function() Snacks.explorer() end,                     desc = "File Explorer" },
 
         -- Picker
-        { "<leader>fs", function() Snacks.picker.smart() end,                 desc = "Smart Find Files" },
         { "<leader>fb", function() Snacks.picker.buffers() end,               desc = "Find Buffers" },
-        { "<leader>ff", function() Snacks.picker.files() end,                 desc = "Find Files" },
+        { "<leader>ff", function() Snacks.picker.smart() end,                 desc = "Find Files" },
         { "<leader>fh", function() Snacks.picker.help() end,                  desc = "Find Help" },
         { "<leader>fn", function() Snacks.picker.notifications() end,         desc = "Find Notification" },
         { "<leader>fp", function() Snacks.picker.projects() end,              desc = "Find Project" },
@@ -128,6 +127,7 @@ return {
         -- Search
         { "<leader>sa", function() Snacks.picker.autocmds() end,              desc = "Search Autocmds" },
         { "<leader>sc", function() Snacks.picker.commands() end,              desc = "Search Commands" },
+        { "<leader>sf", function() Snacks.picker.files() end,                 desc = "Search Files" },
         { "<leader>sk", function() Snacks.picker.keymaps() end,               desc = "Search Keymaps" },
         { "<leader>sm", function() Snacks.picker.marks() end,                 desc = "Search Marks" },
         { "<leader>sM", function() Snacks.picker.man() end,                   desc = "Search Man Pages" },
