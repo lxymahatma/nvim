@@ -1,5 +1,4 @@
 -- Which key
--- TODO: Customize opts
 return {
     "folke/which-key.nvim",
     event = "VeryLazy",
