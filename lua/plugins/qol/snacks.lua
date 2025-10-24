@@ -51,6 +51,7 @@ return {
             },
             sources = {
                 explorer = {
+                    auto_close = true,
                     hidden = true,
                     diagnostics_open = true,
                     git_status_open = true,
@@ -113,7 +114,7 @@ return {
         { "<leader>lg", function() Snacks.lazygit() end,                      desc = "Open Lazygit" },
 
         -- Explorer
-        { "<leader>fe", function() Snacks.explorer() end,                     desc = "File Explorer" },
+        { "<C-e>",      function() Snacks.explorer() end,                     desc = "File Explorer" },
 
         -- Picker
         { "<leader>fb", function() Snacks.picker.buffers() end,               desc = "Find Buffers" },
