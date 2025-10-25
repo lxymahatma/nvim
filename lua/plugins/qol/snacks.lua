@@ -122,7 +122,6 @@ return {
         { "<leader>fh", function() Snacks.picker.help() end,                  desc = "Find Help" },
         { "<leader>fn", function() Snacks.picker.notifications() end,         desc = "Find Notification" },
         { "<leader>fp", function() Snacks.picker.projects() end,              desc = "Find Project" },
-        { "<leader>fr", function() Snacks.picker.recent() end,                desc = "Find Recent" },
         { "<leader>fw", function() Snacks.picker.grep() end,                  desc = "Find Content" },
 
         -- Search
