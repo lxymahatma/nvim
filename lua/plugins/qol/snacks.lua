@@ -128,6 +128,7 @@ return {
         -- Search
         { "<leader>sa", function() Snacks.picker.autocmds() end,              desc = "Search Autocmds" },
         { "<leader>sc", function() Snacks.picker.commands() end,              desc = "Search Commands" },
+        { "<leader>sd", function() Snacks.picker.diagnostics() end,           desc = "Search Diagnostics" },
         { "<leader>sf", function() Snacks.picker.files() end,                 desc = "Search Files" },
         { "<leader>sk", function() Snacks.picker.keymaps() end,               desc = "Search Keymaps" },
         { "<leader>sm", function() Snacks.picker.marks() end,                 desc = "Search Marks" },

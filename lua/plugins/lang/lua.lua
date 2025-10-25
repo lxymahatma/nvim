@@ -23,7 +23,7 @@ return {
         "neovim/nvim-lspconfig",
         opts = {
             servers = {
-                emmylua_ls = {}
+                emmylua_ls = {},
             },
         },
     },
