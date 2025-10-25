@@ -4,7 +4,7 @@ return {
     cmd = { "GrugFar", "GrugFarWithin" },
     keys = {
         {
-            "<leader>fr",
+            "<leader>sr",
             function()
                 local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
                 require("grug-far").open({
@@ -15,7 +15,7 @@ return {
                 })
             end,
             mode = { "n", "x" },
-            desc = "Find and Replace",
+            desc = "Search and Replace",
         },
     },
 }

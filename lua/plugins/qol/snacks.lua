@@ -122,6 +122,7 @@ return {
         { "<leader>fh", function() Snacks.picker.help() end,                  desc = "Find Help" },
         { "<leader>fn", function() Snacks.picker.notifications() end,         desc = "Find Notification" },
         { "<leader>fp", function() Snacks.picker.projects() end,              desc = "Find Project" },
+        { "<leader>fr", function() Snacks.picker.recent_files() end,          desc = "Find Recent" },
         { "<leader>fw", function() Snacks.picker.grep() end,                  desc = "Find Content" },
 
         -- Search
@@ -132,7 +133,7 @@ return {
         { "<leader>sm", function() Snacks.picker.marks() end,                 desc = "Search Marks" },
         { "<leader>sM", function() Snacks.picker.man() end,                   desc = "Search Man Pages" },
         { "<leader>sp", function() Snacks.picker.lazy() end,                  desc = "Search Plugin Spec" },
-        { "<leader>sr", function() Snacks.picker.registers() end,             desc = "Search Registers" },
+        { "<leader>sR", function() Snacks.picker.registers() end,             desc = "Search Registers" },
         { "<leader>sw", function() Snacks.picker.grep_word() end,             desc = "Search selection or word", mode = { "n", "x" } },
 
         -- Git
