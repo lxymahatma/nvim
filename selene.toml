@@ -2,3 +2,4 @@ std = "nvim"
 
 [lints]
 mixed_table = "allow"
+multiple_statements = { "one_line_if" = "allow" }
