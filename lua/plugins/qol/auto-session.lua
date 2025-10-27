@@ -7,6 +7,8 @@ return {
     opts = {
         auto_restore = false,
         bypass_save_filetypes = { "snacks_dashboard" },
+        git_use_branch_name = true,
+        git_auto_restore_on_branch_change = true,
 
         ---@type SessionLens
         session_lens = {
