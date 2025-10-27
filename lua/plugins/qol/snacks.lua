@@ -68,6 +68,7 @@ return {
                     keys = {
                         ["<M-s>"] = { "flash", mode = { "n", "i" } },
                         ["s"] = { "flash" },
+                        ["<M-t>"] = { "trouble_open", mode = { "n", "i" } },
                     },
                 },
             },
@@ -88,6 +89,7 @@ return {
                         end,
                     })
                 end,
+                trouble_open = function(...) return require("trouble.sources.snacks").actions.trouble_open.action(...) end,
             },
         },
         quickfile = { enabled = true },
