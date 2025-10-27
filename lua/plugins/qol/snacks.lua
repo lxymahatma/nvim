@@ -133,9 +133,11 @@ return {
         { "<leader>sd", function() Snacks.picker.diagnostics() end,           desc = "Search Diagnostics" },
         { "<leader>sf", function() Snacks.picker.files() end,                 desc = "Search Files" },
         { "<leader>sk", function() Snacks.picker.keymaps() end,               desc = "Search Keymaps" },
+        { "<leader>sl", function() Snacks.picker.loclist() end,               desc = "Search Location List" },
         { "<leader>sm", function() Snacks.picker.marks() end,                 desc = "Search Marks" },
         { "<leader>sM", function() Snacks.picker.man() end,                   desc = "Search Man Pages" },
         { "<leader>sp", function() Snacks.picker.lazy() end,                  desc = "Search Plugin Spec" },
+        { "<leader>sq", function() Snacks.picker.quickfix() end,              desc = "Search Quickfix List" },
         { "<leader>sR", function() Snacks.picker.registers() end,             desc = "Search Registers" },
         { "<leader>sw", function() Snacks.picker.grep_word() end,             desc = "Search selection or word", mode = { "n", "x" } },
 
