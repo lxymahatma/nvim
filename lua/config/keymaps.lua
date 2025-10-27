@@ -28,6 +28,9 @@ map("n", "<leader>Z", "zA", { desc = "Toggle all folds", remap = true })
 -- Code Actions
 map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 
+-- Clear search highlight
+map("n", "<leader>/", ":nohlsearch<CR>", { desc = "Clear search highlight" })
+
 -- Don't copy the replaced text
 -- map("n", "<leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
 -- map("x", "<leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })

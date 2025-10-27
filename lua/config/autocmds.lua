@@ -6,6 +6,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "help",
         "man",
         "notify",
+        "qf",
         "vim",
     },
     callback = function(event)
