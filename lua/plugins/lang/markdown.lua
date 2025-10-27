@@ -22,6 +22,7 @@ return {
             anti_conceal = {
                 disabled_modes = { "n" },
             },
+            latex = { enabled = false },
         },
     },
 }
