@@ -1,14 +1,12 @@
 -- Diagnostics list
--- TODO: Customize Keymaps
 return {
     "folke/trouble.nvim",
     opts = {
-        modes = {
-            lsp = {
-                win = { position = "right" },
-            },
-        },
+        auto_jump = true,
     },
     cmd = "Trouble",
-    keys = {},
+    keys = {
+        { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>",              desc = "Diagnostics (Trouble)" },
+        { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+    },
 }
