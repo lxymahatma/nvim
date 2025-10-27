@@ -1,4 +1,8 @@
 -- QOL collections
+local function term_nav(direction)
+    return vim.schedule_wrap(function() vim.cmd.wincmd(direction) end)
+end
+
 return {
     "folke/snacks.nvim",
     priority = 1000,
@@ -101,6 +105,17 @@ return {
             folds = {
                 open = true,
                 git_hl = true,
+            },
+        },
+        terminal = {
+            win = {
+                keys = {
+                    nav_h = { "<C-h>", term_nav("h"), desc = "Go to Left Window", expr = true, mode = "t" },
+                    nav_j = { "<C-j>", term_nav("j"), desc = "Go to Lower Window", expr = true, mode = "t" },
+                    nav_k = { "<C-k>", term_nav("k"), desc = "Go to Upper Window", expr = true, mode = "t" },
+                    nav_l = { "<C-l>", term_nav("l"), desc = "Go to Right Window", expr = true, mode = "t" },
+                    hide_slash = { "<C-/>", "hide", desc = "Hide Terminal", mode = { "t", "n" } },
+                },
             },
         },
         words = { enabled = true },
