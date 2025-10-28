@@ -1,14 +1,7 @@
 return {
     "mfussenegger/nvim-lint",
     event = "BufEdit",
-    opts = {
-        linters_by_ft = {
-            dockerfile = { "hadolint" },
-            json = { "jsonlint" },
-            lua = { "selene" },
-            yaml = { "yamllint" },
-        },
-    },
+    opts = {},
     config = function(_, opts) require("lint").linters_by_ft = opts.linters_by_ft end,
     init = function()
         local events = { "BufReadPost", "BufWritePost", "InsertLeave" }

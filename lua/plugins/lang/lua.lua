@@ -29,6 +29,15 @@ return {
     },
 
     {
+        "mfussenegger/nvim-lint",
+        opts = {
+            linters_by_ft = {
+                lua = { "selene" },
+            },
+        },
+    },
+
+    {
         "stevearc/conform.nvim",
         opts = {
             formatters_by_ft = {
