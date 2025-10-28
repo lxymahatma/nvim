@@ -3,10 +3,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         event = "BufEdit",
-        config = function(_, opts)
-            for server, config in pairs(opts.servers) do
-                vim.lsp.config(server, config)
-            end
+        config = vim.schedule_wrap(function(_, opts)
             Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer) vim.lsp.inlay_hint.enable(true, { bufnr = buffer }) end)
             Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
                 ---@cast buffer integer
@@ -16,7 +13,11 @@ return {
                     callback = function() vim.lsp.codelens.refresh({ bufnr = buffer }) end,
                 })
             end)
-        end,
+            for server, config in pairs(opts.servers) do
+                vim.lsp.config(server, config)
+                vim.lsp.enable(server)
+            end
+        end),
     },
 
     -- Mason
@@ -48,7 +49,10 @@ return {
         "mason-org/mason-lspconfig.nvim",
         event = "BufEdit",
         opts_extend = { "ensure_installed" },
-        opts = {},
-        config = vim.schedule_wrap(function(_, opts) require("mason-lspconfig").setup(opts) end),
+
+        ---@type MasonLspconfigSettings
+        opts = {
+            automatic_enable = false,
+        },
     },
 }

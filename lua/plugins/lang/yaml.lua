@@ -18,6 +18,15 @@ return {
     },
 
     {
+        "neovim/nvim-lspconfig",
+        opts = {
+            servers = {
+                yamlls = {},
+            },
+        },
+    },
+
+    {
         "mfussenegger/nvim-lint",
         opts = {
             linters_by_ft = {

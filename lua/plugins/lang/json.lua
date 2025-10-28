@@ -18,6 +18,15 @@ return {
     },
 
     {
+        "neovim/nvim-lspconfig",
+        opts = {
+            servers = {
+                jsonls = {},
+            },
+        },
+    },
+
+    {
         "mfussenegger/nvim-lint",
         opts = {
             linters_by_ft = {
