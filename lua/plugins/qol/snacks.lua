@@ -97,6 +97,7 @@ return {
             },
         },
         quickfile = { enabled = true },
+        scope = { enabled = true },
         scroll = { enabled = true },
 
         ---@type snacks.statuscolumn.Config
