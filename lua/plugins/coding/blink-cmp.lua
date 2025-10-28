@@ -6,8 +6,8 @@ return {
         dependencies = "rafamadriz/friendly-snippets",
         version = "*",
 
-        ---@module "blink.cmp"
         ---@type blink.cmp.Config
+        ---@diagnostic disable:missing-fields
         opts = {
             appearance = { nerd_font_variant = "normal" },
             cmdline = {
@@ -32,13 +32,8 @@ return {
                 ghost_text = { enabled = true },
             },
             sources = {
-                default = { "lazydev", "lsp", "path", "snippets", "buffer", "markdown" },
+                default = { "lsp", "path", "snippets", "buffer", "markdown" },
                 providers = {
-                    lazydev = {
-                        name = "LazyDev",
-                        module = "lazydev.integrations.blink",
-                        score_offset = 100,
-                    },
                     markdown = {
                         name = "RenderMarkdown",
                         module = "render-markdown.integ.blink",

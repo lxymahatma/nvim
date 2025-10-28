@@ -15,7 +15,6 @@ return {
         event = "BufEdit",
         ft = { "markdown", "norg", "rmd", "org" },
 
-        ---@module 'render-markdown'
         ---@type render.md.UserConfig
         opts = {
             completions = { lsp = { enabled = true } },

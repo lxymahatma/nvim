@@ -2,7 +2,6 @@
 return {
     "folke/trouble.nvim",
     opts = {
-        auto_jump = true,
         focus = true,
     },
     cmd = "Trouble",

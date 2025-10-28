@@ -3,10 +3,9 @@ return {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
 
-    ---@module "bufferline.config"
     ---@type bufferline.Config
+    ---@diagnostic disable:missing-fields
     opts = {
-        ---@type bufferline.Options
         options = {
             color_icons = true,
             close_command = function(n) Snacks.bufdelete(n) end,

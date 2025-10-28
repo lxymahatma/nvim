@@ -11,8 +11,6 @@ return {
     ---@type snacks.Config
     opts = {
         bigfile = { enabled = true },
-
-        ---@type snacks.dashboard.Config
         dashboard = {
             enabled = true,
             preset = {
@@ -29,8 +27,6 @@ return {
                 },
             },
         },
-
-        ---@type snacks.explorer.Config
         explorer = {
             enabled = true,
             replace_netrw = true,
@@ -38,11 +34,7 @@ return {
         image = { enabled = true },
         indent = { enabled = true },
         input = { enabled = true },
-
-        ---@type snacks.lazygit.Config
         lazygit = { enabled = true, configure = false },
-
-        ---@type snacks.notifier.Config
         notifier = {
             enabled = true,
             timeout = 3000,
@@ -93,14 +85,13 @@ return {
                         end,
                     })
                 end,
+                ---@diagnostic disable:need-check-nil
                 trouble_open = function(...) return require("trouble.sources.snacks").actions.trouble_open.action(...) end,
             },
         },
         quickfile = { enabled = true },
         scope = { enabled = true },
         scroll = { enabled = true },
-
-        ---@type snacks.statuscolumn.Config
         statuscolumn = {
             enabled = true,
             folds = {
@@ -160,7 +151,7 @@ return {
         { "<leader>sm", function() Snacks.picker.marks() end,                                         desc = "Marks" },
         { "<leader>sM", function() Snacks.picker.man() end,                                           desc = "Man Pages" },
         { "<leader>sp", function() Snacks.picker.lazy() end,                                          desc = "Plugin Spec" },
-        { "<leader>sq", function() Snacks.picker.quickfix() end,                                      desc = "Quickfix List" },
+        { "<leader>sq", function() Snacks.picker.qflist() end,                                        desc = "Quickfix List" },
         { "<leader>sR", function() Snacks.picker.registers() end,                                     desc = "Registers" },
         { "<leader>sw", function() Snacks.picker.grep_word() end,                                     desc = "Selection or Word",      mode = { "n", "x" } },
         { "<leader>sz", function() Snacks.picker.zoxide() end,                                        desc = "Zoxide" },
@@ -185,6 +176,7 @@ return {
         { "<leader>bS", function() Snacks.scratch.select() end,                                       desc = "Select Scratch Buffer" },
 
         -- Todo Comments
+        ---@diagnostic disable:undefined-field
         { "<leader>st", function() Snacks.picker.todo_comments() end,                                 desc = "Todo" },
         { "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX" } }) end, desc = "Todo/Fix" },
     },

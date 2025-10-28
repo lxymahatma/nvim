@@ -7,8 +7,8 @@ return {
         vim.o.timeoutlen = 500
     end,
 
-    ---@module "which-key"
     ---@type wk.Opts
+    ---@diagnostic disable:missing-fields
     opts = {
         preset = "helix",
     },
