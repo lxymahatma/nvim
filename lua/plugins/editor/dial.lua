@@ -1,12 +1,6 @@
 -- Enhance Ctrl-A/X
 return {
     "monaqa/dial.nvim",
-    keys = {
-        { "<C-a>",  "<Plug>(dial-increment)",  mode = { "n", "v" } },
-        { "<C-x>",  "<Plug>(dial-decrement)",  mode = { "n", "v" } },
-        { "g<C-a>", "g<Plug>(dial-increment)", mode = { "n", "v" }, remap = true },
-        { "g<C-x>", "g<Plug>(dial-decrement)", mode = { "n", "v" }, remap = true },
-    },
     config = function()
         local augend = require("dial.augend")
         require("dial.config").augends:register_group({
@@ -28,4 +22,10 @@ return {
             },
         })
     end,
+    keys = {
+        { "<C-a>",  "<Plug>(dial-increment)",  mode = { "n", "v" } },
+        { "<C-x>",  "<Plug>(dial-decrement)",  mode = { "n", "v" } },
+        { "g<C-a>", "g<Plug>(dial-increment)", mode = { "n", "v" }, remap = true },
+        { "g<C-x>", "g<Plug>(dial-decrement)", mode = { "n", "v" }, remap = true },
+    },
 }

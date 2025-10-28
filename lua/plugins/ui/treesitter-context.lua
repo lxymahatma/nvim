@@ -2,6 +2,8 @@
 return {
     "nvim-treesitter/nvim-treesitter-context",
     event = "BufEdit",
+
+    ---@type TSContext.Config
     opts = {
         enable = true,
         multiwindow = false,      -- Enable multiwindow support.

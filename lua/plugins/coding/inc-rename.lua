@@ -1,6 +1,8 @@
 -- Rename
 return {
     "smjonas/inc-rename.nvim",
+
+    ---@type inc_rename.UserConfig
     opts = {
         input_buffer_type = "snacks",
     },

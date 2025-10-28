@@ -3,6 +3,8 @@ return {
     {
         "folke/tokyonight.nvim",
         lazy = true,
+
+        ---@type tokyonight.Config
         opts = {},
     },
 
@@ -11,6 +13,8 @@ return {
         "catppuccin/nvim",
         name = "catppuccin",
         lazy = true,
+
+        ---@type CatppuccinOptions
         opts = {
             flavour = "mocha",
             integrations = {

@@ -3,7 +3,6 @@ return {
     {
         "saghen/blink.cmp",
         event = { "InsertEnter", "CmdlineEnter" },
-        dependencies = "rafamadriz/friendly-snippets",
         version = "*",
 
         ---@type blink.cmp.Config

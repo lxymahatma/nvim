@@ -25,6 +25,9 @@
     "library": [
       "$VIMRUNTIME",
       "$HOME/.local/share/nvim/lazy"
+    ],
+    "ignoreGlobs": [
+      "**/*_spec.lua"
     ]
   }
 }
