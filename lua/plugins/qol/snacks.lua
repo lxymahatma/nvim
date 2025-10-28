@@ -85,7 +85,7 @@ return {
                         end,
                     })
                 end,
-                ---@diagnostic disable:need-check-nil
+                ---@diagnostic disable-next-line:need-check-nil
                 trouble_open = function(...) return require("trouble.sources.snacks").actions.trouble_open.action(...) end,
             },
         },

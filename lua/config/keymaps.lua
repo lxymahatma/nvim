@@ -1,6 +1,5 @@
 local map = vim.keymap.set
 local api = vim.api
-local uv = vim.loop
 
 -- leader key
 map("", "<Space>", "<Nop>")

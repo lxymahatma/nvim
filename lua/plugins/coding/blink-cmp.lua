@@ -7,7 +7,6 @@ return {
         version = "*",
 
         ---@type blink.cmp.Config
-        ---@diagnostic disable:missing-fields
         opts = {
             appearance = { nerd_font_variant = "normal" },
             cmdline = {

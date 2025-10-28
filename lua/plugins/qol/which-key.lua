@@ -8,7 +8,6 @@ return {
     end,
 
     ---@type wk.Opts
-    ---@diagnostic disable:missing-fields
     opts = {
         preset = "helix",
     },

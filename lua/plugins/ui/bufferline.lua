@@ -4,7 +4,6 @@ return {
     event = "VeryLazy",
 
     ---@type bufferline.Config
-    ---@diagnostic disable:missing-fields
     opts = {
         options = {
             color_icons = true,
