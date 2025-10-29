@@ -1,5 +1,4 @@
 local map = vim.keymap.set
-local api = vim.api
 
 -- leader key
 map("", "<Space>", "<Nop>")
@@ -29,6 +28,9 @@ map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" 
 
 -- Clear search highlight
 map("n", "<leader>/", ":nohlsearch<CR>", { desc = "Clear search highlight" })
+
+-- Open Lazy.nvim
+map("n", "<leader>lz", ":Lazy<CR>", { desc = "Open Lazy.nvim" })
 
 -- Don't copy the replaced text
 -- map("n", "<leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
