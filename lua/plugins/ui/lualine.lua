@@ -7,6 +7,7 @@ return {
         options = {
             theme = "auto",
             globalstatus = true,
+            disabled_filetypes = { statusline = { "snacks_dashboard" } },
             sections = {
                 lualine_a = { "mode" },
                 lualine_b = { "branch", "diff", "diagnostics" },
