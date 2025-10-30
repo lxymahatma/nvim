@@ -160,17 +160,6 @@ return {
         { "<leader>gl", function() Snacks.picker.git_log() end,                                       desc = "Git Log" },
         { "<leader>gf", function() Snacks.picker.git_log_file() end,                                  desc = "Git Log File" },
 
-        -- LSP
-        { "gd",         function() Snacks.picker.lsp_definitions() end,                               desc = "Goto Definition" },
-        { "gD",         function() Snacks.picker.lsp_declarations() end,                              desc = "Goto Declaration" },
-        { "gr",         function() Snacks.picker.lsp_references() end,                                desc = "References",             nowait = true },
-        { "gi",         function() Snacks.picker.lsp_implementations() end,                           desc = "Goto Implementation" },
-        { "gy",         function() Snacks.picker.lsp_type_definitions() end,                          desc = "Goto Type Definition" },
-        { "gci",        function() Snacks.picker.lsp_incoming_calls() end,                            desc = "Calls Incoming" },
-        { "gco",        function() Snacks.picker.lsp_outgoing_calls() end,                            desc = "Calls Outgoing" },
-        { "<leader>ss", function() Snacks.picker.lsp_symbols() end,                                   desc = "LSP Symbols" },
-        { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end,                         desc = "LSP Workspace Symbols" },
-
         -- Scratch
         { "<leader>bs", function() Snacks.scratch() end,                                              desc = "Toggle Scratch Buffer" },
         { "<leader>bS", function() Snacks.scratch.select() end,                                       desc = "Select Scratch Buffer" },
