@@ -1,5 +1,5 @@
 local map = Snacks.keymap.set
-local del = vim.keymap.del
+local del = Snacks.keymap.del
 
 -- Move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
