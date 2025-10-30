@@ -1,7 +1,8 @@
 local map = vim.keymap.set
+local del = vim.keymap.del
 
 -- leader key
-map("", "<Space>", "<Nop>")
+vim.keymap.set("", "<Space>", "<Nop>")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -36,3 +37,10 @@ map("n", "<leader>lz", ":Lazy<CR>", { desc = "Open Lazy.nvim" })
 -- map("n", "<leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
 -- map("x", "<leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
 -- map("x", "<leader>p", "\"_dP", { desc = "Paste without replacing the clipboard", remap = true })
+
+-- Delete Keymaps
+del("n", "gra")
+del("n", "gri")
+del("n", "grn")
+del("n", "grr")
+del("n", "grt")
