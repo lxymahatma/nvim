@@ -16,7 +16,10 @@ return {
             lualine_a = { "mode" },
             lualine_b = {
                 "branch",
-                "diff",
+                {
+                    "diff",
+                    colored = true,
+                },
                 {
                     "diagnostics",
                     sources = { "nvim_diagnostic" },
