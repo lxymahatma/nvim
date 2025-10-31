@@ -47,7 +47,7 @@ return {
     -- Mason-lspconfig
     {
         "mason-org/mason-lspconfig.nvim",
-        event = "BufEdit",
+        event = "VeryLazy",
         opts_extend = { "ensure_installed" },
 
         ---@type MasonLspconfigSettings
