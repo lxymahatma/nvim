@@ -12,7 +12,6 @@ return {
     -- Markdown Syntax Highlighting
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        event = "BufEdit",
         ft = { "markdown", "norg", "rmd", "org" },
 
         ---@type render.md.UserConfig
