@@ -4,7 +4,12 @@ return {
     opts = {},
     config = function(_, opts) require("lint").linters_by_ft = opts.linters_by_ft end,
     init = function()
-        local events = { "BufReadPost", "BufWritePost", "InsertLeave" }
+        local events = {
+            "BufReadPost",
+            "BufWritePost",
+            "InsertLeave",
+            "TextChanged",
+        }
         local function debounce(ms, fn)
             local timer = vim.uv.new_timer()
             return function()

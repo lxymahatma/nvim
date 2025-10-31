@@ -1,4 +1,4 @@
 vim.diagnostic.config({
     underline = true,
-    virtual_text = { source = true },
+    virtual_text = false,
 })
