@@ -6,6 +6,8 @@ map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
 map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+
+-- Window Splits
 map("n", "<leader>wj", "<C-w>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>wl", "<C-w>v", { desc = "Split Window Right", remap = true })
 map("n", "<leader>wc", "<C-w>c", { desc = "Close Current Window", remap = true })
@@ -23,10 +25,11 @@ map("n", "<leader>z", "za", { desc = "Toggle fold", remap = true })
 map("n", "<leader>Z", "zA", { desc = "Toggle all folds", remap = true })
 
 -- Clear search highlight
-map("n", "<leader>/", ":nohlsearch<CR>", { desc = "Clear search highlight" })
+map("n", "<leader>/", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
--- Open Lazy.nvim
-map("n", "<leader>lz", ":Lazy<CR>", { desc = "Open Lazy.nvim" })
+-- Lazy.nvim
+map("n", "<leader>lz", "<cmd>Lazy<CR>", { desc = "Open Lazy.nvim" })
+map("n", "<leader>lp", "<cmd>Lazy profile<CR>", { desc = "Profile Lazy.nvim plugins" })
 
 -- Don't copy the replaced text
 -- map("n", "<leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
