@@ -43,4 +43,4 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 opt.termguicolors = true -- True color support
 
-vim.o.sessionoptions = "blank,buffers,curdir,folds,help,localoptions,tabpages,terminal,winpos,winsize"
+vim.o.sessionoptions = "buffers,curdir,folds,help,localoptions,tabpages,terminal,winpos,winsize"
