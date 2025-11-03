@@ -63,32 +63,42 @@ return {
                 kind_icon = {
                     ellipsis = false,
                     text = function(ctx)
-                        local icon
-                        if ctx.source_name == "Path" then
+                        local icon = ctx.kind_icon
+                        if ctx.source_id == "lsp" then
+                            if ctx.kind == "File" then
+                                icon, _ = mini_icons.get("file", ctx.item.detail)
+                            elseif ctx.kind == "Folder" then
+                                icon, _ = mini_icons.get("directory", ctx.item.label)
+                            elseif ctx.kind == "Color" and ctx.item.documentation then
+                                local color_item = highlight_colors.format(ctx.item.documentation, { kind = "Color" })
+                                if color_item and color_item.abbr then icon = color_item.abbr end
+                            else
+                                icon, _ = mini_icons.get("lsp", ctx.kind)
+                            end
+                        elseif ctx.source_id == "path" then
                             icon, _ = mini_icons.get(ctx.item.data.type, ctx.label)
-                            return icon .. ctx.icon_gap
-                        elseif ctx.source_name == "LSP" then
-                            local color_item = highlight_colors.format(ctx.item.documentation, { kind = ctx.kind })
-                            if color_item and color_item.abbr then return color_item.abbr .. ctx.icon_gap end
-                            icon, _ = mini_icons.get("lsp", ctx.kind)
-                            return icon .. ctx.icon_gap
-                        else
-                            return ctx.kind_icon .. ctx.icon_gap
                         end
+
+                        return icon .. ctx.icon_gap
                     end,
                     highlight = function(ctx)
-                        local hl
-                        if ctx.source_name == "Path" then
+                        local hl = ctx.kind_hl
+                        if ctx.source_id == "lsp" then
+                            if ctx.kind == "File" then
+                                _, hl = mini_icons.get("file", ctx.item.detail)
+                            elseif ctx.kind == "Folder" then
+                                _, hl = mini_icons.get("directory", ctx.item.label)
+                            elseif ctx.kind == "Color" and ctx.item.documentation then
+                                local color_item = highlight_colors.format(ctx.item.documentation, { kind = "Color" })
+                                if color_item and color_item.abbr then hl = color_item.abbr_hl_group end
+                            else
+                                _, hl = mini_icons.get("lsp", ctx.kind)
+                            end
+                        elseif ctx.source_id == "path" then
                             _, hl = mini_icons.get(ctx.item.data.type, ctx.label)
-                            return hl
-                        elseif ctx.source_name == "LSP" then
-                            local color_item = highlight_colors.format(ctx.item.documentation, { kind = ctx.kind })
-                            if color_item and color_item.abbr_hl_group then return color_item.abbr_hl_group end
-                            _, hl = mini_icons.get("lsp", ctx.kind)
-                            return hl
-                        else
-                            return ctx.kind_hl
                         end
+
+                        return hl
                     end,
                 },
                 label = {
