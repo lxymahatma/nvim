@@ -153,12 +153,16 @@ return {
         { "<leader>sp", function() Snacks.picker.lazy() end,                                          desc = "Plugin Spec" },
         { "<leader>sq", function() Snacks.picker.qflist() end,                                        desc = "Quickfix List" },
         { "<leader>sR", function() Snacks.picker.registers() end,                                     desc = "Registers" },
-        { "<leader>sw", function() Snacks.picker.grep_word() end,                                     desc = "Selection or Word",      mode = { "n", "x" } },
+        { "<leader>sw", function() Snacks.picker.grep_word() end,                                     desc = "Selection or Word",          mode = { "n", "x" } },
         { "<leader>sz", function() Snacks.picker.zoxide() end,                                        desc = "Zoxide" },
 
         -- Git
         { "<leader>gl", function() Snacks.picker.git_log() end,                                       desc = "Git Log" },
         { "<leader>gf", function() Snacks.picker.git_log_file() end,                                  desc = "Git Log File" },
+        { "<leader>gi", function() Snacks.picker.gh_issue() end,                                      desc = "GitHub Issues (open)" },
+        { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end,                     desc = "GitHub Issues (all)" },
+        { "<leader>gp", function() Snacks.picker.gh_pr() end,                                         desc = "GitHub Pull Requests (open)" },
+        { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end,                        desc = "GitHub Pull Requests (all)" },
 
         -- Scratch
         { "<leader>bs", function() Snacks.scratch() end,                                              desc = "Toggle Scratch Buffer" },
