@@ -159,6 +159,8 @@ return {
         -- Git
         { "<leader>gl", function() Snacks.picker.git_log() end,                                       desc = "Git Log" },
         { "<leader>gf", function() Snacks.picker.git_log_file() end,                                  desc = "Git Log File" },
+
+        -- GH
         { "<leader>gi", function() Snacks.picker.gh_issue() end,                                      desc = "GitHub Issues (open)" },
         { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end,                     desc = "GitHub Issues (all)" },
         { "<leader>gp", function() Snacks.picker.gh_pr() end,                                         desc = "GitHub Pull Requests (open)" },
