@@ -65,6 +65,7 @@ return {
                         ["<M-s>"] = { "flash", mode = { "n", "i" } },
                         ["s"] = { "flash" },
                         ["<M-t>"] = { "trouble_open", mode = { "n", "i" } },
+                        ["M-a"] = { "sidekick_send", mode = { "n", "i" } },
                     },
                 },
             },
@@ -87,6 +88,7 @@ return {
                 end,
                 ---@diagnostic disable-next-line:need-check-nil
                 trouble_open = function(...) return require("trouble.sources.snacks").actions.trouble_open.action(...) end,
+                sidekick_send = function(...) return require("sidekick.cli.picker.snacks").send(...) end,
             },
         },
         quickfile = { enabled = true },
@@ -113,46 +115,56 @@ return {
     },
     keys = {
         -- Terminal
-        { "<C-/>",      function() Snacks.terminal() end,                                             desc = "Toggle Terminal",            mode = { "n", "t" } },
+        {
+            "<C-/>",
+            function() Snacks.terminal() end,
+            desc = "Toggle Terminal",
+            mode = { "n", "t" },
+        },
 
         -- Notifications
-        { "<leader>n",  function() Snacks.notifier.show_history() end,                                desc = "Notification History" },
+        { "<leader>n",  function() Snacks.notifier.show_history() end,     desc = "Notification History" },
 
         -- Lazygit
-        { "<leader>lg", function() Snacks.lazygit() end,                                              desc = "Open Lazygit" },
+        { "<leader>lg", function() Snacks.lazygit() end,                   desc = "Open Lazygit" },
 
         -- Explorer
-        { "<C-e>",      function() Snacks.explorer() end,                                             desc = "File Explorer" },
+        { "<C-e>",      function() Snacks.explorer() end,                  desc = "File Explorer" },
 
         -- Find
-        { "<leader>fb", function() Snacks.picker.buffers() end,                                       desc = "Buffers" },
-        { "<leader>ff", function() Snacks.picker.smart() end,                                         desc = "Files" },
-        { "<leader>fh", function() Snacks.picker.help() end,                                          desc = "Help" },
-        { "<leader>fl", function() Snacks.picker.lines() end,                                         desc = "Buffer Lines" },
-        { "<leader>fn", function() Snacks.picker.notifications() end,                                 desc = "Notification" },
-        { "<leader>fp", function() Snacks.picker.projects() end,                                      desc = "Project" },
-        { "<leader>fr", function() Snacks.picker.recent() end,                                        desc = "Recent" },
-        { "<leader>fw", function() Snacks.picker.grep() end,                                          desc = "Grep" },
+        { "<leader>fb", function() Snacks.picker.buffers() end,            desc = "Buffers" },
+        { "<leader>ff", function() Snacks.picker.smart() end,              desc = "Files" },
+        { "<leader>fh", function() Snacks.picker.help() end,               desc = "Help" },
+        { "<leader>fl", function() Snacks.picker.lines() end,              desc = "Buffer Lines" },
+        { "<leader>fn", function() Snacks.picker.notifications() end,      desc = "Notification" },
+        { "<leader>fp", function() Snacks.picker.projects() end,           desc = "Project" },
+        { "<leader>fr", function() Snacks.picker.recent() end,             desc = "Recent" },
+        { "<leader>fw", function() Snacks.picker.grep() end,               desc = "Grep" },
 
         -- Search
-        { "<leader>sa", function() Snacks.picker.autocmds() end,                                      desc = "Autocmds" },
-        { "<leader>sb", function() Snacks.picker.grep_buffers() end,                                  desc = "Grep Open Buffers" },
-        { "<leader>sc", function() Snacks.picker.commands() end,                                      desc = "Commands" },
-        { "<leader>sd", function() Snacks.picker.diagnostics_buffer() end,                            desc = "Diagnostics (Buffer)" },
-        { "<leader>sD", function() Snacks.picker.diagnostics() end,                                   desc = "Diagnostics (Workspace)" },
-        { "<leader>sf", function() Snacks.picker.files() end,                                         desc = "Files" },
-        { "<leader>sh", function() Snacks.picker.search_history() end,                                desc = "Search History" },
-        { "<leader>sH", function() Snacks.picker.highlights() end,                                    desc = "Highlights" },
-        { "<leader>si", function() Snacks.picker.icons() end,                                         desc = "Icons" },
-        { "<leader>sj", function() Snacks.picker.jumps() end,                                         desc = "Jumps" },
-        { "<leader>sk", function() Snacks.picker.keymaps() end,                                       desc = "Keymaps" },
-        { "<leader>sl", function() Snacks.picker.loclist() end,                                       desc = "Location List" },
-        { "<leader>sm", function() Snacks.picker.marks() end,                                         desc = "Marks" },
-        { "<leader>sM", function() Snacks.picker.man() end,                                           desc = "Man Pages" },
-        { "<leader>sp", function() Snacks.picker.lazy() end,                                          desc = "Plugin Spec" },
-        { "<leader>sq", function() Snacks.picker.qflist() end,                                        desc = "Quickfix List" },
-        { "<leader>sR", function() Snacks.picker.registers() end,                                     desc = "Registers" },
-        { "<leader>sw", function() Snacks.picker.grep_word() end,                                     desc = "Selection or Word",          mode = { "n", "x" } },
+        { "<leader>sa", function() Snacks.picker.autocmds() end,           desc = "Autocmds" },
+        { "<leader>sb", function() Snacks.picker.grep_buffers() end,       desc = "Grep Open Buffers" },
+        { "<leader>sc", function() Snacks.picker.commands() end,           desc = "Commands" },
+        { "<leader>sd", function() Snacks.picker.diagnostics_buffer() end, desc = "Diagnostics (Buffer)" },
+        { "<leader>sD", function() Snacks.picker.diagnostics() end,        desc = "Diagnostics (Workspace)" },
+        { "<leader>sf", function() Snacks.picker.files() end,              desc = "Files" },
+        { "<leader>sh", function() Snacks.picker.search_history() end,     desc = "Search History" },
+        { "<leader>sH", function() Snacks.picker.highlights() end,         desc = "Highlights" },
+        { "<leader>si", function() Snacks.picker.icons() end,              desc = "Icons" },
+        { "<leader>sj", function() Snacks.picker.jumps() end,              desc = "Jumps" },
+        { "<leader>sk", function() Snacks.picker.keymaps() end,            desc = "Keymaps" },
+        { "<leader>sl", function() Snacks.picker.loclist() end,            desc = "Location List" },
+        { "<leader>sm", function() Snacks.picker.marks() end,              desc = "Marks" },
+        { "<leader>sM", function() Snacks.picker.man() end,                desc = "Man Pages" },
+        { "<leader>sp", function() Snacks.picker.lazy() end,               desc = "Plugin Spec" },
+        { "<leader>sq", function() Snacks.picker.qflist() end,             desc = "Quickfix List" },
+        { "<leader>sR", function() Snacks.picker.registers() end,          desc = "Registers" },
+        {
+            "<leader>sw",
+            function() Snacks.picker.grep_word() end,
+            desc = "Selection or Word",
+            mode = { "n", "x" },
+        },
         { "<leader>sz", function() Snacks.picker.zoxide() end,                                        desc = "Zoxide" },
 
         -- Git

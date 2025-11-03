@@ -42,7 +42,11 @@ return {
             keymap = {
                 preset = "none",
                 ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
-                ["<Tab>"] = { "select_and_accept", "fallback" },
+                ["<Tab>"] = {
+                    "select_and_accept",
+                    function() return require("sidekick").nes_jump_or_apply() end,
+                    "fallback",
+                },
                 ["<Up>"] = { "select_prev", "fallback" },
                 ["<Down>"] = { "select_next", "fallback" },
                 ["<C-u>"] = { "scroll_documentation_up", "fallback" },

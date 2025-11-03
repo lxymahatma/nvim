@@ -1,4 +1,37 @@
 -- Statusline
+local function get_copilot_status_component()
+    local icons = {
+        Error = { " ", "DiagnosticError" },
+        Inactive = { " ", "MsgArea" },
+        Warning = { " ", "DiagnosticWarn" },
+        Normal = { " ", "Special" },
+    }
+
+    return {
+        function()
+            local status = require("sidekick.status").get()
+            return status and vim.tbl_get(icons, status.kind, 1)
+        end,
+        cond = function() return require("sidekick.status").get() ~= nil end,
+        color = function()
+            local status = require("sidekick.status").get()
+            local hl = status and (status.busy and "DiagnosticWarn" or vim.tbl_get(icons, status.kind, 2))
+            return { fg = Snacks.util.color(hl) }
+        end,
+    }
+end
+
+local function get_cli_session_component()
+    return {
+        function()
+            local status = require("sidekick.status").cli()
+            return " " .. (#status > 1 and #status or "")
+        end,
+        cond = function() return #require("sidekick.status").cli() > 0 end,
+        color = function() return { fg = Snacks.util.color("Special") } end,
+    }
+end
+
 return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -45,6 +78,8 @@ return {
                 },
             },
             lualine_x = {
+                get_copilot_status_component(),
+                get_cli_session_component(),
                 "overseer",
                 {
                     "encoding",
