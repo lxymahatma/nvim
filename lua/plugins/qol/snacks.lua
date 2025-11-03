@@ -106,7 +106,6 @@ return {
                     nav_j = { "<C-j>", term_nav("j"), desc = "Go to Lower Window", expr = true, mode = "t" },
                     nav_k = { "<C-k>", term_nav("k"), desc = "Go to Upper Window", expr = true, mode = "t" },
                     nav_l = { "<C-l>", term_nav("l"), desc = "Go to Right Window", expr = true, mode = "t" },
-                    hide_slash = { "<C-/>", "hide", desc = "Hide Terminal", mode = { "t", "n" } },
                 },
             },
         },
@@ -114,7 +113,7 @@ return {
     },
     keys = {
         -- Terminal
-        { "<C-/>",      function() Snacks.terminal() end,                                             desc = "Toggle Terminal" },
+        { "<C-/>",      function() Snacks.terminal() end,                                             desc = "Toggle Terminal",            mode = { "n", "t" } },
 
         -- Notifications
         { "<leader>n",  function() Snacks.notifier.show_history() end,                                desc = "Notification History" },
