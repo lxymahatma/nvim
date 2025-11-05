@@ -1,6 +1,8 @@
 return {
     "folke/sidekick.nvim",
     Event = "VeryLazy",
+
+    ---@type sidekick.Config
     opts = {
         cli = {
             mux = {
@@ -12,14 +14,24 @@ return {
     config = function(_, opts)
         require("sidekick").setup(opts)
 
+        local disabled = false
+
         vim.api.nvim_create_autocmd("User", {
             pattern = "SidekickNesHide",
-            callback = function() require("tiny-inline-diagnostic").enable() end,
+            callback = function()
+                if disabled then
+                    disabled = false
+                    require("tiny-inline-diagnostic").enable()
+                end
+            end,
         })
 
         vim.api.nvim_create_autocmd("User", {
             pattern = "SidekickNesShow",
-            callback = function() require("tiny-inline-diagnostic").disable() end,
+            callback = function()
+                disabled = true
+                require("tiny-inline-diagnostic").disable()
+            end,
         })
     end,
     keys = {

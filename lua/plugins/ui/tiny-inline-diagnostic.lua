@@ -5,6 +5,7 @@ return {
         preset = "classic",
         transparent_bg = false,
         transparent_cursorline = true,
+        disabled_ft = { "lazy" },
         options = {
             throttle = 20,
             show_source = {
