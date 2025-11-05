@@ -6,20 +6,20 @@ return {
             mux = {
                 backend = "tmux",
                 enabled = true,
-            }
-        }
+            },
+        },
     },
-    init = function()
-        local tiny_diag = require("tiny-inline-diagnostic")
-
-        vim.api.nvim_create_autocmd("User", {
-            pattern = "SidekickNesShow",
-            callback = function() tiny_diag.disable() end,
-        })
+    config = function(_, opts)
+        require("sidekick").setup(opts)
 
         vim.api.nvim_create_autocmd("User", {
             pattern = "SidekickNesHide",
-            callback = function() tiny_diag.enable() end,
+            callback = function() require("tiny-inline-diagnostic").enable() end,
+        })
+
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "SidekickNesShow",
+            callback = function() require("tiny-inline-diagnostic").disable() end,
         })
     end,
     keys = {

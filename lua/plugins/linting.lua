@@ -2,14 +2,16 @@ return {
     "mfussenegger/nvim-lint",
     event = "BufEdit",
     opts = {},
-    config = function(_, opts) require("lint").linters_by_ft = opts.linters_by_ft end,
-    init = function()
+    config = function(_, opts)
+        require("lint").linters_by_ft = opts.linters_by_ft
+
         local events = {
             "BufReadPost",
             "BufWritePost",
             "InsertLeave",
             "TextChanged",
         }
+
         local function debounce(ms, fn)
             local timer = vim.uv.new_timer()
             return function()
