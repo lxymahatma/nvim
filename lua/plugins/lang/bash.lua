@@ -3,9 +3,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         opts = {
             ensure_installed = {
-                "lua",
-                "luadoc",
-                "luap",
+                "bash",
             },
         },
     },
@@ -14,7 +12,7 @@ return {
         "mason-org/mason-lspconfig.nvim",
         opts = {
             ensure_installed = {
-                "emmylua_ls",
+                "bashls",
             },
         },
     },
@@ -23,7 +21,7 @@ return {
         "neovim/nvim-lspconfig",
         opts = {
             servers = {
-                emmylua_ls = {},
+                bashls = {},
             },
         },
     },
@@ -32,16 +30,7 @@ return {
         "mfussenegger/nvim-lint",
         opts = {
             linters_by_ft = {
-                lua = { "selene" },
-            },
-        },
-    },
-
-    {
-        "stevearc/conform.nvim",
-        opts = {
-            formatters_by_ft = {
-                lua = { "stylua" },
+                bash = { "shellcheck" },
             },
         },
     },
@@ -50,8 +39,7 @@ return {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {
             ensure_installed = {
-                "selene",
-                "stylua",
+                "shellcheck",
             },
         },
     },

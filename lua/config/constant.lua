@@ -1,6 +1,7 @@
 local M = {}
 
 M.default_langs = {
+    "bash",
     "git",
     "json",
     "html",

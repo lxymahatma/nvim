@@ -18,40 +18,4 @@ return {
             end
         end),
     },
-
-    -- Mason
-    {
-        "mason-org/mason.nvim",
-        cmd = "Mason",
-
-        ---@type MasonSettings
-        opts = {
-            ui = {
-                icons = {
-                    package_installed = "✓",
-                    package_pending = "➜",
-                    package_uninstalled = "✗",
-                },
-            },
-            keymaps = {
-                toggle_package_expand = "l",
-                toggle_package_install_log = "l",
-            },
-        },
-        keys = {
-            { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
-        },
-    },
-
-    -- Mason-lspconfig
-    {
-        "mason-org/mason-lspconfig.nvim",
-        event = "VeryLazy",
-        opts_extend = { "ensure_installed" },
-
-        ---@type MasonLspconfigSettings
-        opts = {
-            automatic_enable = false,
-        },
-    },
 }

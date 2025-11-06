@@ -31,13 +31,4 @@ return {
             { "<leader>de", function() require("dapui").eval() end,     desc = "Eval",  mode = { "n", "x" } },
         },
     },
-
-    -- Mason DAP
-    {
-        "jay-babu/mason-nvim-dap.nvim",
-        cmd = { "DapInstall", "DapUninstall" },
-        opts = {
-            automatic_installation = true,
-        },
-    },
 }
