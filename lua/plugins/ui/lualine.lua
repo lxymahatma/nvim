@@ -103,7 +103,7 @@ return {
             lualine_c = {
                 {
                     "filename",
-                    cond = require("utils.window").has_multiple_edit_windows,
+                    cond = require("helpers.window").has_multiple_edit_windows,
                 },
             },
             lualine_x = {},
@@ -116,7 +116,7 @@ return {
             lualine_c = {
                 {
                     "filename",
-                    cond = require("utils.window").has_multiple_edit_windows,
+                    cond = require("helpers.window").has_multiple_edit_windows,
                 },
             },
 
