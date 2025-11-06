@@ -1,6 +1,6 @@
 return {
     "rachartier/tiny-inline-diagnostic.nvim",
-    event = "BufEdit",
+    event = "LspAttach",
     opts = {
         preset = "classic",
         transparent_bg = false,
