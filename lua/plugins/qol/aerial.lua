@@ -1,3 +1,4 @@
+-- Outline
 return {
     "stevearc/aerial.nvim",
     event = "BufEdit",

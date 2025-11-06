@@ -1,3 +1,4 @@
+-- Formatter
 return {
     {
         "stevearc/conform.nvim",

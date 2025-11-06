@@ -1,3 +1,4 @@
+-- AI sidekick
 return {
     "folke/sidekick.nvim",
     Event = "VeryLazy",

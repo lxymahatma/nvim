@@ -1,3 +1,4 @@
+-- Auto close tags
 return {
     "windwp/nvim-ts-autotag",
     event = "BufEdit",

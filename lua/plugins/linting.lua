@@ -1,3 +1,4 @@
+-- Linter
 return {
     "mfussenegger/nvim-lint",
     event = "BufEdit",
