@@ -27,19 +27,19 @@ return {
     },
 
     {
-        "mfussenegger/nvim-lint",
+        "mason-org/mason.nvim",
         opts = {
-            linters_by_ft = {
-                bash = { "shellcheck" },
+            ensure_installed = {
+                "shellcheck",
             },
         },
     },
 
     {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        "mfussenegger/nvim-lint",
         opts = {
-            ensure_installed = {
-                "shellcheck",
+            linters_by_ft = {
+                bash = { "shellcheck" },
             },
         },
     },

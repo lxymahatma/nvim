@@ -29,6 +29,16 @@ return {
     },
 
     {
+        "mason-org/mason.nvim",
+        opts = {
+            ensure_installed = {
+                "selene",
+                "stylua",
+            },
+        },
+    },
+
+    {
         "mfussenegger/nvim-lint",
         opts = {
             linters_by_ft = {
@@ -42,16 +52,6 @@ return {
         opts = {
             formatters_by_ft = {
                 lua = { "stylua" },
-            },
-        },
-    },
-
-    {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-        opts = {
-            ensure_installed = {
-                "selene",
-                "stylua",
             },
         },
     },
