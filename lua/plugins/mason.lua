@@ -26,7 +26,22 @@ return {
             mr.refresh(function()
                 for _, tool in ipairs(opts.ensure_installed) do
                     local p = mr.get_package(tool)
-                    if not p:is_installed() then p:install() end
+                    if not p:is_installed() then
+                        vim.notify(("[mason.nvim] installing %s"):format(tool))
+                        p:install(
+                            {},
+                            vim.schedule_wrap(function(success)
+                                if success then
+                                    vim.notify(("[mason.nvim] %s was successfully installed"):format(tool))
+                                else
+                                    vim.notify(
+                                        ("[mason.nvim] failed to install %s. Installation logs are available in :Mason and :MasonLog"):format(tool),
+                                        vim.log.levels.ERROR
+                                    )
+                                end
+                            end)
+                        )
+                    end
                 end
             end)
         end,
