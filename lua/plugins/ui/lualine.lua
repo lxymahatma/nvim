@@ -103,6 +103,7 @@ return {
             lualine_c = {
                 {
                     "filename",
+                    cond = require("helpers.window").is_edit_window,
                     file_status = false,
                     path = 3,
                 },
@@ -117,6 +118,7 @@ return {
             lualine_c = {
                 {
                     "filename",
+                    cond = require("helpers.window").is_edit_window,
                     file_status = false,
                     path = 3,
                 },

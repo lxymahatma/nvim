@@ -1,5 +1,6 @@
 local M = {}
 function M.is_edit_window(win)
+    win = win or vim.api.nvim_get_current_win()
     local cfg = vim.api.nvim_win_get_config(win)
     if cfg.relative ~= "" then return false end
     local buf = vim.api.nvim_win_get_buf(win)
