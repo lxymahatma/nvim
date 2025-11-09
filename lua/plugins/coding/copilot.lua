@@ -1,8 +1,8 @@
 -- Copilot
 return {
-    {
-        "github/copilot.vim",
-        event = "BufEdit",
-        build = ":Copilot setup",
-    },
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "BufEdit",
+    build = ":Copilot auth",
+    opts = {},
 }
