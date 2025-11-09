@@ -23,6 +23,7 @@ return {
                     { icon = " ", key = "s", desc = "Restore Session", section = "session" },
                     { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
                     { icon = "󰔛 ", key = "P", desc = "Lazy Profile", action = ":Lazy profile", enabled = package.loaded.lazy ~= nil },
+                    { icon = " ", key = "lc", desc = "LeetCode", action = ":Leet" },
                     { icon = " ", key = "q", desc = "Quit", action = ":qa" },
                 },
             },
