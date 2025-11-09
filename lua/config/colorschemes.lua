@@ -1,9 +1,5 @@
 local M = {}
 
-function M.setup(colorscheme)
-    if colorscheme:find("^tokyonight") or colorscheme:find("^catppuccin") then
-        vim.cmd("colorscheme " .. colorscheme)
-    end
-end
+function M.setup(colorscheme) vim.cmd("colorscheme " .. colorscheme) end
 
 return M
