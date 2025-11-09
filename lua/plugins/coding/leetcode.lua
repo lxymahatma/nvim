@@ -5,7 +5,7 @@ return {
 
     ---@type lc.UserConfig
     opts = {
-        lang = "csharp",
+        lang = "python",
         cn = { enabled = false },
         picker = { provider = "snacks-picker" },
         image_support = false,
