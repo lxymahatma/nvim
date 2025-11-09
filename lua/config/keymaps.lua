@@ -39,6 +39,18 @@ map("n", "<leader>lp", "<cmd>Lazy profile<CR>", { desc = "Profile Lazy.nvim plug
 -- Code Actions
 map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action", lsp = { method = "textDocument/codeAction" } })
 
+-- Inlay Hints
+map("n", "<leader>uh", function()
+    local filter = { bufnr = 0 }
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(filter), filter)
+end, { desc = "Toggle inlay hints (buffer)", lsp = { method = "textDocument/inlayHint" } })
+map(
+    "n",
+    "<leader>uH",
+    function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+    { desc = "Toggle inlay hints (global)", lsp = { method = "textDocument/inlayHint" } }
+)
+
 -- Snacks LSP Keymaps
 map("n", "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition", lsp = { method = "textDocument/definition" } })
 map("n", "gD", function() Snacks.picker.lsp_declarations() end, { desc = "Goto Declaration", lsp = { method = "textDocument/declaration" } })
