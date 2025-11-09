@@ -44,11 +44,14 @@ return {
                 ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
                 ["<Tab>"] = {
                     "select_and_accept",
+                    function() return require("copilot.suggestion").accept() end,
                     function() return require("sidekick").nes_jump_or_apply() end,
                     "fallback",
                 },
                 ["<Up>"] = { "select_prev", "fallback" },
                 ["<Down>"] = { "select_next", "fallback" },
+                ["C-p"] = { "select_prev", "fallback_to_mappings" },
+                ["C-n"] = { "select_next", "fallback_to_mappings" },
                 ["<C-u>"] = { "scroll_documentation_up", "fallback" },
                 ["<C-d>"] = { "scroll_documentation_down", "fallback" },
             },
@@ -109,6 +112,19 @@ return {
                     text = function(ctx) return colorful_menu.blink_components_text(ctx) end,
                     highlight = function(ctx) return colorful_menu.blink_components_highlight(ctx) end,
                 },
+            })
+        end,
+        config = function(_, opts)
+            require("blink.cmp").setup(opts)
+
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "BlinkCmpMenuOpen",
+                callback = function() vim.b.copilot_suggestion_hidden = true end,
+            })
+
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "BlinkCmpMenuClose",
+                callback = function() vim.b.copilot_suggestion_hidden = false end,
             })
         end,
     },
