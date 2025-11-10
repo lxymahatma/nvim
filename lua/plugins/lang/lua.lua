@@ -23,7 +23,26 @@ return {
         "neovim/nvim-lspconfig",
         opts = {
             servers = {
-                emmylua_ls = {},
+                emmylua_ls = {
+                    settings = {
+                        Lua = {
+                            runtime = {
+                                version = "LuaJIT",
+                                extensions = { ".lua" },
+                                requirePattern = {
+                                    "lua/?.lua",
+                                    "lua/?/init.lua",
+                                },
+                            },
+                            workspace = {
+                                library = {
+                                    "$VIMRUNTIME",
+                                    "$HOME/.local/share/nvim/lazy",
+                                },
+                            },
+                        },
+                    },
+                },
             },
         },
     },
