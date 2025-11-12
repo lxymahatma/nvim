@@ -83,7 +83,9 @@ return {
                                 icon, _ = mini_icons.get("lsp", ctx.kind)
                             end
                         elseif ctx.source_id == "path" then
-                            icon, _ = mini_icons.get(ctx.item.data.type, ctx.label)
+                            if ctx.item.data.type ~= "link" then
+                                icon, _ = mini_icons.get(ctx.item.data.type, ctx.label)
+                            end
                         end
 
                         return icon .. ctx.icon_gap
@@ -102,7 +104,9 @@ return {
                                 _, hl = mini_icons.get("lsp", ctx.kind)
                             end
                         elseif ctx.source_id == "path" then
-                            _, hl = mini_icons.get(ctx.item.data.type, ctx.label)
+                            if ctx.item.data.type ~= "link" then
+                                _, hl = mini_icons.get(ctx.item.data.type, ctx.label)
+                            end
                         end
 
                         return hl
