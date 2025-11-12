@@ -16,6 +16,8 @@ return {
                     text_align = "left",
                 },
             },
+            show_buffer_icons = true,
+            show_buffer_close_icons = false,
             themable = true,
         },
         highlights = require("catppuccin.special.bufferline").get_theme(),
