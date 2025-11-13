@@ -18,10 +18,13 @@ return {
         opts = {
             flavour = "mocha",
             integrations = {
+                aerial = true,
                 blink_cmp = {
                     style = "bordered",
                 },
                 copilot_vim = true,
+                dap = true,
+                dap_ui = true,
                 dashboard = true,
                 flash = true,
                 gitsigns = {
@@ -29,6 +32,7 @@ return {
                     transparent = false,
                 },
                 grug_far = true,
+                lsp_trouble = true,
                 mason = true,
                 mini = {
                     enabled = true,
@@ -64,7 +68,6 @@ return {
                 symbols_outline = true,
                 treesitter = true,
                 treesitter_context = true,
-                lsp_trouble = true,
                 which_key = true,
             },
         },
