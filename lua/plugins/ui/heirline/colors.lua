@@ -2,7 +2,7 @@ local M = {}
 
 local palette = require("catppuccin.palettes").get_palette("mocha")
 
-local colors = {
+M.colors = {
     bright_bg = palette.surface0,
     bright_fg = palette.text,
     red = palette.red,
@@ -26,7 +26,5 @@ local colors = {
     text = palette.text,
     subtext0 = palette.subtext0,
 }
-
-function M.get() return colors end
 
 return M

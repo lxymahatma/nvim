@@ -1,42 +1,9 @@
 local M = {}
 
+local components = require("plugins.ui.heirline.components")
+local utils = require("heirline.utils")
+
 function M.setup(colors)
-    local utils = require("heirline.utils")
-
-    local FileIcon = {
-        init = function(self)
-            local filename = self.filename
-            self.icon, self.icon_hl, _ = require("mini.icons").get("file", filename)
-
-            if self.icon_hl then
-                local hl = vim.api.nvim_get_hl(0, { name = self.icon_hl })
-                self.icon_color = hl.fg and string.format("#%06x", hl.fg) or colors.text
-            else
-                self.icon_color = colors.text
-            end
-        end,
-        provider = function(self) return self.icon and (self.icon .. " ") end,
-        hl = function(self) return { fg = self.icon_color } end,
-    }
-
-    local TablineDiagnostics = {
-        condition = function(self) return #vim.diagnostic.get(self.bufnr) > 0 end,
-        init = function(self)
-            local diagnostics = vim.diagnostic.get(self.bufnr)
-            self.errors = #vim.tbl_filter(function(d) return d.severity == vim.diagnostic.severity.ERROR end, diagnostics)
-            self.warnings = #vim.tbl_filter(function(d) return d.severity == vim.diagnostic.severity.WARN end, diagnostics)
-        end,
-        update = { "DiagnosticChanged", "BufEnter" },
-        {
-            provider = function(self) return self.errors > 0 and (" " .. self.errors) or "" end,
-            hl = { fg = "diag_error" },
-        },
-        {
-            provider = function(self) return self.warnings > 0 and (" " .. self.warnings) or "" end,
-            hl = { fg = "diag_warn" },
-        },
-    }
-
     local TablineFileName = {
         provider = function(self)
             local filename = self.filename
@@ -47,11 +14,9 @@ function M.setup(colors)
     }
 
     local TablineFileFlags = {
-        {
-            condition = function(self) return vim.api.nvim_get_option_value("modified", { buf = self.bufnr }) end,
-            provider = " ●",
-            hl = { fg = "green" },
-        },
+        condition = function(self) return vim.api.nvim_get_option_value("modified", { buf = self.bufnr }) end,
+        provider = " ●",
+        hl = { fg = "orange" },
     }
 
     local TablineFileNameBlock = {
@@ -63,26 +28,12 @@ function M.setup(colors)
                 return { bg = colors.mantle, fg = colors.subtext0 }
             end
         end,
-        on_click = {
-            callback = function(_, minwid, _, button)
-                if button == "m" then
-                    vim.schedule(function()
-                        Snacks.bufdelete(minwid)
-                        vim.cmd.redrawtabline()
-                    end)
-                else
-                    vim.api.nvim_win_set_buf(0, minwid)
-                end
-            end,
-            minwid = function(self) return self.bufnr end,
-            name = "heirline_tabline_buffer_callback",
-        },
-        { provider = " " },
-        FileIcon,
+        components.Space,
+        components.FileIcon,
         TablineFileName,
-        TablineDiagnostics,
+        components.TablineDiagnostics,
         TablineFileFlags,
-        { provider = " " },
+        components.Space,
     }
 
     local TablineBufferBlock = utils.surround({ "", "" }, function(self)

@@ -2,7 +2,7 @@ return {
     "rebelot/heirline.nvim",
     event = "VeryLazy",
     config = function()
-        local colors = require("plugins.ui.heirline.colors")
+        local colors = require("plugins.ui.heirline.colors").colors
         local tabline = require("plugins.ui.heirline.tabline")
         local statusline = require("plugins.ui.heirline.statusline")
         local winbar = require("plugins.ui.heirline.winbar")
@@ -12,20 +12,12 @@ return {
             winbar = winbar.setup(colors),
             tabline = tabline.setup(colors),
             opts = {
+                colors = colors,
                 disable_winbar_cb = function(args) return not require("helpers.window").is_edit_window() end,
-                colors = colors.get(),
             },
         })
     end,
     keys = {
-        {
-            "<leader>bp",
-            function()
-                vim.b.pinned = not vim.b.pinned
-                print("Buffer " .. (vim.b.pinned and "pinned" or "unpinned"))
-            end,
-            desc = "Toggle Pin Buffer",
-        },
         {
             "<leader>br",
             function()
