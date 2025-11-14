@@ -9,10 +9,11 @@ return {
     },
 
     {
-        "mason-org/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {
             ensure_installed = {
                 "jsonls",
+                "jsonlint",
             },
         },
     },
@@ -22,15 +23,6 @@ return {
         opts = {
             servers = {
                 jsonls = {},
-            },
-        },
-    },
-
-    {
-        "mason-org/mason.nvim",
-        opts = {
-            ensure_installed = {
-                "jsonlint",
             },
         },
     },

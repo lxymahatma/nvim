@@ -10,10 +10,10 @@ return {
     },
 
     {
-        "mason-org/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {
             ensure_installed = {
-                "rust_analyzer",
+                { "rust_analyzer", condition = function() return vim.fn.executable("rust-analyzer") end },
             },
         },
     },

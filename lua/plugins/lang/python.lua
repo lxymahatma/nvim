@@ -9,10 +9,11 @@ return {
     },
 
     {
-        "mason-org/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {
             ensure_installed = {
                 "pyrefly",
+                "ruff",
             },
         },
     },
@@ -22,15 +23,6 @@ return {
         opts = {
             servers = {
                 pyrefly = {},
-            },
-        },
-    },
-
-    {
-        "mason-org/mason.nvim",
-        opts = {
-            ensure_installed = {
-                "ruff",
             },
         },
     },

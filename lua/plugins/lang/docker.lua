@@ -9,12 +9,13 @@ return {
     },
 
     {
-        "mason-org/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {
             ensure_installed = {
                 "docker_compose_language_service",
                 "docker_language_server",
                 "dockerls",
+                "hadolint",
             },
         },
     },

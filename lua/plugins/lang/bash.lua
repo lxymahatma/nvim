@@ -9,10 +9,12 @@ return {
     },
 
     {
-        "mason-org/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {
             ensure_installed = {
                 "bashls",
+                "shellcheck",
+                "shfmt",
             },
         },
     },
@@ -27,20 +29,10 @@ return {
     },
 
     {
-        "mason-org/mason.nvim",
-        opts = {
-            ensure_installed = {
-                "shellcheck",
-                "shfmt",
-            },
-        },
-    },
-
-    {
         "mfussenegger/nvim-lint",
         opts = {
             linters_by_ft = {
-                bash = { "shellcheck" },
+                sh = { "shellcheck" },
             },
         },
     },

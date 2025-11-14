@@ -9,10 +9,12 @@ return {
     },
 
     {
-        "mason-org/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {
             ensure_installed = {
                 "yamlls",
+                "yamllint",
+                "yamlfmt",
             },
         },
     },
@@ -22,16 +24,6 @@ return {
         opts = {
             servers = {
                 yamlls = {},
-            },
-        },
-    },
-
-    {
-        "mason-org/mason.nvim",
-        opts = {
-            ensure_installed = {
-                "yamllint",
-                "yamlfmt",
             },
         },
     },
