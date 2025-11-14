@@ -1,6 +1,11 @@
 local map = Snacks.keymap.set
 local del = Snacks.keymap.del
 
+-- Buffer Keymaps
+map("n", "<S-h>", "<cmd>bp<cr>", { desc = "Previous Buffer", remap = true })
+map("n", "<S-l>", "<cmd>bn<cr>", { desc = "Next Buffer", remap = true })
+map("n", "<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete buffer", remap = true })
+
 -- Insert mode, ctrl + h / ctrl + l move to the beginning and end of the line
 map("i", "<C-h>", "<HOME>", { desc = "Go to the beginning of the line", remap = true })
 map("i", "<C-l>", "<END>", { desc = "Go to the end of the line", remap = true })

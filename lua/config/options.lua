@@ -1,4 +1,5 @@
 local opt = vim.opt
+local o = vim.o
 
 opt.autowrite = true -- Enable auto write
 
@@ -43,4 +44,5 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 opt.termguicolors = true -- True color support
 
-vim.o.sessionoptions = "buffers,curdir,folds,help,localoptions,tabpages,terminal,winpos,winsize"
+o.showtabline = 2
+o.sessionoptions = "buffers,curdir,folds,help,localoptions,tabpages,terminal,winpos,winsize"
