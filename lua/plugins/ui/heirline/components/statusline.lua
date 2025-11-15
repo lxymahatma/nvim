@@ -1,7 +1,7 @@
 local M = {}
 
-local conditions = require("heirline.conditions")
 local icons = require("config.icons")
+local conditions = require("heirline.conditions")
 
 local LeftComponentSep = {
     provider = function(self) return self.left_component_sep end,

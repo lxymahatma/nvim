@@ -8,7 +8,7 @@ function M.get()
             if filename == "" then filename = "[No Name]" end
             return " " .. filename
         end,
-        hl = { fg = "gray", italic = true },
+        hl = { fg = "overlay0", italic = true },
     }
 
     return { WinBarFileName }

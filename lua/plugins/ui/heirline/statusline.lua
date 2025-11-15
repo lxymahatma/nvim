@@ -1,7 +1,6 @@
 local M = {}
 
 local icons = require("config.icons")
-
 local common = require("plugins.ui.heirline.components.common")
 local statusline = require("plugins.ui.heirline.components.statusline")
 
