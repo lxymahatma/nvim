@@ -27,7 +27,6 @@ function M.get()
         },
         tabline.Indicator,
         tabline.LeftPadding,
-        common.FileIcon,
         tabline.FileName,
         tabline.FileFlags,
         tabline.RightPadding,

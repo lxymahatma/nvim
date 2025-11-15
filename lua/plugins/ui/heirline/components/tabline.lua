@@ -1,5 +1,7 @@
 local M = {}
 
+local common = require("plugins.ui.heirline.components.common")
+
 M.Indicator = {
     static = {
         indicator = "▎",
@@ -17,17 +19,24 @@ M.RightPadding = {
 }
 
 M.FileName = {
-    provider = function(self)
-        local filename = self.filepath == "" and "[No Name]" or vim.fn.fnamemodify(self.filepath, ":t")
-        return filename
-    end,
-    hl = function(self)
-        return {
-            fg = self.has_errors and "diag_error" or self.has_warnings and "diag_warn" or self.is_active and "text" or "subtext0",
-            bold = self.is_active,
-            italic = self.is_active,
-        }
-    end,
+    common.FileIcon,
+    {
+        static = {
+            max_length = 14,
+        },
+        provider = function(self)
+            local filename = self.filepath == "" and "[No Name]" or vim.fn.fnamemodify(self.filepath, ":t")
+            if #filename > self.max_length then filename = filename:sub(1, self.max_length) .. "..." end
+            return filename
+        end,
+        hl = function(self)
+            return {
+                fg = self.has_errors and "diag_error" or self.has_warnings and "diag_warn" or self.is_active and "text" or "subtext0",
+                bold = self.is_active,
+                italic = self.is_active,
+            }
+        end,
+    },
 }
 
 M.FileFlags = {
