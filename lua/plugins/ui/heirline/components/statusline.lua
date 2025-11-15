@@ -61,17 +61,25 @@ M.ViMode = {
 }
 
 M.Git = {
-    condition = conditions.is_git_repo,
+    condition = function(self) return vim.b.gitsigns_status_dict or self.last_branch end,
     static = {
         branch = icons.branch,
     },
     init = function(self)
-        self.status_dict = vim.b.gitsigns_status_dict
-        self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
+        local dict = vim.b.gitsigns_status_dict
+
+        if dict then
+            self.status_dict = dict
+            self.last_branch = dict.head
+            self.has_changes = dict.added ~= 0 or dict.changed ~= 0 or dict.removed ~= 0
+        else
+            self.status_dict = nil
+            self.has_changes = false
+        end
     end,
     hl = { bg = "surface0" },
     {
-        provider = function(self) return self.branch .. self.status_dict.head .. " " end,
+        provider = function(self) return self.branch .. self.last_branch .. " " end,
         hl = function(self)
             return {
                 fg = self.mode_colors[self.mode_key],
@@ -84,31 +92,28 @@ M.Git = {
         hl = { fg = "text" },
     },
     {
+        condition = function(self) return self.has_changes end,
         provider = function(self)
             local count = self.status_dict.added or 0
             return count > 0 and ("+" .. count .. " ")
         end,
-        hl = {
-            fg = "git_add",
-        },
+        hl = { fg = "git_add" },
     },
     {
+        condition = function(self) return self.has_changes end,
         provider = function(self)
             local count = self.status_dict.changed or 0
             return count > 0 and ("~" .. count .. " ")
         end,
-        hl = {
-            fg = "git_change",
-        },
+        hl = { fg = "git_change" },
     },
     {
+        condition = function(self) return self.has_changes end,
         provider = function(self)
             local count = self.status_dict.removed or 0
             return count > 0 and ("-" .. count .. " ")
         end,
-        hl = {
-            fg = "git_del",
-        },
+        hl = { fg = "git_del" },
     },
 }
 
