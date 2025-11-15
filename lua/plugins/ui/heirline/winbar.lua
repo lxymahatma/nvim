@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup(colors)
+function M.get()
     local WinBarFileName = {
         init = function(self) self.filename = vim.api.nvim_buf_get_name(0) end,
         provider = function(self)

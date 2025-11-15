@@ -8,9 +8,9 @@ return {
         local winbar = require("plugins.ui.heirline.winbar")
 
         require("heirline").setup({
-            statusline = statusline.setup(),
-            winbar = winbar.setup(colors),
-            tabline = tabline.setup(colors),
+            statusline = statusline.get(),
+            winbar = winbar.get(),
+            tabline = tabline.get(),
             opts = {
                 colors = colors,
                 disable_winbar_cb = function(args) return not require("helpers.window").is_edit_window() end,

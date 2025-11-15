@@ -1,9 +1,9 @@
 local M = {}
 
-local components = require("plugins.ui.heirline.components")
+local common = require("plugins.ui.heirline.components.common")
 local utils = require("heirline.utils")
 
-function M.setup(colors)
+function M.get()
     local TablineFileName = {
         provider = function(self)
             local filename = self.filename
@@ -23,24 +23,24 @@ function M.setup(colors)
         init = function(self) self.filename = vim.api.nvim_buf_get_name(self.bufnr) end,
         hl = function(self)
             if self.is_active then
-                return { bg = colors.surface0, fg = colors.text, bold = true }
+                return { bg = "surface0", fg = "text", bold = true }
             else
-                return { bg = colors.mantle, fg = colors.subtext0 }
+                return { bg = "mantle", fg = "subtext0" }
             end
         end,
-        components.Space,
-        components.FileIcon,
+        common.Space,
+        common.FileIcon,
         TablineFileName,
-        components.TablineDiagnostics,
+        common.TablineDiagnostics,
         TablineFileFlags,
-        components.Space,
+        common.Space,
     }
 
     local TablineBufferBlock = utils.surround({ "", "" }, function(self)
         if self.is_active then
-            return colors.surface0
+            return "surface0"
         else
-            return colors.mantle
+            return "mantle"
         end
     end, { TablineFileNameBlock })
 

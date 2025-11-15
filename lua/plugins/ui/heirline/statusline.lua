@@ -1,47 +1,44 @@
 local M = {}
 
-local components = require("plugins.ui.heirline.components")
 local icons = require("config.icons")
 
-function M.setup()
+local common = require("plugins.ui.heirline.components.common")
+local statusline = require("plugins.ui.heirline.components.statusline")
+
+function M.get()
     local Align = { provider = "%=" }
 
-    local FileIconBlock = {
-        init = function(self) self.filename = vim.api.nvim_buf_get_name(0) end,
-        components.FileIcon,
-    }
-
     local LeftSectionA = {
-        components.ViMode,
-        components.LeftSectionSepX,
+        statusline.ViMode,
+        statusline.LeftSectionSepA,
     }
 
     local LeftSectionB = {
-        components.StatusLineGit,
-        components.LeftSectionSepY,
+        statusline.Git,
+        statusline.LeftSectionSepB,
     }
 
     local LeftSectionC = {
-        components.StatusLineDiagnostics,
-        FileIconBlock,
-        components.FileType,
+        statusline.Diagnostics,
+        common.FileIcon,
+        statusline.FileType,
     }
 
     local RightSectionX = {
-        components.SideKickCopilot,
-        components.SideKickCli,
-        components.FileEncoding,
-        components.FileFormat,
+        statusline.SideKickCopilot,
+        statusline.SideKickCli,
+        statusline.FileEncoding,
+        statusline.FileFormat,
     }
 
     local RightSectionY = {
-        components.RightSectionSepY,
-        components.Progress,
+        statusline.RightSectionSepY,
+        statusline.Progress,
     }
 
     local RightSectionZ = {
-        components.RightSectionSepZ,
-        components.Location,
+        statusline.RightSectionSepZ,
+        statusline.Location,
     }
 
     return {
@@ -51,6 +48,7 @@ function M.setup()
             self.mode_key = self.mode:sub(1, 1)
 
             -- File
+            self.filename = vim.api.nvim_buf_get_name(0)
             self.line = vim.fn.line(".")
             self.charcol = vim.fn.charcol(".")
             self.total = vim.fn.line("$")

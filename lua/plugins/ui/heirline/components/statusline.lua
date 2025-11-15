@@ -3,52 +3,6 @@ local M = {}
 local conditions = require("heirline.conditions")
 local icons = require("config.icons")
 
-M.Space = { provider = " " }
-
-M.FileIcon = {
-    init = function(self)
-        self.icon, self.icon_hl = require("mini.icons").get("file", self.filename)
-        self.icon_color = string.format("#%06x", vim.api.nvim_get_hl(0, { name = self.icon_hl }).fg)
-    end,
-    provider = function(self) return self.icon and (self.icon .. " ") end,
-    hl = function(self) return { fg = self.icon_color } end,
-}
-
-M.FileNameBlock = {
-    init = function(self)
-        local bufnr = self.bufnr or 0
-        self.filename = vim.api.nvim_buf_get_name(bufnr)
-    end,
-    M.FileIcon,
-}
-
-M.FilePathBlock = {
-    init = function(self)
-        local bufnr = self.bufnr or 0
-        self.filename = vim.api.nvim_buf_get_name(bufnr)
-    end,
-    M.FileIcon,
-}
-
--- Tabline Components
-M.TablineDiagnostics = {
-    condition = function(self) return #vim.diagnostic.get(self.bufnr) > 0 end,
-    init = function(self)
-        local diagnostics = vim.diagnostic.get(self.bufnr)
-        self.errors = #vim.tbl_filter(function(d) return d.severity == vim.diagnostic.severity.ERROR end, diagnostics)
-        self.warnings = #vim.tbl_filter(function(d) return d.severity == vim.diagnostic.severity.WARN end, diagnostics)
-    end,
-    update = { "DiagnosticChanged", "BufEnter" },
-    {
-        provider = function(self) return self.errors > 0 and (" " .. self.errors) or "" end,
-        hl = { fg = "diag_error" },
-    },
-    {
-        provider = function(self) return self.warnings > 0 and (" " .. self.warnings) or "" end,
-        hl = { fg = "diag_warn" },
-    },
-}
-
 -- Status Line Components
 M.ViMode = {
     static = {
@@ -106,7 +60,7 @@ M.ViMode = {
     },
 }
 
-M.StatusLineGit = {
+M.Git = {
     condition = conditions.is_git_repo,
     hl = { bg = "surface0" },
     init = function(self) self.status_dict = vim.b.gitsigns_status_dict end,
@@ -145,16 +99,9 @@ M.StatusLineGit = {
             fg = "git_del",
         },
     },
-    {
-        provider = function(self) return self.left_section_sep end,
-        hl = {
-            fg = "surface0",
-            bg = "mantle",
-        },
-    },
 }
 
-M.StatusLineDiagnostics = {
+M.Diagnostics = {
     condition = conditions.has_diagnostics,
     static = {
         error_icon = icons.diagnostics.Error,
@@ -270,7 +217,7 @@ M.Location = {
     end,
 }
 
-M.LeftSectionSepX = {
+M.LeftSectionSepA = {
     provider = function(self) return self.left_section_sep end,
     hl = function(self)
         return {
@@ -280,13 +227,12 @@ M.LeftSectionSepX = {
     end,
 }
 
-M.LeftSectionSepY = {
-    provider = function(self) return self.left_component_sep end,
-    hl = function(self)
-        return {
-            fg = self.mode_colors[self.mode_key],
-        }
-    end,
+M.LeftSectionSepB = {
+    provider = function(self) return self.left_section_sep end,
+    hl = {
+        fg = "surface0",
+        bg = "mantle",
+    },
 }
 
 M.RightSectionSepY = {
