@@ -16,17 +16,18 @@ return {
         require("sidekick").setup(opts)
 
         local tiny_inline = require("tiny-inline-diagnostic")
+        local state = require("tiny-inline-diagnostic.state")
         vim.api.nvim_create_autocmd("User", {
             pattern = "SidekickNesHide",
             callback = function()
-                if not tiny_inline.enabled then require("tiny-inline-diagnostic").enable() end
+                if not state.user_toggle_state then tiny_inline.enable() end
             end,
         })
 
         vim.api.nvim_create_autocmd("User", {
             pattern = "SidekickNesShow",
             callback = function()
-                if tiny_inline.enabled then require("tiny-inline-diagnostic").disable() end
+                if state.user_toggle_state then tiny_inline.disable() end
             end,
         })
     end,
