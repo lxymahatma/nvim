@@ -2,6 +2,8 @@ return {
     "rebelot/heirline.nvim",
     event = "VeryLazy",
     config = function()
+        local conditions = require("heirline.conditions")
+
         local colors = require("plugins.ui.heirline.colors").colors
         local tabline = require("plugins.ui.heirline.tabline")
         local statusline = require("plugins.ui.heirline.statusline")
@@ -13,7 +15,12 @@ return {
             tabline = tabline.get(),
             opts = {
                 colors = colors,
-                disable_winbar_cb = function(args) return not require("helpers.window").is_edit_window() end,
+                disable_winbar_cb = function(args)
+                    return conditions.buffer_matches({
+                        buftype = { "nofile" },
+                        filetype = { "snacks_picker_list" },
+                    }, args.buf)
+                end,
             },
         })
     end,

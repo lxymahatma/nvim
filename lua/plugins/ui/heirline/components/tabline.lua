@@ -22,7 +22,7 @@ M.FileName = {
     common.FileIcon,
     {
         static = {
-            max_length = 14,
+            max_length = 18,
         },
         provider = function(self)
             local filename = self.filepath == "" and "[No Name]" or vim.fn.fnamemodify(self.filepath, ":t")

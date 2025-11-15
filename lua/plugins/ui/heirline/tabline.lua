@@ -1,7 +1,6 @@
 local M = {}
 
 local utils = require("heirline.utils")
-local common = require("plugins.ui.heirline.components.common")
 local tabline = require("plugins.ui.heirline.components.tabline")
 
 function M.get()
