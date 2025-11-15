@@ -4,31 +4,21 @@ local common = require("plugins.ui.heirline.components.common")
 
 M.Indicator = {
     static = {
-        indicator = "▎",
+        indicator = "▎ ",
     },
     provider = function(self) return self.is_active and self.indicator or " " end,
     hl = { fg = "orange" },
 }
 
-M.LeftPadding = {
-    provider = "  ",
-}
-
-M.RightPadding = {
-    provider = " ",
+M.BufferPadding = {
+    provider = function(self) return string.rep(" ", self.buffer_padding) end,
+    hl = function(self) return self.is_active and { bg = "surface0" } or { bg = "mantle" } end,
 }
 
 M.FileName = {
     common.FileIcon,
     {
-        static = {
-            max_length = 18,
-        },
-        provider = function(self)
-            local filename = self.filepath == "" and "[No Name]" or vim.fn.fnamemodify(self.filepath, ":t")
-            if #filename > self.max_length then filename = filename:sub(1, self.max_length) .. "..." end
-            return filename
-        end,
+        provider = function(self) return self.filename end,
         hl = function(self)
             return {
                 fg = self.has_errors and "diag_error" or self.has_warnings and "diag_warn" or self.is_active and "text" or "subtext0",

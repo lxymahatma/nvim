@@ -5,9 +5,15 @@ local tabline = require("plugins.ui.heirline.components.tabline")
 
 function M.get()
     local BufferBlock = {
+        static = {
+            buffer_min_width = 20,
+            filename_max_length = 18,
+        },
         init = function(self)
             -- File
             self.filepath = vim.api.nvim_buf_get_name(self.bufnr)
+            self.filename = self.filepath == "" and "[No Name]" or vim.fn.fnamemodify(self.filepath, ":t")
+            if #self.filename > self.filename_max_length then self.filename = self.filename:sub(1, self.filename_max_length) .. "..." end
 
             -- Diagnostics
             local diagnostics = vim.diagnostic.get(self.bufnr)
@@ -15,6 +21,11 @@ function M.get()
             self.warnings = #vim.tbl_filter(function(d) return d.severity == vim.diagnostic.severity.WARN end, diagnostics)
             self.has_errors = self.errors > 0
             self.has_warnings = self.warnings > 0
+
+            -- Padding
+            local current_width = 6 + #self.filename
+            local padding_needed = math.max(0, self.buffer_min_width - current_width) --[[@type number]]
+            self.buffer_padding = math.floor(padding_needed / 2)
         end,
         hl = function(self) return self.is_active and { fg = "text", bg = "surface0", bold = true } or { fg = "subtext0", bg = "mantle" } end,
         on_click = {
@@ -25,10 +36,10 @@ function M.get()
             name = "heirline_buffer_switch_button",
         },
         tabline.Indicator,
-        tabline.LeftPadding,
+        tabline.BufferPadding,
         tabline.FileName,
         tabline.FileFlags,
-        tabline.RightPadding,
+        tabline.BufferPadding,
     }
 
     local BufferLine = utils.make_buflist({ BufferBlock }, {
