@@ -15,9 +15,9 @@ M.diagnostics = {
 }
 
 M.fileformat = {
-    unix = " ",
-    dos = " ",
-    mac = " ",
+    unix = "",
+    dos = "",
+    mac = "",
 }
 
 M.LeftSectionSep = ""

@@ -8,14 +8,50 @@ local statusline = require("plugins.ui.heirline.components.statusline")
 function M.get()
     local Align = { provider = "%=" }
 
+    local LeftSectionSepA = {
+        provider = function(self) return self.left_section_sep end,
+        hl = function(self)
+            return {
+                fg = self.mode_colors[self.mode_key],
+                bg = "surface0",
+            }
+        end,
+    }
+
+    local LeftSectionSepB = {
+        provider = function(self) return self.left_section_sep end,
+        hl = {
+            fg = "surface0",
+            bg = "mantle",
+        },
+    }
+
+    local RightSectionSepY = {
+        provider = function(self) return self.right_section_sep end,
+        hl = {
+            fg = "surface0",
+            bg = "mantle",
+        },
+    }
+
+    local RightSectionSepZ = {
+        provider = function(self) return self.right_section_sep end,
+        hl = function(self)
+            return {
+                fg = self.mode_colors[self.mode_key],
+                bg = "surface0",
+            }
+        end,
+    }
+
     local LeftSectionA = {
         statusline.ViMode,
-        statusline.LeftSectionSepA,
+        LeftSectionSepA,
     }
 
     local LeftSectionB = {
         statusline.Git,
-        statusline.LeftSectionSepB,
+        LeftSectionSepB,
     }
 
     local LeftSectionC = {
@@ -32,12 +68,12 @@ function M.get()
     }
 
     local RightSectionY = {
-        statusline.RightSectionSepY,
+        RightSectionSepY,
         statusline.Progress,
     }
 
     local RightSectionZ = {
-        statusline.RightSectionSepZ,
+        RightSectionSepZ,
         statusline.Location,
     }
 

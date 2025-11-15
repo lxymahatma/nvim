@@ -3,6 +3,16 @@ local M = {}
 local conditions = require("heirline.conditions")
 local icons = require("config.icons")
 
+local LeftComponentSep = {
+    provider = function(self) return self.left_component_sep end,
+    hl = { fg = "text" },
+}
+
+local RightComponentSep = {
+    provider = function(self) return self.right_component_sep end,
+    hl = { fg = "text" },
+}
+
 M.ViMode = {
     static = {
         mode_names = {
@@ -61,11 +71,11 @@ M.ViMode = {
 
 M.Git = {
     condition = conditions.is_git_repo,
-    hl = { bg = "surface0" },
     init = function(self)
         self.status_dict = vim.b.gitsigns_status_dict
         self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
     end,
+    hl = { bg = "surface0" },
     {
         provider = function(self) return self.status_dict.head .. " " end,
         hl = function(self)
@@ -77,11 +87,7 @@ M.Git = {
     {
         condition = function(self) return self.has_changes end,
         provider = function(self) return self.left_component_sep end,
-        hl = function(self)
-            return {
-                fg = self.mode_colors[self.mode_key],
-            }
-        end,
+        hl = { fg = "text" },
     },
     {
         provider = function(self)
@@ -143,6 +149,7 @@ M.Diagnostics = {
         provider = function(self) return self.hints > 0 and (self.hint_icon .. self.hints .. " ") end,
         hl = { fg = "diag_hint" },
     },
+    LeftComponentSep,
 }
 
 M.FileType = {
@@ -161,29 +168,41 @@ M.SideKickCopilot = {
         },
     },
     init = function(self) self.status = require("sidekick.status").get() end,
-    provider = function(self) return self.status and vim.tbl_get(self.icons, self.status.kind, 1) end,
-    hl = function(self)
-        local hl = self.status and (self.status.busy and "DiagnosticWarn" or vim.tbl_get(self.icons, self.status.kind, 2))
-        return { fg = Snacks.util.color(hl) }
-    end,
+    {
+        provider = function(self) return self.status and vim.tbl_get(self.icons, self.status.kind, 1) end,
+        hl = function(self)
+            local hl = self.status and (self.status.busy and "DiagnosticWarn" or vim.tbl_get(self.icons, self.status.kind, 2))
+            return { fg = Snacks.util.color(hl) }
+        end,
+    },
+    {
+        provider = function(self) return self.right_component_sep end,
+        hl = { fg = "text" },
+    },
     update = { "User", pattern = { "SidekickNesDone", "SidekickNesHide", "SidekickNesShow" } },
 }
 
 M.SideKickCli = {
     condition = function() return #require("sidekick.status").cli() > 0 end,
     init = function(self) self.status = require("sidekick.status").cli() end,
-    provider = function(self) return " " .. (#self.status > 1 and #self.status or "") end,
-    hl = { fg = Snacks.util.color("Special") },
+    {
+        provider = function(self) return "  " .. (#self.status > 1 and #self.status or "") end,
+        hl = { fg = Snacks.util.color("Special") },
+    },
+    RightComponentSep,
     update = { "User", pattern = { "SidekickCliAttach", "SidekickCliDetach" } },
 }
 
 M.FileEncoding = {
-    provider = function()
-        local enc = vim.bo.fenc ~= "" and vim.bo.fenc or vim.o.enc
-        local bomb = vim.bo.bomb and "[BOM]" or ""
-        return enc:upper() .. bomb .. " "
-    end,
-    hl = { fg = "text" },
+    {
+        provider = function()
+            local enc = vim.bo.fenc ~= "" and vim.bo.fenc or vim.o.enc
+            local bomb = vim.bo.bomb and "[BOM]" or ""
+            return " " .. enc:upper() .. bomb
+        end,
+        hl = { fg = "text" },
+    },
+    RightComponentSep,
 }
 
 M.FileFormat = {
@@ -194,7 +213,7 @@ M.FileFormat = {
             mac = icons.fileformat.mac,
         },
     },
-    provider = function(self) return self.symbols[vim.bo.fileformat] .. " " end,
+    provider = function(self) return " " .. self.symbols[vim.bo.fileformat] end,
     hl = { fg = "text" },
 }
 
@@ -224,42 +243,6 @@ M.Location = {
             fg = "surface0",
             bg = self.mode_colors[self.mode_key],
             bold = true,
-        }
-    end,
-}
-
-M.LeftSectionSepA = {
-    provider = function(self) return self.left_section_sep end,
-    hl = function(self)
-        return {
-            fg = self.mode_colors[self.mode_key],
-            bg = "surface0",
-        }
-    end,
-}
-
-M.LeftSectionSepB = {
-    provider = function(self) return self.left_section_sep end,
-    hl = {
-        fg = "surface0",
-        bg = "mantle",
-    },
-}
-
-M.RightSectionSepY = {
-    provider = function(self) return self.right_section_sep end,
-    hl = {
-        fg = "surface0",
-        bg = "mantle",
-    },
-}
-
-M.RightSectionSepZ = {
-    provider = function(self) return self.right_section_sep end,
-    hl = function(self)
-        return {
-            fg = self.mode_colors[self.mode_key],
-            bg = "surface0",
         }
     end,
 }
