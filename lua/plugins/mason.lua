@@ -3,7 +3,6 @@ return {
     {
         "mason-org/mason.nvim",
         cmd = "Mason",
-        opts_extend = { "ensure_installed" },
 
         ---@type MasonSettings
         opts = {
@@ -19,32 +18,6 @@ return {
                 toggle_package_install_log = "l",
             },
         },
-        config = function(_, opts)
-            require("mason").setup(opts)
-
-            local mr = require("mason-registry")
-            mr.refresh(function()
-                for _, tool in ipairs(opts.ensure_installed) do
-                    local p = mr.get_package(tool)
-                    if not p:is_installed() then
-                        vim.notify(("[mason.nvim] installing %s"):format(tool))
-                        p:install(
-                            {},
-                            vim.schedule_wrap(function(success)
-                                if success then
-                                    vim.notify(("[mason.nvim] %s was successfully installed"):format(tool))
-                                else
-                                    vim.notify(
-                                        ("[mason.nvim] failed to install %s. Installation logs are available in :Mason and :MasonLog"):format(tool),
-                                        vim.log.levels.ERROR
-                                    )
-                                end
-                            end)
-                        )
-                    end
-                end
-            end)
-        end,
         keys = {
             { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
         },
@@ -54,7 +27,6 @@ return {
     {
         "mason-org/mason-lspconfig.nvim",
         event = "VeryLazy",
-        opts_extend = { "ensure_installed" },
 
         ---@type MasonLspconfigSettings
         opts = {
@@ -70,6 +42,21 @@ return {
         ---@type MasonNvimDapSettings
         opts = {
             automatic_installation = true,
+        },
+    },
+
+    -- Mason Install Tool
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        event = "VeryLazy",
+        opts_extend = { "ensure_installed" },
+        opts = {
+            auto_update = true,
+            integrations = {
+                ["mason-lspconfig"] = true,
+                ["mason-null-ls"] = true,
+                ["mason-nvim-dap"] = true,
+            },
         },
     },
 }

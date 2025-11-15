@@ -11,10 +11,12 @@ return {
     },
 
     {
-        "mason-org/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {
             ensure_installed = {
                 "emmylua_ls",
+                "selene",
+                "stylua",
             },
         },
     },
@@ -43,16 +45,6 @@ return {
                         },
                     },
                 },
-            },
-        },
-    },
-
-    {
-        "mason-org/mason.nvim",
-        opts = {
-            ensure_installed = {
-                "selene",
-                "stylua",
             },
         },
     },
