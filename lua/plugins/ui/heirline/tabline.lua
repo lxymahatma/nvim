@@ -6,7 +6,18 @@ local tabline = require("plugins.ui.heirline.components.tabline")
 
 function M.get()
     local BufferBlock = {
-        init = function(self) self.filename = vim.api.nvim_buf_get_name(self.bufnr) end,
+        init = function(self)
+            -- File
+            self.filename = vim.api.nvim_buf_get_name(self.bufnr)
+
+            -- Diagnostics
+            local diagnostics = vim.diagnostic.get(self.bufnr)
+            self.errors = #vim.tbl_filter(function(d) return d.severity == vim.diagnostic.severity.ERROR end, diagnostics)
+            self.warnings = #vim.tbl_filter(function(d) return d.severity == vim.diagnostic.severity.WARN end, diagnostics)
+            self.has_errors = self.errors > 0
+            self.has_warnings = self.warnings > 0
+            self.has_diag = self.errors > 0 or self.warnings > 0
+        end,
         hl = function(self) return self.is_active and { fg = "text", bg = "surface0", bold = true } or { fg = "subtext0", bg = "mantle" } end,
         on_click = {
             minwid = function(self) return self.bufnr end,
@@ -19,7 +30,6 @@ function M.get()
         tabline.BufferPadding,
         common.FileIcon,
         tabline.FileName,
-        tabline.Diagnostics,
         tabline.FileFlags,
         tabline.BufferPadding,
     }

@@ -4,13 +4,12 @@ M.Indicator = {
     static = {
         indicator = "▎",
     },
-    condition = function(self) return self.is_active end,
-    provider = function(self) return self.indicator end,
+    provider = function(self) return self.is_active and self.indicator or " " end,
     hl = { fg = "orange" },
 }
 
 M.BufferPadding = {
-    provider = "  ",
+    provider = " ",
 }
 
 M.FileName = {
@@ -21,33 +20,21 @@ M.FileName = {
     end,
     hl = function(self)
         return {
+            fg = self.has_errors and "diag_error" or self.has_warnings and "diag_warn" or self.is_active and "text" or "subtext0",
             bold = self.is_active,
             italic = self.is_active,
         }
     end,
 }
 
-M.Diagnostics = {
-    condition = function(self) return #vim.diagnostic.get(self.bufnr) > 0 end,
-    init = function(self)
-        local diagnostics = vim.diagnostic.get(self.bufnr)
-        self.errors = #vim.tbl_filter(function(d) return d.severity == vim.diagnostic.severity.ERROR end, diagnostics)
-        self.warnings = #vim.tbl_filter(function(d) return d.severity == vim.diagnostic.severity.WARN end, diagnostics)
-    end,
-    update = { "DiagnosticChanged", "BufEnter" },
-    {
-        provider = function(self) return self.errors > 0 and (" " .. self.errors) or "" end,
-        hl = { fg = "diag_error", bold = true },
-    },
-    {
-        provider = function(self) return self.warnings > 0 and (" " .. self.warnings) or "" end,
-        hl = { fg = "diag_warn", bold = true },
-    },
-}
-
 M.FileFlags = {
-    condition = function(self) return vim.api.nvim_get_option_value("modified", { buf = self.bufnr }) end,
-    provider = " ●",
+    provider = function(self)
+        if vim.api.nvim_get_option_value("modified", { buf = self.bufnr }) then
+            return " ●"
+        else
+            return "  "
+        end
+    end,
     hl = { fg = "orange" },
 }
 
