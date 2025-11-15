@@ -16,7 +16,6 @@ function M.get()
             self.warnings = #vim.tbl_filter(function(d) return d.severity == vim.diagnostic.severity.WARN end, diagnostics)
             self.has_errors = self.errors > 0
             self.has_warnings = self.warnings > 0
-            self.has_diag = self.errors > 0 or self.warnings > 0
         end,
         hl = function(self) return self.is_active and { fg = "text", bg = "surface0", bold = true } or { fg = "subtext0", bg = "mantle" } end,
         on_click = {
