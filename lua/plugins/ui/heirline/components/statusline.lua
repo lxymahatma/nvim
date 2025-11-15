@@ -3,7 +3,6 @@ local M = {}
 local conditions = require("heirline.conditions")
 local icons = require("config.icons")
 
--- Status Line Components
 M.ViMode = {
     static = {
         mode_names = {
@@ -63,9 +62,21 @@ M.ViMode = {
 M.Git = {
     condition = conditions.is_git_repo,
     hl = { bg = "surface0" },
-    init = function(self) self.status_dict = vim.b.gitsigns_status_dict end,
+    init = function(self)
+        self.status_dict = vim.b.gitsigns_status_dict
+        self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
+    end,
     {
         provider = function(self) return self.status_dict.head .. " " end,
+        hl = function(self)
+            return {
+                fg = self.mode_colors[self.mode_key],
+            }
+        end,
+    },
+    {
+        condition = function(self) return self.has_changes end,
+        provider = function(self) return self.left_component_sep end,
         hl = function(self)
             return {
                 fg = self.mode_colors[self.mode_key],
