@@ -2,16 +2,7 @@ local M = {}
 
 local icons = require("config.icons")
 local conditions = require("heirline.conditions")
-
-local LeftComponentSep = {
-    provider = function(self) return self.left_component_sep end,
-    hl = { fg = "text" },
-}
-
-local RightComponentSep = {
-    provider = function(self) return self.right_component_sep end,
-    hl = { fg = "text" },
-}
+local common = require("plugins.ui.heirline.components.common")
 
 M.ViMode = {
     static = {
@@ -152,12 +143,14 @@ M.Diagnostics = {
         provider = function(self) return self.hints > 0 and (self.hint_icon .. self.hints .. " ") end,
         hl = { fg = "diag_hint" },
     },
-    LeftComponentSep,
 }
 
 M.FileType = {
-    provider = function() return vim.bo.filetype end,
-    hl = { fg = "text" },
+    common.FileIcon,
+    {
+        provider = function() return vim.bo.filetype end,
+        hl = { fg = "text" },
+    },
 }
 
 M.SideKickCopilot = {
@@ -192,7 +185,6 @@ M.SideKickCli = {
         provider = function(self) return "  " .. (#self.status > 1 and #self.status or "") end,
         hl = { fg = Snacks.util.color("Special") },
     },
-    RightComponentSep,
     update = { "User", pattern = { "SidekickCliAttach", "SidekickCliDetach" } },
 }
 
@@ -205,7 +197,6 @@ M.FileEncoding = {
         end,
         hl = { fg = "text" },
     },
-    RightComponentSep,
 }
 
 M.FileFormat = {

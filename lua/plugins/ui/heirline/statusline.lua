@@ -1,7 +1,7 @@
 local M = {}
 
 local icons = require("config.icons")
-local common = require("plugins.ui.heirline.components.common")
+local utils = require("heirline.utils")
 local statusline = require("plugins.ui.heirline.components.statusline")
 
 function M.get()
@@ -43,6 +43,16 @@ function M.get()
         end,
     }
 
+    local LeftComponentSep = {
+        provider = function(self) return self.left_component_sep end,
+        hl = { fg = "text" },
+    }
+
+    local RightComponentSep = {
+        provider = function(self) return self.right_component_sep end,
+        hl = { fg = "text" },
+    }
+
     local LeftSectionA = {
         statusline.ViMode,
         LeftSectionSepA,
@@ -54,15 +64,14 @@ function M.get()
     }
 
     local LeftSectionC = {
-        statusline.Diagnostics,
-        common.FileIcon,
+        utils.insert(statusline.Diagnostics, LeftComponentSep),
         statusline.FileType,
     }
 
     local RightSectionX = {
         statusline.SideKickCopilot,
-        statusline.SideKickCli,
-        statusline.FileEncoding,
+        utils.insert(statusline.SideKickCli, RightComponentSep),
+        utils.insert(statusline.FileEncoding, RightComponentSep),
         statusline.FileFormat,
     }
 
