@@ -20,4 +20,9 @@ M.fileformat = {
     mac = " ",
 }
 
+M.LeftSectionSep = ""
+M.RightSectionSep = ""
+M.LeftComponentSep = ""
+M.RightComponentSep = ""
+
 return M

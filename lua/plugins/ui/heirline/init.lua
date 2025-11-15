@@ -8,7 +8,7 @@ return {
         local winbar = require("plugins.ui.heirline.winbar")
 
         require("heirline").setup({
-            statusline = statusline.setup(colors),
+            statusline = statusline.setup(),
             winbar = winbar.setup(colors),
             tabline = tabline.setup(colors),
             opts = {

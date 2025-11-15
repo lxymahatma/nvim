@@ -51,7 +51,6 @@ M.TablineDiagnostics = {
 
 -- Status Line Components
 M.ViMode = {
-    init = function(self) self.mode = vim.fn.mode(1) end,
     static = {
         mode_names = {
             n = "NORMAL",
@@ -90,28 +89,13 @@ M.ViMode = {
             ["!"] = "SHELL",
             t = "TERMINAL",
         },
-        mode_colors = {
-            n = "blue",
-            i = "green",
-            v = "purple",
-            V = "purple",
-            ["\22"] = "purple",
-            c = "orange",
-            s = "purple",
-            S = "purple",
-            ["\19"] = "purple",
-            R = "red",
-            r = "red",
-            ["!"] = "red",
-            t = "green",
-        },
+        sep = icons.LeftSectionSep .. " ",
     },
     provider = function(self) return " %2(" .. self.mode_names[self.mode] .. "%) " end,
     hl = function(self)
-        local mode = self.mode:sub(1, 1)
         return {
             fg = "surface0",
-            bg = self.mode_colors[mode],
+            bg = self.mode_colors[self.mode_key],
             bold = true,
         }
     end,
@@ -119,6 +103,54 @@ M.ViMode = {
         "ModeChanged",
         pattern = "*:*",
         callback = vim.schedule_wrap(function() vim.cmd("redrawstatus") end),
+    },
+}
+
+M.StatusLineGit = {
+    condition = conditions.is_git_repo,
+    hl = { bg = "surface0" },
+    init = function(self) self.status_dict = vim.b.gitsigns_status_dict end,
+    {
+        provider = function(self) return self.status_dict.head .. " " end,
+        hl = function(self)
+            return {
+                fg = self.mode_colors[self.mode_key],
+            }
+        end,
+    },
+    {
+        provider = function(self)
+            local count = self.status_dict.added or 0
+            return count > 0 and ("+" .. count .. " ")
+        end,
+        hl = {
+            fg = "git_add",
+        },
+    },
+    {
+        provider = function(self)
+            local count = self.status_dict.changed or 0
+            return count > 0 and ("~" .. count .. " ")
+        end,
+        hl = {
+            fg = "git_change",
+        },
+    },
+    {
+        provider = function(self)
+            local count = self.status_dict.removed or 0
+            return count > 0 and ("-" .. count .. " ")
+        end,
+        hl = {
+            fg = "git_del",
+        },
+    },
+    {
+        provider = function(self) return self.left_section_sep end,
+        hl = {
+            fg = "surface0",
+            bg = "mantle",
+        },
     },
 }
 
@@ -157,7 +189,7 @@ M.StatusLineDiagnostics = {
 
 M.FileType = {
     provider = function() return vim.bo.filetype end,
-    hl = { fg = "bright_fg" },
+    hl = { fg = "text" },
 }
 
 M.SideKickCopilot = {
@@ -181,11 +213,9 @@ M.SideKickCopilot = {
 
 M.SideKickCli = {
     condition = function() return #require("sidekick.status").cli() > 0 end,
-    provider = function()
-        local status = require("sidekick.status").cli()
-        return " " .. (#status > 1 and #status or "") .. " "
-    end,
-    hl = { fg = "cyan" },
+    init = function(self) self.status = require("sidekick.status").cli() end,
+    provider = function(self) return " " .. (#self.status > 1 and #self.status or "") end,
+    hl = { fg = Snacks.util.color("Special") },
     update = { "User", pattern = { "SidekickCliAttach", "SidekickCliDetach" } },
 }
 
@@ -195,7 +225,7 @@ M.FileEncoding = {
         local bomb = vim.bo.bomb and "[BOM]" or ""
         return enc:upper() .. bomb .. " "
     end,
-    hl = { fg = "bright_fg" },
+    hl = { fg = "text" },
 }
 
 M.FileFormat = {
@@ -207,7 +237,7 @@ M.FileFormat = {
         },
     },
     provider = function(self) return self.symbols[vim.bo.fileformat] .. " " end,
-    hl = { fg = "bright_fg" },
+    hl = { fg = "text" },
 }
 
 M.Progress = {
@@ -218,19 +248,63 @@ M.Progress = {
             return "Bot"
         else
             local percent = math.floor((self.line / self.total) * 100)
-            return string.format("%2d%%%%", percent)
+            return string.format("%3d%%%%", percent)
         end
     end,
-    hl = { fg = "bright_fg", bold = true },
+    hl = function(self)
+        return {
+            fg = self.mode_colors[self.mode_key],
+            bg = "surface0",
+        }
+    end,
 }
 
 M.Location = {
-    provider = function(self) return string.format("%3d:%-2d", self.line, self.charcol) end,
+    provider = function(self) return string.format("%4d:%-3d", self.line, self.charcol) end,
+    hl = function(self)
+        return {
+            fg = "surface0",
+            bg = self.mode_colors[self.mode_key],
+            bold = true,
+        }
+    end,
+}
+
+M.LeftSectionSepX = {
+    provider = function(self) return self.left_section_sep end,
+    hl = function(self)
+        return {
+            fg = self.mode_colors[self.mode_key],
+            bg = "surface0",
+        }
+    end,
+}
+
+M.LeftSectionSepY = {
+    provider = function(self) return self.left_component_sep end,
+    hl = function(self)
+        return {
+            fg = self.mode_colors[self.mode_key],
+        }
+    end,
+}
+
+M.RightSectionSepY = {
+    provider = function(self) return self.right_section_sep end,
     hl = {
         fg = "surface0",
-        bg = "blue",
-        bold = true,
+        bg = "mantle",
     },
+}
+
+M.RightSectionSepZ = {
+    provider = function(self) return self.right_section_sep end,
+    hl = function(self)
+        return {
+            fg = self.mode_colors[self.mode_key],
+            bg = "surface0",
+        }
+    end,
 }
 
 return M

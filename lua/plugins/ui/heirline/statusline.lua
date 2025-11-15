@@ -1,71 +1,89 @@
 local M = {}
 
 local components = require("plugins.ui.heirline.components")
-local conditions = require("heirline.conditions")
+local icons = require("config.icons")
 
-function M.setup(colors)
+function M.setup()
     local Align = { provider = "%=" }
-
-    local Git = {
-        condition = conditions.is_git_repo,
-        init = function(self) self.status_dict = vim.b.gitsigns_status_dict end,
-        hl = { fg = "orange" },
-        {
-            provider = function(self) return self.status_dict.head .. " " end,
-        },
-        {
-            provider = function(self)
-                local count = self.status_dict.added or 0
-                return count > 0 and ("+" .. count .. " ")
-            end,
-            hl = { fg = "git_add" },
-        },
-        {
-            provider = function(self)
-                local count = self.status_dict.changed or 0
-                return count > 0 and ("~" .. count .. " ")
-            end,
-            hl = { fg = "git_change" },
-        },
-        {
-            provider = function(self)
-                local count = self.status_dict.removed or 0
-                return count > 0 and ("-" .. count .. " ")
-            end,
-            hl = { fg = "git_del" },
-        },
-    }
 
     local FileIconBlock = {
         init = function(self) self.filename = vim.api.nvim_buf_get_name(0) end,
         components.FileIcon,
     }
 
-    local Ruler = {
-        init = function(self)
-            self.line = vim.fn.line(".")
-            self.charcol = vim.fn.charcol(".")
-            self.total = vim.fn.line("$")
-        end,
+    local LeftSectionA = {
+        components.ViMode,
+        components.LeftSectionSepX,
+    }
+
+    local LeftSectionB = {
+        components.StatusLineGit,
+        components.LeftSectionSepY,
+    }
+
+    local LeftSectionC = {
+        components.StatusLineDiagnostics,
+        FileIconBlock,
+        components.FileType,
+    }
+
+    local RightSectionX = {
+        components.SideKickCopilot,
+        components.SideKickCli,
+        components.FileEncoding,
+        components.FileFormat,
+    }
+
+    local RightSectionY = {
+        components.RightSectionSepY,
         components.Progress,
-        components.Space,
+    }
+
+    local RightSectionZ = {
+        components.RightSectionSepZ,
         components.Location,
     }
 
     return {
-        components.ViMode,
-        components.Space,
-        Git,
-        components.StatusLineDiagnostics,
-        FileIconBlock,
-        components.FileType,
+        init = function(self)
+            -- Mode
+            self.mode = vim.fn.mode(1)
+            self.mode_key = self.mode:sub(1, 1)
+
+            -- File
+            self.line = vim.fn.line(".")
+            self.charcol = vim.fn.charcol(".")
+            self.total = vim.fn.line("$")
+        end,
+        static = {
+            mode_colors = {
+                n = "blue",
+                i = "green",
+                v = "mauve",
+                V = "mauve",
+                ["\22"] = "mauve",
+                c = "peach",
+                s = "mauve",
+                S = "mauve",
+                ["\19"] = "mauve",
+                R = "red",
+                r = "red",
+                ["!"] = "red",
+                t = "green",
+            },
+
+            left_section_sep = icons.LeftSectionSep .. " ",
+            left_component_sep = icons.LeftComponentSep .. " ",
+            right_section_sep = " " .. icons.RightSectionSep,
+            right_component_sep = " " .. icons.RightComponentSep,
+        },
+        LeftSectionA,
+        LeftSectionB,
+        LeftSectionC,
         Align,
-        components.SideKickCopilot,
-        components.SideKickCli,
-        components.Space,
-        components.FileEncoding,
-        components.FileFormat,
-        Ruler,
+        RightSectionX,
+        RightSectionY,
+        RightSectionZ,
     }
 end
 

@@ -3,28 +3,46 @@ local M = {}
 local palette = require("catppuccin.palettes").get_palette("mocha")
 
 M.colors = {
-    bright_bg = palette.surface0,
-    bright_fg = palette.text,
+    -- Accent
+    rosewater = palette.rosewater,
+    flamingo = palette.flamingo,
+    pink = palette.pink,
+    mauve = palette.mauve,
     red = palette.red,
-    green = palette.green,
-    blue = palette.blue,
-    gray = palette.overlay0,
-    orange = palette.peach,
-    purple = palette.mauve,
-    cyan = palette.sky,
+    maroon = palette.maroon,
+    peach = palette.peach,
     yellow = palette.yellow,
+    green = palette.green,
+    teal = palette.teal,
+    sky = palette.sky,
+    sapphire = palette.sapphire,
+    blue = palette.blue,
+    lavender = palette.lavender,
+
+    -- Text
+    text = palette.text,
+    subtext1 = palette.subtext1,
+    subtext0 = palette.subtext0,
+    overlay2 = palette.overlay2,
+    overlay1 = palette.overlay1,
+    overlay0 = palette.overlay0,
+    surface2 = palette.surface2,
+    surface1 = palette.surface1,
+    surface0 = palette.surface0,
+    base = palette.base,
+    mantle = palette.mantle,
+    crust = palette.crust,
+
+    -- Diagnostics
     diag_error = palette.red,
     diag_warn = palette.yellow,
     diag_info = palette.sky,
     diag_hint = palette.teal,
-    git_del = palette.red,
+
+    -- Git
     git_add = palette.green,
     git_change = palette.yellow,
-
-    surface0 = palette.surface0,
-    mantle = palette.mantle,
-    text = palette.text,
-    subtext0 = palette.subtext0,
+    git_del = palette.red,
 }
 
 return M
