@@ -54,7 +54,6 @@ return {
             auto_update = true,
             integrations = {
                 ["mason-lspconfig"] = true,
-                ["mason-null-ls"] = true,
                 ["mason-nvim-dap"] = true,
             },
         },

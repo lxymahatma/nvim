@@ -13,7 +13,7 @@ return {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {
             ensure_installed = {
-                { "rust_analyzer", condition = function() return vim.fn.executable("rust-analyzer") end },
+                { "rust_analyzer", condition = function() return not vim.fn.executable("rust-analyzer") == 1 end },
             },
         },
     },
