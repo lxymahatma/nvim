@@ -83,7 +83,7 @@ function M.get()
             self.mode_key = self.mode:sub(1, 1)
 
             -- File
-            self.filename = vim.api.nvim_buf_get_name(0)
+            self.filepath = vim.api.nvim_buf_get_name(0)
             self.line = vim.fn.line(".")
             self.charcol = vim.fn.charcol(".")
             self.total = vim.fn.line("$")

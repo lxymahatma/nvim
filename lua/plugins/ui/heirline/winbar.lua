@@ -1,17 +1,16 @@
 local M = {}
 
 function M.get()
-    local WinBarFileName = {
-        init = function(self) self.filename = vim.api.nvim_buf_get_name(0) end,
+    local FilePath = {
+        init = function(self) self.filepath = vim.api.nvim_buf_get_name(0) end,
         provider = function(self)
-            local filename = vim.fn.fnamemodify(self.filename, ":~:.")
-            if filename == "" then filename = "[No Name]" end
+            local filename = vim.fn.fnamemodify(self.filepath, ":~")
             return " " .. filename
         end,
         hl = { fg = "overlay0", italic = true },
     }
 
-    return { WinBarFileName }
+    return { FilePath }
 end
 
 return M

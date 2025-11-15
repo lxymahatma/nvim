@@ -1,5 +1,7 @@
 local M = {}
 
+M.branch = " "
+
 M.copilot = {
     Error = " ",
     Inactive = " ",

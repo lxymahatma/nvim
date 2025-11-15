@@ -8,7 +8,7 @@ function M.get()
     local BufferBlock = {
         init = function(self)
             -- File
-            self.filename = vim.api.nvim_buf_get_name(self.bufnr)
+            self.filepath = vim.api.nvim_buf_get_name(self.bufnr)
 
             -- Diagnostics
             local diagnostics = vim.diagnostic.get(self.bufnr)
@@ -24,14 +24,14 @@ function M.get()
             callback = function(_, minwid, _, button)
                 if button == "l" then vim.api.nvim_set_current_buf(minwid) end
             end,
-            name = "heirline_winbar_switch_button",
+            name = "heirline_buffer_switch_button",
         },
         tabline.Indicator,
-        tabline.BufferPadding,
+        tabline.LeftPadding,
         common.FileIcon,
         tabline.FileName,
         tabline.FileFlags,
-        tabline.BufferPadding,
+        tabline.RightPadding,
     }
 
     local BufferLine = utils.make_buflist({ BufferBlock }, {
@@ -42,9 +42,14 @@ function M.get()
         hl = { fg = "surface0" },
     })
 
+    local TabBlock = {}
+
+    local TabLine = utils.make_tablist(TabBlock)
+
     return {
         tabline.Offset,
         BufferLine,
+        TabLine,
     }
 end
 

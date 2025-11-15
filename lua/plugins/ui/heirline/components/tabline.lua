@@ -8,14 +8,17 @@ M.Indicator = {
     hl = { fg = "orange" },
 }
 
-M.BufferPadding = {
+M.LeftPadding = {
+    provider = "  ",
+}
+
+M.RightPadding = {
     provider = " ",
 }
 
 M.FileName = {
     provider = function(self)
-        local filename = self.filename
-        filename = filename == "" and "[No Name]" or vim.fn.fnamemodify(filename, ":t")
+        local filename = self.filepath == "" and "[No Name]" or vim.fn.fnamemodify(self.filepath, ":t")
         return filename
     end,
     hl = function(self)

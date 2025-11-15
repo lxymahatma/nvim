@@ -71,13 +71,16 @@ M.ViMode = {
 
 M.Git = {
     condition = conditions.is_git_repo,
+    static = {
+        branch = icons.branch,
+    },
     init = function(self)
         self.status_dict = vim.b.gitsigns_status_dict
         self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
     end,
     hl = { bg = "surface0" },
     {
-        provider = function(self) return self.status_dict.head .. " " end,
+        provider = function(self) return self.branch .. self.status_dict.head .. " " end,
         hl = function(self)
             return {
                 fg = self.mode_colors[self.mode_key],
