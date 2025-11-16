@@ -35,11 +35,11 @@ function M.get()
             end,
             name = "heirline_buffer_switch_button",
         },
-        components.active_mark,
-        components.buffer_padding,
-        components.file_name,
-        components.modified_mark,
-        components.buffer_padding,
+        components.ActiveMark,
+        components.BufferPadding,
+        components.FileName,
+        components.ModifiedMark,
+        components.BufferPadding,
     }
 
     local BufferLine = utils.make_buflist({ BufferBlock }, {
@@ -55,7 +55,7 @@ function M.get()
     local TabLine = utils.make_tablist(TabBlock)
 
     return {
-        components.offset,
+        components.Offset,
         BufferLine,
         TabLine,
     }

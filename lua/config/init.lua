@@ -1,7 +1,7 @@
 local config = {}
 
 config.colorscheme = "catppuccin"
-config.enabled_langs = require("helpers.lang_loader").get_enabled_langs()
+config.enabled_langs = require("helpers.lang-loader").get_enabled_langs()
 
 -- leader key
 vim.keymap.set("", "<Space>", "<Nop>")

@@ -1,3 +1,3 @@
 return {
-    fileicon = require("heirline.components.common.fileicon"),
+    FileIcon = require("heirline.components.common.fileicon"),
 }

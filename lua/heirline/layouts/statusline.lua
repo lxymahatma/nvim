@@ -53,36 +53,36 @@ function M.get()
         hl = { fg = "text" },
     }
 
-    local left_section_a = {
-        components.vimode,
+    local LeftSectionA = {
+        components.Vimode,
         LeftSectionSepA,
     }
 
-    local left_section_b = {
-        components.git,
+    local LeftSectionB = {
+        components.Git,
         LeftSectionSepB,
     }
 
-    local left_section_c = {
-        utils.insert(components.diagnostics, LeftComponentSep),
-        components.filetype,
+    local LeftSectionC = {
+        utils.insert(components.Diagnostics, LeftComponentSep),
+        components.FileType,
     }
 
-    local right_section_x = {
-        components.sidekick_copilot,
-        utils.insert(components.sidekick_cli, RightComponentSep),
-        utils.insert(components.encoding, RightComponentSep),
-        components.fileformat,
+    local RightSectionX = {
+        components.SidekickCopilot,
+        utils.insert(components.SidekickCli, RightComponentSep),
+        utils.insert(components.Encoding, RightComponentSep),
+        components.FileFormat,
     }
 
-    local right_section_y = {
+    local RightSectionY = {
         RightSectionSepY,
-        components.progress,
+        components.Progress,
     }
 
-    local right_section_z = {
+    local RightSectionZ = {
         RightSectionSepZ,
-        components.location,
+        components.Location,
     }
 
     return {
@@ -119,13 +119,13 @@ function M.get()
             right_section_sep = " " .. icons.RightSectionSep,
             right_component_sep = " " .. icons.RightComponentSep,
         },
-        left_section_a,
-        left_section_b,
-        left_section_c,
+        LeftSectionA,
+        LeftSectionB,
+        LeftSectionC,
         Align,
-        right_section_x,
-        right_section_y,
-        right_section_z,
+        RightSectionX,
+        RightSectionY,
+        RightSectionZ,
     }
 end
 
