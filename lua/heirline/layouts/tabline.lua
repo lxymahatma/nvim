@@ -45,10 +45,10 @@ function M.get()
 
     local BufferLine = utils.make_buflist({ BufferBlock }, {
         provider = " ",
-        hl = { fg = "surface0" },
+        hl = { fg = "text" },
     }, {
         provider = " ",
-        hl = { fg = "surface0" },
+        hl = { fg = "text" },
     })
 
     local TabBlock = {
