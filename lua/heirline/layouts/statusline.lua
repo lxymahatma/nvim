@@ -3,7 +3,7 @@ local M = {}
 local icons = require("config.icons")
 local utils = require("helpers.heirline")
 local common = require("heirline.components.common")
-local components = require("heirline.components.statusline")
+local statusline = require("heirline.components.statusline")
 
 local function make_section_sep(side, use_mode_color)
     return {
@@ -32,22 +32,22 @@ function M.get()
     local LeftComponentSep = make_component_sep("left")
     local RightComponentSep = make_component_sep("right")
 
-    local LeftSectionA = { components.Vimode }
-    local LeftSectionB = { components.Git }
+    local LeftSectionA = { statusline.Vimode }
+    local LeftSectionB = { statusline.Git }
     local LeftSectionC = {
-        utils.insert_last(components.Diagnostics, LeftComponentSep),
-        components.FileType,
+        utils.insert_last(statusline.Diagnostics, LeftComponentSep),
+        statusline.FileType,
     }
 
     local RightSectionX = {
-        components.SidekickCopilot,
-        utils.insert_last(components.SidekickCli, RightComponentSep),
-        utils.insert_last(components.Encoding, RightComponentSep),
-        components.FileFormat,
+        statusline.SidekickCopilot,
+        utils.insert_last(statusline.SidekickCli, RightComponentSep),
+        utils.insert_last(statusline.Encoding, RightComponentSep),
+        statusline.FileFormat,
     }
 
-    local RightSectionY = { components.Progress }
-    local RightSectionZ = { components.Location }
+    local RightSectionY = { statusline.Progress }
+    local RightSectionZ = { statusline.Location }
 
     return {
         init = function(self)

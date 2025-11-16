@@ -2,7 +2,7 @@ local M = {}
 
 local utils = require("heirline.utils")
 local common = require("heirline.components.common")
-local components = require("heirline.components.tabline")
+local tabline = require("heirline.components.tabline")
 
 function M.get()
     local BufferBlock = {
@@ -36,11 +36,11 @@ function M.get()
             end,
             name = "heirline_buffer_switch_button",
         },
-        components.ActiveMark,
-        components.BufferPadding,
-        components.FileName,
-        components.ModifiedMark,
-        components.BufferPadding,
+        tabline.ActiveMark,
+        tabline.BufferPadding,
+        tabline.FileName,
+        tabline.ModifiedMark,
+        tabline.BufferPadding,
     }
 
     local BufferLine = utils.make_buflist({ BufferBlock }, {
@@ -68,7 +68,7 @@ function M.get()
     local TabLine = utils.make_tablist(TabBlock)
 
     return {
-        components.Offset,
+        tabline.Offset,
         BufferLine,
         common.Align,
         TabLine,
