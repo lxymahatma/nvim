@@ -65,7 +65,6 @@ return {
                 snacks = {
                     enabled = true,
                 },
-                symbols_outline = true,
                 treesitter = true,
                 treesitter_context = true,
                 which_key = true,
