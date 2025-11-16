@@ -12,7 +12,7 @@ return {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {
             ensure_installed = {
-                "qmlls",
+                { "qmlls", condition = function() return not vim.fn.executable("qmlls") == 1 end },
             },
         },
     },
