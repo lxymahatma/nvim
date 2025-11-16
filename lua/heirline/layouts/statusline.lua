@@ -65,14 +65,14 @@ function M.get()
 
     local left_section_c = {
         utils.insert(components.diagnostics, LeftComponentSep),
-        components.file_type,
+        components.filetype,
     }
 
     local right_section_x = {
         components.sidekick_copilot,
         utils.insert(components.sidekick_cli, RightComponentSep),
-        utils.insert(components.file_encoding, RightComponentSep),
-        components.file_format,
+        utils.insert(components.encoding, RightComponentSep),
+        components.fileformat,
     }
 
     local right_section_y = {

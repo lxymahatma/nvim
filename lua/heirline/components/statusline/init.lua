@@ -1,8 +1,8 @@
 return {
     diagnostics = require("heirline.components.statusline.diagnostics"),
-    file_type = require("heirline.components.statusline.file_type"),
-    file_encoding = require("heirline.components.statusline.file_encoding"),
-    file_format = require("heirline.components.statusline.file_format"),
+    encoding = require("heirline.components.statusline.encoding"),
+    filetype = require("heirline.components.statusline.filetype"),
+    fileformat = require("heirline.components.statusline.fileformat"),
     git = require("heirline.components.statusline.git"),
     location = require("heirline.components.statusline.location"),
     progress = require("heirline.components.statusline.progress"),

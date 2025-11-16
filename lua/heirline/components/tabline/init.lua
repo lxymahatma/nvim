@@ -1,7 +1,7 @@
 return {
+    active_mark = require("heirline.components.tabline.active_mark"),
     buffer_padding = require("heirline.components.tabline.buffer_padding"),
-    indicator = require("heirline.components.tabline.indicator"),
-    file_name = require("heirline.components.tabline.file_name"),
-    file_flags = require("heirline.components.tabline.file_flags"),
+    filename = require("heirline.components.tabline.filename"),
+    modifie_mark = require("heirline.components.tabline.modifie_mark"),
     offset = require("heirline.components.tabline.offset"),
 }

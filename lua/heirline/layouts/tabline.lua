@@ -35,10 +35,10 @@ function M.get()
             end,
             name = "heirline_buffer_switch_button",
         },
-        components.indicator,
+        components.active_mark,
         components.buffer_padding,
         components.file_name,
-        components.file_flags,
+        components.modified_mark,
         components.buffer_padding,
     }
 
