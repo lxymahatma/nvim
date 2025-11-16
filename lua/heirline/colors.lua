@@ -45,4 +45,4 @@ M.colors = {
     git_del = palette.red,
 }
 
-return M
+return M.colors

@@ -2,7 +2,7 @@ local M = {}
 
 local icons = require("config.icons")
 local utils = require("heirline.utils")
-local statusline = require("plugins.ui.heirline.components.statusline")
+local components = require("heirline.components.statusline")
 
 function M.get()
     local Align = { provider = "%=" }
@@ -53,36 +53,36 @@ function M.get()
         hl = { fg = "text" },
     }
 
-    local LeftSectionA = {
-        statusline.ViMode,
+    local left_section_a = {
+        components.vimode,
         LeftSectionSepA,
     }
 
-    local LeftSectionB = {
-        statusline.Git,
+    local left_section_b = {
+        components.git,
         LeftSectionSepB,
     }
 
-    local LeftSectionC = {
-        utils.insert(statusline.Diagnostics, LeftComponentSep),
-        statusline.FileType,
+    local left_section_c = {
+        utils.insert(components.diagnostics, LeftComponentSep),
+        components.file_type,
     }
 
-    local RightSectionX = {
-        statusline.SideKickCopilot,
-        utils.insert(statusline.SideKickCli, RightComponentSep),
-        utils.insert(statusline.FileEncoding, RightComponentSep),
-        statusline.FileFormat,
+    local right_section_x = {
+        components.sidekick_copilot,
+        utils.insert(components.sidekick_cli, RightComponentSep),
+        utils.insert(components.file_encoding, RightComponentSep),
+        components.file_format,
     }
 
-    local RightSectionY = {
+    local right_section_y = {
         RightSectionSepY,
-        statusline.Progress,
+        components.progress,
     }
 
-    local RightSectionZ = {
+    local right_section_z = {
         RightSectionSepZ,
-        statusline.Location,
+        components.location,
     }
 
     return {
@@ -119,13 +119,13 @@ function M.get()
             right_section_sep = " " .. icons.RightSectionSep,
             right_component_sep = " " .. icons.RightComponentSep,
         },
-        LeftSectionA,
-        LeftSectionB,
-        LeftSectionC,
+        left_section_a,
+        left_section_b,
+        left_section_c,
         Align,
-        RightSectionX,
-        RightSectionY,
-        RightSectionZ,
+        right_section_x,
+        right_section_y,
+        right_section_z,
     }
 end
 

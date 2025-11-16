@@ -1,7 +1,7 @@
 local M = {}
 
 function M.get()
-    local FilePath = {
+    local file_path = {
         init = function(self) self.filepath = vim.api.nvim_buf_get_name(0) end,
         provider = function(self)
             local filename = self.filepath == "" and "[No Name]" or vim.fn.fnamemodify(self.filepath, ":~")
@@ -10,7 +10,7 @@ function M.get()
         hl = { fg = "overlay0", italic = true },
     }
 
-    return { FilePath }
+    return { file_path }
 end
 
 return M

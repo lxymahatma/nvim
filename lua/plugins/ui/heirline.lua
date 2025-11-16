@@ -4,10 +4,10 @@ return {
     config = function()
         local conditions = require("heirline.conditions")
 
-        local colors = require("plugins.ui.heirline.colors").colors
-        local tabline = require("plugins.ui.heirline.tabline")
-        local statusline = require("plugins.ui.heirline.statusline")
-        local winbar = require("plugins.ui.heirline.winbar")
+        local colors = require("heirline.colors")
+        local tabline = require("heirline.layouts.tabline")
+        local statusline = require("heirline.layouts.statusline")
+        local winbar = require("heirline.layouts.winbar")
 
         require("heirline").setup({
             statusline = statusline.get(),
