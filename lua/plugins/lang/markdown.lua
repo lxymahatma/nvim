@@ -9,6 +9,15 @@ return {
         },
     },
 
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        opts = {
+            ensure_installed = {
+                "markdownlint-cli2",
+            },
+        },
+    },
+
     -- Markdown Syntax Highlighting
     {
         "MeanderingProgrammer/render-markdown.nvim",
@@ -21,6 +30,15 @@ return {
                 disabled_modes = { "n" },
             },
             latex = { enabled = false },
+        },
+    },
+
+    {
+        "mfussenegger/nvim-lint",
+        opts = {
+            linters_by_ft = {
+                markdown = { "markdownlint-cli2" },
+            },
         },
     },
 }
