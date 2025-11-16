@@ -2,6 +2,7 @@ local M = {}
 
 local icons = require("config.icons")
 local utils = require("helpers.heirline")
+local common = require("heirline.components.common")
 local components = require("heirline.components.statusline")
 
 local function make_section_sep(side, use_mode_color)
@@ -24,8 +25,6 @@ local function make_component_sep(side)
 end
 
 function M.get()
-    local Align = { provider = "%=" }
-
     local LeftSectionSepA = make_section_sep("left", true)
     local LeftSectionSepB = make_section_sep("left", false)
     local RightSectionSepY = make_section_sep("right", false)
@@ -87,7 +86,7 @@ function M.get()
         utils.insert_last(LeftSectionA, LeftSectionSepA),
         utils.insert_last(LeftSectionB, LeftSectionSepB),
         LeftSectionC,
-        Align,
+        common.Align,
         RightSectionX,
         utils.insert_first(RightSectionY, RightSectionSepY),
         utils.insert_first(RightSectionZ, RightSectionSepZ),

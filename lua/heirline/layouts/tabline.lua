@@ -1,6 +1,7 @@
 local M = {}
 
 local utils = require("heirline.utils")
+local common = require("heirline.components.common")
 local components = require("heirline.components.tabline")
 
 function M.get()
@@ -50,13 +51,26 @@ function M.get()
         hl = { fg = "surface0" },
     })
 
-    local TabBlock = {}
+    local TabBlock = {
+        condition = function() return vim.fn.tabpagenr("$") > 1 end,
+        init = function(self) self.is_active = self.tabnr == vim.fn.tabpagenr() end,
+        hl = function(self) return self.is_active and { fg = "red", bg = "surface0", bold = true } or { fg = "subtext0", bg = "mantle" } end,
+        on_click = {
+            minwid = function(self) return self.tabpage end,
+            callback = function(_, minwid, _, button)
+                if button == "l" then vim.api.nvim_set_current_tabpage(minwid) end
+            end,
+            name = "heirline_tab_switch_button",
+        },
+        provider = function(self) return " " .. self.tabnr .. " " end,
+    }
 
     local TabLine = utils.make_tablist(TabBlock)
 
     return {
         components.Offset,
         BufferLine,
+        common.Align,
         TabLine,
     }
 end
