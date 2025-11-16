@@ -19,11 +19,11 @@ map("n", "<leader>z", "za", { desc = "Toggle fold", remap = true })
 map("n", "<leader>Z", "zA", { desc = "Toggle all folds", remap = true })
 
 -- Clear search highlight
-map("n", "<leader>/", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
+map("n", "<leader>/", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 
 -- Lazy.nvim
-map("n", "<leader>lz", "<cmd>Lazy<CR>", { desc = "Open Lazy.nvim" })
-map("n", "<leader>lp", "<cmd>Lazy profile<CR>", { desc = "Profile Lazy.nvim plugins" })
+map("n", "<leader>lz", "<cmd>Lazy<cr>", { desc = "Open Lazy.nvim" })
+map("n", "<leader>lp", "<cmd>Lazy profile<cr>", { desc = "Profile Lazy.nvim plugins" })
 
 -- Don't copy the replaced text
 -- map("n", "<leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
