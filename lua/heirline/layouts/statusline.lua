@@ -4,63 +4,37 @@ local icons = require("config.icons")
 local utils = require("helpers.heirline")
 local components = require("heirline.components.statusline")
 
+local function make_section_sep(side, use_mode_color)
+    return {
+        provider = function(self) return self[side .. "_section_sep"] end,
+        hl = use_mode_color and function(self)
+            return {
+                fg = self.mode_colors[self.mode_key],
+                bg = "surface0",
+            }
+        end or { fg = "surface0", bg = "mantle" },
+    }
+end
+
+local function make_component_sep(side)
+    return {
+        provider = function(self) return self[side .. "_component_sep"] end,
+        hl = { fg = "text" },
+    }
+end
+
 function M.get()
     local Align = { provider = "%=" }
 
-    local LeftSectionSepA = {
-        provider = function(self) return self.left_section_sep end,
-        hl = function(self)
-            return {
-                fg = self.mode_colors[self.mode_key],
-                bg = "surface0",
-            }
-        end,
-    }
+    local LeftSectionSepA = make_section_sep("left", true)
+    local LeftSectionSepB = make_section_sep("left", false)
+    local RightSectionSepY = make_section_sep("right", false)
+    local RightSectionSepZ = make_section_sep("right", true)
+    local LeftComponentSep = make_component_sep("left")
+    local RightComponentSep = make_component_sep("right")
 
-    local LeftSectionSepB = {
-        provider = function(self) return self.left_section_sep end,
-        hl = {
-            fg = "surface0",
-            bg = "mantle",
-        },
-    }
-
-    local RightSectionSepY = {
-        provider = function(self) return self.right_section_sep end,
-        hl = {
-            fg = "surface0",
-            bg = "mantle",
-        },
-    }
-
-    local RightSectionSepZ = {
-        provider = function(self) return self.right_section_sep end,
-        hl = function(self)
-            return {
-                fg = self.mode_colors[self.mode_key],
-                bg = "surface0",
-            }
-        end,
-    }
-
-    local LeftComponentSep = {
-        provider = function(self) return self.left_component_sep end,
-        hl = { fg = "text" },
-    }
-
-    local RightComponentSep = {
-        provider = function(self) return self.right_component_sep end,
-        hl = { fg = "text" },
-    }
-
-    local LeftSectionA = {
-        components.Vimode,
-    }
-
-    local LeftSectionB = {
-        components.Git,
-    }
-
+    local LeftSectionA = { components.Vimode }
+    local LeftSectionB = { components.Git }
     local LeftSectionC = {
         utils.insert_last(components.Diagnostics, LeftComponentSep),
         components.FileType,
@@ -73,13 +47,8 @@ function M.get()
         components.FileFormat,
     }
 
-    local RightSectionY = {
-        components.Progress,
-    }
-
-    local RightSectionZ = {
-        components.Location,
-    }
+    local RightSectionY = { components.Progress }
+    local RightSectionZ = { components.Location }
 
     return {
         init = function(self)
