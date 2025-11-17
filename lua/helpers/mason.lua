@@ -45,8 +45,7 @@ function M.install_package(pkg_name)
         vim.notify(("[mason.nvim] installing %s"):format(pkg_name))
         pkg:install()
     else
-        local latest_version = pkg:get_latest_version()
-        if pkg:get_installed_version() ~= latest_version then
+        if pkg:get_installed_version() ~= pkg:get_latest_version() then
             vim.notify(("[mason.nvim] updating %s"):format(pkg_name))
             pkg:install()
         end
