@@ -8,6 +8,14 @@ map("n", "<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete buffe
 map("n", "<leader>bl", function() require("helpers.buffer").close_buffers("left") end, { desc = "Close buffers on the left", remap = true })
 map("n", "<leader>br", function() require("helpers.buffer").close_buffers("right") end, { desc = "Close buffers on the right", remap = true })
 
+-- Tabs Keymaps
+map("n", "[t", "<cmd>tabp<cr>", { desc = "Previous Tab", remap = true })
+map("n", "]t", "<cmd>tabn<cr>", { desc = "Next Tab", remap = true })
+map("n", "[T", "<cmd>tabfirst<cr>", { desc = "First Tab", remap = true })
+map("n", "]T", "<cmd>tablast<cr>", { desc = "Last Tab", remap = true })
+map("n", "<leader>tn", "<cmd>tab split<cr>", { desc = "New tab with current file", remap = true })
+map("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close Tab", remap = true })
+
 -- Insert mode, ctrl + h / ctrl + l move to the beginning and end of the line
 map("i", "<C-h>", "<HOME>", { desc = "Go to the beginning of the line", remap = true })
 map("i", "<C-l>", "<END>", { desc = "Go to the end of the line", remap = true })
