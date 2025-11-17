@@ -2,6 +2,9 @@ local utils = require("heirline.utils")
 
 local M = {}
 
+--- @param destination table
+--- @param child table
+--- @return table
 function M.insert_first(destination, child)
     local new = utils.clone(destination)
     local new_child = utils.clone(child)
@@ -9,6 +12,9 @@ function M.insert_first(destination, child)
     return new
 end
 
+--- @param destination table
+--- @param child table
+--- @return table
 function M.insert_last(destination, child)
     local new = utils.clone(destination)
     local new_child = utils.clone(child)

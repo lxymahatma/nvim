@@ -4,6 +4,7 @@ local constant = require("config.constant")
 local default_langs = constant.default_langs
 local local_config_path = constant.local_config_path
 
+--- @return string[]
 function M.get_all_langs()
     local all_langs = {}
     local lang_files = vim.fn.globpath(constant.lang_dir, "*.lua", false, true)
@@ -15,6 +16,7 @@ function M.get_all_langs()
     return all_langs
 end
 
+--- @return string[]
 function M.get_extra_langs()
     if vim.fn.filereadable(local_config_path) == 1 then
         local ok, local_config = pcall(dofile, local_config_path)
@@ -25,6 +27,7 @@ function M.get_extra_langs()
     return {}
 end
 
+--- @return string[]
 function M.get_enabled_langs()
     local extra_langs = M.get_extra_langs()
     local enabled_langs = {}
@@ -35,6 +38,7 @@ function M.get_enabled_langs()
     return enabled_langs
 end
 
+--- @param extra_langs string[]
 function M.save_extra_langs(extra_langs)
     table.sort(extra_langs)
     local content = "return " .. vim.inspect({ extra_langs = extra_langs }) .. "\n"

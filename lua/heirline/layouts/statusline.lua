@@ -1,7 +1,7 @@
 local M = {}
 
 local icons = require("config.icons")
-local utils = require("helpers.heirline")
+local utils = require("utils.heirline")
 local common = require("heirline.components.common")
 local statusline = require("heirline.components.statusline")
 

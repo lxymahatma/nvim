@@ -10,7 +10,7 @@ return {
     },
 
     {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        "mason-org/mason.nvim",
         opts = {
             ensure_installed = {
                 { "clangd", condition = function() return not vim.fn.executable("clangd") == 1 end },

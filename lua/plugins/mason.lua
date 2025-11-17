@@ -3,6 +3,7 @@ return {
     {
         "mason-org/mason.nvim",
         cmd = "Mason",
+        opts_extend = { "ensure_installed" },
 
         ---@type MasonSettings
         opts = {
@@ -18,6 +19,12 @@ return {
                 toggle_package_install_log = "l",
             },
         },
+        config = function(_, opts)
+            require("mason").setup(opts)
+
+            local util = require("utils.mason")
+            util.ensure_packages_installed(opts.ensure_installed)
+        end,
         keys = {
             { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
         },
@@ -26,6 +33,7 @@ return {
     -- Mason-lspconfig
     {
         "mason-org/mason-lspconfig.nvim",
+        dependencies = { "mason-org/mason.nvim" },
         event = "VeryLazy",
 
         ---@type MasonLspconfigSettings
@@ -42,20 +50,6 @@ return {
         ---@type MasonNvimDapSettings
         opts = {
             automatic_installation = true,
-        },
-    },
-
-    -- Mason Install Tool
-    {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-        event = "VeryLazy",
-        opts_extend = { "ensure_installed" },
-        opts = {
-            auto_update = true,
-            integrations = {
-                ["mason-lspconfig"] = true,
-                ["mason-nvim-dap"] = true,
-            },
         },
     },
 }

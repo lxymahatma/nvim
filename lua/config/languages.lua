@@ -1,5 +1,5 @@
 local constant = require("config.constant")
-local lang_loader = require("helpers.lang-loader")
+local lang_loader = require("utils.lang-loader")
 local default_langs = constant.default_langs
 
 local function get_available_langs_for_enable()
@@ -36,13 +36,7 @@ vim.api.nvim_create_user_command("LangEnable", function(opts)
 
     lang_loader.save_extra_langs(extra_langs)
 
-    vim.notify(
-        string.format(
-            "LangEnable: Added languages: %s. Restart Neovim to apply changes.",
-            table.concat(langs_to_add, ", ")
-        ),
-        vim.log.levels.INFO
-    )
+    vim.notify(string.format("LangEnable: Added languages: %s. Restart Neovim to apply changes.", table.concat(langs_to_add, ", ")), vim.log.levels.INFO)
 end, {
     nargs = "+",
     complete = get_available_langs_for_enable,
@@ -77,13 +71,7 @@ vim.api.nvim_create_user_command("LangDisable", function(opts)
 
     lang_loader.save_extra_langs(extra_langs)
 
-    vim.notify(
-        string.format(
-            "LangDisable: Removed languages: %s. Restart Neovim to apply changes.",
-            table.concat(removed_langs, ", ")
-        ),
-        vim.log.levels.INFO
-    )
+    vim.notify(string.format("LangDisable: Removed languages: %s. Restart Neovim to apply changes.", table.concat(removed_langs, ", ")), vim.log.levels.INFO)
 end, {
     nargs = "+",
     complete = get_available_langs_for_disable,

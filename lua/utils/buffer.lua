@@ -1,5 +1,6 @@
 local M = {}
 
+---@param direction "left"|"right"
 function M.close_buffers(direction)
     local current = vim.api.nvim_get_current_buf()
     local current_idx, buffers = nil, {}
@@ -17,7 +18,7 @@ function M.close_buffers(direction)
         for i = current_idx - 1, 1, -1 do
             vim.api.nvim_buf_delete(buffers[i], { force = false })
         end
-    elseif direction == "right" then
+    else
         for i = current_idx + 1, #buffers do
             vim.api.nvim_buf_delete(buffers[i], { force = false })
         end
