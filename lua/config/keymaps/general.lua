@@ -2,8 +2,8 @@ local map = Snacks.keymap.set
 local del = Snacks.keymap.del
 
 -- Buffer Keymaps
-map("n", "<S-h>", "<cmd>bp<cr>", { desc = "Previous Buffer", remap = true })
-map("n", "<S-l>", "<cmd>bn<cr>", { desc = "Next Buffer", remap = true })
+map("n", "H", "<cmd>bp<cr>", { desc = "Previous Buffer", remap = true })
+map("n", "L", "<cmd>bn<cr>", { desc = "Next Buffer", remap = true })
 map("n", "<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete buffer", remap = true })
 map("n", "<leader>bl", function() require("utils.buffer").close_buffers("left") end, { desc = "Close buffers on the left", remap = true })
 map("n", "<leader>br", function() require("utils.buffer").close_buffers("right") end, { desc = "Close buffers on the right", remap = true })
@@ -21,7 +21,7 @@ map("n", "<leader>z", "za", { desc = "Toggle fold", remap = true })
 map("n", "<leader>Z", "zA", { desc = "Toggle all folds", remap = true })
 
 -- Clear search highlight
-map("n", "<leader>/", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
+map("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 
 -- Lazy.nvim
 map("n", "<leader>lz", "<cmd>Lazy<cr>", { desc = "Open Lazy.nvim" })
