@@ -21,9 +21,7 @@ return {
         },
         config = function(_, opts)
             require("mason").setup(opts)
-
-            local util = require("utils.mason")
-            util.ensure_packages_installed(opts.ensure_installed)
+            vim.defer_fn(function() require("utils.mason").ensure_packages_installed(opts.ensure_installed) end, 100)
         end,
         keys = {
             { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
