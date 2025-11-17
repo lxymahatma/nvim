@@ -14,7 +14,7 @@ map("n", "<leader>n", function() Snacks.notifier.show_history() end, { desc = "N
 map("n", "<leader>lg", function() Snacks.lazygit() end, { desc = "Open Lazygit" })
 
 -- Explorer
-map("n", "<C-e>", function() Snacks.explorer() end, { desc = "File Explorer" })
+map("n", "<leader>fe", function() Snacks.explorer() end, { desc = "File Explorer" })
 
 -- Find
 map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
