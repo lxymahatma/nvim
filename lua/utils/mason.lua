@@ -2,7 +2,6 @@ local M = {}
 
 local mr = require("mason-registry")
 local mlsp = require("mason-lspconfig")
-local mdap = require("mason-nvim-dap")
 local mappings = mlsp.get_mappings().lspconfig_to_package
 
 ---@alias PackageSpec string | { [1]: string, condition: fun(): boolean }
@@ -28,7 +27,7 @@ end
 
 ---@param pkg_name string
 function M.install_package(pkg_name)
-    local ok, pkg = pcall(mr.get_package, mappings[pkg_name] or mdap.nvim_dap_to_package[pkg_name] or pkg_name)
+    local ok, pkg = pcall(mr.get_package, mappings[pkg_name] or pkg_name)
     if not ok then
         vim.notify(("[mason.nvim] Package %s not found"):format(pkg_name), vim.log.levels.WARN)
         return
