@@ -1,7 +1,6 @@
 -- Outline
 return {
     "stevearc/aerial.nvim",
-    event = "BufEdit",
     opts = {
         autojump = true,
         attach_mode = "global",

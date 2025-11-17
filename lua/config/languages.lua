@@ -1,5 +1,6 @@
 local constant = require("config.constant")
 local lang_loader = require("helpers.lang-loader")
+
 local default_langs = constant.default_langs
 
 local function get_available_langs_for_enable()
