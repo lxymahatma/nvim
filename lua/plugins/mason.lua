@@ -46,6 +46,7 @@ return {
     {
         "jay-babu/mason-nvim-dap.nvim",
         cmd = { "DapInstall", "DapUninstall" },
+        dependencies = { "mason-org/mason.nvim" },
 
         ---@type MasonNvimDapSettings
         opts = {
