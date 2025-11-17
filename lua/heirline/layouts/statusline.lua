@@ -1,7 +1,7 @@
 local M = {}
 
 local icons = require("config.icons")
-local utils = require("utils.heirline")
+local helpers = require("helpers.heirline")
 local common = require("heirline.components.common")
 local statusline = require("heirline.components.statusline")
 
@@ -35,14 +35,14 @@ function M.get()
     local LeftSectionA = { statusline.Vimode }
     local LeftSectionB = { statusline.Git }
     local LeftSectionC = {
-        utils.insert_last(statusline.Diagnostics, LeftComponentSep),
+        helpers.insert_last(statusline.Diagnostics, LeftComponentSep),
         statusline.FileType,
     }
 
     local RightSectionX = {
         statusline.SidekickCopilot,
-        utils.insert_last(statusline.SidekickCli, RightComponentSep),
-        utils.insert_last(statusline.Encoding, RightComponentSep),
+        helpers.insert_last(statusline.SidekickCli, RightComponentSep),
+        helpers.insert_last(statusline.Encoding, RightComponentSep),
         statusline.FileFormat,
     }
 
@@ -83,13 +83,13 @@ function M.get()
             right_section_sep = " " .. icons.RightSectionSep,
             right_component_sep = " " .. icons.RightComponentSep,
         },
-        utils.insert_last(LeftSectionA, LeftSectionSepA),
-        utils.insert_last(LeftSectionB, LeftSectionSepB),
+        helpers.insert_last(LeftSectionA, LeftSectionSepA),
+        helpers.insert_last(LeftSectionB, LeftSectionSepB),
         LeftSectionC,
         common.Align,
         RightSectionX,
-        utils.insert_first(RightSectionY, RightSectionSepY),
-        utils.insert_first(RightSectionZ, RightSectionSepZ),
+        helpers.insert_first(RightSectionY, RightSectionSepY),
+        helpers.insert_first(RightSectionZ, RightSectionSepZ),
     }
 end
 

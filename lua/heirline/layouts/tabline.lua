@@ -1,5 +1,6 @@
 local M = {}
 
+local helpers = require("helpers.buffer")
 local utils = require("heirline.utils")
 local common = require("heirline.components.common")
 local tabline = require("heirline.components.tabline")
