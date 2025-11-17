@@ -45,7 +45,6 @@ return {
                 ["<Tab>"] = {
                     "select_and_accept",
                     function() return require("copilot.suggestion").accept() end,
-                    function() return require("sidekick").nes_jump_or_apply() end,
                     "fallback",
                 },
                 ["<Up>"] = { "select_prev", "fallback" },
