@@ -3,11 +3,6 @@ return {
     "stevearc/overseer.nvim",
     event = "VeryLazy",
 
-    ---@type overseer.Config
-    opts = {
-        templates = {
-            "builtin",
-            "user",
-        },
-    },
+    ---@type overseer.SetupOpts
+    opts = {},
 }
