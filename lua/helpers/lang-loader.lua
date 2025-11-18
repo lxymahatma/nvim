@@ -1,8 +1,8 @@
 local M = {}
 
+local STORAGE_KEY = "lang_config"
 local constant = require("config.constant")
-local default_langs = constant.default_langs
-local local_config_path = constant.local_config_path
+local storage = require("helpers.storage")
 
 --- @return string[]
 function M.get_all_langs()
@@ -18,10 +18,10 @@ end
 
 --- @return string[]
 function M.get_extra_langs()
-    if vim.fn.filereadable(local_config_path) == 1 then
-        local ok, local_config = pcall(dofile, local_config_path)
+    if storage.exists(STORAGE_KEY) then
+        local ok, data = pcall(storage.load, STORAGE_KEY)
         if not ok then return {} end
-        return local_config.extra_langs or {}
+        return data.extra_langs or {}
     end
 
     return {}
@@ -31,7 +31,7 @@ end
 function M.get_enabled_langs()
     local extra_langs = M.get_extra_langs()
     local enabled_langs = {}
-    vim.list_extend(enabled_langs, default_langs)
+    vim.list_extend(enabled_langs, constant.default_langs)
     for _, lang in ipairs(extra_langs) do
         if not vim.tbl_contains(enabled_langs, lang) then table.insert(enabled_langs, lang) end
     end
@@ -41,9 +41,8 @@ end
 --- @param extra_langs string[]
 function M.save_extra_langs(extra_langs)
     table.sort(extra_langs)
-    local content = "return " .. vim.inspect({ extra_langs = extra_langs }) .. "\n"
-    local ok = vim.fn.writefile(vim.split(content, "\n"), local_config_path)
-    if ok ~= 0 then vim.notify("Failed to write to " .. local_config_path, vim.log.levels.ERROR) end
+    local ok, err = pcall(storage.save, STORAGE_KEY, { extra_langs = extra_langs })
+    if not ok then vim.notify("Failed to save language config: " .. tostring(err), vim.log.levels.ERROR) end
 end
 
 return M

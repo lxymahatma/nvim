@@ -14,7 +14,7 @@ M.default_langs = {
     "yaml",
 }
 
-M.local_config_path = vim.fn.stdpath("data") .. "/local.lua"
+M.storage_dir = vim.fn.stdpath("data") .. "/storage"
 M.lang_dir = vim.fn.stdpath("config") .. "/lua/plugins/lang"
 
 return M

@@ -1,7 +1,7 @@
-local config = {}
+require("helpers.storage").setup()
 
-config.colorscheme = "catppuccin"
-config.enabled_langs = require("helpers.lang-loader").get_enabled_langs()
+local colorscheme = "catppuccin"
+local enabled_langs = require("helpers.lang-loader").get_enabled_langs()
 
 -- leader key
 vim.keymap.set("", "<Space>", "<Nop>")
@@ -13,7 +13,7 @@ require("config.diagnostic")
 require("config.autocmds")
 require("config.bootstrap")
 require("config.events").setup()
-require("config.lazy").setup(config.enabled_langs)
-require("config.colorschemes").setup(config.colorscheme)
+require("config.lazy").setup(enabled_langs)
+require("config.colorschemes").setup(colorscheme)
 require("config.languages")
 require("config.keymaps")
