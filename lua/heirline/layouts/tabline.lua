@@ -53,7 +53,6 @@ function M.get()
 
     local TabBlock = {
         condition = function() return #vim.api.nvim_list_tabpages() > 1 end,
-        init = function(self) self.is_active = self.tabnr == vim.fn.tabpagenr() end,
         hl = function(self) return self.is_active and { fg = "red", bg = "surface0", bold = true } or { fg = "subtext0", bg = "mantle" } end,
         on_click = {
             minwid = function(self) return self.tabpage end,
