@@ -1,6 +1,5 @@
 local M = {}
 
-local helpers = require("helpers.buffer")
 local utils = require("heirline.utils")
 local common = require("heirline.components.common")
 local tabline = require("heirline.components.tabline")
@@ -53,7 +52,7 @@ function M.get()
     })
 
     local TabBlock = {
-        condition = function() return vim.fn.tabpagenr("$") > 1 end,
+        condition = function() return #vim.api.nvim_list_tabpages() > 1 end,
         init = function(self) self.is_active = self.tabnr == vim.fn.tabpagenr() end,
         hl = function(self) return self.is_active and { fg = "red", bg = "surface0", bold = true } or { fg = "subtext0", bg = "mantle" } end,
         on_click = {
