@@ -1,4 +1,4 @@
-require("helpers.storage").setup()
+require("helpers.storage").init()
 
 local colorscheme = "catppuccin"
 local enabled_langs = require("helpers.lang-loader").get_enabled_langs()

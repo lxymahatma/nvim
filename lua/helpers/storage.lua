@@ -2,68 +2,99 @@ local M = {}
 
 local constant = require("config.constant")
 
----Get the file path for a given type
----@param type string The storage type/key
----@return string
-local function get_file_path(type) return constant.storage_dir .. "/" .. type .. ".json" end
+local function json_path(key) return constant.storage_dir .. "/" .. key .. ".json" end
+local function mpack_path(key) return constant.storage_dir .. "/" .. key .. ".mpack" end
 
----Setup the storage directory
-function M.setup()
+function M.init()
     local storage_dir = constant.storage_dir
     if vim.fn.isdirectory(storage_dir) == 0 then vim.fn.mkdir(storage_dir, "p") end
 end
 
----Save data to local storage
----@param key string The storage type/key
----@param data table The data to save
-function M.save(key, data)
-    assert(key and key ~= "", "Type cannot be empty")
+-----------
+-- JSON ---
+-----------
+
+---Write table to JSON
+---@param key string
+---@param data table
+function M.write_json(key, data)
+    assert(key and key ~= "", "Key cannot be empty")
     assert(type(data) == "table", "Data must be a table")
 
-    local filepath = get_file_path(key)
-    local json_str = vim.json.encode(data)
+    local path = json_path(key)
+    local ok, json = pcall(vim.json.encode, data)
+    assert(ok, "Failed to encode JSON: " .. tostring(json))
 
-    local file = assert(io.open(filepath, "w"), "Failed to open file for writing: " .. filepath)
-    file:write(json_str)
-    file:close()
+    local f = assert(io.open(path, "w"), "Failed to open file: " .. path)
+    f:write(json)
+    f:close()
 end
 
----Load data from local storage
----@param key string The storage type/key
----@return table data The loaded data
-function M.load(key)
-    assert(key and key ~= "", "Type cannot be empty")
+---Read table from JSON
+---@param key string
+---@return table
+function M.read_json(key)
+    assert(key and key ~= "", "Key cannot be empty")
 
-    local filepath = get_file_path(key)
-    assert(vim.fn.filereadable(filepath) == 1, "File not found: " .. filepath)
+    local path = json_path(key)
+    assert(vim.fn.filereadable(path) == 1, "JSON file not found: " .. path)
 
-    local file = assert(io.open(filepath, "r"), "Failed to open file for reading: " .. filepath)
-    local content = file:read("*all")
-    file:close()
-
-    assert(content and content ~= "", "File is empty: " .. filepath)
+    local f = assert(io.open(path, "r"))
+    local content = f:read("*all")
+    f:close()
 
     return vim.json.decode(content)
 end
 
----Delete storage file for a given type
----@param type string The storage type/key
-function M.delete(type)
-    assert(type and type ~= "", "Type cannot be empty")
-
-    local filepath = get_file_path(type)
-    if vim.fn.filereadable(filepath) == 0 then return end
-    assert(os.remove(filepath), "Failed to delete file: " .. filepath)
+---Check if JSON file exists
+---@param key string
+---@return boolean
+function M.exists_json(key)
+    if not key or key == "" then return false end
+    return vim.fn.filereadable(json_path(key)) == 1
 end
 
----Check if storage exists for a given type
----@param type string The storage type/key
----@return boolean exists Whether the storage exists
-function M.exists(type)
-    if type == nil or type == "" then return false end
+------------------
+-- MessagePack ---
+------------------
 
-    local filepath = get_file_path(type)
-    return vim.fn.filereadable(filepath) == 1
+---Write table to MessagePack
+---@param key string
+---@param data table
+function M.write_mpack(key, data)
+    assert(key and key ~= "", "Key cannot be empty")
+    assert(type(data) == "table", "Data must be a table")
+
+    local path = mpack_path(key)
+    local encoded = vim.mpack.encode(data)
+
+    local f = assert(io.open(path, "wb"), "Failed to open file: " .. path)
+    f:write(encoded)
+    f:close()
+end
+
+---Read table from MessagePack
+---@param key string
+---@return table
+function M.read_mpack(key)
+    assert(key and key ~= "", "Key cannot be empty")
+
+    local path = mpack_path(key)
+    assert(vim.fn.filereadable(path) == 1, "MsgPack file not found: " .. path)
+
+    local f = assert(io.open(path, "rb"))
+    local bytes = f:read("*all")
+    f:close()
+
+    return vim.mpack.decode(bytes)
+end
+
+---Check if MessagePack file exists
+---@param key string
+---@return boolean
+function M.exists_mpack(key)
+    if not key or key == "" then return false end
+    return vim.fn.filereadable(mpack_path(key)) == 1
 end
 
 return M
