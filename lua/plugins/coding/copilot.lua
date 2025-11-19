@@ -3,7 +3,6 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "BufEdit",
-    build = ":Copilot auth",
 
     ---@type CopilotConfig
     opts = {
