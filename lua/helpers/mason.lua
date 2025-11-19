@@ -34,6 +34,13 @@ function M.install_package(pkg_name)
     end
 
     ---@cast pkg Package
+    pkg:once("install:success", function()
+        vim.schedule(function() vim.notify(("[mason.nvim] %s installation complete"):format(pkg_name)) end)
+    end)
+    pkg:once("install:failed", function()
+        vim.schedule(function() vim.notify(("[mason.nvim] %s installation failed"):format(pkg_name), vim.log.levels.ERROR) end)
+    end)
+
     if not pkg:is_installed() then
         vim.notify(("[mason.nvim] installing %s"):format(pkg_name))
         pkg:install()
