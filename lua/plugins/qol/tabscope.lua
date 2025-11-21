@@ -1,7 +1,7 @@
 return {
     "lxymahatma/tabscope.nvim",
 
-    ---@type TabScope.Config
+    ---@type Tabscope.Config
     opts = {
         branch = true,
         persistence = true,
