@@ -1,5 +1,6 @@
 return {
     "lxymahatma/tabscope.nvim",
+    event = "VeryLazy",
 
     ---@type Tabscope.Config
     opts = {
