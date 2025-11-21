@@ -49,7 +49,7 @@ function M.get()
     }, {
         provider = " ",
         hl = { fg = "text" },
-    }, function() return require("helpers.tab").get_tab_buffer_list(vim.api.nvim_tabpage_get_number(0)) end, false)
+    }, function() return require("tabscope").get_buflist() end, false)
 
     local TabBlock = {
         condition = function() return #vim.api.nvim_list_tabpages() > 1 end,
