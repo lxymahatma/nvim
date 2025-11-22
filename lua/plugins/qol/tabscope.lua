@@ -5,6 +5,8 @@ return {
     ---@type Tabscope.Config
     opts = {
         branch = true,
-        persistence = true,
+        integrations = {
+            persistence = true,
+        },
     },
 }
