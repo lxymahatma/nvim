@@ -10,9 +10,9 @@ return {
         local winbar = require("heirline.layouts.winbar")
 
         require("heirline").setup({
-            statusline = statusline.get(),
-            winbar = winbar.get(),
-            tabline = tabline.get(),
+            statusline = statusline,
+            winbar = winbar,
+            tabline = tabline,
             opts = {
                 colors = colors,
                 disable_winbar_cb = function(args)
