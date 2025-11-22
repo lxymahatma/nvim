@@ -42,7 +42,6 @@ local RightSectionX = {
     helpers.insert_last(statusline.Encoding, RightComponentSep),
     statusline.FileFormat,
 }
-
 local RightSectionY = { statusline.Progress }
 local RightSectionZ = { statusline.Location }
 
