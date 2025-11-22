@@ -5,6 +5,16 @@ Snacks.toggle.diagnostics():map("<leader>ud")
 Snacks.toggle.inlay_hints():map("<leader>uh")
 Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
 Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+Snacks.toggle({
+    name = "Auto Format (Buffer)",
+    get = function() return not vim.b.disable_autoformat end,
+    set = function(state) vim.b.disable_autoformat = not state end,
+}):map("<leader>uf")
+Snacks.toggle({
+    name = "Auto Format (Global)",
+    get = function() return not vim.g.disable_autoformat end,
+    set = function(state) vim.g.disable_autoformat = not state end,
+}):map("<leader>uF")
 
 -- Terminal
 map({ "n", "t" }, "<C-/>", Snacks.terminal.toggle, { desc = "Toggle Terminal" })

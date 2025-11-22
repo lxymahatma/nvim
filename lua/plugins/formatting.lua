@@ -9,9 +9,10 @@ return {
             default_format_opts = {
                 lsp_format = "last",
             },
-            format_on_save = {
-                timeout_ms = 500,
-            },
+            format_on_save = function()
+                if vim.g.disable_autoformat or vim.b.disable_autoformat then return nil end
+                return { timeout_ms = 500 }
+            end,
         },
     },
 }
