@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup(enabled_langs)
-    local spec = {
+    local plugin_spec = {
         { import = "plugins" },
         { import = "plugins.coding" },
         { import = "plugins.deps" },
@@ -11,10 +11,23 @@ function M.setup(enabled_langs)
         { import = "plugins.ui" },
     }
     for _, lang in ipairs(enabled_langs) do
-        table.insert(spec, { import = ("plugins.lang.%s"):format(lang) })
+        table.insert(plugin_spec, { import = ("plugins.lang.%s"):format(lang) })
     end
 
-    require("lazy").setup({ spec = spec })
+    ---@type LazyConfig
+    local opts = {
+        spec = plugin_spec,
+        dev = {
+            path = function(plugin)
+                local dir = vim.env.NVIM_DEV_DIR or ""
+                return vim.fs.joinpath(dir, plugin.name)
+            end,
+            patterns = { "." },
+            fallback = true,
+        },
+    }
+
+    require("lazy").setup(opts)
 end
 
 return M
