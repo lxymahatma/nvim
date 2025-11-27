@@ -34,7 +34,8 @@
   "workspace": {
     "library": [
       "$VIMRUNTIME",
-      "$HOME/.local/share/nvim/lazy"
+      "$HOME/.local/share/nvim/lazy",
+      "$NVIM_DEV_DIR"
     ],
     "ignoreGlobs": [
       "**/*_spec.lua"
