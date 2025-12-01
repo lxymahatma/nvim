@@ -11,5 +11,8 @@ return {
             dotenv = { glyph = "", hl = "MiniIconsYellow" },
         },
     },
-    init = function() require("mini.icons").mock_nvim_web_devicons() end,
+    config = function(_, opts)
+        require("mini.icons").mock_nvim_web_devicons()
+        require("mini.icons").setup(opts)
+    end,
 }
