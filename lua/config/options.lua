@@ -2,6 +2,9 @@ local o = vim.o
 
 o.autowrite = true -- Enable auto write
 
+o.timeout = true
+o.timeoutlen = 500
+
 -- Enable relative line numbers
 o.number = true
 o.relativenumber = true
