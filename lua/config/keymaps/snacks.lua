@@ -63,7 +63,7 @@ map("n", "<leader>sz", Snacks.picker.zoxide, { desc = "Zoxide" })
 -- LSP Pickers
 map("n", "gd", Snacks.picker.lsp_definitions, { desc = "Goto Definition", lsp = { method = "textDocument/definition" } })
 map("n", "gD", Snacks.picker.lsp_declarations, { desc = "Goto Declaration", lsp = { method = "textDocument/declaration" } })
-map("n", "gr", Snacks.picker.lsp_references, { desc = "References", lsp = { method = "textDocument/references" }, nowait = true })
+map("n", "gR", Snacks.picker.lsp_references, { desc = "Goto References", lsp = { method = "textDocument/references" }, nowait = true })
 map("n", "gi", Snacks.picker.lsp_implementations, { desc = "Goto Implementation", lsp = { method = "textDocument/implementation" } })
 map("n", "gy", Snacks.picker.lsp_type_definitions, { desc = "Goto Type Definition", lsp = { method = "textDocument/typeDefinition" } })
 map("n", "gci", Snacks.picker.lsp_incoming_calls, { desc = "Calls Incoming", lsp = { method = "callHierarchy/incomingCalls" } })

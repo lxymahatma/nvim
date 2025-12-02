@@ -36,17 +36,12 @@ map("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 map("n", "<leader>lz", "<cmd>Lazy<cr>", { desc = "Open Lazy.nvim" })
 map("n", "<leader>lp", "<cmd>Lazy profile<cr>", { desc = "Profile Lazy.nvim plugins" })
 
--- Don't copy the replaced text
--- map("n", "<leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
--- map("x", "<leader>d", "\"_d", { desc = "Delete without copying to the clipboard", remap = true })
--- map("x", "<leader>p", "\"_dP", { desc = "Paste without replacing the clipboard", remap = true })
-
 -- Code Actions
 map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action", lsp = { method = "textDocument/codeAction" } })
 
--- Delete Keymaps
-del("n", "gra")
-del("n", "gri")
-del("n", "grn")
-del("n", "grr")
-del("n", "grt")
+-- Open Link
+map("n", "gl", function() vim.ui.open(vim.fn.expand("<cfile>")) end, { desc = "Open link/file under cursor" })
+map("x", "gl", function()
+    local lines = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = vim.fn.mode() })
+    vim.ui.open(table.concat(vim.iter(lines):map(vim.trim):totable()))
+end, { desc = "Open selected link/file" })
