@@ -2,6 +2,7 @@
 ---@type LazyPluginSpec
 return {
     "stevearc/oil.nvim",
+    cmd = "Oil",
 
     ---@type oil.SetupOpts
     opts = {
