@@ -3,7 +3,7 @@
 return {
     "rebelot/heirline.nvim",
     event = "VeryLazy",
-    config = function()
+    opts = function()
         local conditions = require("heirline.conditions")
 
         local colors = require("heirline.colors")
@@ -11,7 +11,7 @@ return {
         local statusline = require("heirline.layouts.statusline")
         local winbar = require("heirline.layouts.winbar")
 
-        require("heirline").setup({
+        return {
             statusline = statusline,
             winbar = winbar,
             tabline = tabline,
@@ -24,6 +24,6 @@ return {
                     }, args.buf)
                 end,
             },
-        })
+        }
     end,
 }
