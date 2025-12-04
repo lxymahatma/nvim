@@ -25,10 +25,6 @@ map("i", "<C-l>", "<END>", { desc = "Go to the end of the line", remap = true })
 map("n", "<leader>o", "o<Esc>", { desc = "Open a new line below", remap = true })
 map("n", "<leader>O", "O<Esc>", { desc = "Open a new line above", remap = true })
 
--- Folding
-map("n", "<leader>z", "za", { desc = "Toggle fold", remap = true })
-map("n", "<leader>Z", "zA", { desc = "Toggle all folds", remap = true })
-
 -- Clear search highlight
 map("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 
