@@ -1,4 +1,5 @@
 -- Auto close tags
+---@type LazyPluginSpec
 return {
     "windwp/nvim-ts-autotag",
     event = "BufEdit",

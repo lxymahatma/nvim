@@ -1,4 +1,5 @@
 -- Syntax Highlighting
+---@type LazyPluginSpec
 return {
     "nvim-treesitter/nvim-treesitter",
     branch = "master",

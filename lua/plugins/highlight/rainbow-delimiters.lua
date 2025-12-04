@@ -1,4 +1,5 @@
 -- Rainbow Brackets
+---@type LazyPluginSpec
 return {
     "HiPhish/rainbow-delimiters.nvim",
     event = "BufEdit",

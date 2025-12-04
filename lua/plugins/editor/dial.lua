@@ -1,4 +1,5 @@
 -- Enhance Ctrl-A/X
+---@type LazyPluginSpec
 return {
     "monaqa/dial.nvim",
     config = function()

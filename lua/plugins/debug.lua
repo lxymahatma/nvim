@@ -1,5 +1,6 @@
 return {
     -- DAP Core
+    ---@type LazyPluginSpec
     {
         "mfussenegger/nvim-dap",
         keys = {
@@ -23,6 +24,7 @@ return {
     },
 
     -- DAP UI
+    ---@type LazyPluginSpec
     {
         "rcarriga/nvim-dap-ui",
         opts = {},

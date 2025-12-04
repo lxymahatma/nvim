@@ -1,4 +1,5 @@
 -- LeetCode
+---@type LazyPluginSpec
 return {
     "kawre/leetcode.nvim",
     cmd = "Leet",

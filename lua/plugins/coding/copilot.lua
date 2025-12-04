@@ -1,4 +1,5 @@
 -- Copilot
+---@type LazyPluginSpec
 return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",

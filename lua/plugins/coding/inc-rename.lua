@@ -1,4 +1,5 @@
 -- Rename
+---@type LazyPluginSpec
 return {
     "smjonas/inc-rename.nvim",
 

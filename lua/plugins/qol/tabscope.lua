@@ -1,3 +1,4 @@
+---@type LazyPluginSpec
 return {
     "lxymahatma/tabscope.nvim",
     lazy = true,

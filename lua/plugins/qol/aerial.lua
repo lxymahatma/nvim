@@ -1,4 +1,5 @@
 -- Outline
+---@type LazyPluginSpec
 return {
     "stevearc/aerial.nvim",
     opts = {

@@ -1,5 +1,6 @@
 return {
     -- Lsp config
+    ---@type LazyPluginSpec
     {
         "neovim/nvim-lspconfig",
         event = "BufEdit",

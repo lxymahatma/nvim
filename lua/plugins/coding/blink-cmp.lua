@@ -1,5 +1,6 @@
 -- Code Completion
 return {
+    ---@type LazyPluginSpec
     {
         "saghen/blink.cmp",
         event = { "InsertEnter", "CmdlineEnter" },
@@ -58,6 +59,7 @@ return {
     },
 
     -- Completion Icon and Highlighting
+    ---@type LazyPluginSpec
     {
         "saghen/blink.cmp",
         opts = function(_, opts)

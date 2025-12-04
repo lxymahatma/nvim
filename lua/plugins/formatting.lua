@@ -1,18 +1,17 @@
 -- Formatter
+---@type LazyPluginSpec
 return {
-    {
-        "stevearc/conform.nvim",
-        event = "BufEdit",
+    "stevearc/conform.nvim",
+    event = "BufEdit",
 
-        ---@type conform.setupOpts
-        opts = {
-            default_format_opts = {
-                lsp_format = "last",
-            },
-            format_on_save = function()
-                if vim.g.disable_autoformat or vim.b.disable_autoformat then return nil end
-                return { timeout_ms = 500 }
-            end,
+    ---@type conform.setupOpts
+    opts = {
+        default_format_opts = {
+            lsp_format = "last",
         },
+        format_on_save = function()
+            if vim.g.disable_autoformat or vim.b.disable_autoformat then return nil end
+            return { timeout_ms = 500 }
+        end,
     },
 }

@@ -1,4 +1,5 @@
 -- Fast and feature-rich surround actions
+---@type LazyPluginSpec
 return {
     "nvim-mini/mini.surround",
     event = "BufEdit",

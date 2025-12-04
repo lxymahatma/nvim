@@ -1,4 +1,5 @@
 -- Extend and create a/i textobjects
+---@type LazyPluginSpec
 return {
     "nvim-mini/mini.ai",
     event = "BufEdit",

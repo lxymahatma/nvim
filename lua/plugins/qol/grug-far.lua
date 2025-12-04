@@ -1,4 +1,5 @@
 -- Find And Replace
+---@type LazyPluginSpec
 return {
     "MagicDuck/grug-far.nvim",
     cmd = { "GrugFar", "GrugFarWithin" },

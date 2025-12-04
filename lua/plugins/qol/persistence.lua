@@ -1,4 +1,5 @@
 -- Session Management
+---@type LazyPluginSpec
 return {
     "folke/persistence.nvim",
     event = "BufReadPre",

@@ -1,4 +1,5 @@
 -- Highlight colors
+---@type LazyPluginSpec
 return {
     "brenoprata10/nvim-highlight-colors",
     event = "BufEdit",

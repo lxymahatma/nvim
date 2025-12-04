@@ -1,4 +1,5 @@
 -- Diagnostics list
+---@type LazyPluginSpec
 return {
     "folke/trouble.nvim",
 
