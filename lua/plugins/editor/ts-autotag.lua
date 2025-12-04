@@ -3,7 +3,6 @@
 return {
     "windwp/nvim-ts-autotag",
     event = "BufEdit",
-
     opts = {
         ---@type nvim-ts-autotag.Opts
         opts = {

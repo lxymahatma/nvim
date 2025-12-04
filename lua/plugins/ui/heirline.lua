@@ -1,3 +1,4 @@
+-- Statusline, Winbar and Tabline
 ---@type LazyPluginSpec
 return {
     "rebelot/heirline.nvim",

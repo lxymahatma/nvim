@@ -1,6 +1,6 @@
+---@type LazyPluginSpec[]
 return {
     -- tokyonight
-    ---@type LazyPluginSpec
     {
         "folke/tokyonight.nvim",
         lazy = true,
@@ -10,7 +10,6 @@ return {
     },
 
     -- catppuccin
-    ---@type LazyPluginSpec
     {
         "catppuccin/nvim",
         name = "catppuccin",

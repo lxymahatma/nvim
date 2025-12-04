@@ -1,6 +1,6 @@
+---@type LazyPluginSpec[]
 return {
     -- Mason
-    ---@type LazyPluginSpec
     {
         "mason-org/mason.nvim",
         cmd = "Mason",
@@ -30,7 +30,6 @@ return {
     },
 
     -- Mason-lspconfig
-    ---@type LazyPluginSpec
     {
         "mason-org/mason-lspconfig.nvim",
         dependencies = { "mason-org/mason.nvim" },
