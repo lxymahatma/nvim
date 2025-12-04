@@ -45,3 +45,5 @@ map("x", "gl", function()
     local lines = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = vim.fn.mode() })
     vim.ui.open(table.concat(vim.iter(lines):map(vim.trim):totable()))
 end, { desc = "Open selected link/file" })
+
+map("n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
