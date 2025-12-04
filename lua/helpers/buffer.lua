@@ -2,27 +2,36 @@ local M = {}
 
 ---@param direction "left"|"right"
 function M.close_buffers(direction)
-    local current = vim.api.nvim_get_current_buf()
-    local current_idx, buffers = nil, {}
+    local current_buf = vim.api.nvim_get_current_buf()
+    local buffers = require("tabscope").get_buflist()
+    local current_idx = nil
 
-    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.api.nvim_get_option_value("buflisted", { buf = bufnr }) then
-            buffers[#buffers + 1] = bufnr
-            if bufnr == current then current_idx = #buffers end
+    for i, buf in ipairs(buffers) do
+        if buf == current_buf then
+            current_idx = i
+            break
         end
     end
 
     if not current_idx then return end
 
+    local targets = {}
+
     if direction == "left" then
-        for i = current_idx - 1, 1, -1 do
-            vim.api.nvim_buf_delete(buffers[i], { force = false })
+        for i = 1, current_idx - 1 do
+            targets[buffers[i]] = true
         end
-    else
+    elseif direction == "right" then
         for i = current_idx + 1, #buffers do
-            vim.api.nvim_buf_delete(buffers[i], { force = false })
+            targets[buffers[i]] = true
         end
     end
+
+    if next(targets) == nil then return end
+
+    Snacks.bufdelete({
+        filter = function(buf) return targets[buf] end,
+    })
 end
 
 return M
