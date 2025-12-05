@@ -13,7 +13,7 @@ return {
         "mason-org/mason.nvim",
         opts = {
             ensure_installed = {
-                { "qmlls", condition = function() return vim.fn.executable("qmlls") == 0 end },
+                { "qmlls", condition = { missing = "qmlls" } },
             },
         },
     },

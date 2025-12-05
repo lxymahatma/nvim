@@ -4,19 +4,30 @@ local mr = require("mason-registry")
 local mlsp = require("mason-lspconfig")
 local mappings = mlsp.get_mappings().lspconfig_to_package
 
----@alias PackageSpec string | { [1]: string, condition: fun(): boolean }
+---@class ConditionOptions
+---@field missing string
+
+---@alias ConditionSpec fun(): boolean | ConditionOptions
+---@alias PackageSpec string | { [1]: string, condition: ConditionSpec? }
 ---@param package_list PackageSpec[]
 function M.ensure_packages_installed(package_list)
     mr.refresh(function()
         for _, pkg_spec in ipairs(package_list) do
-            local pkg_name, should_install
+            local pkg_name, should_install = nil, true
 
             if type(pkg_spec) == "string" then
                 pkg_name = pkg_spec
-                should_install = true
             elseif type(pkg_spec) == "table" then
                 pkg_name = pkg_spec[1]
-                should_install = pkg_spec.condition()
+                local condition = pkg_spec.condition
+
+                if type(condition) == "function" then
+                    ---@cast condition fun(): boolean
+                    should_install = condition()
+                elseif type(condition) == "table" then
+                    ---@cast condition ConditionOptions
+                    should_install = vim.fn.executable(condition.missing) == 0
+                end
             end
 
             ---@cast pkg_name string
@@ -34,19 +45,24 @@ function M.install_package(pkg_name)
     end
 
     ---@cast pkg Package
-    pkg:once("install:success", function()
-        vim.schedule(function() vim.notify(("[mason.nvim] %s installation complete"):format(pkg_name)) end)
-    end)
-    pkg:once("install:failed", function()
-        vim.schedule(function() vim.notify(("[mason.nvim] %s installation failed"):format(pkg_name), vim.log.levels.ERROR) end)
-    end)
+    local function install_package()
+        pkg:once("install:success", function()
+            vim.schedule(function() vim.notify(("[mason.nvim] %s installation complete"):format(pkg_name)) end)
+        end)
+
+        pkg:once("install:failed", function()
+            vim.schedule(function() vim.notify(("[mason.nvim] %s installation failed"):format(pkg_name), vim.log.levels.ERROR) end)
+        end)
+
+        pkg:install()
+    end
 
     if not pkg:is_installed() then
         vim.notify(("[mason.nvim] installing %s"):format(pkg_name))
-        pkg:install()
+        install_package()
     elseif pkg:get_installed_version() ~= pkg:get_latest_version() then
         vim.notify(("[mason.nvim] updating %s"):format(pkg_name))
-        pkg:install()
+        install_package()
     end
 end
 
