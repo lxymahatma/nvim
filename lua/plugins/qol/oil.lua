@@ -3,7 +3,6 @@
 return {
     "stevearc/oil.nvim",
     cmd = "Oil",
-
     opts = function()
         local hidden_names = {
             ".DS_Store",
