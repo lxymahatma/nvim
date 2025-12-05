@@ -21,10 +21,6 @@ map("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close Tab", remap = true }
 map("i", "<C-h>", "<HOME>", { desc = "Go to the beginning of the line", remap = true })
 map("i", "<C-l>", "<END>", { desc = "Go to the end of the line", remap = true })
 
--- Space Line
-map("n", "<leader>o", "o<Esc>", { desc = "Open a new line below", remap = true })
-map("n", "<leader>O", "O<Esc>", { desc = "Open a new line above", remap = true })
-
 -- Clear search highlight
 map("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 
