@@ -14,7 +14,7 @@ return {
         "mason-org/mason.nvim",
         opts = {
             ensure_installed = {
-                { "clangd", condition = function() return not vim.fn.executable("clangd") == 1 end },
+                { "clangd", condition = function() return vim.fn.executable("clangd") == 0 end },
             },
         },
     },
