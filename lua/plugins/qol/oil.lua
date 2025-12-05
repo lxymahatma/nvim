@@ -4,7 +4,6 @@ return {
     "stevearc/oil.nvim",
     cmd = "Oil",
 
-    ---@type oil.SetupOpts
     opts = function()
         local hidden_names = {
             ".DS_Store",
@@ -12,6 +11,7 @@ return {
         }
         local hidden_set = require("helpers.table").to_set(hidden_names)
 
+        ---@type oil.SetupOpts
         return {
             default_file_explorer = false,
             columns = {
