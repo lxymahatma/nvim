@@ -5,7 +5,7 @@ local mlsp = require("mason-lspconfig")
 local mappings = mlsp.get_mappings().lspconfig_to_package
 
 ---@class ConditionOptions
----@field missing string
+---@field missing string | boolean If string, checks that specific executable. If true, use the package name as executable name.
 
 ---@alias ConditionSpec fun(): boolean | ConditionOptions
 ---@alias PackageSpec string | { [1]: string, condition: ConditionSpec? }
@@ -26,7 +26,11 @@ function M.ensure_packages_installed(package_list)
                     should_install = condition()
                 elseif type(condition) == "table" then
                     ---@cast condition ConditionOptions
-                    should_install = vim.fn.executable(condition.missing) == 0
+                    if condition.missing == true then
+                        should_install = vim.fn.executable(pkg_name) == 0
+                    elseif type(condition.missing) == "string" then
+                        should_install = vim.fn.executable(condition.missing) == 0
+                    end
                 end
             end
 
