@@ -60,8 +60,8 @@ return {
             map("n", "<leader>hd", gitsigns.diffthis, "Diff This")
             map("n", "<leader>hD", function() gitsigns.diffthis("~") end, "Diff This ~")
 
-            map("n", "<leader>hq", gitsigns.setqflist)
-            map("n", "<leader>hQ", function() gitsigns.setqflist("all") end)
+            map("n", "<leader>hl", gitsigns.setqflist, "List Hunks")
+            map("n", "<leader>hL", function() gitsigns.setqflist("all") end, "List All Hunks")
 
             -- Toggle
             map("n", "<leader>tb", gitsigns.toggle_current_line_blame, "Toggle Current Line Blame")
