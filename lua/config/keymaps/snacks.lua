@@ -87,5 +87,5 @@ map("n", "<leader>bS", Snacks.scratch.select, { desc = "Select Scratch Buffer" }
 
 -- Todo Comments
 ---@diagnostic disable:undefined-field
-map("n", "<leader>st", function() Snacks.picker.todo_comments() end, { desc = "Todo" })
-map("n", "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX" } }) end, { desc = "Todo/Fix" })
+map("n", "<leader>st", function() Snacks.picker.todo_comments() end, { desc = "Search Todo" })
+map("n", "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX" } }) end, { desc = "Search Todo/Fix" })
