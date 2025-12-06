@@ -1,6 +1,9 @@
 local M = {}
 
-function M.setup(enabled_langs)
+local enabled_langs = require("helpers.lang-loader").get_enabled_langs()
+local enabled_tools = require("helpers.tool-loader").get_enabled_tools()
+
+function M.setup()
     local plugin_spec = {
         { import = "plugins" },
         { import = "plugins.coding" },
@@ -10,8 +13,13 @@ function M.setup(enabled_langs)
         { import = "plugins.qol" },
         { import = "plugins.ui" },
     }
+
     for _, lang in ipairs(enabled_langs) do
         table.insert(plugin_spec, { import = ("plugins.lang.%s"):format(lang) })
+    end
+
+    for _, tool in ipairs(enabled_tools) do
+        table.insert(plugin_spec, { import = ("plugins.tools.%s"):format(tool) })
     end
 
     ---@type LazyConfig
