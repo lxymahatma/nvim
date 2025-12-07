@@ -6,16 +6,8 @@ return {
         "OverseerOpen",
         "OverseerClose",
         "OverseerToggle",
-        "OverseerSaveBundle",
-        "OverseerLoadBundle",
-        "OverseerDeleteBundle",
-        "OverseerRunCmd",
         "OverseerRun",
-        "OverseerInfo",
-        "OverseerBuild",
-        "OverseerQuickAction",
         "OverseerTaskAction",
-        "OverseerClearCache",
     },
 
     ---@type overseer.SetupOpts
