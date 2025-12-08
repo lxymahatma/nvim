@@ -4,8 +4,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         opts = {
             ensure_installed = {
-                "javascript",
-                "typescript",
+                "zig",
             },
         },
     },
@@ -14,7 +13,7 @@ return {
         "mason-org/mason.nvim",
         opts = {
             ensure_installed = {
-                "ts_ls",
+                "zls",
             },
         },
     },
@@ -23,7 +22,7 @@ return {
         "neovim/nvim-lspconfig",
         opts = {
             servers = {
-                ts_ls = {},
+                zls = {},
             },
         },
     },
