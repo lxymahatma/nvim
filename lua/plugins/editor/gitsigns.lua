@@ -14,6 +14,7 @@ return {
             follow_files = true,
         },
         auto_attach = true,
+        current_line_blame = true,
         current_line_blame_opts = {
             virt_text = true,
             virt_text_pos = "eol",
@@ -62,10 +63,6 @@ return {
 
             map("n", "<leader>hl", gitsigns.setqflist, "List Hunks")
             map("n", "<leader>hL", function() gitsigns.setqflist("all") end, "List All Hunks")
-
-            -- Toggle
-            map("n", "<leader>tb", gitsigns.toggle_current_line_blame, "Toggle Current Line Blame")
-            map("n", "<leader>tw", gitsigns.toggle_word_diff, "Toggle Word Diff")
 
             -- Text object
             map({ "o", "x" }, "ih", gitsigns.select_hunk, "GitSigns Select Hunk")
