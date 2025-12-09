@@ -1,12 +1,12 @@
 local M = {}
 
-local lang_parser = require("langs.lang-parser")
-local tool_parser = require("tools.tool-parser")
-
-lang_parser.load_all()
-tool_parser.load_all()
-
 function M.setup()
+    local lang_parser = require("langs.lang-parser")
+    local tool_parser = require("tools.tool-parser")
+
+    lang_parser.load_all()
+    tool_parser.load_all()
+
     local plugin_spec = {
         { import = "plugins" },
         { import = "plugins.coding" },

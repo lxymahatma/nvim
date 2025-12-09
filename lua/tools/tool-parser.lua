@@ -68,13 +68,15 @@ local function parse_spec(tool_name, spec)
     if spec.formatter then
         if type(spec.formatter) == "string" then
             -- formatter = "javascript"
-            M._cache.formatters_by_ft[spec.formatter] = { tool_name }
+            M._cache.formatters_by_ft[spec.formatter] = M._cache.formatters_by_ft[spec.formatter] or {}
+            table.insert(M._cache.formatters_by_ft[spec.formatter], tool_name)
         elseif type(spec.formatter) == "table" then
             if type(spec.formatter[1]) == "string" then
                 -- formatter = { "javascript", "typescript" }
                 ---@cast spec.formatter string[]
                 for _, ft in ipairs(spec.formatter) do
-                    M._cache.formatters_by_ft[ft] = { tool_name }
+                    M._cache.formatters_by_ft[ft] = M._cache.formatters_by_ft[ft] or {}
+                    table.insert(M._cache.formatters_by_ft[ft], tool_name)
                 end
             elseif spec.formatter[1] == nil then
                 -- formatter = { ft1 = {...}, ft2 = {...} }
