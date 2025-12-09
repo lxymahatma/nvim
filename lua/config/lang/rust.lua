@@ -4,9 +4,7 @@ return {
         "rust",
         "ron",
     },
-    mason = {
-        { "rust_analyzer", condition = { missing = "rust-analyzer" } },
-    },
+    mason = { "rust_analyzer", condition = { missing = "rust-analyzer" } },
     lsp = "rust_analyzer",
     formatter = "rustfmt",
 }

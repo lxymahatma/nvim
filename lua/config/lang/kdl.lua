@@ -1,6 +1,6 @@
 ---@type LanguageSpec
 return {
-    treesitter = "kdl",
+    treesitter = true,
     mason = "kdlfmt",
     formatter = "kdlfmt",
 }

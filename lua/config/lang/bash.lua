@@ -1,6 +1,6 @@
 ---@type LanguageSpec
 return {
-    treesitter = "bash",
+    treesitter = true,
     mason = {
         "bashls",
         "shellcheck",

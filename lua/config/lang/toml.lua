@@ -1,6 +1,6 @@
 ---@type LanguageSpec
 return {
-    treesitter = "toml",
+    treesitter = true,
     mason = "taplo",
     lsp = "taplo",
     formatter = "taplo",

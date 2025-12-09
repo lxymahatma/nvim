@@ -4,6 +4,7 @@ return {
     "stevearc/conform.nvim",
     event = "BufEdit",
     opts = function()
+        ---@type conform.setupOpts
         return {
             formatters_by_ft = require("helpers.lang-parser").get_formatters(),
             default_format_opts = {

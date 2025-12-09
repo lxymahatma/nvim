@@ -1,6 +1,6 @@
 ---@type LanguageSpec
 return {
-    treesitter = "latex",
+    treesitter = true,
     mason = "texlab",
     lsp = "texlab",
 }

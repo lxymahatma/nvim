@@ -1,6 +1,6 @@
 ---@type LanguageSpec
 return {
-    treesitter = "python",
+    treesitter = true,
     mason = {
         "pyrefly",
         "ruff",
