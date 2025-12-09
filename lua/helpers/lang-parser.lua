@@ -23,7 +23,7 @@ M._cache = {
 ---@param lang_name string
 ---@param spec LanguageSpec
 local function parse_spec(lang_name, spec)
-    if spec.treesitter ~= nil then
+    if spec.treesitter then
         ---@param parser string
         local function add_parser(parser)
             if not vim.tbl_contains(M._cache.treesitter_parsers, parser) then table.insert(M._cache.treesitter_parsers, parser) end

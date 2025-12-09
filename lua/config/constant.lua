@@ -25,7 +25,7 @@ M.default_langs = {
 M.default_tools = {}
 
 M.storage_dir = vim.fn.stdpath("data") .. "/storage"
-M.lang_dir = vim.fn.stdpath("config") .. "/lua/plugins/lang"
-M.tool_dir = vim.fn.stdpath("config") .. "/lua/plugins/tools"
+M.lang_dir = vim.fn.stdpath("config") .. "/lua/config/lang"
+M.tool_dir = vim.fn.stdpath("config") .. "/lua/config/tools"
 
 return M
