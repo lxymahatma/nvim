@@ -148,14 +148,14 @@ local function parse_spec(lang_name, spec)
 end
 
 function M.load_all()
-    local enabled_langs = require("helpers.lang-loader").get_enabled_langs()
+    local enabled_langs = require("langs.lang-loader").get_enabled_langs()
 
     for _, lang in ipairs(enabled_langs) do
-        local ok, spec = pcall(require, ("config.langs.%s"):format(lang))
+        local ok, spec = pcall(require, ("langs.configs.%s"):format(lang))
         if ok and type(spec) == "table" then
             parse_spec(lang, spec)
         else
-            vim.notify(string.format("[lang-parser] Failed to load config.langs.%s", lang), vim.log.levels.WARN)
+            vim.notify(string.format("[lang-parser] Failed to load langs.configs.%s", lang), vim.log.levels.WARN)
         end
     end
 end

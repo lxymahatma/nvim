@@ -4,8 +4,8 @@ return {
     "stevearc/conform.nvim",
     event = "BufEdit",
     opts = function()
-        local lang_formatters = require("helpers.lang-parser").get_formatters()
-        local tool_formatters = require("helpers.tool-parser").get_formatters()
+        local lang_formatters = require("langs.lang-parser").get_formatters()
+        local tool_formatters = require("tools.tool-parser").get_formatters()
         local formatters_by_ft = vim.tbl_extend("force", lang_formatters, tool_formatters)
 
         ---@type conform.setupOpts

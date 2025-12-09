@@ -1,7 +1,7 @@
 local M = {}
 
-local lang_parser = require("helpers.lang-parser")
-local tool_parser = require("helpers.tool-parser")
+local lang_parser = require("langs.lang-parser")
+local tool_parser = require("tools.tool-parser")
 
 lang_parser.load_all()
 tool_parser.load_all()
