@@ -4,9 +4,13 @@ return {
     "stevearc/conform.nvim",
     event = "BufEdit",
     opts = function()
+        local lang_formatters = require("helpers.lang-parser").get_formatters()
+        local tool_formatters = require("helpers.tool-parser").get_formatters()
+        local formatters_by_ft = vim.tbl_extend("force", lang_formatters, tool_formatters)
+
         ---@type conform.setupOpts
         return {
-            formatters_by_ft = require("helpers.lang-parser").get_formatters(),
+            formatters_by_ft = formatters_by_ft,
             default_format_opts = {
                 lsp_format = "last",
             },

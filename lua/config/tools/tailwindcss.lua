@@ -1,10 +1,17 @@
----@type LazyPluginSpec[]
+---@type ToolSpec
 return {
-    {
-        "neovim/nvim-lspconfig",
-        opts = {
-            servers = {
-                tailwindcss = {},
+    lsp = {
+        tailwindcss = {
+            filetypes = {
+                "html",
+                "css",
+                "scss",
+                "javascript",
+                "javascriptreact",
+                "typescript",
+                "typescriptreact",
+                "vue",
+                "svelte",
             },
         },
     },

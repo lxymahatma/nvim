@@ -23,3 +23,6 @@
 ---@class ToolSpec
 ---@field mason? MasonPackageSpec | MasonPackageSpec[] Mason packages to install. Can be a single package name/spec or a list of package names/specs.
 ---@field lsp? string | table<string, vim.lsp.ClientConfig> LSP servers configuration. Can be a single server name (default config) or (server_name -> config) map.
+---@field formatter? table<string, string|string[]> Formatters by filetype. Must be explicit filetype mapping (e.g., { html = "prettier", css = "prettier" }).
+---@field linter? table<string, string[]> Linters by filetype. Must be explicit filetype mapping (e.g., { javascript = { "eslint" } }).
+---@field plugins? LazyPluginSpec | LazyPluginSpec[] Extra plugins to install. Can be a single plugin spec or a list of plugin specs.

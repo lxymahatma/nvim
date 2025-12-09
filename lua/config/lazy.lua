@@ -1,9 +1,10 @@
 local M = {}
 
 local lang_parser = require("helpers.lang-parser")
-local enabled_tools = require("helpers.tool-loader").get_enabled_tools()
+local tool_parser = require("helpers.tool-parser")
 
 lang_parser.load_all()
+tool_parser.load_all()
 
 function M.setup()
     local plugin_spec = {
@@ -17,10 +18,7 @@ function M.setup()
     }
 
     vim.list_extend(plugin_spec, lang_parser.get_extra_plugins())
-
-    for _, tool in ipairs(enabled_tools) do
-        table.insert(plugin_spec, { import = ("plugins.tools.%s"):format(tool) })
-    end
+    vim.list_extend(plugin_spec, tool_parser.get_extra_plugins())
 
     ---@type LazyConfig
     local opts = {
