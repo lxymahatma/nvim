@@ -49,7 +49,13 @@ local function parse_spec(tool_name, spec)
             ---@cast spec.lsp string
             M._cache.lsp_servers[spec.lsp] = {}
         elseif type(spec.lsp) == "table" then
-            if spec.lsp[1] == nil then
+            if type(spec.lsp[1]) == "string" then
+                -- lsp = { "server1", "server2" }
+                ---@cast spec.lsp string[]
+                for _, server in ipairs(spec.lsp) do
+                    M._cache.lsp_servers[server] = {}
+                end
+            elseif spec.lsp[1] == nil then
                 -- lsp = { server1 = {...}, server2 = {...} }
                 ---@cast spec.lsp table<string, vim.lsp.ClientConfig>
                 for server, config in pairs(spec.lsp) do
@@ -60,20 +66,48 @@ local function parse_spec(tool_name, spec)
     end
 
     if spec.formatter then
-        -- formatter = { ft1 = {...}, ft2 = {...} }
-        ---@cast spec.formatter table<string, string|string[]>
-        for ft, formatters in pairs(spec.formatter) do
-            local fmt_list = type(formatters) == "table" and formatters or { formatters }
-            M._cache.formatters_by_ft[ft] = fmt_list
+        if type(spec.formatter) == "string" then
+            -- formatter = "javascript"
+            M._cache.formatters_by_ft[spec.formatter] = { tool_name }
+        elseif type(spec.formatter) == "table" then
+            if type(spec.formatter[1]) == "string" then
+                -- formatter = { "javascript", "typescript" }
+                ---@cast spec.formatter string[]
+                for _, ft in ipairs(spec.formatter) do
+                    M._cache.formatters_by_ft[ft] = { tool_name }
+                end
+            elseif spec.formatter[1] == nil then
+                -- formatter = { ft1 = {...}, ft2 = {...} }
+                ---@cast spec.formatter table<string, string|string[]>
+                for ft, formatters in pairs(spec.formatter) do
+                    ---@type string[]
+                    local fmt_list = type(formatters) == "table" and formatters or { formatters }
+                    M._cache.formatters_by_ft[ft] = fmt_list
+                end
+            end
         end
     end
 
     if spec.linter then
-        -- linter = { ft1 = {...}, ft2 = {...} }
-        ---@cast spec.linter table<string, string[]>
-        for ft, linters in pairs(spec.linter) do
-            local linter_list = type(linters) == "table" and linters or { linters }
-            M._cache.linters_by_ft[ft] = linter_list
+        if type(spec.linter) == "string" then
+            -- linter = "javascript"
+            M._cache.linters_by_ft[spec.linter] = { tool_name }
+        elseif type(spec.linter) == "table" then
+            if type(spec.linter[1]) == "string" then
+                -- linter = { "javascript", "typescript" }
+                ---@cast spec.linter string[]
+                for _, ft in ipairs(spec.linter) do
+                    M._cache.linters_by_ft[ft] = { tool_name }
+                end
+            elseif spec.linter[1] == nil then
+                -- linter = { ft1 = {...}, ft2 = {...} }
+                ---@cast spec.linter table<string, string|string[]>
+                for ft, linters in pairs(spec.linter) do
+                    ---@type string[]
+                    local linter_list = type(linters) == "table" and linters or { linters }
+                    M._cache.linters_by_ft[ft] = linter_list
+                end
+            end
         end
     end
 
