@@ -102,14 +102,14 @@ local function parse_spec(tool_name, spec)
 end
 
 function M.load_all()
-    local enabled_tools = require("helpers.tool-loader").get_enabled_tools()
+    local enabled_tools = require("tools.tool-loader").get_enabled_tools()
 
     for _, tool in ipairs(enabled_tools) do
-        local ok, spec = pcall(require, ("config.tools.%s"):format(tool))
+        local ok, spec = pcall(require, ("tools.configs.%s"):format(tool))
         if ok and type(spec) == "table" then
             parse_spec(tool, spec)
         else
-            vim.notify(string.format("[tool-parser] Failed to load config.tools.%s", tool), vim.log.levels.WARN)
+            vim.notify(string.format("[tool-parser] Failed to load tools.configs.%s", tool), vim.log.levels.WARN)
         end
     end
 end

@@ -1,5 +1,5 @@
 local constant = require("config.constant")
-local tool_loader = require("helpers.tool-loader")
+local tool_loader = require("tools.tool-loader")
 
 local default_tools = constant.default_tools
 
