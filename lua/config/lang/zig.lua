@@ -1,6 +1,6 @@
 ---@type LanguageSpec
 return {
-    treesitter = "zig",
+    treesitter = true,
     mason = "zls",
     lsp = "zls",
 }

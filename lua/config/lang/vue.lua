@@ -1,6 +1,6 @@
 ---@type LanguageSpec
 return {
-    treesitter = "vue",
+    treesitter = true,
     mason = "vue_ls",
     lsp = "vue_ls",
 }

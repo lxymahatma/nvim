@@ -1,6 +1,6 @@
 ---@type LanguageSpec
 return {
-    treesitter = "yaml",
+    treesitter = true,
     mason = {
         "yamlls",
         "yamllint",

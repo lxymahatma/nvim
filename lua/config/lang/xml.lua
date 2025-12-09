@@ -1,6 +1,6 @@
 ---@type LanguageSpec
 return {
-    treesitter = "xml",
+    treesitter = true,
     mason = "lemminx",
     lsp = "lemminx",
 }
