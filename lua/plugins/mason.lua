@@ -23,7 +23,10 @@ return {
             require("mason").setup(opts)
 
             vim.defer_fn(function()
-                local packages = require("helpers.lang-parser").get_mason_packages()
+                local lang_packages = require("helpers.lang-parser").get_mason_packages()
+                local tool_packages = require("helpers.tool-parser").get_mason_packages()
+                local packages = vim.list_extend(vim.deepcopy(lang_packages), tool_packages)
+
                 require("helpers.mason").ensure_packages_installed(packages)
             end, 100)
         end,
