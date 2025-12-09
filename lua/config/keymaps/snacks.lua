@@ -17,8 +17,8 @@ Snacks.toggle({
 }):map("<leader>uF")
 Snacks.toggle({
     name = "Render Markdown",
-    get = require("render-markdown").get,
-    set = require("render-markdown").set,
+    get = function() return require("render-markdown").get() end,
+    set = function(state) require("render-markdown").set(state) end,
 }):map("<leader>um")
 
 -- Terminal
