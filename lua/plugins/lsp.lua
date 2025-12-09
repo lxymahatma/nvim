@@ -3,7 +3,7 @@
 return {
     "neovim/nvim-lspconfig",
     event = "BufEdit",
-    config = vim.schedule_wrap(function(_, opts)
+    config = vim.schedule_wrap(function()
         Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer) vim.lsp.inlay_hint.enable(true, { bufnr = buffer }) end)
         Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
             vim.lsp.codelens.refresh({ bufnr = buffer })
@@ -12,7 +12,9 @@ return {
                 callback = function() vim.lsp.codelens.refresh({ bufnr = buffer }) end,
             })
         end)
-        for server, config in pairs(opts.servers) do
+
+        local servers = require("helpers.lang-parser").get_lsp_servers()
+        for server, config in pairs(servers) do
             vim.lsp.config(server, config)
             vim.lsp.enable(server)
         end

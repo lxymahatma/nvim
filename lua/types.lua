@@ -11,7 +11,7 @@
 ---@class LanguageSpec
 ---@field treesitter? string|string[] Treesitter parsers to install. Can be a single parser name or a list of parser names.
 ---@field mason? MasonPackageSpec|MasonPackageSpec[] Mason packages to install. Can be a single package name/spec or a list of package names/specs.
----@field lsp? string | table<string, vim.lsp.ClientConfig> LSP servers configuration. Can be a single server name (default config) or (server_name -> config) map.
+---@field lsp? string | string[] | table<string, vim.lsp.ClientConfig> LSP servers configuration. Can be a single server name (default config) or (server_name -> config) map.
 ---@field formatter? string | table<string, string|string[]> Formatters by filetype. Can be a single formatter name or (filetype -> formatters) map.
 ---@field linter? string | table<string, string|string[]> Linters by filetype. Can be a single linter name or (filetype -> linters) map.
 ---@field dap? table DAP (Debug Adapter Protocol) configuration

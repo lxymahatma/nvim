@@ -4,7 +4,6 @@ return {
     {
         "mason-org/mason.nvim",
         cmd = "Mason",
-        opts_extend = { "ensure_installed" },
 
         ---@type MasonSettings
         opts = {
@@ -22,7 +21,11 @@ return {
         },
         config = function(_, opts)
             require("mason").setup(opts)
-            vim.defer_fn(function() require("helpers.mason").ensure_packages_installed(opts.ensure_installed) end, 100)
+
+            vim.defer_fn(function()
+                local packages = require("helpers.lang-parser").get_mason_packages()
+                require("helpers.mason").ensure_packages_installed(packages)
+            end, 100)
         end,
         keys = {
             { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },

@@ -5,20 +5,16 @@ return {
     branch = "main",
     event = { "BufEdit", "VeryLazy" },
     build = ":TSUpdate",
-    opts_extend = { "ensure_installed" },
     opts = {
         highlight = { enable = true },
         indent = { enable = true },
-        ensure_installed = {
-            "diff",
-            "query",
-            "regex",
-            "vim",
-            "vimdoc",
-        },
     },
     config = function(_, opts)
         require("nvim-treesitter").setup(opts)
-        vim.defer_fn(function() require("helpers.treesitter").ensure_parsers_installed(opts.ensure_installed) end, 100)
+
+        vim.defer_fn(function()
+            local parsers = vim.list_extend(require("config.constant").default_parsers, require("helpers.lang-parser").get_treesitter_parsers())
+            require("helpers.treesitter").ensure_parsers_installed(parsers)
+        end, 100)
     end,
 }

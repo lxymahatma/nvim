@@ -1,7 +1,9 @@
 local M = {}
 
-local enabled_langs = require("helpers.lang-loader").get_enabled_langs()
+local lang_parser = require("helpers.lang-parser")
 local enabled_tools = require("helpers.tool-loader").get_enabled_tools()
+
+lang_parser.load_all()
 
 function M.setup()
     local plugin_spec = {
@@ -14,9 +16,7 @@ function M.setup()
         { import = "plugins.ui" },
     }
 
-    for _, lang in ipairs(enabled_langs) do
-        table.insert(plugin_spec, { import = ("plugins.lang.%s"):format(lang) })
-    end
+    vim.list_extend(plugin_spec, lang_parser.get_extra_plugins())
 
     for _, tool in ipairs(enabled_tools) do
         table.insert(plugin_spec, { import = ("plugins.tools.%s"):format(tool) })
