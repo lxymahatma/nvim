@@ -19,6 +19,6 @@ return {
     },
     config = function(_, opts)
         require("nvim-treesitter").setup(opts)
-        vim.defer_fn(function() require("helpers.treesitter").ensure_parser_installed(opts.ensure_installed) end, 100)
+        vim.defer_fn(function() require("helpers.treesitter").ensure_parsers_installed(opts.ensure_installed) end, 100)
     end,
 }
