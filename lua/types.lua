@@ -16,3 +16,7 @@
 ---@field linter? string | table<string, string|string[]> Linters by filetype. Can be a single linter name or (filetype -> linters) map.
 ---@field dap? table DAP (Debug Adapter Protocol) configuration
 ---@field plugins? LazyPluginSpec | LazyPluginSpec[] Plugins to install. Can be a single plugin spec or a list of plugin specs.
+
+---@class ToolSpec
+---@field mason? MasonPackageSpec|MasonPackageSpec[] Mason packages to install. Can be a single package name/spec or a list of package names/specs.
+---@field lsp? string | table<string, vim.lsp.ClientConfig> LSP servers configuration. Can be a single server name (default config) or (server_name -> config) map.
