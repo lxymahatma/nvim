@@ -2,15 +2,15 @@
 return {
     lsp = "biome",
     formatter = {
-        javascript = { "biome" },
-        javascriptreact = { "biome" },
-        typescript = { "biome" },
-        typescriptreact = { "biome" },
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
     },
     linter = {
-        javascript = { "biome" },
-        javascriptreact = { "biome" },
-        typescript = { "biome" },
-        typescriptreact = { "biome" },
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
     },
 }
