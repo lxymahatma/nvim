@@ -4,8 +4,8 @@ return {
     "mfussenegger/nvim-lint",
     event = "BufEdit",
     opts = {},
-    config = function(_, opts)
-        require("lint").linters_by_ft = opts.linters_by_ft
+    config = function()
+        require("lint").linters_by_ft = require("helpers.lang-parser").get_linters()
 
         local events = {
             "BufReadPost",

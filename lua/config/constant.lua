@@ -1,5 +1,13 @@
 local M = {}
 
+M.default_parsers = {
+    "diff",
+    "query",
+    "regex",
+    "vim",
+    "vimdoc",
+}
+
 M.default_langs = {
     "bash",
     "git",
