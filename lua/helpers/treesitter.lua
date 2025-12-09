@@ -1,10 +1,9 @@
 local M = {}
 
 local ts = require("nvim-treesitter")
-local helpers = require("helpers.table")
 
 M.ensure_parsers_installed = function(parser_list)
-    local installed_set = helpers.to_set(ts.get_installed())
+    local installed_set = require("helpers.table").to_set(ts.get_installed())
 
     local install_list = {}
     local update_list = {}

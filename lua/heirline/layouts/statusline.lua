@@ -1,5 +1,5 @@
 local icons = require("config.icons")
-local helpers = require("helpers.heirline")
+local heirline_helper = require("helpers.heirline")
 local common = require("heirline.components.common")
 local statusline = require("heirline.components.statusline")
 
@@ -32,14 +32,14 @@ local RightComponentSep = make_component_sep("right")
 local LeftSectionA = { statusline.Vimode }
 local LeftSectionB = { statusline.Git }
 local LeftSectionC = {
-    helpers.insert_last(statusline.Diagnostics, LeftComponentSep),
+    heirline_helper.insert_last(statusline.Diagnostics, LeftComponentSep),
     statusline.FileType,
 }
 
 local RightSectionX = {
     statusline.SidekickCopilot,
-    helpers.insert_last(statusline.SidekickCli, RightComponentSep),
-    helpers.insert_last(statusline.Encoding, RightComponentSep),
+    heirline_helper.insert_last(statusline.SidekickCli, RightComponentSep),
+    heirline_helper.insert_last(statusline.Encoding, RightComponentSep),
     statusline.FileFormat,
 }
 local RightSectionY = { statusline.Progress }
@@ -79,11 +79,11 @@ return {
         right_section_sep = " " .. icons.RightSectionSep,
         right_component_sep = " " .. icons.RightComponentSep,
     },
-    helpers.insert_last(LeftSectionA, LeftSectionSepA),
-    helpers.insert_last(LeftSectionB, LeftSectionSepB),
+    heirline_helper.insert_last(LeftSectionA, LeftSectionSepA),
+    heirline_helper.insert_last(LeftSectionB, LeftSectionSepB),
     LeftSectionC,
     common.Align,
     RightSectionX,
-    helpers.insert_first(RightSectionY, RightSectionSepY),
-    helpers.insert_first(RightSectionZ, RightSectionSepZ),
+    heirline_helper.insert_first(RightSectionY, RightSectionSepY),
+    heirline_helper.insert_first(RightSectionZ, RightSectionSepZ),
 }
