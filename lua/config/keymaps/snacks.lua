@@ -15,6 +15,11 @@ Snacks.toggle({
     get = function() return not vim.g.disable_autoformat end,
     set = function(state) vim.g.disable_autoformat = not state end,
 }):map("<leader>uF")
+Snacks.toggle({
+    name = "Render Markdown",
+    get = require("render-markdown").get,
+    set = require("render-markdown").set,
+}):map("<leader>um")
 
 -- Terminal
 map({ "n", "t" }, "<C-/>", Snacks.terminal.toggle, { desc = "Toggle Terminal" })
