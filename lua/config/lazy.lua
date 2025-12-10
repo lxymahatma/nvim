@@ -10,6 +10,7 @@ function M.setup()
     local plugin_spec = {
         { import = "plugins" },
         { import = "plugins.coding" },
+        { import = "plugins.colorschemes" },
         { import = "plugins.deps" },
         { import = "plugins.editor" },
         { import = "plugins.highlight" },
