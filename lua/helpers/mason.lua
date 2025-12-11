@@ -11,19 +11,23 @@ function M.ensure_packages_installed(package_list)
             local pkg_name, should_install = nil, true
 
             if type(pkg_spec) == "string" then
+                -- { "package" }
                 pkg_name = pkg_spec
             elseif type(pkg_spec) == "table" then
                 pkg_name = pkg_spec[1]
                 local condition = pkg_spec.condition
 
                 if type(condition) == "function" then
+                    -- { "package", condition = function() ... end }
                     ---@cast condition fun(): boolean
                     should_install = condition()
                 elseif type(condition) == "table" then
                     ---@cast condition ConditionOptions
                     if condition.missing == true then
+                        -- { "package", condition = { missing = true } }
                         should_install = vim.fn.executable(pkg_name) == 0
                     elseif type(condition.missing) == "string" then
+                        -- { "package", condition = { missing = "executable" } }
                         should_install = vim.fn.executable(condition.missing) == 0
                     end
                 end
