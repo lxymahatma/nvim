@@ -1,6 +1,9 @@
 ---@type LanguageSpec
 return {
-    treesitter = true,
+    treesitter = {
+        "html",
+        "html_tags",
+    },
     mason = "html",
     lsp = "html",
 }
