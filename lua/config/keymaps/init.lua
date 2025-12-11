@@ -1,3 +1,5 @@
+require("config.keymaps.buffer")
 require("config.keymaps.general")
 require("config.keymaps.snacks")
+require("config.keymaps.tab")
 require("config.keymaps.window")
