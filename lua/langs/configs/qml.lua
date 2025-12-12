@@ -3,5 +3,4 @@ return {
     treesitter = "qmljs",
     mason = { "qmlls", condition = { missing = true } },
     lsp = "qmlls",
-    formatter = "qmlformat",
 }
