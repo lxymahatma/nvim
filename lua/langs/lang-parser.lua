@@ -134,20 +134,20 @@ local function parse_spec(lang_name, spec)
 
     if spec.dap then vim.tbl_deep_extend("force", M._cache.dap_configs, spec.dap) end
 
-    if spec.plugins then
-        if type(spec.plugins) == "string" then
-            -- plugins = "user/repo"
-            table.insert(M._cache.extra_plugins, spec.plugins)
-        elseif type(spec.plugins) == "table" then
-            if vim.islist(spec.plugins) then
-                -- plugins = { "repo1", "repo2" }
-                -- plugins = { { "repo1", ... }, { "repo2", ... } }
-                ---@cast spec.plugins LazyPluginSpec[]
-                vim.list_extend(M._cache.extra_plugins, spec.plugins)
+    if spec.plugin then
+        if type(spec.plugin) == "string" then
+            -- plugin = "user/repo"
+            table.insert(M._cache.extra_plugins, spec.plugin)
+        elseif type(spec.plugin) == "table" then
+            if vim.islist(spec.plugin) then
+                -- plugin = { "repo1", "repo2" }
+                -- plugin = { { "repo1", ... }, { "repo2", ... } }
+                ---@cast spec.plugin LazyPluginSpec[]
+                vim.list_extend(M._cache.extra_plugins, spec.plugin)
             else
-                -- plugins = { "user/repo", ... }
-                ---@cast spec.plugins LazyPluginSpec
-                table.insert(M._cache.extra_plugins, spec.plugins)
+                -- plugin = { "user/repo", ... }
+                ---@cast spec.plugin LazyPluginSpec
+                table.insert(M._cache.extra_plugins, spec.plugin)
             end
         end
     end

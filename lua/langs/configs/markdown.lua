@@ -7,7 +7,7 @@ return {
     mason = "markdownlint-cli2",
     linter = "markdownlint-cli2",
     formatter = "markdownlint-cli2",
-    plugins = {
+    plugin = {
         "MeanderingProgrammer/render-markdown.nvim",
         ft = { "markdown", "norg", "rmd", "org" },
         opts = {

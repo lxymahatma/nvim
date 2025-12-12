@@ -29,7 +29,7 @@ return {
         c = { "clang-format" },
         cpp = { "clang-format" },
     },
-    plugins = {
+    plugin = {
         "p00f/clangd_extensions.nvim",
         lazy = true,
     },

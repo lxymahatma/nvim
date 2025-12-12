@@ -20,7 +20,7 @@
 ---@field formatter? string | string[] | table<string, string|string[]> Formatters. `string` uses lang_name, `string[]` specifies multiple formatter tools for lang_name filetype, or `table` for explicit filetype mapping.
 ---@field linter? string | string[] | table<string, string|string[]> Linters. `string` uses lang_name, `string[]` specifies multiple linter tools for lang_name filetype, or `table` for explicit filetype mapping.
 ---@field dap? table DAP (Debug Adapter Protocol) configuration
----@field plugins? LazyPluginSpec | LazyPluginSpec[] Extra plugins to install. Can be a single plugin spec or a list of plugin specs.
+---@field plugin? LazyPluginSpec | LazyPluginSpec[] Extra plugin(s) to install. Can be a single plugin spec or a list of plugin specs.
 
 -- Tool configuration specification
 ---@class ToolSpec
@@ -28,4 +28,4 @@
 ---@field lsp? string | table<string, vim.lsp.ClientConfig> LSP servers configuration. Can be a single server name (default config) or (server_name -> config) map.
 ---@field formatter? string | string[] | table<string, string|string[]> Formatters. `string` uses tool_name, `string[]` specifies multiple filetypes that tool_name formats, or `table` for explicit filetype mapping.
 ---@field linter? string | string[] | table<string, string | string[]> Linters. `string` uses tool_name, `string[]` specifies multiple filetypes that tool_name lints, or `table` for explicit filetype mapping.
----@field plugins? LazyPluginSpec | LazyPluginSpec[] Extra plugins to install. Can be a single plugin spec or a list of plugin specs.
+---@field plugin? LazyPluginSpec | LazyPluginSpec[] Extra plugin(s) to install. Can be a single plugin spec or a list of plugin specs.
