@@ -1,5 +1,6 @@
 ---@type LanguageSpec
 return {
+    filetype = "dockerfile",
     treesitter = "dockerfile",
     mason = {
         "docker_compose_language_service",
@@ -12,7 +13,5 @@ return {
         "docker_language_server",
         "dockerls",
     },
-    linter = {
-        dockerfile = { "hadolint" },
-    },
+    linter = "hadolint",
 }
