@@ -4,7 +4,11 @@ return {
         "markdown",
         "markdown_inline",
     },
-    mason = "markdownlint-cli2",
+    mason = {
+        "marksman",
+        "markdownlint-cli2",
+    },
+    lsp = "marksman",
     linter = "markdownlint-cli2",
     formatter = "markdownlint-cli2",
     plugin = {

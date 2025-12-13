@@ -1,7 +1,13 @@
 ---@type LanguageSpec
 return {
-    filetype = { "c", "cpp" },
-    treesitter = { "c", "cpp" },
+    filetype = {
+        "c",
+        "cpp",
+    },
+    treesitter = {
+        "c",
+        "cpp",
+    },
     mason = {
         { "clangd",       condition = { missing = true } },
         { "clang-format", condition = { missing = true } },
