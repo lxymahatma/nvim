@@ -52,14 +52,6 @@ return {
                     hidden = true,
                     diagnostics_open = true,
                     git_status_open = true,
-                    win = {
-                        list = {
-                            keys = {
-                                ["<C-t>"] = "tab",
-                                ["<C-/>"] = "terminal",
-                            },
-                        },
-                    },
                 },
                 files = {
                     hidden = true,
