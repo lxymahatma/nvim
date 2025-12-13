@@ -25,20 +25,15 @@ local function parse_spec(tool_name, spec)
             ---@cast spec.mason string
             table.insert(M._cache.mason_packages, spec.mason)
         elseif type(spec.mason) == "table" then
-            if type(spec.mason[1]) == "string" then
-                if type(spec.mason[2]) == "string" then
-                    -- mason = { "package1", "package2" }
-                    ---@cast spec.mason string[]
-                    vim.list_extend(M._cache.mason_packages, spec.mason)
-                elseif spec.mason.condition ~= nil then
-                    -- mason = { "package", condition = {...} }
-                    ---@cast spec.mason MasonPackageStruct
-                    table.insert(M._cache.mason_packages, spec.mason)
-                end
-            elseif type(spec.mason[1]) == "table" then
+            ---@cast spec.mason table
+            if vim.islist(spec.mason) then
+                -- mason = { "package1", "package2" }
                 -- mason = { { "package1", ... }, { "package2", ... } }
-                ---@cast spec.mason MasonPackageSpec[]
                 vim.list_extend(M._cache.mason_packages, spec.mason)
+            elseif spec.mason.condition ~= nil then
+                -- mason = { "package", condition = {...} }
+                ---@cast spec.mason MasonPackageStruct
+                table.insert(M._cache.mason_packages, spec.mason)
             end
         end
     end
@@ -49,13 +44,14 @@ local function parse_spec(tool_name, spec)
             ---@cast spec.lsp string
             M._cache.lsp_servers[spec.lsp] = {}
         elseif type(spec.lsp) == "table" then
-            if type(spec.lsp[1]) == "string" then
+            ---@cast spec.lsp table
+            if vim.islist(spec.lsp) then
                 -- lsp = { "server1", "server2" }
                 ---@cast spec.lsp string[]
                 for _, server in ipairs(spec.lsp) do
                     M._cache.lsp_servers[server] = {}
                 end
-            elseif spec.lsp[1] == nil then
+            else
                 -- lsp = { server1 = {...}, server2 = {...} }
                 ---@cast spec.lsp table<string, vim.lsp.ClientConfig>
                 for server, config in pairs(spec.lsp) do
@@ -68,17 +64,19 @@ local function parse_spec(tool_name, spec)
     if spec.formatter then
         if type(spec.formatter) == "string" then
             -- formatter = "javascript"
+            ---@cast spec.formatter string
             M._cache.formatters_by_ft[spec.formatter] = M._cache.formatters_by_ft[spec.formatter] or {}
             table.insert(M._cache.formatters_by_ft[spec.formatter], tool_name)
         elseif type(spec.formatter) == "table" then
-            if type(spec.formatter[1]) == "string" then
+            ---@cast spec.formatter table
+            if vim.islist(spec.formatter) then
                 -- formatter = { "javascript", "typescript" }
                 ---@cast spec.formatter string[]
                 for _, ft in ipairs(spec.formatter) do
                     M._cache.formatters_by_ft[ft] = M._cache.formatters_by_ft[ft] or {}
                     table.insert(M._cache.formatters_by_ft[ft], tool_name)
                 end
-            elseif spec.formatter[1] == nil then
+            else
                 -- formatter = { ft1 = {...}, ft2 = {...} }
                 ---@cast spec.formatter table<string, string|string[]>
                 for ft, formatters in pairs(spec.formatter) do
@@ -93,15 +91,17 @@ local function parse_spec(tool_name, spec)
     if spec.linter then
         if type(spec.linter) == "string" then
             -- linter = "javascript"
+            ---@cast spec.linter string
             M._cache.linters_by_ft[spec.linter] = { tool_name }
         elseif type(spec.linter) == "table" then
-            if type(spec.linter[1]) == "string" then
+            ---@cast spec.linter table
+            if vim.islist(spec.linter) then
                 -- linter = { "javascript", "typescript" }
                 ---@cast spec.linter string[]
                 for _, ft in ipairs(spec.linter) do
                     M._cache.linters_by_ft[ft] = { tool_name }
                 end
-            elseif spec.linter[1] == nil then
+            else
                 -- linter = { ft1 = {...}, ft2 = {...} }
                 ---@cast spec.linter table<string, string|string[]>
                 for ft, linters in pairs(spec.linter) do
@@ -140,7 +140,7 @@ function M.load_all()
         if ok and type(spec) == "table" then
             parse_spec(tool, spec)
         else
-            vim.notify(string.format("[tool-parser] Failed to load tools.configs.%s", tool), vim.log.levels.WARN)
+            vim.notify(("[tool-parser] Failed to load tools.configs.%s"):format(tool), vim.log.levels.WARN)
         end
     end
 end
