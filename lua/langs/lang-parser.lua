@@ -22,32 +22,30 @@ M._cache = {
     extra_plugins = {},
 }
 
+---@param parser string
+local function add_parser(parser)
+    if not vim.tbl_contains(M._cache.treesitter_parsers, parser) then table.insert(M._cache.treesitter_parsers, parser) end
+end
+
 ---@param lang_name string
 ---@param spec LanguageSpec
 local function parse_spec(lang_name, spec)
     ---@type string[]
     local filetypes = type(spec.filetype) == "table" and spec.filetype or { spec.filetype or lang_name }
 
-    if spec.treesitter then
-        ---@param parser string
-        local function add_parser(parser)
-            if not vim.tbl_contains(M._cache.treesitter_parsers, parser) then table.insert(M._cache.treesitter_parsers, parser) end
-        end
-
-        if type(spec.treesitter) == "boolean" then
-            -- treesitter = true
-            ---@cast spec.treesitter boolean
-            if spec.treesitter then add_parser(lang_name) end
-        elseif type(spec.treesitter) == "string" then
-            -- treesitter = "parser"
-            ---@cast spec.treesitter string
-            add_parser(spec.treesitter)
-        else
-            -- treesitter = { "parser1", "parser2" }
-            ---@cast spec.treesitter string[]
-            for _, parser in ipairs(spec.treesitter) do
-                add_parser(parser)
-            end
+    if type(spec.treesitter) == "boolean" then
+        -- treesitter = true
+        ---@cast spec.treesitter boolean
+        add_parser(lang_name)
+    elseif type(spec.treesitter) == "string" then
+        -- treesitter = "parser"
+        ---@cast spec.treesitter string
+        add_parser(spec.treesitter)
+    elseif type(spec.treesitter) == "table" then
+        -- treesitter = { "parser1", "parser2" }
+        ---@cast spec.treesitter string[]
+        for _, parser in ipairs(spec.treesitter) do
+            add_parser(parser)
         end
     end
 
@@ -175,12 +173,13 @@ function M.load_all()
     end
 end
 
----@return string[]
-function M.get_filetypes() return vim.tbl_keys(M._cache.configs_by_ft) end
-
 --- Get all treesitter parsers
 ---@return string[]
 function M.get_treesitter_parsers() return M._cache.treesitter_parsers end
+
+--- Get all configured filetypes
+---@return string[]
+function M.get_filetypes() return vim.tbl_keys(M._cache.configs_by_ft) end
 
 --- Get all mason packages
 ---@return MasonPackageSpec[]

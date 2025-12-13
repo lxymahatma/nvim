@@ -14,8 +14,8 @@
 
 -- Language configuration specification
 ---@class LanguageSpec
+---@field treesitter true | string | string[] Treesitter parsers to install. `true` uses lang name, or specify parser name(s).
 ---@field filetype? string | string[] Filetype(s) associated with the language.
----@field treesitter? boolean | string | string[] Treesitter parsers to install. `true` uses lang name, `false` skips, or specify parser name(s).
 ---@field mason? MasonPackageSpec | MasonPackageSpec[] Mason packages to install. Can be a single package name/spec or a list of package names/specs.
 ---@field lsp? string | string[] | table<string, vim.lsp.ClientConfig> LSP servers configuration. Can be a single server name (default config) or (server_name -> config) map.
 ---@field formatter? string | string[] | table<string, string|string[]> Formatters. `string` uses lang_name, `string[]` specifies multiple formatter tools for lang_name filetype, or `table` for explicit filetype mapping.
