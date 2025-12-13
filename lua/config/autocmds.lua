@@ -27,6 +27,10 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = require("langs.lang-parser").get_filetypes(),
-    callback = function() vim.treesitter.start() end,
+    callback = function()
+        vim.treesitter.start()
+        vim.wo.foldmethod = "expr"
+        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    end,
     group = vim.api.nvim_create_augroup("LangTreesitter", { clear = true }),
 })

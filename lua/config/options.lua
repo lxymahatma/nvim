@@ -41,9 +41,7 @@ o.wrap = false        -- Disable line wrap
 
 -- Folding
 o.foldlevel = 99
-o.foldmethod = "expr"
 o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- Tabs
 o.showtabline = 2
