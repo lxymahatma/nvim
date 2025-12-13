@@ -1,5 +1,6 @@
 ---@type LanguageSpec
 return {
+    filetype = "sh",
     treesitter = true,
     mason = {
         "bashls",
@@ -7,10 +8,6 @@ return {
         "shfmt",
     },
     lsp = "bashls",
-    linter = {
-        sh = { "shellcheck" },
-    },
-    formatter = {
-        sh = { "shfmt" },
-    },
+    linter = "shellcheck",
+    formatter = "shfmt",
 }

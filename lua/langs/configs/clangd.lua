@@ -1,9 +1,7 @@
 ---@type LanguageSpec
 return {
-    treesitter = {
-        "c",
-        "cpp",
-    },
+    filetype = { "c", "cpp" },
+    treesitter = { "c", "cpp" },
     mason = {
         { "clangd",       condition = { missing = true } },
         { "clang-format", condition = { missing = true } },
@@ -25,10 +23,7 @@ return {
             },
         },
     },
-    formatter = {
-        c = { "clang-format" },
-        cpp = { "clang-format" },
-    },
+    formatter = "clang-format",
     plugin = {
         "p00f/clangd_extensions.nvim",
         lazy = true,

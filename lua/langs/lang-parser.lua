@@ -1,21 +1,23 @@
 local M = {}
 
+---@class FiletypeConfig
+---@field formatters? string[]
+---@field linters? string[]
+
 ---@class LangParserCache
+---@field configs_by_ft table<string, FiletypeConfig> Language configurations by filetype
 ---@field treesitter_parsers string[] Treesitter parsers to install
 ---@field mason_packages MasonPackageSpec[] Mason packages to install
 ---@field lsp_servers table<string, vim.lsp.ClientConfig> LSP server configurations
----@field formatters_by_ft table<string, string|string[]> Formatters by filetype
----@field linters_by_ft table<string, string[]> Linters by filetype
 ---@field dap_configs table DAP configurations
 ---@field extra_plugins LazyPluginSpec[] Extra plugins from language configs
 
 ---@type LangParserCache
 M._cache = {
+    configs_by_ft = {},
     treesitter_parsers = {},
     mason_packages = {},
     lsp_servers = {},
-    formatters_by_ft = {},
-    linters_by_ft = {},
     dap_configs = {},
     extra_plugins = {},
 }
@@ -23,6 +25,9 @@ M._cache = {
 ---@param lang_name string
 ---@param spec LanguageSpec
 local function parse_spec(lang_name, spec)
+    ---@type string[]
+    local filetypes = type(spec.filetype) == "table" and spec.filetype or { spec.filetype or lang_name }
+
     if spec.treesitter then
         ---@param parser string
         local function add_parser(parser)
@@ -33,16 +38,16 @@ local function parse_spec(lang_name, spec)
             -- treesitter = true
             ---@cast spec.treesitter boolean
             if spec.treesitter then add_parser(lang_name) end
-        elseif type(spec.treesitter) == "table" then
+        elseif type(spec.treesitter) == "string" then
+            -- treesitter = "parser"
+            ---@cast spec.treesitter string
+            add_parser(spec.treesitter)
+        else
             -- treesitter = { "parser1", "parser2" }
             ---@cast spec.treesitter string[]
             for _, parser in ipairs(spec.treesitter) do
                 add_parser(parser)
             end
-        else
-            -- treesitter = "parser"
-            ---@cast spec.treesitter string
-            add_parser(spec.treesitter)
         end
     end
 
@@ -92,47 +97,51 @@ local function parse_spec(lang_name, spec)
         end
     end
 
-    if spec.formatter then
-        if type(spec.formatter) == "string" then
-            -- formatter = "tool"
-            M._cache.formatters_by_ft[lang_name] = { spec.formatter }
-        elseif type(spec.formatter) == "table" then
-            if type(spec.formatter[1]) == "string" then
-                -- formatter = { "tool1", "tool2" }
-                ---@cast spec.formatter string[]
-                M._cache.formatters_by_ft[lang_name] = spec.formatter
-            elseif spec.formatter[1] == nil then
-                -- formatter = { ft1 = {...}, ft2 = {...} }
-                ---@cast spec.formatter table<string, string|string[]>
-                for ft, formatters in pairs(spec.formatter) do
-                    local fmt_list = type(formatters) == "table" and formatters or { formatters }
-                    M._cache.formatters_by_ft[ft] = fmt_list
+    for _, ft in ipairs(filetypes) do
+        local cfg = {}
+
+        if spec.formatter then
+            if type(spec.formatter) == "string" then
+                -- formatter = "tool"
+                ---@cast spec.formatter string
+                cfg.formatters = { spec.formatter }
+            elseif type(spec.formatter) == "table" then
+                ---@cast spec.formatter table
+                if vim.islist(spec.formatter) then
+                    -- formatter = { "tool1", "tool2" }
+                    ---@cast spec.formatter string[]
+                    cfg.formatters = spec.formatter
+                elseif spec.formatter[ft] then
+                    -- formatter = { ft1 = {...}, ft2 = {...} }
+                    local fmt = spec.formatter[ft]
+                    cfg.formatters = type(fmt) == "string" and { fmt } or fmt
                 end
             end
         end
-    end
 
-    if spec.linter then
-        if type(spec.linter) == "string" then
-            -- linter = "tool"
-            M._cache.linters_by_ft[lang_name] = { spec.linter }
-        elseif type(spec.linter) == "table" then
-            if type(spec.linter[1]) == "string" then
-                -- linter = { "tool1", "tool2" }
-                ---@cast spec.linter string[]
-                M._cache.linters_by_ft[lang_name] = spec.linter
-            elseif spec.linter[1] == nil then
-                -- linter = { ft1 = {...}, ft2 = {...} }
-                ---@cast spec.linter table<string, string|string[]>
-                for ft, linters in pairs(spec.linter) do
-                    local linter_list = type(linters) == "table" and linters or { linters }
-                    M._cache.linters_by_ft[ft] = linter_list
+        if spec.linter then
+            if type(spec.linter) == "string" then
+                -- linter = "tool"
+                ---@cast spec.linter string
+                cfg.linters = { spec.linter }
+            elseif type(spec.linter) == "table" then
+                ---@cast spec.linter table
+                if vim.islist(spec.linter) then
+                    -- linter = { "tool1", "tool2" }
+                    ---@cast spec.linter string[]
+                    cfg.linters = spec.linter
+                elseif spec.linter[ft] then
+                    -- linter = { ft1 = {...}, ft2 = {...} }
+                    local lint = spec.linter[ft]
+                    cfg.linters = type(lint) == "string" and { lint } or lint
                 end
             end
         end
+
+        M._cache.configs_by_ft[ft] = cfg
     end
 
-    if spec.dap then vim.tbl_deep_extend("force", M._cache.dap_configs, spec.dap) end
+    if spec.dap then M._cache.dap_configs = vim.tbl_deep_extend("force", M._cache.dap_configs, spec.dap) end
 
     if spec.plugin then
         if type(spec.plugin) == "string" then
@@ -166,6 +175,9 @@ function M.load_all()
     end
 end
 
+---@return string[]
+function M.get_filetypes() return vim.tbl_keys(M._cache.configs_by_ft) end
+
 --- Get all treesitter parsers
 ---@return string[]
 function M.get_treesitter_parsers() return M._cache.treesitter_parsers end
@@ -178,13 +190,23 @@ function M.get_mason_packages() return M._cache.mason_packages end
 ---@return table<string, vim.lsp.ClientConfig>
 function M.get_lsp_servers() return M._cache.lsp_servers end
 
---- Get all formatter configurations
----@return table<string, string|string[]>
-function M.get_formatters() return M._cache.formatters_by_ft end
-
---- Get all linter configurations
 ---@return table<string, string[]>
-function M.get_linters() return M._cache.linters_by_ft end
+function M.get_formatters()
+    local result = {}
+    for ft, cfg in pairs(M._cache.configs_by_ft) do
+        if cfg.formatters then result[ft] = cfg.formatters end
+    end
+    return result
+end
+
+---@return table<string, string[]>
+function M.get_linters()
+    local result = {}
+    for ft, cfg in pairs(M._cache.configs_by_ft) do
+        if cfg.linters then result[ft] = cfg.linters end
+    end
+    return result
+end
 
 --- Get all DAP configurations
 ---@return table

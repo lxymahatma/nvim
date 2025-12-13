@@ -24,3 +24,9 @@ vim.api.nvim_create_autocmd("FileType", {
         end)
     end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = require("langs.lang-parser").get_filetypes(),
+    callback = function() vim.treesitter.start() end,
+    group = vim.api.nvim_create_augroup("LangTreesitter", { clear = true }),
+})

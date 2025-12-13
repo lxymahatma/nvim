@@ -1,12 +1,6 @@
 local M = {}
 
-function M.setup()
-    local lang_parser = require("langs.lang-parser")
-    local tool_parser = require("tools.tool-parser")
-
-    lang_parser.load_all()
-    tool_parser.load_all()
-
+function M.setup(extra_plugins)
     local plugin_spec = {
         { import = "plugins" },
         { import = "plugins.coding" },
@@ -18,12 +12,9 @@ function M.setup()
         { import = "plugins.ui" },
     }
 
-    vim.list_extend(plugin_spec, lang_parser.get_extra_plugins())
-    vim.list_extend(plugin_spec, tool_parser.get_extra_plugins())
-
     ---@type LazyConfig
     local opts = {
-        spec = plugin_spec,
+        spec = vim.list_extend(plugin_spec, extra_plugins or {}),
         dev = {
             path = function(plugin)
                 local dir = vim.env.NVIM_DEV_DIR or ""

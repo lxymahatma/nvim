@@ -5,10 +5,7 @@ return {
     branch = "main",
     event = { "BufEdit", "VeryLazy" },
     build = ":TSUpdate",
-    opts = {
-        highlight = { enable = true },
-        indent = { enable = true },
-    },
+    opts = {},
     config = function(_, opts)
         require("nvim-treesitter").setup(opts)
 
