@@ -2,8 +2,12 @@
 return {
     filetype = "tex",
     treesitter = true,
-    mason = "texlab",
+    mason = {
+        "texlab",
+        "tex-fmt",
+    },
     lsp = "texlab",
+    formatter = "tex-fmt",
     plugin = {
         "lervag/vimtex",
         ft = "tex",
