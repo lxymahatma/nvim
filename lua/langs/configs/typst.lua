@@ -1,8 +1,12 @@
 ---@type LanguageSpec
 return {
     treesitter = true,
-    mason = "tinymist",
+    mason = {
+        "tinymist",
+        "typstyle",
+    },
     lsp = "tinymist",
+    formatter = "typstyle",
     plugin = {
         "chomosuke/typst-preview.nvim",
         ft = "typst",
