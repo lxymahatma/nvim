@@ -6,6 +6,9 @@ return {
 
     ---@type sidekick.Config
     opts = {
+        nes = {
+            diff = { inline = "chars" },
+        },
         cli = {
             mux = {
                 backend = "tmux",
