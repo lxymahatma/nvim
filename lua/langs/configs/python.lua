@@ -2,10 +2,10 @@
 return {
     treesitter = true,
     mason = {
-        "pyrefly",
+        "ty",
         "ruff",
     },
-    lsp = "pyrefly",
+    lsp = "ty",
     linter = "ruff",
     formatter = "ruff",
 }
