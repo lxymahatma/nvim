@@ -3,7 +3,7 @@ local M = {}
 local ts = require("nvim-treesitter")
 
 ---@param parser_list string[] List of parser names to ensure are installed
-M.ensure_parsers_installed = function(parser_list) ts.install(parser_list, { force = false, summary = true }) end
+M.ensure_parsers_installed = function(parser_list) ts.install(parser_list) end
 
 ---@param parser_name string
 M.install_parser = function(parser_name)
