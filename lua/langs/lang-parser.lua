@@ -3,6 +3,8 @@ local M = {}
 ---@class FiletypeConfig
 ---@field formatters? string[]
 ---@field linters? string[]
+---@field on_attach_buf? fun(bufnr: integer)
+---@field on_attach_win? fun(winid: integer, bufnr: integer)
 
 ---@class LangParserCache
 ---@field configs_by_ft table<string, FiletypeConfig> Language configurations by filetype
@@ -136,6 +138,9 @@ local function parse_spec(lang_name, spec)
             end
         end
 
+        if spec.on_attach_buf then cfg.on_attach_buf = spec.on_attach_buf end
+        if spec.on_attach_win then cfg.on_attach_win = spec.on_attach_win end
+
         M._cache.configs_by_ft[ft] = cfg
     end
 
@@ -214,5 +219,10 @@ function M.get_dap_configs() return M._cache.dap_configs end
 --- Get all extra plugins
 ---@return LazyPluginSpec[]
 function M.get_extra_plugins() return M._cache.extra_plugins end
+
+--- Get configuration for a specific filetype
+---@param filetype string
+---@return FiletypeConfig
+function M.get_config_by_ft(filetype) return M._cache.configs_by_ft[filetype] end
 
 return M

@@ -25,12 +25,32 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+local lang_parser = require("langs.lang-parser")
+local filetypes = lang_parser.get_filetypes()
+local group = vim.api.nvim_create_augroup("LangConfig", { clear = true })
+
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = require("langs.lang-parser").get_filetypes(),
-    callback = function()
+    group = group,
+    pattern = filetypes,
+    callback = function(args)
         vim.treesitter.start()
-        vim.wo.foldmethod = "expr"
-        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+        local ft_config = lang_parser.get_config_by_ft(args.match)
+        if ft_config.on_attach_buf then ft_config.on_attach_buf(args.buf) end
     end,
-    group = vim.api.nvim_create_augroup("LangTreesitter", { clear = true }),
+})
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    group = group,
+    callback = function(args)
+        local ft = vim.bo[args.buf].filetype
+        if not vim.tbl_contains(filetypes, ft) then return end
+
+        local winid = vim.api.nvim_get_current_win()
+        vim.wo[winid].foldmethod = "expr"
+        vim.wo[winid].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+        local ft_config = lang_parser.get_config_by_ft(ft)
+        if ft_config and ft_config.on_attach_win then ft_config.on_attach_win(winid, args.buf) end
+    end,
 })
