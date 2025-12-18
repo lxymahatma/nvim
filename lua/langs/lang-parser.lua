@@ -1,7 +1,7 @@
 local M = {}
 
 ---@class FiletypeConfig
----@field formatters? string[]
+---@field formatters? conform.FiletypeFormatter
 ---@field linters? string[]
 ---@field on_attach_buf? fun(bufnr: integer)
 ---@field on_attach_win? fun(winid: integer, bufnr: integer)
@@ -107,9 +107,9 @@ local function parse_spec(lang_name, spec)
                 cfg.formatters = { spec.formatter }
             elseif type(spec.formatter) == "table" then
                 ---@cast spec.formatter table
-                if vim.islist(spec.formatter) then
-                    -- formatter = { "tool1", "tool2" }
-                    ---@cast spec.formatter string[]
+                if spec.formatter[1] ~= nil then
+                    -- formatter = { "tool1", "tool2", ... }
+                    -- formatter = { "tool1", lsp_format = "last", ... }
                     cfg.formatters = spec.formatter
                 elseif spec.formatter[ft] then
                     -- formatter = { ft1 = {...}, ft2 = {...} }
@@ -194,7 +194,7 @@ function M.get_mason_packages() return M._cache.mason_packages end
 ---@return table<string, vim.lsp.ClientConfig>
 function M.get_lsp_servers() return M._cache.lsp_servers end
 
----@return table<string, string[]>
+---@return table<string, conform.FiletypeFormatter>
 function M.get_formatters()
     local result = {}
     for ft, cfg in pairs(M._cache.configs_by_ft) do
