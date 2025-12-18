@@ -51,6 +51,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
         vim.wo[winid].foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
         local ft_config = lang_parser.get_config_by_ft(ft)
-        if ft_config and ft_config.on_attach_win then ft_config.on_attach_win(winid, args.buf) end
+        if ft_config.on_attach_win then ft_config.on_attach_win(winid, args.buf) end
     end,
 })
