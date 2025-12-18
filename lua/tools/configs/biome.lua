@@ -8,9 +8,11 @@ return {
         "typescriptreact",
     },
     linter = {
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact",
+        biomejs = {
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+        },
     },
 }
