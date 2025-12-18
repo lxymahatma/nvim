@@ -33,5 +33,5 @@ return {
         },
     },
     linter = "selene",
-    formatter = "stylua",
+    formatter = { "stylua", lsp_format = "last" },
 }
