@@ -2,7 +2,6 @@
 return {
     treesitter = {
         "json",
-        "jsonc",
         "json5",
     },
     mason = {
