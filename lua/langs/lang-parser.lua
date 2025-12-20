@@ -3,8 +3,7 @@ local M = {}
 ---@class FiletypeConfig
 ---@field formatters? conform.FiletypeFormatter
 ---@field linters? string[]
----@field on_attach_buf? fun(bufnr: integer)
----@field on_attach_win? fun(winid: integer, bufnr: integer)
+---@field on_attach? fun(bufnr: integer)
 
 ---@class LangParserCache
 ---@field configs_by_ft table<string, FiletypeConfig> Language configurations by filetype
@@ -138,8 +137,7 @@ local function parse_spec(lang_name, spec)
             end
         end
 
-        if spec.on_attach_buf then cfg.on_attach_buf = spec.on_attach_buf end
-        if spec.on_attach_win then cfg.on_attach_win = spec.on_attach_win end
+        if spec.on_attach then cfg.on_attach = spec.on_attach end
 
         M._cache.configs_by_ft[ft] = cfg
     end
