@@ -6,14 +6,13 @@ local ft_groups = {
     markdown = "markdown",
 }
 
----@param direction "increment" | "decrement"
+---@param direction direction
 ---@param g boolean
 local function dial(direction, g)
     local is_visual = vim.fn.mode(true):find("^[vV\22]")
     local mode = (g and "g" or "") .. (is_visual and "visual" or "normal")
     local group = ft_groups[vim.bo.filetype] or "default"
 
-    ---@cast direction direction
     ---@cast mode mode
     return require("dial.map").manipulate(direction, mode, group)
 end
@@ -36,7 +35,7 @@ return {
                     augend.date.alias["%Y年%-m月%-d日"],
                     augend.date.new({
                         pattern = "%Y/%m/%d",
-                        default_kind = "day" --[[@as datekind]],
+                        default_kind = "day",
                         only_valid = true,
                         word = false,
                     }),
