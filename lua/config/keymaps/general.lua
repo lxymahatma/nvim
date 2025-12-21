@@ -18,10 +18,3 @@ map("n", "<leader>lp", "<cmd>Lazy profile<cr>", { desc = "Profile Lazy.nvim plug
 
 -- Code Actions
 map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action", lsp = { method = "textDocument/codeAction" } })
-
--- Open Link
-map("n", "gl", function() vim.ui.open(vim.fn.expand("<cfile>")) end, { desc = "Open link/file under cursor" })
-map("x", "gl", function()
-    local lines = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = vim.fn.mode() })
-    vim.ui.open(table.concat(vim.iter(lines):map(vim.trim):totable()))
-end, { desc = "Open selected link/file" })
