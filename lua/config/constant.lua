@@ -13,6 +13,7 @@ M.default_langs = {
     "git",
     "json",
     "html",
+    "ini",
     "latex",
     "lua",
     "markdown",
