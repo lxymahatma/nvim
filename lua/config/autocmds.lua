@@ -39,6 +39,8 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
         local ft_config = lang_parser.get_config_by_ft(args.match)
+
+        ---@cast ft_config FiletypeConfig
         if ft_config.on_attach then ft_config.on_attach(args.buf) end
     end,
 })

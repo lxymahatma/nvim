@@ -243,7 +243,7 @@ function M.get_extra_plugins() return M._cache.extra_plugins end
 
 --- Get configuration for a specific filetype
 ---@param filetype string
----@return FiletypeConfig
+---@return FiletypeConfig?
 function M.get_config_by_ft(filetype) return M._cache.configs_by_ft[filetype] end
 
 return M
