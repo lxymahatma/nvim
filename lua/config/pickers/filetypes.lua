@@ -41,6 +41,40 @@ local function get_filetype_infos()
     return cache
 end
 
+---@param item FiletypeInfo
+---@param picker snacks.Picker
+local function format_item(item, picker)
+    local align = Snacks.picker.util.align
+
+    ---@cast picker.layout.wins.list.win integer
+    local width = vim.api.nvim_win_get_width(picker.layout.wins.list.win) - 2
+
+    local ft_icon, ft_hl = Snacks.util.icon(item.text, "filetype")
+
+    local ts_icon = #item.treesitter > 0 and "" or " "
+    local lsp_icon = #item.lsp > 0 and "" or " "
+    local fmt_icon = #item.formatters > 0 and "󰉼" or " "
+    local lint_icon = #item.linters > 0 and "󰁨" or " "
+
+    local name_width = width - 10
+    local icon_width = 2
+
+    return {
+        { align(ft_icon, icon_width),   ft_hl },
+        {
+            align(item.text, name_width, { truncate = true }),
+            item.has_config and "" or "SnacksPickerDimmed",
+        },
+        { align(ts_icon, icon_width),   "SnacksPickerFtTreesitter" },
+        { align(lsp_icon, icon_width),  "SnacksPickerFtLsp" },
+        { align(fmt_icon, icon_width),  "SnacksPickerFtFormatter" },
+        { align(lint_icon, icon_width), "SnacksPickerFtLinter" },
+    }
+end
+
+---@param ctx snacks.picker.preview.ctx
+local function preview(ctx) end
+
 ---@type snacks.picker.Config
 return {
     title = "Filetypes",
@@ -48,37 +82,8 @@ return {
     sort = { fields = { "has_config", "text" } },
     matcher = { sort_empty = true, frecency = true },
     finder = get_filetype_infos,
-
-    ---@param item snacks.picker.Item
-    ---@param picker snacks.Picker
-    format = function(item, picker)
-        local align = Snacks.picker.util.align
-
-        ---@cast picker.layout.wins.list.win integer
-        local width = vim.api.nvim_win_get_width(picker.layout.wins.list.win) - 2
-
-        local ft_icon, ft_hl = Snacks.util.icon(item.text, "filetype")
-
-        local ts_icon = #item.treesitter > 0 and "" or " "
-        local lsp_icon = #item.lsp > 0 and "" or " "
-        local fmt_icon = #item.formatters > 0 and "󰉼" or " "
-        local lint_icon = #item.linters > 0 and "󰁨" or " "
-
-        local name_width = width - 10
-        local icon_width = 2
-
-        return {
-            { align(ft_icon, icon_width),   ft_hl },
-            {
-                align(item.text, name_width, { truncate = true }),
-                item.has_config and "" or "SnacksPickerDimmed",
-            },
-            { align(ts_icon, icon_width),   "SnacksPickerFtTreesitter" },
-            { align(lsp_icon, icon_width),  "SnacksPickerFtLsp" },
-            { align(fmt_icon, icon_width),  "SnacksPickerFtFormatter" },
-            { align(lint_icon, icon_width), "SnacksPickerFtLinter" },
-        }
-    end,
+    format = format_item,
+    preview = preview,
 
     ---@param picker snacks.Picker
     ---@param item FiletypeInfo
