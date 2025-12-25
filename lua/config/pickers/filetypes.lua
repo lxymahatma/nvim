@@ -1,3 +1,5 @@
+---@class snacks.picker.filetypes.Config : snacks.picker.Config
+
 ---@type FiletypeInfo[]?
 local cache = nil
 

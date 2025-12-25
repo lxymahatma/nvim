@@ -31,3 +31,8 @@
 ---@field formatter? string | string[] | table<string, string|string[]> Formatters. `string` uses tool_name, `string[]` specifies multiple filetypes that tool_name formats, or `table` for explicit filetype mapping.
 ---@field linter? string | string[] | table<string, string | string[]> Linters. `string` uses tool_name, `string[]` specifies multiple filetypes that tool_name lints, or `table` for explicit filetype mapping.
 ---@field plugin? LazyPluginSpec | LazyPluginSpec[] Extra plugin(s) to install. Can be a single plugin spec or a list of plugin specs.
+
+-- Types for Snacks Pickers
+---@class snacks.picker
+---@field filetypes fun(opts?:snacks.picker.filetypes.Config|{}): snacks.Picker
+---@field todo_comments fun(opts?:snacks.picker.todo.Config|{}): snacks.Picker

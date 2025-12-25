@@ -13,6 +13,7 @@
   "diagnostics": {
     "diagnosticInterval": 500,
     "disable": [
+      "duplicate-type",
       "missing-fields"
     ],
     "enable": true,
