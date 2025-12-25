@@ -73,14 +73,68 @@ local function format_item(item, picker)
 end
 
 ---@param ctx snacks.picker.preview.ctx
-local function preview(ctx) end
+local function preview(ctx)
+    local item = ctx.item
+    local lines = {}
+
+    lines[#lines + 1] = "# " .. item.text
+    lines[#lines + 1] = ""
+
+    if not item.has_config then
+        lines[#lines + 1] = "**Status**: ✗ Not configured"
+        lines[#lines + 1] = ""
+        ctx.preview:set_lines(lines)
+        ctx.preview:highlight({ ft = "markdown" })
+        return
+    end
+
+    lines[#lines + 1] = "**Status**: ✓ Configured"
+    lines[#lines + 1] = ""
+
+    -- Treesitter
+    lines[#lines + 1] = "##  Treesitter"
+    for _, parser in ipairs(item.treesitter) do
+        lines[#lines + 1] = "- " .. parser
+    end
+    lines[#lines + 1] = ""
+
+    -- LSP
+    if #item.lsp > 0 then
+        lines[#lines + 1] = "##  LSP Servers"
+        for _, server in ipairs(item.lsp) do
+            lines[#lines + 1] = "- " .. server
+        end
+        lines[#lines + 1] = ""
+    end
+
+    -- Formatters
+    if #item.formatters > 0 then
+        lines[#lines + 1] = "## 󰉼 Formatters"
+        for _, formatter in ipairs(item.formatters) do
+            lines[#lines + 1] = "- " .. formatter
+        end
+        lines[#lines + 1] = ""
+    end
+
+    -- Linters
+    if #item.linters > 0 then
+        lines[#lines + 1] = "## 󰁨 Linters"
+        for _, linter in ipairs(item.linters) do
+            lines[#lines + 1] = "- " .. linter
+        end
+        lines[#lines + 1] = ""
+    end
+
+    ctx.preview:set_lines(lines)
+    ctx.preview:highlight({ ft = "markdown" })
+end
 
 ---@type snacks.picker.Config
 return {
     title = "Filetypes",
-    layout = "vscode",
+    layout = "default",
     sort = { fields = { "has_config", "text" } },
-    matcher = { sort_empty = true, frecency = true },
+    matcher = { sort_empty = true },
     finder = get_filetype_infos,
     format = format_item,
     preview = preview,
