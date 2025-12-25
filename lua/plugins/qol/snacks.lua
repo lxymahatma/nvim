@@ -61,6 +61,7 @@ return {
                 grep = {
                     hidden = true,
                 },
+                filetypes = require("config.pickers.filetypes"),
             },
             win = {
                 input = {

@@ -1,6 +1,8 @@
 local M = {}
 
 ---@class FiletypeConfig
+---@field treesitter string[]
+---@field lsp string[]
 ---@field formatters? conform.FiletypeFormatter
 ---@field linters? string[]
 ---@field on_attach? fun(bufnr: integer)
@@ -24,8 +26,22 @@ M._cache = {
 }
 
 ---@param parser string
-local function add_parser(parser)
-    if not vim.tbl_contains(M._cache.treesitter_parsers, parser) then table.insert(M._cache.treesitter_parsers, parser) end
+---@param local_list string[]
+local function add_parser(parser, local_list)
+    table.insert(M._cache.treesitter_parsers, parser)
+    table.insert(local_list, parser)
+end
+
+---@param server string
+---@param local_list string[]
+---@param config? table
+local function add_lsp(server, local_list, config)
+    if config then
+        M._cache.lsp_servers[server] = config
+    else
+        M._cache.lsp_servers[server] = {}
+    end
+    table.insert(local_list, server)
 end
 
 ---@param lang_name string
@@ -34,19 +50,22 @@ local function parse_spec(lang_name, spec)
     ---@type string[]
     local filetypes = type(spec.filetype) == "table" and spec.filetype or { spec.filetype or lang_name }
 
+    local current_parsers = {}
+    local current_lsps = {}
+
     if type(spec.treesitter) == "boolean" then
         -- treesitter = true
         ---@cast spec.treesitter boolean
-        add_parser(lang_name)
+        add_parser(lang_name, current_parsers)
     elseif type(spec.treesitter) == "string" then
         -- treesitter = "parser"
         ---@cast spec.treesitter string
-        add_parser(spec.treesitter)
+        add_parser(spec.treesitter, current_parsers)
     elseif type(spec.treesitter) == "table" then
         -- treesitter = { "parser1", "parser2" }
         ---@cast spec.treesitter string[]
         for _, parser in ipairs(spec.treesitter) do
-            add_parser(parser)
+            add_parser(parser, current_parsers)
         end
     end
 
@@ -78,19 +97,19 @@ local function parse_spec(lang_name, spec)
         if type(spec.lsp) == "string" then
             -- lsp = "server"
             ---@cast spec.lsp string
-            M._cache.lsp_servers[spec.lsp] = {}
+            add_lsp(spec.lsp, current_lsps)
         elseif type(spec.lsp) == "table" then
             if type(spec.lsp[1]) == "string" then
                 -- lsp = { "server1", "server2" }
                 ---@cast spec.lsp string[]
                 for _, server in ipairs(spec.lsp) do
-                    M._cache.lsp_servers[server] = {}
+                    add_lsp(server, current_lsps)
                 end
             elseif spec.lsp[1] == nil then
                 -- lsp = { server1 = {...}, server2 = {...} }
                 ---@cast spec.lsp table<string, vim.lsp.ClientConfig>
                 for server, config in pairs(spec.lsp) do
-                    M._cache.lsp_servers[server] = config
+                    add_lsp(server, current_lsps, config)
                 end
             end
         end
@@ -98,6 +117,10 @@ local function parse_spec(lang_name, spec)
 
     for _, ft in ipairs(filetypes) do
         local cfg = {}
+
+        if #current_parsers > 0 then cfg.treesitter = vim.deepcopy(current_parsers) end
+
+        if #current_lsps > 0 then cfg.lsp = vim.deepcopy(current_lsps) end
 
         if spec.formatter then
             if type(spec.formatter) == "string" then
