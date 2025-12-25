@@ -2,8 +2,7 @@ local M = {}
 
 ---@class snacks.picker.filetypes.Config : snacks.picker.Config
 
----@class FiletypeInfo
----@field text string
+---@class FiletypeInfo : snacks.picker.Item
 ---@field treesitter string[]
 ---@field lsp string[]
 ---@field formatters string[]
@@ -47,6 +46,7 @@ end
 
 ---@param item FiletypeInfo
 ---@param picker snacks.Picker
+---@return snacks.picker.format
 function M.format(item, picker)
     local align = Snacks.picker.util.align
 
@@ -133,6 +133,7 @@ function M.preview(ctx)
     ctx.preview:highlight({ ft = "markdown" })
 end
 
+---@type snacks.picker.filetypes.Config
 M.source = {
     title = "Filetypes",
     layout = "default",
