@@ -7,10 +7,9 @@ local storage_helper = require("helpers.storage")
 --- @return string[]
 function M.get_all_modules(module_dir)
     local all_modules = {}
-    local module_files = vim.fn.globpath(module_dir, "*.lua", false, true)
-    for _, file in ipairs(module_files) do
-        local module = vim.fn.fnamemodify(file, ":t:r")
-        table.insert(all_modules, module)
+
+    for name in vim.fs.dir(module_dir) do
+        table.insert(all_modules, name:sub(1, -5))
     end
 
     return all_modules
@@ -38,9 +37,7 @@ function M.get_enabled_modules(default_modules, storage_key)
     local enabled_modules = {}
     vim.list_extend(enabled_modules, default_modules)
     for _, module in ipairs(extra_modules) do
-        if not vim.tbl_contains(enabled_modules, module) then
-            table.insert(enabled_modules, module)
-        end
+        if not vim.tbl_contains(enabled_modules, module) then table.insert(enabled_modules, module) end
     end
     return enabled_modules
 end
@@ -51,9 +48,7 @@ end
 function M.save_extra_modules(storage_key, extra_modules)
     table.sort(extra_modules)
     local ok, err = pcall(storage_helper.write_json, storage_key, { extra_modules = extra_modules })
-    if not ok then
-        vim.notify("Failed to save module config: " .. tostring(err), vim.log.levels.ERROR)
-    end
+    if not ok then vim.notify("Failed to save module config: " .. tostring(err), vim.log.levels.ERROR) end
 end
 
 return M

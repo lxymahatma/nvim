@@ -3,7 +3,7 @@ local M = {}
 local constant = require("config.constant")
 
 function M.setup()
-    for name, _ in vim.fs.dir(constant.picker_dir) do
+    for name in vim.fs.dir(constant.picker_dir) do
         if name ~= "init.lua" then
             local key = name:sub(1, -5)
             local mod = require("config.pickers." .. key)
