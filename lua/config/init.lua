@@ -18,6 +18,7 @@ require("config.events").setup()
 require("config.lazy").setup(parsers.get_extra_plugins())
 require("config.colorschemes").setup(colorscheme)
 require("config.highlight")
+require("config.pickers").setup()
 require("config.keymaps")
 
 require("langs.commands")

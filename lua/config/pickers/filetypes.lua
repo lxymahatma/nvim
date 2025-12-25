@@ -1,7 +1,6 @@
----@class snacks.picker.filetypes.Config : snacks.picker.Config
+local M = {}
 
----@type FiletypeInfo[]?
-local cache = nil
+---@class snacks.picker.filetypes.Config : snacks.picker.Config
 
 ---@class FiletypeInfo
 ---@field text string
@@ -11,8 +10,11 @@ local cache = nil
 ---@field linters string[]
 ---@field has_config boolean
 
+---@type FiletypeInfo[]?
+local cache = nil
+
 ---@return FiletypeInfo[]
-local function get_filetype_infos()
+function M.find()
     if cache then return cache end
 
     local parser = require("langs.lang-parser")
@@ -45,7 +47,7 @@ end
 
 ---@param item FiletypeInfo
 ---@param picker snacks.Picker
-local function format_item(item, picker)
+function M.format(item, picker)
     local align = Snacks.picker.util.align
 
     ---@cast picker.layout.wins.list.win integer
@@ -75,7 +77,7 @@ local function format_item(item, picker)
 end
 
 ---@param ctx snacks.picker.preview.ctx
-local function preview(ctx)
+function M.preview(ctx)
     local item = ctx.item
     local lines = {}
 
@@ -131,20 +133,4 @@ local function preview(ctx)
     ctx.preview:highlight({ ft = "markdown" })
 end
 
----@type snacks.picker.Config
-return {
-    title = "Filetypes",
-    layout = "default",
-    sort = { fields = { "has_config", "text" } },
-    matcher = { sort_empty = true },
-    finder = get_filetype_infos,
-    format = format_item,
-    preview = preview,
-
-    ---@param picker snacks.Picker
-    ---@param item FiletypeInfo
-    confirm = function(picker, item)
-        picker:close()
-        vim.bo.filetype = item.text
-    end,
-}
+return M
