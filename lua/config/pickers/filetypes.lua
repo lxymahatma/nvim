@@ -133,4 +133,21 @@ function M.preview(ctx)
     ctx.preview:highlight({ ft = "markdown" })
 end
 
+M.source = {
+    title = "Filetypes",
+    layout = "default",
+    sort = { fields = { "has_config", "text" } },
+    matcher = { sort_empty = true },
+    finder = M.find,
+    format = M.format,
+    preview = M.preview,
+
+    ---@param picker snacks.Picker
+    ---@param item FiletypeInfo
+    confirm = function(picker, item)
+        picker:close()
+        vim.bo.filetype = item.text
+    end,
+}
+
 return M

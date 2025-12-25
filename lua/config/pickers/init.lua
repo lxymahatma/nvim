@@ -1,23 +1,18 @@
 local M = {}
 
-function M.setup()
-    local filetypes_picker = require("config.pickers.filetypes")
-    Snacks.picker.sources.filetypes = {
-        title = "Filetypes",
-        layout = "default",
-        sort = { fields = { "has_config", "text" } },
-        matcher = { sort_empty = true },
-        finder = filetypes_picker.find,
-        format = filetypes_picker.format,
-        preview = filetypes_picker.preview,
+local constant = require("config.constant")
 
-        ---@param picker snacks.Picker
-        ---@param item FiletypeInfo
-        confirm = function(picker, item)
-            picker:close()
-            vim.bo.filetype = item.text
-        end,
-    }
+function M.setup()
+    local picker_files = vim.fn.globpath(constant.picker_dir, "*.lua", false, true)
+
+    for _, file in ipairs(picker_files) do
+        local name = vim.fn.fnamemodify(file, ":t:r")
+
+        if name ~= "init" then
+            local mod = require("config.pickers." .. name)
+            Snacks.picker.sources[name] = mod.source
+        end
+    end
 end
 
 return M
