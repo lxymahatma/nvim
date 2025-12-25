@@ -6,7 +6,7 @@ return {
     opts = function()
         local conditions = require("heirline.conditions")
 
-        local colors = require("heirline.colors")
+        local colors = require("config.colors")
         local tabline = require("heirline.layouts.tabline")
         local statusline = require("heirline.layouts.statusline")
         local winbar = require("heirline.layouts.winbar")

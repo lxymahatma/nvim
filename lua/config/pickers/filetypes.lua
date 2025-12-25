@@ -57,26 +57,26 @@ return {
         ---@cast picker.layout.wins.list.win integer
         local width = vim.api.nvim_win_get_width(picker.layout.wins.list.win) - 2
 
-        local icon, hl = Snacks.util.icon(item.text, "filetype")
+        local ft_icon, ft_hl = Snacks.util.icon(item.text, "filetype")
 
         local ts_icon = #item.treesitter > 0 and "" or " "
         local lsp_icon = #item.lsp > 0 and "" or " "
         local fmt_icon = #item.formatters > 0 and "󰉼" or " "
         local lint_icon = #item.linters > 0 and "󰁨" or " "
 
-        local name_width = math.floor(width * 0.5)
+        local name_width = width - 10
         local icon_width = 2
 
         return {
-            { align(icon, 2),               hl },
+            { align(ft_icon, icon_width),   ft_hl },
             {
                 align(item.text, name_width, { truncate = true }),
                 item.has_config and "" or "SnacksPickerDimmed",
             },
-            { align(ts_icon, icon_width),   "DiagnosticOk" },
-            { align(lsp_icon, icon_width),  "DiagnosticOk" },
-            { align(fmt_icon, icon_width),  "DiagnosticOk" },
-            { align(lint_icon, icon_width), "DiagnosticOk" },
+            { align(ts_icon, icon_width),   "SnacksPickerFtTreesitter" },
+            { align(lsp_icon, icon_width),  "SnacksPickerFtLsp" },
+            { align(fmt_icon, icon_width),  "SnacksPickerFtFormatter" },
+            { align(lint_icon, icon_width), "SnacksPickerFtLinter" },
         }
     end,
 
