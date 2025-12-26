@@ -26,6 +26,7 @@
 
 -- Tool configuration specification
 ---@class ToolSpec
+---@field filetype string | string[] Filetype(s) associated with the language.
 ---@field mason? MasonPackageSpec | MasonPackageSpec[] Mason packages to install. Can be a single package name/spec or a list of package names/specs.
 ---@field lsp? string | table<string, vim.lsp.ClientConfig> LSP servers configuration. Can be a single server name (default config) or (server_name -> config) map.
 ---@field formatter? string | string[] | table<string, string|string[]> Formatters. `string` uses tool_name, `string[]` specifies multiple filetypes that tool_name formats, or `table` for explicit filetype mapping.

@@ -1,6 +1,6 @@
 ---@type ToolSpec
 return {
-    formatter = {
+    filetype = {
         "javascript",
         "javascriptreact",
         "typescript",
@@ -9,4 +9,5 @@ return {
         "css",
         "scss",
     },
+    formatter = true,
 }

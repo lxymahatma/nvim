@@ -16,9 +16,8 @@ local cache = nil
 function M.find()
     if cache then return cache end
 
-    local parser = require("langs.lang-parser")
     cache = vim.tbl_map(function(ft)
-        local cfg = parser.get_config_by_ft(ft)
+        local cfg = require("helpers.toolchain").get_config_by_ft(ft)
 
         if not cfg then
             return {

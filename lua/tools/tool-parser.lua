@@ -1,24 +1,44 @@
 local M = {}
 
+---@class ToolFtConfig
+---@field lsp string[]
+---@field formatters? conform.FiletypeFormatter
+---@field linters? string[]
+
 ---@class ToolParserCache
+---@field configs_by_ft table<string, ToolFtConfig> Tool configurations by filetype
 ---@field mason_packages MasonPackageSpec[] Mason packages to install
 ---@field lsp_servers table<string, vim.lsp.ClientConfig> LSP server configurations
----@field formatters_by_ft table<string, string|string[]> Formatters by filetype
----@field linters_by_ft table<string, string[]> Linters by filetype
 ---@field extra_plugins LazyPluginSpec[] Extra plugins from tool configs
 
 ---@type ToolParserCache
 M._cache = {
+    configs_by_ft = {},
     mason_packages = {},
     lsp_servers = {},
-    formatters_by_ft = {},
-    linters_by_ft = {},
     extra_plugins = {},
 }
+
+---@param server string
+---@param local_list string[]
+---@param config? table
+local function add_lsp(server, local_list, config)
+    if config then
+        M._cache.lsp_servers[server] = config
+    else
+        M._cache.lsp_servers[server] = {}
+    end
+    table.insert(local_list, server)
+end
 
 ---@param tool_name string
 ---@param spec ToolSpec
 local function parse_spec(tool_name, spec)
+    ---@type string[]
+    local filetypes = type(spec.filetype) == "table" and spec.filetype or (spec.filetype and { spec.filetype } or {})
+
+    local current_lsps = {}
+
     if spec.mason then
         if type(spec.mason) == "string" then
             -- mason = "package"
@@ -42,75 +62,67 @@ local function parse_spec(tool_name, spec)
         if type(spec.lsp) == "string" then
             -- lsp = "server"
             ---@cast spec.lsp string
-            M._cache.lsp_servers[spec.lsp] = {}
+            add_lsp(spec.lsp, current_lsps)
         elseif type(spec.lsp) == "table" then
             ---@cast spec.lsp table
             if vim.islist(spec.lsp) then
                 -- lsp = { "server1", "server2" }
                 ---@cast spec.lsp string[]
                 for _, server in ipairs(spec.lsp) do
-                    M._cache.lsp_servers[server] = {}
+                    add_lsp(server, current_lsps)
                 end
             else
                 -- lsp = { server1 = {...}, server2 = {...} }
                 ---@cast spec.lsp table<string, vim.lsp.ClientConfig>
                 for server, config in pairs(spec.lsp) do
-                    M._cache.lsp_servers[server] = config
+                    add_lsp(server, current_lsps, config)
                 end
             end
         end
     end
 
-    if spec.formatter then
-        if type(spec.formatter) == "string" then
-            -- formatter = "javascript"
-            ---@cast spec.formatter string
-            M._cache.formatters_by_ft[spec.formatter] = M._cache.formatters_by_ft[spec.formatter] or {}
-            table.insert(M._cache.formatters_by_ft[spec.formatter], tool_name)
-        elseif type(spec.formatter) == "table" then
-            ---@cast spec.formatter table
-            if vim.islist(spec.formatter) then
-                -- formatter = { "javascript", "typescript" }
-                ---@cast spec.formatter string[]
-                for _, ft in ipairs(spec.formatter) do
-                    M._cache.formatters_by_ft[ft] = M._cache.formatters_by_ft[ft] or {}
-                    table.insert(M._cache.formatters_by_ft[ft], tool_name)
-                end
-            else
-                -- formatter = { ft1 = {...}, ft2 = {...} }
-                ---@cast spec.formatter table<string, string|string[]>
-                for ft, formatters in pairs(spec.formatter) do
-                    ---@type string[]
-                    local fmt_list = type(formatters) == "table" and formatters or { formatters }
-                    M._cache.formatters_by_ft[ft] = fmt_list
-                end
-            end
-        end
-    end
+    for _, ft in ipairs(filetypes) do
+        local cfg = {}
 
-    if spec.linter then
-        if type(spec.linter) == "string" then
-            -- linter = "javascript"
-            ---@cast spec.linter string
-            M._cache.linters_by_ft[spec.linter] = { tool_name }
-        elseif type(spec.linter) == "table" then
-            ---@cast spec.linter table
-            if vim.islist(spec.linter) then
-                -- linter = { "javascript", "typescript" }
-                ---@cast spec.linter string[]
-                for _, ft in ipairs(spec.linter) do
-                    M._cache.linters_by_ft[ft] = { tool_name }
-                end
-            else
-                -- linter = { ft1 = {...}, ft2 = {...} }
-                ---@cast spec.linter table<string, string|string[]>
-                for ft, linters in pairs(spec.linter) do
-                    ---@type string[]
-                    local linter_list = type(linters) == "table" and linters or { linters }
-                    M._cache.linters_by_ft[ft] = linter_list
+        cfg.lsp = current_lsps
+
+        if spec.formatter then
+            if spec.formatter == true then
+                -- formatter = true
+                cfg.formatters = { tool_name }
+            elseif type(spec.formatter) == "string" then
+                -- formatter = "tool"
+                ---@cast spec.formatter string
+                cfg.formatters = { spec.formatter }
+            elseif type(spec.formatter) == "table" then
+                ---@cast spec.formatter table
+                if spec.formatter[ft] then
+                    -- formatter = { ft1 = {...}, ft2 = {...} }
+                    local fmt = spec.formatter[ft]
+                    cfg.formatters = type(fmt) == "string" and { fmt } or fmt
                 end
             end
         end
+
+        if spec.linter then
+            if spec.linter == true then
+                -- linter = true
+                cfg.linters = { tool_name }
+            elseif type(spec.linter) == "string" then
+                -- linter = "tool"
+                ---@cast spec.linter string
+                cfg.linters = { spec.linter }
+            elseif type(spec.linter) == "table" then
+                ---@cast spec.linter table
+                if spec.linter[ft] then
+                    -- linter = { ft1 = {...}, ft2 = {...} }
+                    local lint = spec.linter[ft]
+                    cfg.linters = type(lint) == "string" and { lint } or lint
+                end
+            end
+        end
+
+        M._cache.configs_by_ft[ft] = cfg
     end
 
     if spec.plugin then
@@ -153,16 +165,31 @@ function M.get_mason_packages() return M._cache.mason_packages end
 ---@return table<string, vim.lsp.ClientConfig>
 function M.get_lsp_servers() return M._cache.lsp_servers end
 
---- Get all formatter configurations
----@return table<string, string|string[]>
-function M.get_formatters() return M._cache.formatters_by_ft end
+---@return table<string, conform.FiletypeFormatter>
+function M.get_formatters()
+    local result = {}
+    for ft, cfg in pairs(M._cache.configs_by_ft) do
+        if cfg.formatters then result[ft] = cfg.formatters end
+    end
+    return result
+end
 
---- Get all linter configurations
 ---@return table<string, string[]>
-function M.get_linters() return M._cache.linters_by_ft end
+function M.get_linters()
+    local result = {}
+    for ft, cfg in pairs(M._cache.configs_by_ft) do
+        if cfg.linters then result[ft] = cfg.linters end
+    end
+    return result
+end
 
 --- Get all extra plugins
 ---@return LazyPluginSpec[]
 function M.get_extra_plugins() return M._cache.extra_plugins end
+
+--- Get configuration for a specific filetype
+---@param filetype string
+---@return ToolFtConfig?
+function M.get_config_by_ft(filetype) return M._cache.configs_by_ft[filetype] end
 
 return M

@@ -1,18 +1,12 @@
 ---@type ToolSpec
 return {
-    lsp = "biome",
-    formatter = {
+    filetype = {
         "javascript",
         "javascriptreact",
         "typescript",
         "typescriptreact",
     },
-    linter = {
-        biomejs = {
-            "javascript",
-            "javascriptreact",
-            "typescript",
-            "typescriptreact",
-        },
-    },
+    lsp = "biome",
+    formatter = true,
+    linter = "biomejs",
 }
