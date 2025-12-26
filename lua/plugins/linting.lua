@@ -5,11 +5,7 @@ return {
     event = "BufEdit",
     opts = {},
     config = function()
-        local lang_linters = require("langs.lang-parser").get_linters()
-        local tool_linters = require("tools.tool-parser").get_linters()
-        local linters_by_ft = vim.tbl_extend("force", lang_linters, tool_linters)
-
-        require("lint").linters_by_ft = linters_by_ft
+        require("lint").linters_by_ft = require("helpers.parsers").get_linters()
 
         local events = {
             "BufReadPost",

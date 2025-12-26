@@ -17,10 +17,7 @@ return {
             })
         end)
 
-        local lang_servers = require("langs.lang-parser").get_lsp_servers()
-        local tool_servers = require("tools.tool-parser").get_lsp_servers()
-        local servers = vim.tbl_extend("force", lang_servers, tool_servers)
-
+        local servers = require("helpers.parsers").get_lsp_servers()
         for server, config in pairs(servers) do
             vim.lsp.config(server, config)
             vim.lsp.enable(server)
