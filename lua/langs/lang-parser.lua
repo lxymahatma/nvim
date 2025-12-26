@@ -1,6 +1,6 @@
 local M = {}
 
----@class FiletypeConfig
+---@class LangFtConfig
 ---@field treesitter string[]
 ---@field lsp string[]
 ---@field formatters? conform.FiletypeFormatter
@@ -8,7 +8,7 @@ local M = {}
 ---@field on_attach? fun(bufnr: integer)
 
 ---@class LangParserCache
----@field configs_by_ft table<string, FiletypeConfig> Language configurations by filetype
+---@field configs_by_ft table<string, LangFtConfig> Language configurations by filetype
 ---@field treesitter_parsers string[] Treesitter parsers to install
 ---@field mason_packages MasonPackageSpec[] Mason packages to install
 ---@field lsp_servers table<string, vim.lsp.ClientConfig> LSP server configurations
@@ -118,9 +118,8 @@ local function parse_spec(lang_name, spec)
     for _, ft in ipairs(filetypes) do
         local cfg = {}
 
-        if #current_parsers > 0 then cfg.treesitter = vim.deepcopy(current_parsers) end
-
-        if #current_lsps > 0 then cfg.lsp = vim.deepcopy(current_lsps) end
+        cfg.treesitter = current_parsers
+        cfg.lsp = current_lsps
 
         if spec.formatter then
             if type(spec.formatter) == "string" then
@@ -243,7 +242,7 @@ function M.get_extra_plugins() return M._cache.extra_plugins end
 
 --- Get configuration for a specific filetype
 ---@param filetype string
----@return FiletypeConfig?
+---@return LangFtConfig?
 function M.get_config_by_ft(filetype) return M._cache.configs_by_ft[filetype] end
 
 return M
