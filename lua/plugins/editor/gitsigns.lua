@@ -64,20 +64,20 @@ return {
             map("n", "[H", function() gitsigns.nav_hunk("first") end, "First Hunk")
 
             -- Hunk Actions
-            map({ "n", "x" }, "<leader>hs", ":Gitsigns stage_hunk<cr>", "Stage Hunk")
-            map({ "n", "x" }, "<leader>hr", ":Gitsigns reset_hunk<cr>", "Reset Hunk")
-            map("n", "<leader>hS", gitsigns.stage_buffer, "Stage Buffer")
-            map("n", "<leader>hR", gitsigns.reset_buffer, "Reset Buffer")
+            map({ "n", "x" }, "<leader>ghs", ":Gitsigns stage_hunk<cr>", "Stage Hunk")
+            map({ "n", "x" }, "<leader>ghr", ":Gitsigns reset_hunk<cr>", "Reset Hunk")
+            map("n", "<leader>ghS", gitsigns.stage_buffer, "Stage Buffer")
+            map("n", "<leader>ghR", gitsigns.reset_buffer, "Reset Buffer")
 
-            map("n", "<leader>hp", gitsigns.preview_hunk_inline, "Preview Hunk Inline")
-            map("n", "<leader>hb", function() gitsigns.blame_line({ full = true }) end, "Blame Line")
-            map("n", "<leader>hB", function() gitsigns.blame() end, "Blame Buffer")
+            map("n", "<leader>ghp", gitsigns.preview_hunk_inline, "Preview Hunk Inline")
+            map("n", "<leader>ghb", function() gitsigns.blame_line({ full = true }) end, "Blame Line")
+            map("n", "<leader>ghB", function() gitsigns.blame() end, "Blame Buffer")
 
-            map("n", "<leader>hd", gitsigns.diffthis, "Diff This")
-            map("n", "<leader>hD", function() gitsigns.diffthis("~") end, "Diff This ~")
+            map("n", "<leader>ghd", gitsigns.diffthis, "Diff This")
+            map("n", "<leader>ghD", function() gitsigns.diffthis("~") end, "Diff This ~")
 
-            map("n", "<leader>hl", gitsigns.setqflist, "List Hunks")
-            map("n", "<leader>hL", function() gitsigns.setqflist("all") end, "List All Hunks")
+            map("n", "<leader>ghl", gitsigns.setqflist, "List Hunks")
+            map("n", "<leader>ghL", function() gitsigns.setqflist("all") end, "List All Hunks")
 
             -- Text object
             map({ "o", "x" }, "ih", gitsigns.select_hunk, "GitSigns Select Hunk")
