@@ -5,7 +5,7 @@ return {
     event = "BufEdit",
     opts = {},
     config = function()
-        require("lint").linters_by_ft = require("helpers.parsers").get_linters()
+        require("lint").linters_by_ft = require("helpers.toolchain").get_linters()
 
         local events = {
             "BufReadPost",

@@ -17,7 +17,7 @@ return {
             })
         end)
 
-        local servers = require("helpers.parsers").get_lsp_servers()
+        local servers = require("helpers.toolchain").get_lsp_servers()
         for server, config in pairs(servers) do
             vim.lsp.config(server, config)
             vim.lsp.enable(server)

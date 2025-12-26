@@ -7,7 +7,7 @@ vim.keymap.set("", "<Space>", "<Nop>")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local parsers = require("helpers.parsers")
+local parsers = require("helpers.toolchain")
 parsers.setup()
 
 require("config.options")
