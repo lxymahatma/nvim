@@ -13,7 +13,7 @@ M.diagnostics = {
     Error = " ",
     Warn = " ",
     Info = " ",
-    Hint = " ",
+    Hint = " ",
 }
 
 M.fileformat = {
