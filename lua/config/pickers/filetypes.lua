@@ -135,7 +135,21 @@ end
 ---@type snacks.picker.filetypes.Config
 M.source = {
     title = "Filetypes",
-    layout = "default",
+    layout = {
+        hidden = { "preview" },
+        layout = {
+            backdrop = false,
+            row = 1,
+            width = 0.4,
+            min_width = 80,
+            height = 0.8,
+            border = "none",
+            box = "vertical",
+            { win = "input",   height = 1,  border = true,  title = "{title}",  title_pos = "center" },
+            { win = "list",    height = 18, border = "hpad" },
+            { win = "preview", height = 0,  border = true,  title = "{preview}" },
+        },
+    },
     sort = { fields = { "has_config", "text" } },
     matcher = { sort_empty = true },
     finder = M.find,
