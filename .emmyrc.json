@@ -41,5 +41,13 @@
     "ignoreGlobs": [
       "**/*_spec.lua"
     ]
+  },
+  "strict": {
+    "arrayIndex": true,
+    "docBaseConstMatchBaseType": true,
+    "metaOverrideFileDefine": true,
+    "requireExportGlobal": false,
+    "requirePath": false,
+    "typeCall": true
   }
 }
