@@ -46,17 +46,6 @@ local RightSectionY = { statusline.Progress }
 local RightSectionZ = { statusline.Location }
 
 return {
-    init = function(self)
-        -- Mode
-        self.mode = vim.fn.mode(1)
-        self.mode_key = self.mode:sub(1, 1)
-
-        -- File
-        self.filepath = vim.api.nvim_buf_get_name(0)
-        self.line = vim.fn.line(".")
-        self.charcol = vim.fn.charcol(".")
-        self.total = vim.fn.line("$")
-    end,
     static = {
         mode_colors = {
             n = "blue",
@@ -79,6 +68,17 @@ return {
         right_section_sep = " " .. icons.RightSectionSep,
         right_component_sep = " " .. icons.RightComponentSep,
     },
+    init = function(self)
+        -- Mode
+        self.mode = vim.fn.mode(1)
+        self.mode_key = self.mode:sub(1, 1)
+
+        -- File
+        self.filepath = vim.api.nvim_buf_get_name(0)
+        self.line = vim.fn.line(".")
+        self.charcol = vim.fn.charcol(".")
+        self.total = vim.fn.line("$")
+    end,
     heirline_helper.insert_last(LeftSectionA, LeftSectionSepA),
     heirline_helper.insert_last(LeftSectionB, LeftSectionSepB),
     LeftSectionC,
