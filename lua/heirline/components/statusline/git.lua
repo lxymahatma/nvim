@@ -11,7 +11,7 @@ return {
         if dict then
             self.status_dict = dict
             self.last_branch = dict.head
-            self.has_changes = dict.added ~= 0 or dict.changed ~= 0 or dict.removed ~= 0
+            self.has_changes = vim.b.gitsigns_status ~= ""
         else
             self.status_dict = nil
             self.has_changes = false
