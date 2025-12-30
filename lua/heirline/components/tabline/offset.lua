@@ -1,6 +1,8 @@
+local icons = require("config.icons")
+
 return {
     static = {
-        separator = "│",
+        separator = icons.bufferline.separator,
     },
     condition = function(self)
         local win = vim.api.nvim_tabpage_list_wins(0)[1]

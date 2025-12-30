@@ -22,6 +22,14 @@ M.fileformat = {
     mac = "",
 }
 
+M.bufferline = {
+    active = "▎",
+    modified = "●",
+    separator = "│",
+    trunc_left = " ",
+    trunc_right = " ",
+}
+
 M.LeftSectionSep = ""
 M.RightSectionSep = ""
 M.LeftComponentSep = ""

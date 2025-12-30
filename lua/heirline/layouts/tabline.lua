@@ -1,3 +1,4 @@
+local icons = require("config.icons")
 local utils = require("heirline.utils")
 local common = require("heirline.components.common")
 local tabline = require("heirline.components.tabline")
@@ -41,10 +42,10 @@ local BufferBlock = {
 }
 
 local BufferLine = utils.make_buflist({ BufferBlock }, {
-    provider = " ",
+    provider = icons.bufferline.trunc_left,
     hl = { fg = "text" },
 }, {
-    provider = " ",
+    provider = icons.bufferline.trunc_right,
     hl = { fg = "text" },
 }, function() return require("tabscope").get_buflist() end, false)
 
