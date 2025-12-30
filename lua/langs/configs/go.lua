@@ -9,6 +9,7 @@ return {
     mason = {
         "gopls",
         "golangci-lint",
+        "gofumpt",
     },
     lsp = "gopls",
     linter = "golangcilint",
