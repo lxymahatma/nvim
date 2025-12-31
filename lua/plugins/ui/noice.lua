@@ -13,7 +13,7 @@ return {
             },
         },
         popupmenu = {
-            backend = "cmp",
+            backend = "nui",
         },
         presets = {
             bottom_search = false,
