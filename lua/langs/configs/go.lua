@@ -12,6 +12,6 @@ return {
         "gofumpt",
     },
     lsp = "gopls",
-    linter = "golangcilint",
     formatter = "gofumpt",
+    linter = "golangcilint",
 }
