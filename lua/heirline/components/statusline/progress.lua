@@ -1,9 +1,9 @@
 return {
     provider = function(self)
         if self.line == 1 then
-            return "Top"
+            return " Top"
         elseif self.line == self.total then
-            return "Bot"
+            return " Bot"
         else
             local percent = math.floor((self.line / self.total) * 100)
             return string.format("%3d%%%%", percent)
