@@ -1,11 +1,11 @@
 -- Copilot
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "BufEdit",
 
-    ---@type CopilotConfig
+    --- @type CopilotConfig
     opts = {
         panel = {
             enabled = false,

@@ -1,10 +1,10 @@
 -- Find And Replace
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "MagicDuck/grug-far.nvim",
     cmd = { "GrugFar", "GrugFarWithin" },
 
-    ---@type grug.far.Options
+    --- @type grug.far.Options
     opts = {},
     keys = {
         {

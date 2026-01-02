@@ -1,5 +1,5 @@
 -- Buffer like Filesystem
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "stevearc/oil.nvim",
     cmd = "Oil",
@@ -10,7 +10,7 @@ return {
         }
         local hidden_set = require("helpers.table").to_set(hidden_names)
 
-        ---@type oil.SetupOpts
+        --- @type oil.SetupOpts
         return {
             default_file_explorer = false,
             columns = {

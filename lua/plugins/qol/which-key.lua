@@ -1,14 +1,14 @@
 -- Which key
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "folke/which-key.nvim",
     event = "VeryLazy",
 
-    ---@type wk.Opts
+    --- @type wk.Opts
     opts = {
         preset = "helix",
 
-        ---@type wk.Spec
+        --- @type wk.Spec
         spec = {
             { "<leader>a",  group = "AI" },
             { "<leader>b",  group = "Buffer" },

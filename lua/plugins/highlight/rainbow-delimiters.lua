@@ -1,11 +1,11 @@
 -- Rainbow Brackets
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "HiPhish/rainbow-delimiters.nvim",
     event = "BufEdit",
     main = "rainbow-delimiters.setup",
 
-    ---@type rainbow_delimiters.config
+    --- @type rainbow_delimiters.config
     opts = {
         strategy = {
             [""] = "rainbow-delimiters.strategy.global",

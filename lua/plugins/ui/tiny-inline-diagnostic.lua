@@ -1,5 +1,5 @@
 -- Inline diagnostic messages
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "LspAttach",

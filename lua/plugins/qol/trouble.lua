@@ -1,9 +1,9 @@
 -- Diagnostics list
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "folke/trouble.nvim",
 
-    ---@type trouble.Config
+    --- @type trouble.Config
     opts = {
         focus = true,
     },

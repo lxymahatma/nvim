@@ -1,18 +1,18 @@
 local M = {}
 
----@class snacks.picker.filetypes.Config : snacks.picker.Config
+--- @class snacks.picker.filetypes.Config : snacks.picker.Config
 
----@class FiletypeInfo : snacks.picker.Item
----@field treesitter string[]
----@field lsp string[]
----@field formatters string[]
----@field linters string[]
----@field has_config boolean
+--- @class FiletypeInfo : snacks.picker.Item
+--- @field treesitter string[]
+--- @field lsp string[]
+--- @field formatters string[]
+--- @field linters string[]
+--- @field has_config boolean
 
----@type FiletypeInfo[]?
+--- @type FiletypeInfo[]?
 local cache = nil
 
----@return FiletypeInfo[]
+--- @return FiletypeInfo[]
 function M.find()
     if cache then return cache end
 
@@ -43,13 +43,13 @@ function M.find()
     return cache
 end
 
----@param item FiletypeInfo
----@param picker snacks.Picker
----@return snacks.picker.format
+--- @param item FiletypeInfo
+--- @param picker snacks.Picker
+--- @return snacks.picker.format
 function M.format(item, picker)
     local align = Snacks.picker.util.align
 
-    ---@cast picker.layout.wins.list.win integer
+    --- @cast picker.layout.wins.list.win integer
     local width = vim.api.nvim_win_get_width(picker.layout.wins.list.win) - 2
 
     local ft_icon, ft_hl = Snacks.util.icon(item.text, "filetype")
@@ -75,7 +75,7 @@ function M.format(item, picker)
     }
 end
 
----@param ctx snacks.picker.preview.ctx
+--- @param ctx snacks.picker.preview.ctx
 function M.preview(ctx)
     local item = ctx.item
     local lines = {}
@@ -132,7 +132,7 @@ function M.preview(ctx)
     ctx.preview:highlight({ ft = "markdown" })
 end
 
----@type snacks.picker.filetypes.Config
+--- @type snacks.picker.filetypes.Config
 M.source = {
     title = "Filetypes",
     layout = {
@@ -156,8 +156,8 @@ M.source = {
     format = M.format,
     preview = M.preview,
 
-    ---@param picker snacks.Picker
-    ---@param item FiletypeInfo
+    --- @param picker snacks.Picker
+    --- @param item FiletypeInfo
     confirm = function(picker, item)
         picker:close()
         vim.bo.filetype = item.text

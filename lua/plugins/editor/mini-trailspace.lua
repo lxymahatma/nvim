@@ -1,5 +1,5 @@
 --- Show Trailing Whitespace
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "nvim-mini/mini.trailspace",
     event = "BufEdit",

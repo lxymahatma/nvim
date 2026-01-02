@@ -1,4 +1,4 @@
----@type ToolSpec
+--- @type ToolSpec
 return {
     lsp = {
         tailwindcss = {

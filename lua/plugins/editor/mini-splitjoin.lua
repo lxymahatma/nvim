@@ -1,5 +1,5 @@
 -- Split and join arguments
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "nvim-mini/mini.splitjoin",
     event = "BufEdit",

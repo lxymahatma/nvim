@@ -1,10 +1,10 @@
 -- Git integration for buffers
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "lewis6991/gitsigns.nvim",
     event = "BufEdit",
 
-    ---@type Gitsigns.Config
+    --- @type Gitsigns.Config
     opts = {
         signs = {
             add = { text = "▎" },
@@ -44,7 +44,7 @@ return {
 
             local function map(mode, l, r, desc) vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc, silent = true }) end
 
-            ---@diagnostic disable: need-check-nil
+            --- @diagnostic disable: need-check-nil
             -- Hunk Navigation
             map("n", "]h", function()
                 if vim.wo.diff then

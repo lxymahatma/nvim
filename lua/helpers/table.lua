@@ -1,8 +1,8 @@
 local M = {}
 
----@generic T
----@param list T[]
----@return table<T, boolean>
+--- @generic T
+--- @param list T[]
+--- @return table<T, boolean>
 function M.to_set(list)
     local lookup = {}
 
@@ -12,9 +12,9 @@ function M.to_set(list)
     return lookup
 end
 
----@generic T
----@param ... T[]
----@return T[]
+--- @generic T
+--- @param ... T[]
+--- @return T[]
 function M.list_merge(...)
     local result = {}
     local args = { ... }

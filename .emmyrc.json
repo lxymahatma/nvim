@@ -10,6 +10,9 @@
     "enable": true,
     "postfix": "@"
   },
+  "codeAction": {
+    "insertSpace": true
+  },
   "diagnostics": {
     "diagnosticInterval": 500,
     "disable": [

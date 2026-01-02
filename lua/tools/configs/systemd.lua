@@ -1,4 +1,4 @@
----@type ToolSpec
+--- @type ToolSpec
 return {
     filetype = "systemd",
     mason = "systemd_lsp",

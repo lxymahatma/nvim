@@ -1,10 +1,10 @@
 -- Formatter
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "stevearc/conform.nvim",
     event = "BufEdit",
 
-    ---@type conform.setupOpts
+    --- @type conform.setupOpts
     opts = {
         formatters_by_ft = require("helpers.toolchain").get_formatters(),
         default_format_opts = {

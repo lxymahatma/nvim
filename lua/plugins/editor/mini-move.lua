@@ -1,5 +1,5 @@
 -- Move any selection in any direction
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "nvim-mini/mini.move",
     event = "BufEdit",

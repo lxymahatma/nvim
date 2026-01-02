@@ -1,4 +1,4 @@
----@type LanguageSpec
+--- @type LanguageSpec
 return {
     filetype = "tex",
     treesitter = true,

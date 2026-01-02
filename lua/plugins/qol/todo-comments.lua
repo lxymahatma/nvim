@@ -1,9 +1,9 @@
 -- Highlight TODO comments and can search them
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "folke/todo-comments.nvim",
     event = "BufEdit",
 
-    ---@type TodoOptions
+    --- @type TodoOptions
     opts = {},
 }

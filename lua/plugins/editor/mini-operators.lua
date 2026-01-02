@@ -1,5 +1,5 @@
 -- Text Operations
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "nvim-mini/mini.operators",
     event = "BufEdit",

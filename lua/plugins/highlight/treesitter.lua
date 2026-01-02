@@ -1,5 +1,5 @@
 -- Syntax Highlighting
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufEdit", "VeryLazy" },

@@ -1,11 +1,11 @@
 -- catppuccin
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = true,
 
-    ---@type CatppuccinOptions
+    --- @type CatppuccinOptions
     opts = {
         flavour = "mocha",
         integrations = {

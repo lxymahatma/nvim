@@ -1,5 +1,5 @@
 -- Linter
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "mfussenegger/nvim-lint",
     event = "BufEdit",

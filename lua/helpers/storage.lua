@@ -15,8 +15,8 @@ end
 -----------
 
 ---Write table to JSON
----@param key string
----@param data table
+--- @param key string
+--- @param data table
 function M.write_json(key, data)
     assert(key and key ~= "", "Key cannot be empty")
     assert(type(data) == "table", "Data must be a table")
@@ -31,8 +31,8 @@ function M.write_json(key, data)
 end
 
 ---Read table from JSON
----@param key string
----@return table
+--- @param key string
+--- @return table
 function M.read_json(key)
     assert(key and key ~= "", "Key cannot be empty")
 
@@ -47,8 +47,8 @@ function M.read_json(key)
 end
 
 ---Check if JSON file exists
----@param key string
----@return boolean
+--- @param key string
+--- @return boolean
 function M.exists_json(key)
     if not key or key == "" then return false end
     return vim.fn.filereadable(json_path(key)) == 1
@@ -59,8 +59,8 @@ end
 ------------------
 
 ---Write table to MessagePack
----@param key string
----@param data table
+--- @param key string
+--- @param data table
 function M.write_mpack(key, data)
     assert(key and key ~= "", "Key cannot be empty")
     assert(type(data) == "table", "Data must be a table")
@@ -74,8 +74,8 @@ function M.write_mpack(key, data)
 end
 
 ---Read table from MessagePack
----@param key string
----@return table
+--- @param key string
+--- @return table
 function M.read_mpack(key)
     assert(key and key ~= "", "Key cannot be empty")
 
@@ -90,8 +90,8 @@ function M.read_mpack(key)
 end
 
 ---Check if MessagePack file exists
----@param key string
----@return boolean
+--- @param key string
+--- @return boolean
 function M.exists_mpack(key)
     if not key or key == "" then return false end
     return vim.fn.filereadable(mpack_path(key)) == 1

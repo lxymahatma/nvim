@@ -1,5 +1,5 @@
 -- Mini Icons
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "nvim-mini/mini.icons",
     lazy = true,

@@ -1,5 +1,5 @@
 -- Statusline, Winbar and Tabline
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "rebelot/heirline.nvim",
     event = "VeryLazy",

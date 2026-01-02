@@ -1,4 +1,4 @@
----@type overseer.TemplateFileDefinition
+--- @type overseer.TemplateFileDefinition
 return {
     name = "clangd build",
     builder = function()

@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
         local ft_config = lang_parser.get_config_by_ft(args.match)
 
-        ---@cast ft_config LangFtConfig
+        --- @cast ft_config LangFtConfig
         if ft_config.on_attach then ft_config.on_attach(args.buf) end
     end,
 })

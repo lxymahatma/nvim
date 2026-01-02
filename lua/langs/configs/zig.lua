@@ -1,4 +1,4 @@
----@type LanguageSpec
+--- @type LanguageSpec
 return {
     treesitter = true,
     mason = "zls",

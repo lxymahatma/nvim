@@ -1,11 +1,11 @@
----@type LazyPluginSpec[]
+--- @type LazyPluginSpec[]
 return {
     -- Mason
     {
         "mason-org/mason.nvim",
         cmd = "Mason",
 
-        ---@type MasonSettings
+        --- @type MasonSettings
         opts = {
             ui = {
                 icons = {
@@ -38,7 +38,7 @@ return {
         dependencies = { "mason-org/mason.nvim" },
         event = "VeryLazy",
 
-        ---@type MasonLspconfigSettings
+        --- @type MasonLspconfigSettings
         opts = {
             automatic_enable = false,
         },

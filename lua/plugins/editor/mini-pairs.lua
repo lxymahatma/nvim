@@ -1,5 +1,5 @@
 -- Auto pairs
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "nvim-mini/mini.pairs",
     event = "InsertEnter",

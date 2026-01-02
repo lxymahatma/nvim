@@ -12,7 +12,7 @@ function M.setup(extra_plugins)
         { import = "plugins.ui" },
     }
 
-    ---@type LazyConfig
+    --- @type LazyConfig
     local opts = {
         spec = vim.list_extend(plugin_spec, extra_plugins or {}),
         dev = {

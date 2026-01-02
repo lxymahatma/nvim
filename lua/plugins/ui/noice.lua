@@ -1,10 +1,10 @@
 -- Noice notification
----@type LazyPluginSpec
+--- @type LazyPluginSpec
 return {
     "folke/noice.nvim",
     event = "VeryLazy",
 
-    ---@type NoiceConfig
+    --- @type NoiceConfig
     opts = {
         lsp = {
             override = {
