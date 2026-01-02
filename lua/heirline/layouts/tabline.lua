@@ -23,7 +23,9 @@ local BufferBlock = {
 
         -- Padding
         local current_width = 4 + #self.filename
-        local padding_needed = math.max(0, self.buffer_min_width - current_width) --[[@type number]]
+
+        --- @type number
+        local padding_needed = math.max(0, self.buffer_min_width - current_width)
         self.buffer_padding = math.floor(padding_needed / 2)
     end,
     hl = function(self) return self.is_active and { fg = "text", bg = "surface0", bold = true } or { fg = "subtext0", bg = "mantle" } end,
