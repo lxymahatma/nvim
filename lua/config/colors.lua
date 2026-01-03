@@ -32,17 +32,6 @@ M.colors = {
     base = palette.base,
     mantle = palette.mantle,
     crust = palette.crust,
-
-    -- Diagnostics
-    diag_error = palette.red,
-    diag_warn = palette.yellow,
-    diag_info = palette.sky,
-    diag_hint = palette.teal,
-
-    -- Git
-    git_add = palette.green,
-    git_change = palette.yellow,
-    git_del = palette.red,
 }
 
 return M.colors

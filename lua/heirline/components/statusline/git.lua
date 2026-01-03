@@ -37,21 +37,21 @@ return {
                 local count = self.status_dict.added or 0
                 return count > 0 and ("+" .. count .. " ")
             end,
-            hl = { fg = "git_add" },
+            hl = "GitSignsAdd",
         },
         {
             provider = function(self)
                 local count = self.status_dict.changed or 0
                 return count > 0 and ("~" .. count .. " ")
             end,
-            hl = { fg = "git_change" },
+            hl = "GitSignsChange",
         },
         {
             provider = function(self)
                 local count = self.status_dict.removed or 0
                 return count > 0 and ("-" .. count .. " ")
             end,
-            hl = { fg = "git_del" },
+            hl = "GitSignsDelete",
         },
     },
 }
