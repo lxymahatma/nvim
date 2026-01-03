@@ -1,5 +1,13 @@
 local icons = require("config.icons")
 
+local Align = require("config.heirline.common.align")
+local SectionA = require("config.heirline.statusline.section-a")
+local SectionB = require("config.heirline.statusline.section-b")
+local SectionC = require("config.heirline.statusline.section-c")
+local SectionX = require("config.heirline.statusline.section-x")
+local SectionY = require("config.heirline.statusline.section-y")
+local SectionZ = require("config.heirline.statusline.section-z")
+
 return {
     static = {
         mode_colors = {
@@ -32,11 +40,11 @@ return {
         self.charcol = vim.fn.charcol(".")
         self.total = vim.fn.line("$")
     end,
-    require("config.heirline.statusline.section-a"),
-    require("config.heirline.statusline.section-b"),
-    require("config.heirline.statusline.section-c"),
-    require("config.heirline.common.align"),
-    require("config.heirline.statusline.section-x"),
-    require("config.heirline.statusline.section-y"),
-    require("config.heirline.statusline.section-z"),
+    SectionA,
+    SectionB,
+    SectionC,
+    Align,
+    SectionX,
+    SectionY,
+    SectionZ,
 }
