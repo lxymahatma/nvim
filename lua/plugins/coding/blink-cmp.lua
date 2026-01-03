@@ -38,7 +38,7 @@ return {
             sources = {
                 default = { "lsp", "path", "snippets", "buffer" },
                 per_filetype = {
-                    markdown = { inherit_defaults = false, "markview", "buffer" },
+                    markdown = { inherit_defaults = true, "markview" },
                 },
                 providers = {
                     markview = { module = "blink-markview" },
