@@ -14,19 +14,19 @@ local Diagnostics = {
     update = { "DiagnosticChanged", "BufEnter" },
     {
         provider = function(self) return self.errors > 0 and (icons.diagnostics.Error .. self.errors .. " ") end,
-        hl = "DiagnosticError",
+        hl = "DiagnosticSignError",
     },
     {
         provider = function(self) return self.warnings > 0 and (icons.diagnostics.Warn .. self.warnings .. " ") end,
-        hl = "DiagnosticWarn",
+        hl = "DiagnosticSignWarn",
     },
     {
         provider = function(self) return self.info > 0 and (icons.diagnostics.Info .. self.info .. " ") end,
-        hl = "DiagnosticInfo",
+        hl = "DiagnosticSignInfo",
     },
     {
         provider = function(self) return self.hints > 0 and (icons.diagnostics.Hint .. self.hints .. " ") end,
-        hl = "DiagnosticHint",
+        hl = "DiagnosticSignHint",
     },
     {
         provider = function(self) return self.sep.left_component end,
