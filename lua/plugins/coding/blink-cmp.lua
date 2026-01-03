@@ -10,8 +10,13 @@ return {
         opts = {
             appearance = { nerd_font_variant = "normal" },
             cmdline = {
+                enabled = true,
                 keymap = { preset = "inherit" },
                 completion = { menu = { auto_show = true } },
+            },
+            term = {
+                enabled = true,
+                keymap = { preset = "inherit" },
             },
             completion = {
                 keyword = { range = "full" },
@@ -31,13 +36,12 @@ return {
                 ghost_text = { enabled = true },
             },
             sources = {
-                default = { "lsp", "path", "snippets", "buffer", "markdown" },
+                default = { "lsp", "path", "snippets", "buffer" },
+                per_filetype = {
+                    markdown = { inherit_defaults = false, "markview", "buffer" },
+                },
                 providers = {
-                    markdown = {
-                        name = "RenderMarkdown",
-                        module = "render-markdown.integ.blink",
-                        fallbacks = { "lsp" },
-                    },
+                    markview = { module = "blink-markview" },
                 },
             },
             keymap = {
