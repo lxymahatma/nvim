@@ -2,12 +2,9 @@ local icons = require("config.icons")
 
 return {
     condition = function(self) return vim.b.gitsigns_status_dict or self.last_branch end,
-    static = {
-        branch = icons.branch,
-    },
+    hl = { bg = "surface0" },
     init = function(self)
         local dict = vim.b.gitsigns_status_dict
-
         if dict then
             self.status_dict = dict
             self.last_branch = dict.head
@@ -17,19 +14,14 @@ return {
             self.has_changes = false
         end
     end,
-    hl = { bg = "surface0" },
     {
-        provider = function(self) return self.branch .. self.last_branch .. " " end,
-        hl = function(self)
-            return {
-                fg = self.mode_colors[self.mode_key],
-            }
-        end,
+        provider = function(self) return icons.branch .. self.last_branch .. " " end,
+        hl = function(self) return { fg = self.mode_colors[self.mode_key] } end,
     },
     {
         condition = function(self) return self.has_changes end,
         {
-            provider = function(self) return self.left_component_sep end,
+            provider = function(self) return self.sep.left_component end,
             hl = { fg = "text" },
         },
         {
@@ -53,5 +45,9 @@ return {
             end,
             hl = "GitSignsDelete",
         },
+    },
+    {
+        provider = function(self) return self.sep.left_section end,
+        hl = { fg = "surface0", bg = "mantle" },
     },
 }

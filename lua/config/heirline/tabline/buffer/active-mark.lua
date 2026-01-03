@@ -5,5 +5,5 @@ return {
         active_icon = icons.bufferline.active .. " ",
     },
     provider = function(self) return self.is_active and self.active_icon or "  " end,
-    hl = { fg = "orange" },
+    hl = { fg = "peach" },
 }

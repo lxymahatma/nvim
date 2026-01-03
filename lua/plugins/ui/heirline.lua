@@ -5,16 +5,12 @@ return {
     event = "VeryLazy",
     opts = function()
         local conditions = require("heirline.conditions")
-
         local colors = require("config.colors")
-        local tabline = require("heirline.layouts.tabline")
-        local statusline = require("heirline.layouts.statusline")
-        local winbar = require("heirline.layouts.winbar")
 
         return {
-            statusline = statusline,
-            winbar = winbar,
-            tabline = tabline,
+            statusline = require("config.heirline.statusline"),
+            winbar = require("config.heirline.winbar"),
+            tabline = require("config.heirline.tabline"),
             opts = {
                 colors = colors,
                 disable_winbar_cb = function(args)
