@@ -18,3 +18,7 @@ map("n", "<leader>lp", "<cmd>Lazy profile<cr>", { desc = "Profile Lazy.nvim plug
 
 -- Code Actions
 map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action", lsp = { method = "textDocument/codeAction" } })
+
+-- Preview
+map("n", "<leader>up", "<cmd>Markview<cr>", { desc = "Toggle Preview" })
+map("n", "<leader>uP", "<cmd>Markview splitToggle<cr>", { desc = "Toggle Split Preview" })
