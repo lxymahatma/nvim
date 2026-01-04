@@ -30,10 +30,6 @@ return {
                 },
                 markdown_inline = {
                     enable = true,
-                    inline_codes = {
-                        padding_left = "",
-                        padding_right = "",
-                    },
                 },
                 html = {
                     enable = true,
