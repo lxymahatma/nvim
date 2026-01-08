@@ -1,6 +1,6 @@
-local M = {}
-
 local constant = require("config.constant")
+
+local M = {}
 
 function M.setup()
     for name in vim.fs.dir(constant.picker_dir) do

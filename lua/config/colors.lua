@@ -1,6 +1,6 @@
-local M = {}
-
 local palette = require("catppuccin.palettes").get_palette()
+
+local M = {}
 
 M.colors = {
     -- Accent

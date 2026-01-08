@@ -1,6 +1,6 @@
-local M = {}
-
 local constant = require("config.constant")
+
+local M = {}
 
 local function json_path(key) return constant.storage_dir .. "/" .. key .. ".json" end
 local function mpack_path(key) return constant.storage_dir .. "/" .. key .. ".mpack" end

@@ -7,19 +7,18 @@ vim.keymap.set("", "<Space>", "<Nop>")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local parsers = require("helpers.toolchain")
-parsers.setup()
+local toolchain = require("toolchain")
+toolchain.setup()
 
 require("config.options")
 require("config.diagnostic")
 require("config.autocmds")
 require("config.bootstrap")
 require("config.events").setup()
-require("config.lazy").setup(parsers.get_extra_plugins())
+require("config.lazy").setup(toolchain.get_extra_plugins())
 require("config.colorschemes").setup(colorscheme)
 require("config.highlight")
 require("config.pickers").setup()
 require("config.keymaps")
 
-require("langs.commands")
-require("tools.commands")
+require("toolchain.commands")

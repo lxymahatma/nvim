@@ -1,8 +1,8 @@
-local M = {}
-
-local lang_parser = require("langs.lang-parser")
-local tool_parser = require("tools.tool-parser")
+local lang_parser = require("toolchain.lang.parser")
+local tool_parser = require("toolchain.tool.parser")
 local table_helper = require("helpers.table")
+
+local M = {}
 
 M.setup = function()
     lang_parser.load_all()

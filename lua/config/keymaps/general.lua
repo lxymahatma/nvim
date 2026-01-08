@@ -22,3 +22,6 @@ map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action",
 -- Preview
 map("n", "<leader>up", "<cmd>Markview<cr>", { desc = "Toggle Preview" })
 map("n", "<leader>uP", "<cmd>Markview splitToggle<cr>", { desc = "Toggle Split Preview" })
+
+-- Toolchain
+map("n", "<leader>ct", "<cmd>Toolchain<cr>", { desc = "Toolchain" })
