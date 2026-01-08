@@ -1,8 +1,8 @@
-local M = {}
-
 local mr = require("mason-registry")
 local mlsp = require("mason-lspconfig")
 local mappings = mlsp.get_mappings().lspconfig_to_package
+
+local M = {}
 
 --- @param package_list MasonPackageSpec[] List of package names or specs to ensure are installed
 function M.ensure_packages_installed(package_list)

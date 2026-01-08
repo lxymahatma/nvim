@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-local lang_parser = require("langs.lang-parser")
+local lang_parser = require("toolchain.lang.parser")
 local filetypes = lang_parser.get_filetypes()
 local group = vim.api.nvim_create_augroup("LangConfig", { clear = true })
 

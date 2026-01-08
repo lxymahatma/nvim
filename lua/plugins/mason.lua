@@ -23,7 +23,7 @@ return {
             require("mason").setup(opts)
 
             vim.defer_fn(function()
-                local packages = require("helpers.toolchain").get_mason_packages()
+                local packages = require("toolchain").get_mason_packages()
                 require("helpers.mason").ensure_packages_installed(packages)
             end, 100)
         end,

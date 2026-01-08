@@ -1,6 +1,6 @@
-local M = {}
-
 local storage_helper = require("helpers.storage")
+
+local M = {}
 
 --- Get all modules from a directory
 --- @param module_dir string

@@ -1,8 +1,9 @@
+local constant = require("config.constant")
+local module_loader = require("helpers.module-loader")
+
 local M = {}
 
 local STORAGE_KEY = "tool"
-local constant = require("config.constant")
-local module_loader = require("helpers.module-loader")
 
 --- @return string[]
 function M.get_all_tools() return module_loader.get_all_modules(constant.tool_dir) end

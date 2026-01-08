@@ -1,14 +1,5 @@
 local M = {}
 
---- @class snacks.picker.filetypes.Config : snacks.picker.Config
-
---- @class FiletypeInfo : snacks.picker.Item
---- @field treesitter string[]
---- @field lsp string[]
---- @field formatters string[]
---- @field linters string[]
---- @field has_config boolean
-
 --- @type FiletypeInfo[]?
 local cache = nil
 
@@ -17,7 +8,7 @@ function M.find()
     if cache then return cache end
 
     cache = vim.tbl_map(function(ft)
-        local cfg = require("helpers.toolchain").get_config_by_ft(ft)
+        local cfg = require("toolchain").get_config_by_ft(ft)
 
         if not cfg then
             return {
