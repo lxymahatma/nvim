@@ -186,14 +186,15 @@ local function parse_spec(lang_name, spec)
 end
 
 function M.load_all()
-    local enabled_langs = require("toolchain.lang.loader").get_enabled_langs()
+    local loader = require("toolchain.loader")
+    local enabled_langs = loader.get_enabled("lang")
 
     for _, lang in ipairs(enabled_langs) do
         local ok, spec = pcall(require, ("toolchain.lang.configs.%s"):format(lang))
         if ok and type(spec) == "table" then
             parse_spec(lang, spec)
         else
-            vim.notify(string.format("[lang-parser] Failed to load toolchain.lang.configs.%s", lang), vim.log.levels.WARN)
+            vim.notify(string.format("[lang-parser] Failed to load Language %s", lang), vim.log.levels.WARN)
         end
     end
 end

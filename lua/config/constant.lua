@@ -1,5 +1,10 @@
 local M = {}
 
+M.toolchain_types = {
+    "lang",
+    "tool",
+}
+
 M.default_parsers = {
     "diff",
     "query",

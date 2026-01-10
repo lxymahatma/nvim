@@ -1,3 +1,4 @@
+local loader = require("toolchain.loader")
 local lang_parser = require("toolchain.lang.parser")
 local tool_parser = require("toolchain.tool.parser")
 local table_helper = require("helpers.table")
@@ -5,6 +6,7 @@ local table_helper = require("helpers.table")
 local M = {}
 
 M.setup = function()
+    loader.load()
     lang_parser.load_all()
     tool_parser.load_all()
 end
