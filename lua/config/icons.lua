@@ -35,4 +35,12 @@ M.RightSectionSep = ""
 M.LeftComponentSep = ""
 M.RightComponentSep = ""
 
+M.toolchain = {
+    enabled = "",
+    disabled = "",
+    default = "★",
+    tab_active = "●",
+    tab_inactive = "○",
+}
+
 return M

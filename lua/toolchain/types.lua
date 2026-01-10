@@ -31,28 +31,11 @@
 --- @field enabled boolean
 --- @field is_default boolean
 
---- @class ToolchainState
---- @field current_tab ToolchainTab
---- @field cursor_line integer
---- @field width integer
---- @field height integer
---- @field items ToolchainItem[]
---- @field filtered_items ToolchainItem[]
---- @field toggle_current fun(self:ToolchainState): (ToolchainItem?, string?)
---- @field switch_tab fun(self:ToolchainState, tab?: ToolchainTab)
---- @field switch_prev_tab fun(self:ToolchainState)
---- @field move_cursor fun(self:ToolchainState, delta: integer): boolean
---- @field set_cursor fun(self:ToolchainState, line: integer): boolean
---- @field load_items fun(self:ToolchainState)
+--- @class ToolchainUIOptions
+--- @field width? integer
+--- @field height? integer
 
---- @class ToolchainUI
+--- @class ToolchainRenderContext
 --- @field buf integer?
 --- @field win integer?
 --- @field state ToolchainState
---- @field render fun(self:ToolchainUI)
---- @field toggle_item fun(self:ToolchainUI)
---- @field switch_tab fun(self:ToolchainUI, tab?: ToolchainTab)
---- @field move_cursor fun(self:ToolchainUI, delta: integer)
---- @field setup_keymaps fun(self:ToolchainUI)
---- @field close fun(self:ToolchainUI)
---- @field open fun(self:ToolchainUI): ToolchainUI

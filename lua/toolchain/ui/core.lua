@@ -2,15 +2,25 @@ local api = vim.api
 
 local Renderer = require("toolchain.ui.renderer")
 local State = require("toolchain.ui.state")
+local Keymaps = require("toolchain.ui.keymaps")
+local CursorSync = require("toolchain.ui.cursor")
 
+--- @class ToolchainUI
+--- @field buf integer?
+--- @field win integer?
+--- @field state ToolchainState
 local UI = {}
 UI.__index = UI
+setmetatable(UI, {
+    __call = function(_, ...) return UI.new(...) end,
+})
 
----@param opts? {width?: integer, height?: integer}
----@return ToolchainUI
+--- @param opts? {width?: integer, height?: integer}
+--- @return ToolchainUI
 function UI.new(opts)
     local self = setmetatable({}, UI)
-    self.state = State.new(opts)
+    self.state = State(opts)
+
     return self
 end
 
@@ -21,12 +31,12 @@ function UI:render() Renderer.render({ buf = self.buf, win = self.win, state = s
 function UI:toggle_item()
     local item, message = self.state:toggle_current()
     if not item then
-        if message then vim.notify(message, vim.log.levels.WARN) end
+        vim.notify(message, vim.log.levels.WARN)
         return
     end
 
     self:render()
-    if message then vim.notify(message, vim.log.levels.INFO) end
+    vim.notify(message, vim.log.levels.INFO)
 end
 
 --- @param tab ToolchainTab
@@ -43,60 +53,30 @@ function UI:move_cursor(delta)
 end
 
 --- @return void
-function UI:setup_keymaps()
-    ---@cast self.buf integer
-    local opts = { buffer = self.buf, nowait = true, silent = true }
+function UI:setup_keymaps() Keymaps.attach(self) end
 
-    vim.keymap.set("n", "j", function() self:move_cursor(1) end, opts)
-    vim.keymap.set("n", "k", function() self:move_cursor(-1) end, opts)
-    vim.keymap.set("n", "<Down>", function() self:move_cursor(1) end, opts)
-    vim.keymap.set("n", "<Up>", function() self:move_cursor(-1) end, opts)
-    vim.keymap.set("n", "G", function()
-        if self.state:set_cursor(#self.state.filtered_items) then self:render() end
-    end, opts)
-    vim.keymap.set("n", "gg", function()
-        if self.state:set_cursor(1) then self:render() end
-    end, opts)
+--- @return void
+function UI:attach_cursor_sync() CursorSync.attach(self) end
 
-    vim.keymap.set("n", "<CR>", function() self:toggle_item() end, opts)
-    vim.keymap.set("n", "i", function() self:toggle_item() end, opts)
-    vim.keymap.set("n", "x", function() self:toggle_item() end, opts)
-
-    vim.keymap.set("n", "1", function() self:switch_tab("all") end, opts)
-    vim.keymap.set("n", "2", function() self:switch_tab("lang") end, opts)
-    vim.keymap.set("n", "3", function() self:switch_tab("tool") end, opts)
-
-    vim.keymap.set("n", "q", function() self:close() end, opts)
-    vim.keymap.set("n", "<Esc>", function() self:close() end, opts)
-
-    vim.keymap.set("n", "R", function()
-        self.state:load_items()
-        self:render()
-    end, opts)
-end
-
+--- @return void
 function UI:close()
+    self.state:save()
     if self.win and api.nvim_win_is_valid(self.win) then api.nvim_win_close(self.win, true) end
     self.win = nil
     self.buf = nil
 end
 
----@return ToolchainUI
+--- @return self
 function UI:open()
     self.buf = api.nvim_create_buf(false, true)
     api.nvim_set_option_value("bufhidden", "wipe", { buf = self.buf })
     api.nvim_set_option_value("filetype", "toolchain", { buf = self.buf })
 
     local editor_ui = api.nvim_list_uis()[1]
-    local row = math.floor((editor_ui.height - self.state.height) / 2)
-    local col = math.floor((editor_ui.width - self.state.width) / 2)
-    ---@cast row integer
-    ---@cast col integer
-
     local width = self.state.width
     local height = self.state.height
-    ---@cast width integer
-    ---@cast height integer
+    local row = (editor_ui.height - height) / 2
+    local col = (editor_ui.width - width) / 2
 
     self.win = api.nvim_open_win(self.buf, true, {
         relative = "editor",
@@ -115,6 +95,7 @@ function UI:open()
 
     self:setup_keymaps()
     self:render()
+    self:attach_cursor_sync()
 
     api.nvim_create_autocmd("BufLeave", {
         buffer = self.buf,
