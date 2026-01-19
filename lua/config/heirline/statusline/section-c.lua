@@ -1,4 +1,4 @@
-local icons = require("config.icons")
+local icons = require("config.icons").diagnostics
 local conditions = require("heirline.conditions")
 
 local FileIcon = require("config.heirline.common.fileicon")
@@ -13,19 +13,19 @@ local Diagnostics = {
     end,
     update = { "DiagnosticChanged", "BufEnter" },
     {
-        provider = function(self) return self.errors > 0 and (icons.diagnostics.Error .. self.errors .. " ") end,
+        provider = function(self) return self.errors > 0 and (icons.Error .. self.errors .. " ") end,
         hl = "DiagnosticSignError",
     },
     {
-        provider = function(self) return self.warnings > 0 and (icons.diagnostics.Warn .. self.warnings .. " ") end,
+        provider = function(self) return self.warnings > 0 and (icons.Warn .. self.warnings .. " ") end,
         hl = "DiagnosticSignWarn",
     },
     {
-        provider = function(self) return self.info > 0 and (icons.diagnostics.Info .. self.info .. " ") end,
+        provider = function(self) return self.info > 0 and (icons.Info .. self.info .. " ") end,
         hl = "DiagnosticSignInfo",
     },
     {
-        provider = function(self) return self.hints > 0 and (icons.diagnostics.Hint .. self.hints .. " ") end,
+        provider = function(self) return self.hints > 0 and (icons.Hint .. self.hints .. " ") end,
         hl = "DiagnosticSignHint",
     },
     {

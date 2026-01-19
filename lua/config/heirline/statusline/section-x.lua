@@ -1,13 +1,13 @@
-local icons = require("config.icons")
+local icons = require("config.icons").copilot
 
 local SidekickCopilot = {
     condition = function() return require("sidekick.status").get() ~= nil end,
     static = {
         icons = {
-            Error = { icons.copilot.Error, "DiagnosticError" },
-            Inactive = { icons.copilot.Inactive, "MsgArea" },
-            Warning = { icons.copilot.Warning, "DiagnosticWarn" },
-            Normal = { icons.copilot.Normal, "Special" },
+            Error = { icons.Error, "DiagnosticError" },
+            Inactive = { icons.Inactive, "MsgArea" },
+            Warning = { icons.Warning, "DiagnosticWarn" },
+            Normal = { icons.Normal, "Special" },
         },
     },
     init = function(self) self.status = require("sidekick.status").get() end,
