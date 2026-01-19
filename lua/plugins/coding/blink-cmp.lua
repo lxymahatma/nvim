@@ -68,7 +68,6 @@ return {
         "saghen/blink.cmp",
         opts = function(_, opts)
             local mini_icons = require("mini.icons")
-            local highlight_colors = require("nvim-highlight-colors")
             local colorful_menu = require("colorful-menu")
 
             opts.completion.menu.draw.components = vim.tbl_extend("force", opts.completion.menu.draw.components or {}, {
@@ -81,9 +80,6 @@ return {
                                 icon, _ = mini_icons.get("file", ctx.item.detail)
                             elseif ctx.kind == "Folder" then
                                 icon, _ = mini_icons.get("directory", ctx.item.label)
-                            elseif ctx.kind == "Color" and ctx.item.documentation then
-                                local color_item = highlight_colors.format(ctx.item.documentation, { kind = "Color" })
-                                if color_item and color_item.abbr then icon = color_item.abbr end
                             else
                                 icon, _ = mini_icons.get("lsp", ctx.kind)
                             end
@@ -102,9 +98,6 @@ return {
                                 _, hl = mini_icons.get("file", ctx.item.detail)
                             elseif ctx.kind == "Folder" then
                                 _, hl = mini_icons.get("directory", ctx.item.label)
-                            elseif ctx.kind == "Color" and ctx.item.documentation then
-                                local color_item = highlight_colors.format(ctx.item.documentation, { kind = "Color" })
-                                if color_item and color_item.abbr then hl = color_item.abbr_hl_group end
                             else
                                 _, hl = mini_icons.get("lsp", ctx.kind)
                             end
