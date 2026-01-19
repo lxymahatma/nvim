@@ -4,7 +4,7 @@ local icons = require("config.icons").toolchain
 local ns = api.nvim_create_namespace("toolchain_ui")
 
 local tabs = {
-    { key = "all", label = "All" },
+    { key = "all",  label = "All" },
     { key = "lang", label = "Lang" },
     { key = "tool", label = "Tool" },
 }
@@ -86,9 +86,7 @@ local function render_items(state)
         table.insert(highlights, { line = i, col_start = 6, col_end = 26, hl = "ToolchainName" })
         table.insert(highlights, { line = i, col_start = type_start, col_end = type_end, hl = type_hl })
 
-        if item.is_default then
-            table.insert(highlights, { line = i, col_start = type_end, col_end = type_end + #default_mark, hl = "ToolchainDefault" })
-        end
+        if item.is_default then table.insert(highlights, { line = i, col_start = type_end, col_end = type_end + #default_mark, hl = "ToolchainDefault" }) end
     end
 
     return lines, highlights
@@ -147,9 +145,7 @@ function Renderer.render(ctx)
     local cursor_line = header_offset + state.cursor_line
     if win and api.nvim_win_is_valid(win) then
         local ok, current = pcall(api.nvim_win_get_cursor, win)
-        if not ok or current[1] ~= cursor_line then
-            pcall(api.nvim_win_set_cursor, win, { cursor_line, 0 })
-        end
+        if not ok or current[1] ~= cursor_line then pcall(api.nvim_win_set_cursor, win, { cursor_line, 0 }) end
     end
 end
 
