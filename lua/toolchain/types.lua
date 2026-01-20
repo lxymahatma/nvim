@@ -39,3 +39,13 @@
 --- @field buf integer?
 --- @field win integer?
 --- @field state ToolchainState
+
+--- @class ToolchainRenderHighlight
+--- @field line integer
+--- @field col_start integer
+--- @field col_end integer
+--- @field hl string
+
+--- @class ToolchainRenderChunk
+--- @field lines string[]
+--- @field highlights? ToolchainRenderHighlight[]
