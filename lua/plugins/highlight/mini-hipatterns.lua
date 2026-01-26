@@ -26,7 +26,7 @@ return {
 
                 -- Highlight Tailwind CSS colors (e.g., bg-blue-500)
                 tailwind = {
-                    pattern = "%f[%w:-]()[%w:-]+%-[a-z%-]+%-%d+()%f[^%w:-]",
+                    pattern = "[%w-]+%-[%a-]+%-%d+",
                     group = function(_, _, data)
                         local color, shade = data.full_match:match("[%w-]+%-([a-z%-]+)%-(%d+)")
                         local hex = vim.tbl_get(colors.tailwind, color, tonumber(shade))
