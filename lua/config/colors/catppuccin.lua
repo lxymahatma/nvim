@@ -1,8 +1,6 @@
 local palette = require("catppuccin.palettes").get_palette()
 
-local M = {}
-
-M.colors = {
+return {
     -- Accent
     rosewater = palette.rosewater,
     flamingo = palette.flamingo,
@@ -33,5 +31,3 @@ M.colors = {
     mantle = palette.mantle,
     crust = palette.crust,
 }
-
-return M.colors

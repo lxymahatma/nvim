@@ -4,6 +4,7 @@ return {
     event = "BufEdit",
     opts = function()
         local hipatterns = require("mini.hipatterns")
+        local colors = require("config.colors")
 
         return {
             highlighters = {
@@ -14,12 +15,26 @@ return {
                 hex_color_short = {
                     pattern = "#%x%x%x%f[%X]",
                     group = function(_, _, data)
-                        ---@type string
+                        --- @type string
                         local match = data.full_match
                         local r, g, b = match:sub(2, 2), match:sub(3, 3), match:sub(4, 4)
                         local hex_color = "#" .. r .. r .. g .. g .. b .. b
 
                         return hipatterns.compute_hex_color_group(hex_color, "bg")
+                    end,
+                },
+
+                -- Highlight Tailwind CSS colors (e.g., bg-blue-500)
+                tailwind = {
+                    pattern = "%f[%w:-]()[%w:-]+%-[a-z%-]+%-%d+()%f[^%w:-]",
+                    group = function(_, _, data)
+                        local color, shade = data.full_match:match("[%w-]+%-([a-z%-]+)%-(%d+)")
+                        shade = tonumber(shade)
+
+                        --- @type string | nil
+                        local hex = colors.tailwind[color] and colors.tailwind[color][shade]
+                        if hex then return hipatterns.compute_hex_color_group(hex, "bg") end
+                        return nil
                     end,
                 },
             },

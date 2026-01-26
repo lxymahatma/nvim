@@ -1,4 +1,4 @@
-local colors = require("config.colors")
+local colors = require("config.colors").catppuccin
 
 -- Filetype picker highlights
 Snacks.util.set_hl({

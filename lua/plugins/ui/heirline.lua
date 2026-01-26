@@ -5,7 +5,7 @@ return {
     event = "VeryLazy",
     opts = function()
         local conditions = require("heirline.conditions")
-        local colors = require("config.colors")
+        local colors = require("config.colors").catppuccin
 
         return {
             statusline = require("config.heirline.statusline"),
