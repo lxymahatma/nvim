@@ -37,4 +37,18 @@ M.picker_dir = vim.fn.stdpath("config") .. "/lua/config/pickers"
 M.lang_dir = vim.fn.stdpath("config") .. "/lua/toolchain/lang/configs"
 M.tool_dir = vim.fn.stdpath("config") .. "/lua/toolchain/tool/configs"
 
+M.filetypes = {
+    web = {
+        "html",
+        "css",
+        "scss",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+        "svelte",
+    },
+}
+
 return M

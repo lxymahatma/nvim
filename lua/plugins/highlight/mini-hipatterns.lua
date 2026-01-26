@@ -5,6 +5,8 @@ return {
     opts = function()
         local hipatterns = require("mini.hipatterns")
         local colors = require("config.colors")
+        local colorspace = require("helpers.colorspace")
+        local filetypes = require("config.constant").filetypes
 
         return {
             highlighters = {
@@ -24,14 +26,38 @@ return {
                     end,
                 },
 
+                -- Highlight HSL color codes (e.g., hsl(120, 100%, 50%))
+                hsl = {
+                    pattern = function()
+                        if not vim.tbl_contains(filetypes.web, vim.bo.filetype) then return end
+                        return "hsl%(%s*%d+%s*,%s*%d+%%%s*,%s*%d+%%%s*%)"
+                    end,
+                    group = function(_, _, data)
+                        local h, s, l = data.full_match:match("hsl%(%s*(%d+)%s*,%s*(%d+)%%%s*,%s*(%d+)%%%s*%)")
+                        h = tonumber(h) --- @cast h number
+                        s = tonumber(s) --- @cast s number
+                        l = tonumber(l) --- @cast l number
+
+                        s = s / 100
+                        l = l / 100
+
+                        local hex_color = colorspace.hsl_to_hex(h, s, l)
+                        return hipatterns.compute_hex_color_group(hex_color, "bg")
+                    end,
+                },
+
                 -- Highlight Tailwind CSS colors (e.g., bg-blue-500)
                 tailwind = {
-                    pattern = "[%w-]+%-[%a-]+%-%d+",
+                    pattern = function()
+                        if not vim.tbl_contains(filetypes.web, vim.bo.filetype) then return end
+                        return "[%w:-]+%-[a-z%-]+%-%d+"
+                    end,
                     group = function(_, _, data)
                         local color, shade = data.full_match:match("[%w-]+%-([a-z%-]+)%-(%d+)")
                         local hex = vim.tbl_get(colors.tailwind, color, tonumber(shade))
-                        if hex then return hipatterns.compute_hex_color_group(hex, "bg") end
-                        return nil
+
+                        if not hex then return end
+                        return hipatterns.compute_hex_color_group(hex, "bg")
                     end,
                 },
             },
