@@ -39,6 +39,7 @@
     "library": [
       "$VIMRUNTIME",
       "$HOME/.local/share/nvim/lazy",
+      "$USERPROFILE/AppData/Local/nvim-data/lazy",
       "$NVIM_DEV_DIR"
     ],
     "ignoreGlobs": [
