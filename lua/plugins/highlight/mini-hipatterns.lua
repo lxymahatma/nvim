@@ -29,10 +29,7 @@ return {
                     pattern = "%f[%w:-]()[%w:-]+%-[a-z%-]+%-%d+()%f[^%w:-]",
                     group = function(_, _, data)
                         local color, shade = data.full_match:match("[%w-]+%-([a-z%-]+)%-(%d+)")
-                        shade = tonumber(shade)
-
-                        --- @type string | nil
-                        local hex = colors.tailwind[color] and colors.tailwind[color][shade]
+                        local hex = vim.tbl_get(colors.tailwind, color, tonumber(shade))
                         if hex then return hipatterns.compute_hex_color_group(hex, "bg") end
                         return nil
                     end,
