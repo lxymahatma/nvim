@@ -8,6 +8,9 @@ return {
         local colorspace = require("helpers.colorspace")
         local filetypes = require("config.constant").filetypes
 
+        --- @type table<string, string?>
+        local color_cache = {}
+
         return {
             highlighters = {
                 -- Highlight hex color codes (e.g., #FF5733)
@@ -33,7 +36,11 @@ return {
                         return "hsl%(%s*%d+%s*,%s*%d+%%%s*,%s*%d+%%%s*%)"
                     end,
                     group = function(_, _, data)
-                        local h, s, l = data.full_match:match("hsl%(%s*(%d+)%s*,%s*(%d+)%%%s*,%s*(%d+)%%%s*%)")
+                        local color_str = data.full_match
+                        local cached_hex = color_cache[color_str]
+                        if cached_hex then return hipatterns.compute_hex_color_group(cached_hex, "bg") end
+
+                        local h, s, l = color_str:match("hsl%(%s*(%d+)%s*,%s*(%d+)%%%s*,%s*(%d+)%%%s*%)")
                         h = tonumber(h) --- @cast h number
                         s = tonumber(s) --- @cast s number
                         l = tonumber(l) --- @cast l number
@@ -41,8 +48,9 @@ return {
                         s = s / 100
                         l = l / 100
 
-                        local hex_color = colorspace.hsl_to_hex(h, s, l)
-                        return hipatterns.compute_hex_color_group(hex_color, "bg")
+                        local hex = colorspace.hsl_to_hex(h, s, l)
+                        color_cache[color_str] = hex
+                        return hipatterns.compute_hex_color_group(hex, "bg")
                     end,
                 },
 
@@ -53,7 +61,11 @@ return {
                         return "oklch%(%s*[%d%.]+%%?%s+[%d%.]+%s+[%d%.]+%s*%)"
                     end,
                     group = function(_, _, data)
-                        local l, l_unit, c, h = data.full_match:match("oklch%(%s*([%d%.]+)(%%?)%s+([%d%.]+)%s+([%d%.]+)%s*%)")
+                        local color_str = data.full_match
+                        local cached_hex = color_cache[color_str]
+                        if cached_hex then return hipatterns.compute_hex_color_group(cached_hex, "bg") end
+
+                        local l, l_unit, c, h = color_str:match("oklch%(%s*([%d%.]+)(%%?)%s+([%d%.]+)%s+([%d%.]+)%s*%)")
 
                         l = tonumber(l) --- @cast l number
                         c = tonumber(c) --- @cast c number
@@ -62,6 +74,7 @@ return {
                         l = (l_unit == "%") and (l / 100) or l
 
                         local hex = colorspace.oklch_to_hex(l, c, h)
+                        color_cache[color_str] = hex
                         return hipatterns.compute_hex_color_group(hex, "bg")
                     end,
                 },
