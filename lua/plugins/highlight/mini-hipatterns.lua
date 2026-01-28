@@ -20,9 +20,8 @@ return {
                 hex_color_short = {
                     pattern = "#%x%x%x%f[%X]",
                     group = function(_, _, data)
-                        --- @type string
-                        local match = data.full_match
-                        local r, g, b = match:sub(2, 2), match:sub(3, 3), match:sub(4, 4)
+                        local color_str = data.full_match
+                        local r, g, b = color_str:sub(2, 2), color_str:sub(3, 3), color_str:sub(4, 4)
                         local hex_color = "#" .. r .. r .. g .. g .. b .. b
 
                         return hipatterns.compute_hex_color_group(hex_color, "bg")
@@ -110,7 +109,7 @@ return {
                     end,
                     group = function(_, _, data)
                         local color_str = data.full_match
-                        -- Ignore negative variants or css variable declarations
+                        -- Ignore negative variants or css variable declarations (e.g., -mt-4 or --color-primary-500)
                         if color_str:sub(1, 1) == "-" then return end
 
                         local cached_hex = color_cache[color_str]
