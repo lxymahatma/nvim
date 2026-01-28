@@ -86,10 +86,17 @@ return {
                         return "[%w:-]+%-[a-z%-]+%-%d+"
                     end,
                     group = function(_, _, data)
+                        local color_str = data.full_match
+                        if color_str:sub(1, 1) == "-" then return end
+
+                        local cached_hex = color_cache[color_str]
+                        if cached_hex then return hipatterns.compute_hex_color_group(cached_hex, "bg") end
+
                         local color, shade = data.full_match:match("[%w-]+%-([a-z%-]+)%-(%d+)")
                         local hex = vim.tbl_get(colors.tailwind, color, tonumber(shade))
 
                         if not hex then return end
+                        color_cache[color_str] = hex
                         return hipatterns.compute_hex_color_group(hex, "bg")
                     end,
                 },

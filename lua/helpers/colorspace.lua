@@ -9,7 +9,7 @@ end
 --- @return number
 local function to_srgb(val)
     if val <= 0.0031308 then
-        return math.max(0, 12.92 * val)
+        return 12.92 * val
     else
         return 1.055 * (val ^ (1 / 2.4)) - 0.055
     end
