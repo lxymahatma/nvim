@@ -76,18 +76,18 @@ return {
                     end,
                 },
 
-                -- Highlight OKLCH color codes (e.g., oklch(50% 0.1 120) oklch(0.5 0.1 120))
+                -- Highlight OKLCH color codes (e.g., oklch(50% 0.1 120) oklch(0.5 0.1 120) oklch(0.5 0.1 120 / 0.8))
                 oklch = {
                     pattern = function()
                         if not vim.tbl_contains(filetypes.web, vim.bo.filetype) then return end
-                        return "oklch%(%s*[%d%.]+%%?%s+[%d%.]+%s+[%d%.]+%s*%)"
+                        return "oklch%(%s*[%d%.]+%%?%s+[%d%.]+%s+[%d%.]+[%s/]*[%d%.]*%%?%s*%)"
                     end,
                     group = function(_, _, data)
                         local color_str = data.full_match
                         local cached_hex = color_cache[color_str]
                         if cached_hex then return hipatterns.compute_hex_color_group(cached_hex, "bg") end
 
-                        local l, l_unit, c, h = color_str:match("oklch%(%s*([%d%.]+)(%%?)%s+([%d%.]+)%s+([%d%.]+)%s*%)")
+                        local l, l_unit, c, h = color_str:match("oklch%(%s*([%d%.]+)(%%?)%s+([%d%.]+)%s+([%d%.]+)")
 
                         l = tonumber(l) --- @cast l number
                         c = tonumber(c) --- @cast c number
