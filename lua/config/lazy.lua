@@ -5,7 +5,7 @@ function M.setup(extra_plugins)
         { import = "plugins" },
         { import = "plugins.coding" },
         { import = "plugins.colorschemes" },
-        { import = "plugins.deps" },
+        { import = "plugins.dependencies" },
         { import = "plugins.editor" },
         { import = "plugins.highlight" },
         { import = "plugins.qol" },

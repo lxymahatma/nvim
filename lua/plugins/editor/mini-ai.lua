@@ -5,6 +5,8 @@ return {
     event = "BufEdit",
     opts = function()
         local ai = require("mini.ai")
+        local extra = require("mini.extra").gen_ai_spec
+
         return {
             custom_textobjects = {
                 o = ai.gen_spec.treesitter({
@@ -19,6 +21,11 @@ return {
                     a = "@class.outer",
                     i = "@class.inner",
                 }),
+                B = extra.buffer(),
+                D = extra.diagnostic(),
+                I = extra.indent(),
+                L = extra.line(),
+                N = extra.number(),
             },
             mappings = {
                 -- Main textobject prefixes
