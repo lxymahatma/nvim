@@ -46,6 +46,7 @@ o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 -- Tabs
 o.showtabline = 2
 
+o.shell = "nu"
 o.termguicolors = true -- True color support
 
 o.sessionoptions = "buffers,curdir,folds,help,localoptions,tabpages,terminal,winpos,winsize"
