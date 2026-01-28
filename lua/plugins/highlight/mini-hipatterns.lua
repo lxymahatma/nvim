@@ -54,7 +54,7 @@ return {
                 -- Highlight HSL(A) color codes (e.g., hsl(120, 100%, 50%) or hsl(120 100% 50% / 0.5))
                 hsl = {
                     pattern = function()
-                        -- if not vim.tbl_contains(filetypes.web, vim.bo.filetype) then return end
+                        if not vim.tbl_contains(filetypes.web, vim.bo.filetype) then return end
                         return "hsl%(%s*[%d%.]+[%s,]+[%d%.]+%%[%s,]+[%d%.]+%%[%s/]*[%d%.]*%%?%s*%)"
                     end,
                     group = function(_, _, data)
