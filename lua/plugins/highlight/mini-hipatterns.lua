@@ -51,18 +51,18 @@ return {
                     end,
                 },
 
-                -- Highlight HSL color codes (e.g., hsl(120, 100%, 50%))
+                -- Highlight HSL(A) color codes (e.g., hsl(120, 100%, 50%) or hsl(120 100% 50% / 0.5))
                 hsl = {
                     pattern = function()
-                        if not vim.tbl_contains(filetypes.web, vim.bo.filetype) then return end
-                        return "hsl%(%s*%d+%s*,%s*%d+%%%s*,%s*%d+%%%s*%)"
+                        -- if not vim.tbl_contains(filetypes.web, vim.bo.filetype) then return end
+                        return "hsl%(%s*[%d%.]+[%s,]+[%d%.]+%%[%s,]+[%d%.]+%%[%s/]*[%d%.]*%%?%s*%)"
                     end,
                     group = function(_, _, data)
                         local color_str = data.full_match
                         local cached_hex = color_cache[color_str]
                         if cached_hex then return hipatterns.compute_hex_color_group(cached_hex, "bg") end
 
-                        local h, s, l = color_str:match("hsl%(%s*(%d+)%s*,%s*(%d+)%%%s*,%s*(%d+)%%%s*%)")
+                        local h, s, l = color_str:match("hsl%(%s*([%d%.]+)[%s,]+([%d%.]+)%%[%s,]+([%d%.]+)%%")
                         h = tonumber(h) --- @cast h number
                         s = tonumber(s) --- @cast s number
                         l = tonumber(l) --- @cast l number
@@ -76,7 +76,7 @@ return {
                     end,
                 },
 
-                -- Highlight OKLCH color codes (e.g., oklch(50% 0.1 120) oklch(0.5 0.1 120) oklch(0.5 0.1 120 / 0.8))
+                -- Highlight OKLCH(A) color codes (e.g., oklch(50% 0.1 120) oklch(0.5 0.1 120) oklch(0.5 0.1 120 / 0.8))
                 oklch = {
                     pattern = function()
                         if not vim.tbl_contains(filetypes.web, vim.bo.filetype) then return end
