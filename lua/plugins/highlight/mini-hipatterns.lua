@@ -29,6 +29,29 @@ return {
                     end,
                 },
 
+                -- Highlight RGB(A) color codes (e.g., rgb(255 87 51) or rgb(255 87 51 / 0.5))
+                rgb = {
+                    pattern = function()
+                        if not vim.tbl_contains(filetypes.web, vim.bo.filetype) then return end
+                        return "rgb%(%s*%d+[%s,]+%d+[%s,]+%d+[%s/]*[%d%.]*%%?%s*%)"
+                    end,
+                    group = function(_, _, data)
+                        local color_str = data.full_match
+                        local cached_hex = color_cache[color_str]
+                        vim.notify(color_str)
+                        if cached_hex then return hipatterns.compute_hex_color_group(cached_hex, "bg") end
+
+                        local r, g, b = color_str:match("rgb%(%s*(%d+)[%s,]+(%d+)[%s,]+(%d+)")
+                        r = tonumber(r) --- @cast r integer
+                        g = tonumber(g) --- @cast g integer
+                        b = tonumber(b) --- @cast b integer
+
+                        local hex = colorspace.rgb_to_hex(r, g, b)
+                        color_cache[color_str] = hex
+                        return hipatterns.compute_hex_color_group(hex, "bg")
+                    end,
+                },
+
                 -- Highlight HSL color codes (e.g., hsl(120, 100%, 50%))
                 hsl = {
                     pattern = function()
@@ -87,6 +110,7 @@ return {
                     end,
                     group = function(_, _, data)
                         local color_str = data.full_match
+                        -- Ignore negative variants or css variable declarations
                         if color_str:sub(1, 1) == "-" then return end
 
                         local cached_hex = color_cache[color_str]
