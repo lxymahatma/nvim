@@ -125,7 +125,6 @@ return {
         },
         words = { enabled = true },
         styles = {
-            notification = { wo = { wrap = true } },
             notification_history = { wo = { wrap = true } },
         },
     },
