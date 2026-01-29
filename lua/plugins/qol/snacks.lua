@@ -79,6 +79,7 @@ return {
                         ["M-a"] = { "sidekick_send", mode = { "n", "i" } },
                     },
                 },
+                preview = { wo = { wrap = true } },
             },
             actions = {
                 flash = function(picker)
@@ -123,5 +124,9 @@ return {
             },
         },
         words = { enabled = true },
+        styles = {
+            notification = { wo = { wrap = true } },
+            notification_history = { wo = { wrap = true } },
+        },
     },
 }
