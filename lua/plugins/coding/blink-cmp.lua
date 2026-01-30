@@ -15,7 +15,7 @@ return {
                 completion = { menu = { auto_show = true } },
             },
             term = {
-                enabled = true,
+                enabled = false,
                 keymap = { preset = "inherit" },
             },
             completion = {
