@@ -19,6 +19,10 @@ return {
             },
         },
     },
+    keymaps = {
+        { mode = "n", lhs = "k", rhs = "v:count == 0 ? 'gk' : 'k'", opts = { expr = true, silent = true } },
+        { mode = "n", lhs = "j", rhs = "v:count == 0 ? 'gj' : 'j'", opts = { expr = true, silent = true } },
+    },
     on_attach = function(bufnr)
         vim.bo[bufnr].spelllang = "en_us"
 
@@ -26,8 +30,5 @@ return {
         vim.wo.linebreak = true
         vim.wo.breakindent = true
         vim.wo.spell = true
-
-        vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, silent = true, expr = true, buffer = bufnr })
-        vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, silent = true, expr = true, buffer = bufnr })
     end,
 }

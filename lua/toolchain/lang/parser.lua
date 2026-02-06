@@ -14,6 +14,7 @@ local M = {}
 --- @field lsp_servers table<string, vim.lsp.ClientConfig> LSP server configurations
 --- @field dap_configs table DAP configurations
 --- @field extra_plugins LazyPluginSpec[] Extra plugins from language configs
+--- @field keymaps snacks.Keymap[]
 
 --- @type LangParserCache
 M._cache = {
@@ -23,6 +24,7 @@ M._cache = {
     lsp_servers = {},
     dap_configs = {},
     extra_plugins = {},
+    keymaps = {},
 }
 
 --- @param parser string
@@ -183,6 +185,14 @@ local function parse_spec(lang_name, spec)
             end
         end
     end
+
+    if spec.keymaps then
+        for _, km in ipairs(spec.keymaps) do
+            local opts = km.opts or {}
+            if not opts.ft then opts.ft = filetypes end
+            table.insert(M._cache.keymaps, { mode = km.mode, lhs = km.lhs, rhs = km.rhs, opts = opts })
+        end
+    end
 end
 
 function M.load_all()
@@ -232,6 +242,9 @@ function M.get_linters()
     end
     return result
 end
+
+--- @return snacks.Keymap[]
+function M.get_keymaps() return M._cache.keymaps end
 
 --- Get all DAP configurations
 --- @return table

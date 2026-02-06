@@ -10,6 +10,7 @@
 --- @field linter? string | string[] | table<string, string|string[]> Linters. `string` uses lang_name, `string[]` specifies multiple linter tools for lang_name filetype, or `table` for explicit filetype mapping.
 --- @field dap? table DAP (Debug Adapter Protocol) configuration
 --- @field plugin? LazyPluginSpec | LazyPluginSpec[] Extra plugin(s) to install. Can be a single plugin spec or a list of plugin specs.
+--- @field keymaps? snacks.Keymap[] Keymaps to register for the language.
 --- @field on_attach? fun(bufnr: integer) Called once on FileType.
 
 -- Tool configuration specification
