@@ -20,3 +20,14 @@ Snacks.util.set_hl({
     Default = { fg = colors.red },
     Footer = { fg = colors.overlay0, italic = true },
 }, { prefix = "Toolchain" })
+
+-- Blink Pairs highlights
+Snacks.util.set_hl({
+    Red = { fg = colors.red },
+    Yellow = { fg = colors.yellow },
+    Blue = { fg = colors.blue },
+    Orange = { fg = colors.peach },
+    Green = { fg = colors.green },
+    Violet = { fg = colors.mauve },
+    Cyan = { fg = colors.sky },
+}, { prefix = "BlinkPairs", default = true })
