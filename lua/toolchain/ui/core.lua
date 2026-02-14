@@ -73,7 +73,9 @@ function UI:open()
     api.nvim_set_option_value("filetype", "toolchain", { buf = self.buf })
 
     local editor_ui = api.nvim_list_uis()[1]
-    local width, height = self.state:update_window_size(editor_ui)
+    self.state:update_window_size(editor_ui)
+    local width = self.state.window_width
+    local height = self.state.window_height
     local row = (editor_ui.height - height) / 2
     local col = (editor_ui.width - width) / 2
 

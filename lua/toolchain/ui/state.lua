@@ -36,6 +36,7 @@ function State.new(opts)
 end
 
 --- @param editor_ui {width: integer, height: integer}
+--- @return void
 function State:update_window_size(editor_ui)
     --- @param value ToolchainUISize
     --- @param total integer
