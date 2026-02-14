@@ -25,6 +25,7 @@
 -- Toolchain UI
 --- @alias ToolchainType "lang" | "tool"
 --- @alias ToolchainTab "all" | ToolchainType
+--- @alias ToolchainUISize number Positive number. `< 1` means ratio of editor size, `>= 1` means absolute columns/lines.
 
 --- @class ToolchainItem
 --- @field name string
@@ -33,8 +34,8 @@
 --- @field is_default boolean
 
 --- @class ToolchainUIOptions
---- @field width? integer
---- @field height? integer
+--- @field width? ToolchainUISize
+--- @field height? ToolchainUISize
 
 --- @class ToolchainRenderContext
 --- @field buf integer?

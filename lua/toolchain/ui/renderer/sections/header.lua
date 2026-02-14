@@ -31,7 +31,7 @@ function Header.render(state, tabs)
     end
 
     table.insert(lines, tab_line)
-    table.insert(lines, string.rep("─", state.width - 2))
+    table.insert(lines, string.rep("─", state.window_width - 2))
 
     return {
         lines = lines,

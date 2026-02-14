@@ -8,7 +8,7 @@ local Footer = require("toolchain.ui.renderer.sections.footer")
 local ns = api.nvim_create_namespace("toolchain_ui")
 
 local tabs = {
-    { key = "all", label = "All" },
+    { key = "all",  label = "All" },
     { key = "lang", label = "Lang" },
     { key = "tool", label = "Tool" },
 }
@@ -54,7 +54,7 @@ function Renderer.render(ctx)
 
     local footer_chunk = Footer.render(state)
     local content_height = layout:line_count() + #footer_chunk.lines
-    local padding = state.height - content_height - 2
+    local padding = state.window_height - content_height - 2
     layout:pad(padding)
     layout:append(footer_chunk)
 

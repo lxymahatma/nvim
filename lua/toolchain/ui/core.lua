@@ -15,7 +15,7 @@ setmetatable(UI, {
     __call = function(_, ...) return UI.new(...) end,
 })
 
---- @param opts? {width?: integer, height?: integer}
+--- @param opts? ToolchainUIOptions
 --- @return ToolchainUI
 function UI.new(opts)
     local self = setmetatable({}, UI)
@@ -73,8 +73,7 @@ function UI:open()
     api.nvim_set_option_value("filetype", "toolchain", { buf = self.buf })
 
     local editor_ui = api.nvim_list_uis()[1]
-    local width = self.state.width
-    local height = self.state.height
+    local width, height = self.state:update_window_size(editor_ui)
     local row = (editor_ui.height - height) / 2
     local col = (editor_ui.width - width) / 2
 

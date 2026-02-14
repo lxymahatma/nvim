@@ -3,19 +3,21 @@ local loader = require("toolchain.loader")
 --- @class ToolchainState
 --- @field current_tab ToolchainTab
 --- @field cursor_line integer
---- @field width integer
---- @field height integer
 --- @field header_offset integer
+--- @field dirty boolean
+--- @field width ToolchainUISize
+--- @field height ToolchainUISize
+--- @field window_width integer
+--- @field window_height integer
 --- @field items ToolchainItem[]
 --- @field filtered_items ToolchainItem[]
---- @field dirty boolean
 local State = {}
 State.__index = State
 setmetatable(State, {
     __call = function(_, ...) return State.new(...) end,
 })
 
---- @param opts? {width?: integer, height?: integer}
+--- @param opts? ToolchainUIOptions
 --- @return ToolchainState
 function State.new(opts)
     opts = opts or {}
@@ -23,14 +25,36 @@ function State.new(opts)
     local self = setmetatable({}, State)
     self.current_tab = "all"
     self.cursor_line = 1
-    self.width = opts.width or 100
-    self.height = opts.height or 40
     self.header_offset = 0
     self.dirty = false
+    self.width = opts.width or 0.4
+    self.height = opts.height or 0.8
     self.items = loader.get_items()
     self.filtered_items = self.items
 
     return self
+end
+
+--- @param editor_ui {width: integer, height: integer}
+function State:update_window_size(editor_ui)
+    --- @param value ToolchainUISize
+    --- @param total integer
+    --- @param fallback integer
+    --- @return integer
+    local function resolve_size(value, total, fallback)
+        local size = value or fallback
+        if size < 1 then size = math.floor(total * size) end
+        size = math.floor(size)
+        if size < 1 then size = 1 end
+        if size > total then size = total end
+        return size
+    end
+
+    local width = resolve_size(self.width, editor_ui.width, 100)
+    local height = resolve_size(self.height, editor_ui.height, 40)
+
+    self.window_width = width
+    self.window_height = height
 end
 
 --- @return void

@@ -11,8 +11,8 @@ function Footer.render(state)
     local help_text = "<CR> Toggle  q Close"
     return {
         lines = {
-            string.rep("─", state.width - 2),
-            center(help_text, state.width),
+            string.rep("─", state.window_width - 2),
+            center(help_text, state.window_width),
             "",
         },
     }
