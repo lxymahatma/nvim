@@ -9,6 +9,7 @@ local M = {}
 --- @field configs_by_ft table<string, ToolFtConfig> Tool configurations by filetype
 --- @field mason_packages MasonPackageSpec[] Mason packages to install
 --- @field lsp_servers table<string, vim.lsp.ClientConfig> LSP server configurations
+--- @field formatter_overrides table<string, conform.FormatterConfigOverride> Conform formatter overrides
 --- @field extra_plugins LazyPluginSpec[] Extra plugins from tool configs
 
 --- @type ToolParserCache
@@ -16,6 +17,7 @@ M._cache = {
     configs_by_ft = {},
     mason_packages = {},
     lsp_servers = {},
+    formatter_overrides = {},
     extra_plugins = {},
 }
 
@@ -78,6 +80,13 @@ local function parse_spec(tool_name, spec)
                     add_lsp(server, current_lsps, config)
                 end
             end
+        end
+    end
+
+    if spec.formatter_opts then
+        if type(spec.formatter_opts) == "table" then
+            --- @cast spec.formatter_opts table<string, conform.FormatterConfigOverride>
+            M._cache.formatter_overrides = vim.tbl_extend("force", M._cache.formatter_overrides, spec.formatter_opts)
         end
     end
 
@@ -174,6 +183,9 @@ function M.get_formatters()
     end
     return result
 end
+
+--- @return table<string, conform.FormatterConfigOverride>
+function M.get_formatter_overrides() return M._cache.formatter_overrides end
 
 --- @return table<string, string[]>
 function M.get_linters()

@@ -12,6 +12,7 @@ local M = {}
 --- @field treesitter_parsers string[] Treesitter parsers to install
 --- @field mason_packages MasonPackageSpec[] Mason packages to install
 --- @field lsp_servers table<string, vim.lsp.ClientConfig> LSP server configurations
+--- @field formatter_overrides table<string, conform.FormatterConfigOverride> Conform formatter overrides
 --- @field dap_configs table DAP configurations
 --- @field extra_plugins LazyPluginSpec[] Extra plugins from language configs
 --- @field keymaps snacks.Keymap[]
@@ -22,6 +23,7 @@ M._cache = {
     treesitter_parsers = {},
     mason_packages = {},
     lsp_servers = {},
+    formatter_overrides = {},
     dap_configs = {},
     extra_plugins = {},
     keymaps = {},
@@ -166,6 +168,13 @@ local function parse_spec(lang_name, spec)
         M._cache.configs_by_ft[ft] = cfg
     end
 
+    if spec.formatter_opts then
+        if type(spec.formatter_opts) == "table" then
+            --- @cast spec.formatter_opts table<string, conform.FormatterConfigOverride>
+            M._cache.formatter_overrides = vim.tbl_extend("force", M._cache.formatter_overrides, spec.formatter_opts)
+        end
+    end
+
     if spec.dap then M._cache.dap_configs = vim.tbl_deep_extend("force", M._cache.dap_configs, spec.dap) end
 
     if spec.plugin then
@@ -233,6 +242,9 @@ function M.get_formatters()
     end
     return result
 end
+
+--- @return table<string, conform.FormatterConfigOverride>
+function M.get_formatter_overrides() return M._cache.formatter_overrides end
 
 --- @return table<string, string[]>
 function M.get_linters()

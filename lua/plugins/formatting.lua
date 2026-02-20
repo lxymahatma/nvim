@@ -7,6 +7,7 @@ return {
     --- @type conform.setupOpts
     opts = {
         formatters_by_ft = require("toolchain").get_formatters(),
+        formatters = require("toolchain").get_formatter_overrides(),
         default_format_opts = {
             lsp_format = "fallback",
         },
