@@ -11,7 +11,7 @@ return {
     formatter = "yamlfmt",
     formatter_opts = {
         yamlfmt = {
-            append_args = { "--indent-size", "2", "-formatter", "retain_line_breaks=true" },
+            prepend_args = { "-formatter", "indent=2,retain_line_breaks_single=true" },
         },
     },
 }
