@@ -2,7 +2,6 @@ vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("quit", { clear = true }),
     pattern = {
         "checkhealth",
-        "gitsigns-blame",
         "grug-far",
         "help",
         "man",
