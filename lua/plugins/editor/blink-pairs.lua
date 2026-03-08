@@ -22,7 +22,7 @@ return {
                 "BlinkPairsBlue",
                 "BlinkPairsOrange",
                 "BlinkPairsGreen",
-                "BlinkPairsViolet",
+                "BlinkPairsPurple",
                 "BlinkPairsCyan",
             },
             unmatched_group = "BlinkPairsUnmatched",
