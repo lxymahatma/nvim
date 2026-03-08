@@ -13,6 +13,7 @@ return {
             blink_cmp = {
                 style = "bordered",
             },
+            blink_pairs = true,
             copilot_vim = true,
             dap = true,
             dap_ui = true,
