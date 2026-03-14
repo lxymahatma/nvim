@@ -1,6 +1,6 @@
 require("helpers.storage").init()
 
-local colorscheme = "catppuccin"
+local colorscheme = "catppuccin-nvim"
 
 -- leader key
 vim.keymap.set("", "<Space>", "<Nop>")
