@@ -3,7 +3,7 @@ return {
     "saghen/blink.pairs",
     event = "BufEdit",
     version = "*",
-    dependencies = "saghen/blink.download",
+    dependencies = "saghen/blink.lib",
 
     --- @type blink.pairs.Config
     opts = {
