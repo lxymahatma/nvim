@@ -17,7 +17,7 @@ Snacks.toggle({
 }):map("<leader>uF")
 
 -- Terminal
-map({ "n", "t" }, "<C-/>", function() Snacks.terminal.toggle() end, { desc = "Toggle Terminal" })
+map({ "n", "t" }, "<C-/>", function() Snacks.terminal.focus() end, { desc = "Toggle Terminal" })
 
 -- Notifications
 map("n", "<leader>n", function() Snacks.notifier.show_history() end, { desc = "Notification History" })
