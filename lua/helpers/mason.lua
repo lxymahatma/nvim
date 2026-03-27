@@ -4,7 +4,7 @@ local mappings = mlsp.get_mappings().lspconfig_to_package
 
 local M = {}
 
---- @param package_list MasonPackageSpec[] List of package names or specs to ensure are installed
+---@param package_list MasonPackageSpec[] List of package names or specs to ensure are installed
 function M.ensure_packages_installed(package_list)
     mr.refresh(function()
         for _, pkg_spec in ipairs(package_list) do
@@ -39,7 +39,7 @@ function M.ensure_packages_installed(package_list)
     end)
 end
 
---- @param pkg_name string
+---@param pkg_name string
 function M.install_package(pkg_name)
     local ok, pkg = pcall(mr.get_package, mappings[pkg_name] or pkg_name)
     if not ok then

@@ -1,13 +1,13 @@
 -- Enhance Ctrl-A/X
 
---- @type table<string, string> Map of filetype to dial group
+---@type table<string, string> Map of filetype to dial group
 local ft_groups = {
     lua = "lua",
     markdown = "markdown",
 }
 
---- @param direction direction
---- @param g boolean
+---@param direction direction
+---@param g boolean
 local function dial(direction, g)
     local is_visual = vim.fn.mode(true):find("^[vV\22]")
     local mode = (g and "g" or "") .. (is_visual and "visual" or "normal")
@@ -17,7 +17,7 @@ local function dial(direction, g)
     return require("dial.map").manipulate(direction, mode, group)
 end
 
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "monaqa/dial.nvim",
     opts = function()

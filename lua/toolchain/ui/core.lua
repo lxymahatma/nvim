@@ -5,18 +5,18 @@ local State = require("toolchain.ui.state")
 local Keymaps = require("toolchain.ui.keymaps")
 local CursorSync = require("toolchain.ui.cursor")
 
---- @class ToolchainUI
---- @field buf integer?
---- @field win integer?
---- @field state ToolchainState
+---@class ToolchainUI
+---@field buf integer?
+---@field win integer?
+---@field state ToolchainState
 local UI = {}
 UI.__index = UI
 setmetatable(UI, {
     __call = function(_, ...) return UI.new(...) end,
 })
 
---- @param opts? ToolchainUIOptions
---- @return ToolchainUI
+---@param opts? ToolchainUIOptions
+---@return ToolchainUI
 function UI.new(opts)
     local self = setmetatable({}, UI)
     self.state = State(opts)
@@ -24,10 +24,10 @@ function UI.new(opts)
     return self
 end
 
---- @return void
+---@return void
 function UI:render() Renderer.render({ buf = self.buf, win = self.win, state = self.state }) end
 
---- @return void
+---@return void
 function UI:toggle_item()
     local item, message = self.state:toggle_current()
     if not item then
@@ -39,26 +39,26 @@ function UI:toggle_item()
     vim.notify(message, vim.log.levels.INFO)
 end
 
---- @param tab ToolchainTab
---- @return void
+---@param tab ToolchainTab
+---@return void
 function UI:switch_tab(tab)
     self.state:switch_tab(tab)
     self:render()
 end
 
---- @param delta integer
---- @return void
+---@param delta integer
+---@return void
 function UI:move_cursor(delta)
     if self.state:move_cursor(delta) then self:render() end
 end
 
---- @return void
+---@return void
 function UI:setup_keymaps() Keymaps.attach(self) end
 
---- @return void
+---@return void
 function UI:attach_cursor_sync() CursorSync.attach(self) end
 
---- @return void
+---@return void
 function UI:close()
     self.state:save()
     if self.win and api.nvim_win_is_valid(self.win) then api.nvim_win_close(self.win, true) end
@@ -66,7 +66,7 @@ function UI:close()
     self.buf = nil
 end
 
---- @return self
+---@return self
 function UI:open()
     self.buf = api.nvim_create_buf(false, true)
     api.nvim_set_option_value("bufhidden", "wipe", { buf = self.buf })

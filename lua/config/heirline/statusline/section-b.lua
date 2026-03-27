@@ -1,6 +1,6 @@
 local icons = require("config.icons")
 
---- @return string?
+---@return string?
 local function get_git_branch()
     local git_dir = vim.fn.finddir(".git", ".;")
     if git_dir == "" then return nil end

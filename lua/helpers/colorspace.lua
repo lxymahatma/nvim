@@ -5,8 +5,8 @@ for i = 0, 255 do
     hex_cache[i] = string.format("%02X", i)
 end
 
---- @param val number
---- @return number
+---@param val number
+---@return number
 local function to_srgb(val)
     if val <= 0.0031308 then
         return 12.92 * val
@@ -15,22 +15,22 @@ local function to_srgb(val)
     end
 end
 
---- @param val number
---- @return integer
+---@param val number
+---@return integer
 local function clamp255(val)
     if val <= 0 then return 0 end
     if val >= 1 then return 255 end
     return math.floor(val * 255 + 0.5)
 end
 
---- @param r integer 0-255
---- @param g integer 0-255
---- @param b integer 0-255
+---@param r integer 0-255
+---@param g integer 0-255
+---@param b integer 0-255
 function M.rgb_to_hex(r, g, b) return "#" .. hex_cache[r] .. hex_cache[g] .. hex_cache[b] end
 
---- @param h number Hue 0-360
---- @param s number Saturation 0-100
---- @param l number Lightness 0-100
+---@param h number Hue 0-360
+---@param s number Saturation 0-100
+---@param l number Lightness 0-100
 function M.hsl_to_hex(h, s, l)
     s = s / 100
     l = l / 100
@@ -60,9 +60,9 @@ function M.hsl_to_hex(h, s, l)
     return M.rgb_to_hex(r, g, b)
 end
 
---- @param l number Lightness 0-1
---- @param c number Chroma 0-0.4
---- @param h number Hue 0-360
+---@param l number Lightness 0-1
+---@param c number Chroma 0-0.4
+---@param h number Hue 0-360
 function M.oklch_to_hex(l, c, h)
     local hue_rad = math.rad(h)
     local lab_a = c * math.cos(hue_rad)

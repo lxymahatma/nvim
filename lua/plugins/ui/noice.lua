@@ -1,5 +1,5 @@
 -- Noice notification
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "folke/noice.nvim",
     event = "VeryLazy",

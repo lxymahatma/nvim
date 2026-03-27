@@ -1,5 +1,5 @@
 -- Show code context
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "nvim-treesitter/nvim-treesitter-context",
     event = "BufEdit",

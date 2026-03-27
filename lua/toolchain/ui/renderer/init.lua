@@ -15,11 +15,11 @@ local tabs = {
 
 local Renderer = {}
 
---- @param buf integer
---- @param row integer
---- @param col_start integer
---- @param col_end integer
---- @param hl_group string
+---@param buf integer
+---@param row integer
+---@param col_start integer
+---@param col_end integer
+---@param hl_group string
 local function set_hl(buf, row, col_start, col_end, hl_group)
     api.nvim_buf_set_extmark(buf, ns, row, col_start, {
         end_col = col_end,
@@ -27,8 +27,8 @@ local function set_hl(buf, row, col_start, col_end, hl_group)
     })
 end
 
---- @param layout ToolchainLayout
---- @param buf integer
+---@param layout ToolchainLayout
+---@param buf integer
 local function apply_layout(layout, buf)
     local all_lines = layout:get_lines()
     api.nvim_buf_set_lines(buf, 0, -1, false, all_lines)
@@ -39,7 +39,7 @@ local function apply_layout(layout, buf)
     end
 end
 
---- @param ctx ToolchainRenderContext
+---@param ctx ToolchainRenderContext
 function Renderer.render(ctx)
     local buf, win, state = ctx.buf, ctx.win, ctx.state
     if not buf or not api.nvim_buf_is_valid(buf) then return end

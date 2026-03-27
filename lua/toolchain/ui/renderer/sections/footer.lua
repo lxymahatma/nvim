@@ -5,8 +5,8 @@ local function center(text, width)
     return string.rep(" ", padding) .. text
 end
 
---- @param state ToolchainState
---- @return ToolchainRenderChunk
+---@param state ToolchainState
+---@return ToolchainRenderChunk
 function Footer.render(state)
     local help_text = "<CR> Toggle  q Close"
     return {

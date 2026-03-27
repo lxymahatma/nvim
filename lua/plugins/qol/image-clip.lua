@@ -1,4 +1,4 @@
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "HakonHarnes/img-clip.nvim",
     opts = {},

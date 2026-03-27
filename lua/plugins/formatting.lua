@@ -1,5 +1,5 @@
 -- Formatter
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "stevearc/conform.nvim",
     event = "BufEdit",

@@ -1,5 +1,5 @@
 -- catppuccin
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "catppuccin/nvim",
     name = "catppuccin",

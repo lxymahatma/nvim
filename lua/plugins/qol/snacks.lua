@@ -1,11 +1,11 @@
 -- QOL collections
 
---- @param direction "h" | "j" | "k" | "l"
+---@param direction "h" | "j" | "k" | "l"
 local function term_nav(direction)
     return vim.schedule_wrap(function() vim.cmd.wincmd(direction) end)
 end
 
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "folke/snacks.nvim",
     priority = 1000,

@@ -1,5 +1,5 @@
 -- AI sidekick
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "folke/sidekick.nvim",
     Event = "VeryLazy",

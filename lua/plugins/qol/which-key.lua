@@ -1,5 +1,5 @@
 -- Which key
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "folke/which-key.nvim",
     event = "VeryLazy",

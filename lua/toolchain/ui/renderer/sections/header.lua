@@ -2,9 +2,9 @@ local icons = require("config.icons").toolchain
 
 local Header = {}
 
---- @param state ToolchainState
---- @param tabs { key: ToolchainTab, label: string }[]
---- @return ToolchainRenderChunk
+---@param state ToolchainState
+---@param tabs { key: ToolchainTab, label: string }[]
+---@return ToolchainRenderChunk
 function Header.render(state, tabs)
     local lines = { "" }
     local highlights = {}

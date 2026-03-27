@@ -1,9 +1,9 @@
 local M = {}
 
---- @type FiletypeInfo[]?
+---@type FiletypeInfo[]?
 local cache = nil
 
---- @return FiletypeInfo[]
+---@return FiletypeInfo[]
 function M.find()
     if cache then return cache end
 
@@ -34,9 +34,9 @@ function M.find()
     return cache
 end
 
---- @param item FiletypeInfo
---- @param picker snacks.Picker
---- @return snacks.picker.format
+---@param item FiletypeInfo
+---@param picker snacks.Picker
+---@return snacks.picker.format
 function M.format(item, picker)
     local align = Snacks.picker.util.align
 
@@ -66,7 +66,7 @@ function M.format(item, picker)
     }
 end
 
---- @param ctx snacks.picker.preview.ctx
+---@param ctx snacks.picker.preview.ctx
 function M.preview(ctx)
     local item = ctx.item
     local lines = {}
@@ -123,7 +123,7 @@ function M.preview(ctx)
     ctx.preview:highlight({ ft = "markdown" })
 end
 
---- @type snacks.picker.filetypes.Config
+---@type snacks.picker.filetypes.Config
 M.source = {
     title = "Filetypes",
     layout = {

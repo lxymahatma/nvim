@@ -3,8 +3,8 @@ local storage_helper = require("helpers.storage")
 local M = {}
 
 --- Get all modules from a directory
---- @param module_dir string
---- @return string[]
+---@param module_dir string
+---@return string[]
 function M.get_all_modules(module_dir)
     local all_modules = {}
 
@@ -16,8 +16,8 @@ function M.get_all_modules(module_dir)
 end
 
 --- Get extra modules from storage
---- @param storage_key string
---- @return string[]
+---@param storage_key string
+---@return string[]
 function M.get_extra_modules(storage_key)
     if storage_helper.exists_json(storage_key) then
         local ok, data = pcall(storage_helper.read_json, storage_key)
@@ -29,9 +29,9 @@ function M.get_extra_modules(storage_key)
 end
 
 --- Get enabled modules (default + extra)
---- @param default_modules string[]
---- @param storage_key string
---- @return string[]
+---@param default_modules string[]
+---@param storage_key string
+---@return string[]
 function M.get_enabled_modules(default_modules, storage_key)
     local extra_modules = M.get_extra_modules(storage_key)
     local enabled_modules = {}
@@ -43,8 +43,8 @@ function M.get_enabled_modules(default_modules, storage_key)
 end
 
 --- Save extra modules to storage
---- @param storage_key string
---- @param extra_modules string[]
+---@param storage_key string
+---@param extra_modules string[]
 function M.save_extra_modules(storage_key, extra_modules)
     table.sort(extra_modules)
     local ok, err = pcall(storage_helper.write_json, storage_key, { extra_modules = extra_modules })

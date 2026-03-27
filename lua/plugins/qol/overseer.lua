@@ -1,5 +1,5 @@
 -- Task Runner
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "stevearc/overseer.nvim",
     cmd = {

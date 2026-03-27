@@ -1,23 +1,23 @@
 local M = {}
 
---- @class LangFtConfig
---- @field treesitter string[]
---- @field lsp string[]
---- @field formatters? conform.FiletypeFormatter
---- @field linters? string[]
---- @field on_attach? fun(bufnr: integer)
+---@class LangFtConfig
+---@field treesitter string[]
+---@field lsp string[]
+---@field formatters? conform.FiletypeFormatter
+---@field linters? string[]
+---@field on_attach? fun(bufnr: integer)
 
---- @class LangParserCache
---- @field configs_by_ft table<string, LangFtConfig> Language configurations by filetype
---- @field treesitter_parsers string[] Treesitter parsers to install
---- @field mason_packages MasonPackageSpec[] Mason packages to install
---- @field lsp_servers table<string, vim.lsp.ClientConfig> LSP server configurations
---- @field formatter_overrides table<string, conform.FormatterConfigOverride> Conform formatter overrides
---- @field dap_configs table DAP configurations
---- @field extra_plugins LazyPluginSpec[] Extra plugins from language configs
---- @field keymaps snacks.Keymap[]
+---@class LangParserCache
+---@field configs_by_ft table<string, LangFtConfig> Language configurations by filetype
+---@field treesitter_parsers string[] Treesitter parsers to install
+---@field mason_packages MasonPackageSpec[] Mason packages to install
+---@field lsp_servers table<string, vim.lsp.ClientConfig> LSP server configurations
+---@field formatter_overrides table<string, conform.FormatterConfigOverride> Conform formatter overrides
+---@field dap_configs table DAP configurations
+---@field extra_plugins LazyPluginSpec[] Extra plugins from language configs
+---@field keymaps snacks.Keymap[]
 
---- @type LangParserCache
+---@type LangParserCache
 M._cache = {
     configs_by_ft = {},
     treesitter_parsers = {},
@@ -29,16 +29,16 @@ M._cache = {
     keymaps = {},
 }
 
---- @param parser string
---- @param local_list string[]
+---@param parser string
+---@param local_list string[]
 local function add_parser(parser, local_list)
     table.insert(M._cache.treesitter_parsers, parser)
     table.insert(local_list, parser)
 end
 
---- @param server string
---- @param local_list string[]
---- @param config? table
+---@param server string
+---@param local_list string[]
+---@param config? table
 local function add_lsp(server, local_list, config)
     if config then
         M._cache.lsp_servers[server] = config
@@ -48,8 +48,8 @@ local function add_lsp(server, local_list, config)
     table.insert(local_list, server)
 end
 
---- @param lang_name string
---- @param spec LanguageSpec
+---@param lang_name string
+---@param spec LanguageSpec
 local function parse_spec(lang_name, spec)
     --- @type string[]
     local filetypes = type(spec.filetype) == "table" and spec.filetype or { spec.filetype or lang_name }
@@ -219,22 +219,22 @@ function M.load_all()
 end
 
 --- Get all treesitter parsers
---- @return string[]
+---@return string[]
 function M.get_treesitter_parsers() return M._cache.treesitter_parsers end
 
 --- Get all configured filetypes
---- @return string[]
+---@return string[]
 function M.get_filetypes() return vim.tbl_keys(M._cache.configs_by_ft) end
 
 --- Get all mason packages
---- @return MasonPackageSpec[]
+---@return MasonPackageSpec[]
 function M.get_mason_packages() return M._cache.mason_packages end
 
 --- Get all LSP server configurations
---- @return table<string, vim.lsp.ClientConfig>
+---@return table<string, vim.lsp.ClientConfig>
 function M.get_lsp_servers() return M._cache.lsp_servers end
 
---- @return table<string, conform.FiletypeFormatter>
+---@return table<string, conform.FiletypeFormatter>
 function M.get_formatters()
     local result = {}
     for ft, cfg in pairs(M._cache.configs_by_ft) do
@@ -243,10 +243,10 @@ function M.get_formatters()
     return result
 end
 
---- @return table<string, conform.FormatterConfigOverride>
+---@return table<string, conform.FormatterConfigOverride>
 function M.get_formatter_overrides() return M._cache.formatter_overrides end
 
---- @return table<string, string[]>
+---@return table<string, string[]>
 function M.get_linters()
     local result = {}
     for ft, cfg in pairs(M._cache.configs_by_ft) do
@@ -255,20 +255,20 @@ function M.get_linters()
     return result
 end
 
---- @return snacks.Keymap[]
+---@return snacks.Keymap[]
 function M.get_keymaps() return M._cache.keymaps end
 
 --- Get all DAP configurations
---- @return table
+---@return table
 function M.get_dap_configs() return M._cache.dap_configs end
 
 --- Get all extra plugins
---- @return LazyPluginSpec[]
+---@return LazyPluginSpec[]
 function M.get_extra_plugins() return M._cache.extra_plugins end
 
 --- Get configuration for a specific filetype
---- @param filetype string
---- @return LangFtConfig?
+---@param filetype string
+---@return LangFtConfig?
 function M.get_config_by_ft(filetype) return M._cache.configs_by_ft[filetype] end
 
 return M

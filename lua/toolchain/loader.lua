@@ -2,17 +2,17 @@ local constant = require("config.constant")
 local module_loader = require("helpers.module-loader")
 local table_helper = require("helpers.table")
 
---- @class ToolchainLoader
---- @field items ToolchainItem[]
---- @field enabled table<ToolchainType, string[]>
---- @field extra table<ToolchainType, string[]>
+---@class ToolchainLoader
+---@field items ToolchainItem[]
+---@field enabled table<ToolchainType, string[]>
+---@field extra table<ToolchainType, string[]>
 local M = {
     items = {},
     enabled = {},
     extra = {},
 }
 
---- @return void
+---@return void
 function M.load()
     M.items = {}
     M.enabled = {}
@@ -42,18 +42,18 @@ function M.load()
     table.sort(M.items, function(a, b) return a.name < b.name end)
 end
 
---- @return ToolchainItem[]
+---@return ToolchainItem[]
 function M.get_items() return M.items end
 
---- @param type_name ToolchainType
---- @return string[]
+---@param type_name ToolchainType
+---@return string[]
 function M.get_enabled(type_name) return M.enabled[type_name] or {} end
 
---- @param type_name ToolchainType
---- @return string[]
+---@param type_name ToolchainType
+---@return string[]
 function M.get_extra(type_name) return M.extra[type_name] or {} end
 
---- @return void
+---@return void
 function M.save()
     for type_name, extra in pairs(M.extra) do
         module_loader.save_extra_modules(type_name, extra)

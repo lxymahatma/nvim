@@ -1,5 +1,5 @@
 -- Tab scoped buffers
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "lxymahatma/tabscope.nvim",
     lazy = true,

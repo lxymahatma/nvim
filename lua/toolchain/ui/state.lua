@@ -1,24 +1,24 @@
 local loader = require("toolchain.loader")
 
---- @class ToolchainState
---- @field current_tab ToolchainTab
---- @field cursor_line integer
---- @field header_offset integer
---- @field dirty boolean
---- @field width ToolchainUISize
---- @field height ToolchainUISize
---- @field window_width integer
---- @field window_height integer
---- @field items ToolchainItem[]
---- @field filtered_items ToolchainItem[]
+---@class ToolchainState
+---@field current_tab ToolchainTab
+---@field cursor_line integer
+---@field header_offset integer
+---@field dirty boolean
+---@field width ToolchainUISize
+---@field height ToolchainUISize
+---@field window_width integer
+---@field window_height integer
+---@field items ToolchainItem[]
+---@field filtered_items ToolchainItem[]
 local State = {}
 State.__index = State
 setmetatable(State, {
     __call = function(_, ...) return State.new(...) end,
 })
 
---- @param opts? ToolchainUIOptions
---- @return ToolchainState
+---@param opts? ToolchainUIOptions
+---@return ToolchainState
 function State.new(opts)
     opts = opts or {}
 
@@ -35,8 +35,8 @@ function State.new(opts)
     return self
 end
 
---- @param editor_ui {width: integer, height: integer}
---- @return void
+---@param editor_ui {width: integer, height: integer}
+---@return void
 function State:update_window_size(editor_ui)
     --- @param value ToolchainUISize
     --- @param total integer
@@ -58,7 +58,7 @@ function State:update_window_size(editor_ui)
     self.window_height = height
 end
 
---- @return void
+---@return void
 function State:filter_items()
     if self.current_tab == "all" then
         self.filtered_items = self.items
@@ -67,26 +67,26 @@ function State:filter_items()
     end
 end
 
---- @param tab ToolchainTab
---- @return integer
+---@param tab ToolchainTab
+---@return integer
 function State:count_by_tab(tab)
     if tab == "all" then return #self.items end
     return #vim.tbl_filter(function(item) return item.type == tab end, self.items)
 end
 
---- @param tab ToolchainTab
---- @return integer
+---@param tab ToolchainTab
+---@return integer
 function State:count_enabled_by_tab(tab)
     local items = tab == "all" and self.items or vim.tbl_filter(function(item) return item.type == tab end, self.items)
     return #vim.tbl_filter(function(item) return item.enabled end, items)
 end
 
---- @return ToolchainItem
+---@return ToolchainItem
 function State:get_current_item()
     return self.filtered_items[self.cursor_line] --[[@as ToolchainItem]]
 end
 
---- @return ToolchainItem?, string
+---@return ToolchainItem?, string
 function State:toggle_current()
     local item = self:get_current_item()
 
@@ -108,22 +108,22 @@ function State:toggle_current()
     return item, string.format("%s %s. Restart Neovim to apply.", action, item.name)
 end
 
---- @param tab ToolchainTab
+---@param tab ToolchainTab
 function State:switch_tab(tab)
     self.current_tab = tab
     self.cursor_line = 1
     self:filter_items()
 end
 
---- @param delta integer
---- @return boolean
+---@param delta integer
+---@return boolean
 function State:move_cursor(delta)
     local new_line = self.cursor_line + delta
     return self:set_cursor(new_line)
 end
 
---- @param line integer
---- @return boolean
+---@param line integer
+---@return boolean
 function State:set_cursor(line)
     if line < 1 or line > #self.filtered_items then return false end
 
@@ -131,7 +131,7 @@ function State:set_cursor(line)
     return true
 end
 
---- @return void
+---@return void
 function State:save()
     if not self.dirty then return end
     loader.save()

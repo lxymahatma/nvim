@@ -2,8 +2,8 @@ local icons = require("config.icons").toolchain
 
 local Items = {}
 
---- @param state ToolchainState
---- @return ToolchainRenderChunk
+---@param state ToolchainState
+---@return ToolchainRenderChunk
 function Items.render(state)
     local lines = {}
     local highlights = {}

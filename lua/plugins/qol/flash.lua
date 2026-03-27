@@ -1,5 +1,5 @@
 -- Search and Navigation
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "folke/flash.nvim",
     event = "VeryLazy",

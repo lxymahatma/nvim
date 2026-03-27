@@ -1,18 +1,18 @@
 local M = {}
 
---- @class ToolFtConfig
---- @field lsp string[]
---- @field formatters? conform.FiletypeFormatter
---- @field linters? string[]
+---@class ToolFtConfig
+---@field lsp string[]
+---@field formatters? conform.FiletypeFormatter
+---@field linters? string[]
 
---- @class ToolParserCache
---- @field configs_by_ft table<string, ToolFtConfig> Tool configurations by filetype
---- @field mason_packages MasonPackageSpec[] Mason packages to install
---- @field lsp_servers table<string, vim.lsp.ClientConfig> LSP server configurations
---- @field formatter_overrides table<string, conform.FormatterConfigOverride> Conform formatter overrides
---- @field extra_plugins LazyPluginSpec[] Extra plugins from tool configs
+---@class ToolParserCache
+---@field configs_by_ft table<string, ToolFtConfig> Tool configurations by filetype
+---@field mason_packages MasonPackageSpec[] Mason packages to install
+---@field lsp_servers table<string, vim.lsp.ClientConfig> LSP server configurations
+---@field formatter_overrides table<string, conform.FormatterConfigOverride> Conform formatter overrides
+---@field extra_plugins LazyPluginSpec[] Extra plugins from tool configs
 
---- @type ToolParserCache
+---@type ToolParserCache
 M._cache = {
     configs_by_ft = {},
     mason_packages = {},
@@ -21,9 +21,9 @@ M._cache = {
     extra_plugins = {},
 }
 
---- @param server string
---- @param local_list string[]
---- @param config? table
+---@param server string
+---@param local_list string[]
+---@param config? table
 local function add_lsp(server, local_list, config)
     if config then
         M._cache.lsp_servers[server] = config
@@ -33,8 +33,8 @@ local function add_lsp(server, local_list, config)
     table.insert(local_list, server)
 end
 
---- @param tool_name string
---- @param spec ToolSpec
+---@param tool_name string
+---@param spec ToolSpec
 local function parse_spec(tool_name, spec)
     --- @type string[]
     local filetypes = type(spec.filetype) == "table" and spec.filetype or (spec.filetype and { spec.filetype } or {})
@@ -168,14 +168,14 @@ function M.load_all()
 end
 
 --- Get all mason packages
---- @return MasonPackageSpec[]
+---@return MasonPackageSpec[]
 function M.get_mason_packages() return M._cache.mason_packages end
 
 --- Get all LSP server configurations
---- @return table<string, vim.lsp.ClientConfig>
+---@return table<string, vim.lsp.ClientConfig>
 function M.get_lsp_servers() return M._cache.lsp_servers end
 
---- @return table<string, conform.FiletypeFormatter>
+---@return table<string, conform.FiletypeFormatter>
 function M.get_formatters()
     local result = {}
     for ft, cfg in pairs(M._cache.configs_by_ft) do
@@ -184,10 +184,10 @@ function M.get_formatters()
     return result
 end
 
---- @return table<string, conform.FormatterConfigOverride>
+---@return table<string, conform.FormatterConfigOverride>
 function M.get_formatter_overrides() return M._cache.formatter_overrides end
 
---- @return table<string, string[]>
+---@return table<string, string[]>
 function M.get_linters()
     local result = {}
     for ft, cfg in pairs(M._cache.configs_by_ft) do
@@ -197,12 +197,12 @@ function M.get_linters()
 end
 
 --- Get all extra plugins
---- @return LazyPluginSpec[]
+---@return LazyPluginSpec[]
 function M.get_extra_plugins() return M._cache.extra_plugins end
 
 --- Get configuration for a specific filetype
---- @param filetype string
---- @return ToolFtConfig?
+---@param filetype string
+---@return ToolFtConfig?
 function M.get_config_by_ft(filetype) return M._cache.configs_by_ft[filetype] end
 
 return M

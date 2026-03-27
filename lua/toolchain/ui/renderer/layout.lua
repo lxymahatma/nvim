@@ -1,10 +1,10 @@
---- @class ToolchainLayout
---- @field lines string[]
---- @field highlights ToolchainRenderHighlight[]
+---@class ToolchainLayout
+---@field lines string[]
+---@field highlights ToolchainRenderHighlight[]
 local Layout = {}
 Layout.__index = Layout
 
---- @return ToolchainLayout
+---@return ToolchainLayout
 function Layout.new()
     return setmetatable({
         lines = {},
@@ -12,8 +12,8 @@ function Layout.new()
     }, Layout)
 end
 
---- @param chunk ToolchainRenderChunk?
---- @return integer
+---@param chunk ToolchainRenderChunk?
+---@return integer
 function Layout:append(chunk)
     if not chunk or not chunk.lines then return 0 end
 
@@ -36,24 +36,24 @@ function Layout:append(chunk)
     return #chunk.lines
 end
 
---- @param count integer
+---@param count integer
 function Layout:pad(count)
     for _ = 1, math.max(0, count) do
         table.insert(self.lines, "")
     end
 end
 
---- @return integer
+---@return integer
 function Layout:line_count()
     return #self.lines
 end
 
---- @return string[]
+---@return string[]
 function Layout:get_lines()
     return self.lines
 end
 
---- @return ToolchainRenderHighlight[]
+---@return ToolchainRenderHighlight[]
 function Layout:get_highlights()
     return self.highlights
 end
