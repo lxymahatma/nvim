@@ -6,5 +6,7 @@ name: nvim
 globals:
   vim:
     any: true
+  svim:
+    any: true
   Snacks:
     any: true
