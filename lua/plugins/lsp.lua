@@ -10,11 +10,7 @@ return {
         end)
         Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
             --- @cast buffer integer
-            vim.lsp.codelens.refresh({ bufnr = buffer })
-            vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost" }, {
-                buffer = buffer,
-                callback = function() vim.lsp.codelens.refresh({ bufnr = buffer }) end,
-            })
+            vim.lsp.codelens.enable(true, { bufnr = buffer })
         end)
 
         local servers = require("toolchain").get_lsp_servers()
