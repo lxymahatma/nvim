@@ -16,6 +16,7 @@ return {
 
         local function debounce(ms, fn)
             local timer = vim.uv.new_timer()
+            ---@cast timer uv.uv_timer_t
             return function()
                 timer:start(ms, 0, function()
                     timer:stop()
