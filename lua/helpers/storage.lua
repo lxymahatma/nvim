@@ -22,7 +22,7 @@ function M.write_json(key, data)
     assert(type(data) == "table", "Data must be a table")
 
     local path = json_path(key)
-    local ok, json = pcall(vim.json.encode, data)
+    local ok, json = pcall(vim.json.encode, data, { indent = "  ", sort_keys = true })
     assert(ok, "Failed to encode JSON: " .. tostring(json))
 
     local f = assert(io.open(path, "w"), "Failed to open file: " .. path)
