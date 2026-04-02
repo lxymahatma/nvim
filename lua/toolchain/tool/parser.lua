@@ -36,7 +36,7 @@ end
 ---@param tool_name string
 ---@param spec ToolSpec
 local function parse_spec(tool_name, spec)
-    --- @type string[]
+    ---@type string[]
     local filetypes = type(spec.filetype) == "table" and spec.filetype or (spec.filetype and { spec.filetype } or {})
 
     local current_lsps = {}
@@ -44,17 +44,17 @@ local function parse_spec(tool_name, spec)
     if spec.mason then
         if type(spec.mason) == "string" then
             -- mason = "package"
-            --- @cast spec.mason string
+            ---@cast spec.mason string
             table.insert(M._cache.mason_packages, spec.mason)
         elseif type(spec.mason) == "table" then
-            --- @cast spec.mason table
+            ---@cast spec.mason table
             if vim.islist(spec.mason) then
                 -- mason = { "package1", "package2" }
                 -- mason = { { "package1", ... }, { "package2", ... } }
                 vim.list_extend(M._cache.mason_packages, spec.mason)
             elseif spec.mason.condition ~= nil then
                 -- mason = { "package", condition = {...} }
-                --- @cast spec.mason MasonPackageStruct
+                ---@cast spec.mason MasonPackageStruct
                 table.insert(M._cache.mason_packages, spec.mason)
             end
         end
@@ -63,19 +63,19 @@ local function parse_spec(tool_name, spec)
     if spec.lsp then
         if type(spec.lsp) == "string" then
             -- lsp = "server"
-            --- @cast spec.lsp string
+            ---@cast spec.lsp string
             add_lsp(spec.lsp, current_lsps)
         elseif type(spec.lsp) == "table" then
-            --- @cast spec.lsp table
+            ---@cast spec.lsp table
             if vim.islist(spec.lsp) then
                 -- lsp = { "server1", "server2" }
-                --- @cast spec.lsp string[]
+                ---@cast spec.lsp string[]
                 for _, server in ipairs(spec.lsp) do
                     add_lsp(server, current_lsps)
                 end
             else
                 -- lsp = { server1 = {...}, server2 = {...} }
-                --- @cast spec.lsp table<string, vim.lsp.ClientConfig>
+                ---@cast spec.lsp table<string, vim.lsp.ClientConfig>
                 for server, config in pairs(spec.lsp) do
                     add_lsp(server, current_lsps, config)
                 end
@@ -85,7 +85,7 @@ local function parse_spec(tool_name, spec)
 
     if spec.formatter_opts then
         if type(spec.formatter_opts) == "table" then
-            --- @cast spec.formatter_opts table<string, conform.FormatterConfigOverride>
+            ---@cast spec.formatter_opts table<string, conform.FormatterConfigOverride>
             M._cache.formatter_overrides = vim.tbl_extend("force", M._cache.formatter_overrides, spec.formatter_opts)
         end
     end
@@ -101,10 +101,10 @@ local function parse_spec(tool_name, spec)
                 cfg.formatters = { tool_name }
             elseif type(spec.formatter) == "string" then
                 -- formatter = "tool"
-                --- @cast spec.formatter string
+                ---@cast spec.formatter string
                 cfg.formatters = { spec.formatter }
             elseif type(spec.formatter) == "table" then
-                --- @cast spec.formatter table
+                ---@cast spec.formatter table
                 if spec.formatter[ft] then
                     -- formatter = { ft1 = {...}, ft2 = {...} }
                     local fmt = spec.formatter[ft]
@@ -119,10 +119,10 @@ local function parse_spec(tool_name, spec)
                 cfg.linters = { tool_name }
             elseif type(spec.linter) == "string" then
                 -- linter = "tool"
-                --- @cast spec.linter string
+                ---@cast spec.linter string
                 cfg.linters = { spec.linter }
             elseif type(spec.linter) == "table" then
-                --- @cast spec.linter table
+                ---@cast spec.linter table
                 if spec.linter[ft] then
                     -- linter = { ft1 = {...}, ft2 = {...} }
                     local lint = spec.linter[ft]
@@ -142,11 +142,11 @@ local function parse_spec(tool_name, spec)
             if vim.islist(spec.plugin) then
                 -- plugin = { "repo1", "repo2" }
                 -- plugin = { { "repo1", ... }, { "repo2", ... } }
-                --- @cast spec.plugin LazyPluginSpec[]
+                ---@cast spec.plugin LazyPluginSpec[]
                 vim.list_extend(M._cache.extra_plugins, spec.plugin)
             else
                 -- plugin = { "user/repo", ... }
-                --- @cast spec.plugin LazyPluginSpec
+                ---@cast spec.plugin LazyPluginSpec
                 table.insert(M._cache.extra_plugins, spec.plugin)
             end
         end

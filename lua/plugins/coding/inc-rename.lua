@@ -3,7 +3,7 @@
 return {
     "smjonas/inc-rename.nvim",
 
-    --- @type inc_rename.UserConfig
+    ---@type inc_rename.UserConfig
     opts = {},
     keys = {
         {

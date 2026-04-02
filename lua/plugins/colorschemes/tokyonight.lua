@@ -5,6 +5,6 @@ return {
     lazy = true,
     enabled = false,
 
-    --- @type tokyonight.Config
+    ---@type tokyonight.Config
     opts = {},
 }

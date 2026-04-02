@@ -4,7 +4,7 @@ return {
     "stevearc/conform.nvim",
     event = "BufEdit",
 
-    --- @type conform.setupOpts
+    ---@type conform.setupOpts
     opts = {
         formatters_by_ft = require("toolchain").get_formatters(),
         formatters = require("toolchain").get_formatter_overrides(),

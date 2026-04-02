@@ -51,7 +51,7 @@ end
 ---@param lang_name string
 ---@param spec LanguageSpec
 local function parse_spec(lang_name, spec)
-    --- @type string[]
+    ---@type string[]
     local filetypes = type(spec.filetype) == "table" and spec.filetype or { spec.filetype or lang_name }
 
     local current_parsers = {}
@@ -59,15 +59,15 @@ local function parse_spec(lang_name, spec)
 
     if type(spec.treesitter) == "boolean" then
         -- treesitter = true
-        --- @cast spec.treesitter boolean
+        ---@cast spec.treesitter boolean
         add_parser(lang_name, current_parsers)
     elseif type(spec.treesitter) == "string" then
         -- treesitter = "parser"
-        --- @cast spec.treesitter string
+        ---@cast spec.treesitter string
         add_parser(spec.treesitter, current_parsers)
     elseif type(spec.treesitter) == "table" then
         -- treesitter = { "parser1", "parser2" }
-        --- @cast spec.treesitter string[]
+        ---@cast spec.treesitter string[]
         for _, parser in ipairs(spec.treesitter) do
             add_parser(parser, current_parsers)
         end
@@ -76,22 +76,22 @@ local function parse_spec(lang_name, spec)
     if spec.mason then
         if type(spec.mason) == "string" then
             -- mason = "package"
-            --- @cast spec.mason string
+            ---@cast spec.mason string
             table.insert(M._cache.mason_packages, spec.mason)
         elseif type(spec.mason) == "table" then
             if type(spec.mason[1]) == "string" then
                 if type(spec.mason[2]) == "string" then
                     -- mason = { "package1", "package2" }
-                    --- @cast spec.mason string[]
+                    ---@cast spec.mason string[]
                     vim.list_extend(M._cache.mason_packages, spec.mason)
                 elseif spec.mason.condition ~= nil then
                     -- mason = { "package", condition = {...} }
-                    --- @cast spec.mason MasonPackageStruct
+                    ---@cast spec.mason MasonPackageStruct
                     table.insert(M._cache.mason_packages, spec.mason)
                 end
             elseif type(spec.mason[1]) == "table" then
                 -- mason = { { "package1", ... }, { "package2", ... } }
-                --- @cast spec.mason MasonPackageSpec[]
+                ---@cast spec.mason MasonPackageSpec[]
                 vim.list_extend(M._cache.mason_packages, spec.mason)
             end
         end
@@ -100,18 +100,18 @@ local function parse_spec(lang_name, spec)
     if spec.lsp then
         if type(spec.lsp) == "string" then
             -- lsp = "server"
-            --- @cast spec.lsp string
+            ---@cast spec.lsp string
             add_lsp(spec.lsp, current_lsps)
         elseif type(spec.lsp) == "table" then
             if type(spec.lsp[1]) == "string" then
                 -- lsp = { "server1", "server2" }
-                --- @cast spec.lsp string[]
+                ---@cast spec.lsp string[]
                 for _, server in ipairs(spec.lsp) do
                     add_lsp(server, current_lsps)
                 end
             elseif spec.lsp[1] == nil then
                 -- lsp = { server1 = {...}, server2 = {...} }
-                --- @cast spec.lsp table<string, vim.lsp.ClientConfig>
+                ---@cast spec.lsp table<string, vim.lsp.ClientConfig>
                 for server, config in pairs(spec.lsp) do
                     add_lsp(server, current_lsps, config)
                 end
@@ -128,10 +128,10 @@ local function parse_spec(lang_name, spec)
         if spec.formatter then
             if type(spec.formatter) == "string" then
                 -- formatter = "tool"
-                --- @cast spec.formatter string
+                ---@cast spec.formatter string
                 cfg.formatters = { spec.formatter }
             elseif type(spec.formatter) == "table" then
-                --- @cast spec.formatter table
+                ---@cast spec.formatter table
                 if spec.formatter[1] ~= nil then
                     -- formatter = { "tool1", "tool2", ... }
                     -- formatter = { "tool1", lsp_format = "last", ... }
@@ -147,13 +147,13 @@ local function parse_spec(lang_name, spec)
         if spec.linter then
             if type(spec.linter) == "string" then
                 -- linter = "tool"
-                --- @cast spec.linter string
+                ---@cast spec.linter string
                 cfg.linters = { spec.linter }
             elseif type(spec.linter) == "table" then
-                --- @cast spec.linter table
+                ---@cast spec.linter table
                 if vim.islist(spec.linter) then
                     -- linter = { "tool1", "tool2" }
-                    --- @cast spec.linter string[]
+                    ---@cast spec.linter string[]
                     cfg.linters = spec.linter
                 elseif spec.linter[ft] then
                     -- linter = { ft1 = {...}, ft2 = {...} }
@@ -170,7 +170,7 @@ local function parse_spec(lang_name, spec)
 
     if spec.formatter_opts then
         if type(spec.formatter_opts) == "table" then
-            --- @cast spec.formatter_opts table<string, conform.FormatterConfigOverride>
+            ---@cast spec.formatter_opts table<string, conform.FormatterConfigOverride>
             M._cache.formatter_overrides = vim.tbl_extend("force", M._cache.formatter_overrides, spec.formatter_opts)
         end
     end
@@ -185,11 +185,11 @@ local function parse_spec(lang_name, spec)
             if vim.islist(spec.plugin) then
                 -- plugin = { "repo1", "repo2" }
                 -- plugin = { { "repo1", ... }, { "repo2", ... } }
-                --- @cast spec.plugin LazyPluginSpec[]
+                ---@cast spec.plugin LazyPluginSpec[]
                 vim.list_extend(M._cache.extra_plugins, spec.plugin)
             else
                 -- plugin = { "user/repo", ... }
-                --- @cast spec.plugin LazyPluginSpec
+                ---@cast spec.plugin LazyPluginSpec
                 table.insert(M._cache.extra_plugins, spec.plugin)
             end
         end

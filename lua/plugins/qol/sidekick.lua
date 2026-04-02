@@ -4,7 +4,7 @@ return {
     "folke/sidekick.nvim",
     Event = "VeryLazy",
 
-    --- @type sidekick.Config
+    ---@type sidekick.Config
     opts = {
         nes = {
             diff = { inline = "chars" },

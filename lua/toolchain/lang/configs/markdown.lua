@@ -17,7 +17,7 @@ return {
         opts = function()
             local presets = require("markview.presets")
 
-            --- @type markview.config
+            ---@type markview.config
             return {
                 markdown = {
                     enable = true,

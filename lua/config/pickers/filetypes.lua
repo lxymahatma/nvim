@@ -40,7 +40,7 @@ end
 function M.format(item, picker)
     local align = Snacks.picker.util.align
 
-    --- @cast picker.layout.wins.list.win integer
+    ---@cast picker.layout.wins.list.win integer
     local width = vim.api.nvim_win_get_width(picker.layout.wins.list.win) - 2
 
     local ft_icon, ft_hl = Snacks.util.icon(item.text, "filetype")
@@ -147,8 +147,8 @@ M.source = {
     format = M.format,
     preview = M.preview,
 
-    --- @param picker snacks.Picker
-    --- @param item FiletypeInfo
+    ---@param picker snacks.Picker
+    ---@param item FiletypeInfo
     confirm = function(picker, item)
         picker:close()
         vim.bo.filetype = item.text

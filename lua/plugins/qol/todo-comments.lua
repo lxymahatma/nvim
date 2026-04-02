@@ -4,6 +4,6 @@ return {
     "folke/todo-comments.nvim",
     event = "BufEdit",
 
-    --- @type TodoOptions
+    ---@type TodoOptions
     opts = {},
 }

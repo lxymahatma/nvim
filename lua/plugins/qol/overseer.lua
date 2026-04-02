@@ -10,7 +10,7 @@ return {
         "OverseerTaskAction",
     },
 
-    --- @type overseer.SetupOpts
+    ---@type overseer.SetupOpts
     opts = {},
     keys = {
         { "<leader>ow", "<cmd>OverseerToggle<cr>",     desc = "Task list" },

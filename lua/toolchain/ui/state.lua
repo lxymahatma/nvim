@@ -38,10 +38,10 @@ end
 ---@param editor_ui {width: integer, height: integer}
 ---@return void
 function State:update_window_size(editor_ui)
-    --- @param value ToolchainUISize
-    --- @param total integer
-    --- @param fallback integer
-    --- @return integer
+    ---@param value ToolchainUISize
+    ---@param total integer
+    ---@param fallback integer
+    ---@return integer
     local function resolve_size(value, total, fallback)
         local size = value or fallback
         if size < 1 then size = math.floor(total * size) end

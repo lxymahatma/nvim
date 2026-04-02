@@ -4,6 +4,6 @@ return {
     "xzbdmw/colorful-menu.nvim",
     lazy = true,
 
-    --- @type ColorfulMenuConfig
+    ---@type ColorfulMenuConfig
     opts = {},
 }

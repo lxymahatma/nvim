@@ -5,7 +5,7 @@ return {
     version = "*",
     dependencies = "saghen/blink.lib",
 
-    --- @type blink.pairs.Config
+    ---@type blink.pairs.Config
     opts = {
         mappings = {
             enabled = true,

@@ -5,7 +5,7 @@ return {
     cmd = "Copilot",
     event = "BufEdit",
 
-    --- @type CopilotConfig
+    ---@type CopilotConfig
     opts = {
         panel = {
             enabled = false,

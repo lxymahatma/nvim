@@ -5,7 +5,7 @@ return {
     name = "catppuccin",
     lazy = true,
 
-    --- @type CatppuccinOptions
+    ---@type CatppuccinOptions
     opts = {
         flavour = "mocha",
         integrations = {

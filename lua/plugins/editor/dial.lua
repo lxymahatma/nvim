@@ -13,7 +13,7 @@ local function dial(direction, g)
     local mode = (g and "g" or "") .. (is_visual and "visual" or "normal")
     local group = ft_groups[vim.bo.filetype] or "default"
 
-    --- @cast mode mode
+    ---@cast mode mode
     return require("dial.map").manipulate(direction, mode, group)
 end
 

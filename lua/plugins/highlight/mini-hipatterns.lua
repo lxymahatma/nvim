@@ -8,7 +8,7 @@ return {
         local colorspace = require("helpers.colorspace")
         local filetypes = require("config.constant").filetypes
 
-        --- @type table<string, string?>
+        ---@type table<string, string?>
         local color_cache = {}
 
         return {
@@ -41,9 +41,9 @@ return {
                         if cached_hex then return hipatterns.compute_hex_color_group(cached_hex, "bg") end
 
                         local r, g, b = color_str:match("rgb%(%s*(%d+)[%s,]+(%d+)[%s,]+(%d+)")
-                        r = tonumber(r) --- @cast r integer
-                        g = tonumber(g) --- @cast g integer
-                        b = tonumber(b) --- @cast b integer
+                        r = tonumber(r) ---@cast r integer
+                        g = tonumber(g) ---@cast g integer
+                        b = tonumber(b) ---@cast b integer
 
                         local hex = colorspace.rgb_to_hex(r, g, b)
                         color_cache[color_str] = hex
@@ -63,9 +63,9 @@ return {
                         if cached_hex then return hipatterns.compute_hex_color_group(cached_hex, "bg") end
 
                         local h, s, l = color_str:match("hsl%(%s*([%d%.]+)[%s,]+([%d%.]+)%%[%s,]+([%d%.]+)%%")
-                        h = tonumber(h) --- @cast h number
-                        s = tonumber(s) --- @cast s number
-                        l = tonumber(l) --- @cast l number
+                        h = tonumber(h) ---@cast h number
+                        s = tonumber(s) ---@cast s number
+                        l = tonumber(l) ---@cast l number
 
                         s = s / 100
                         l = l / 100
@@ -89,9 +89,9 @@ return {
 
                         local l, l_unit, c, h = color_str:match("oklch%(%s*([%d%.]+)(%%?)%s+([%d%.]+)%s+([%d%.]+)")
 
-                        l = tonumber(l) --- @cast l number
-                        c = tonumber(c) --- @cast c number
-                        h = tonumber(h) --- @cast h number
+                        l = tonumber(l) ---@cast l number
+                        c = tonumber(c) ---@cast c number
+                        h = tonumber(h) ---@cast h number
 
                         l = (l_unit == "%") and (l / 100) or l
 
