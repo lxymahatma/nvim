@@ -2,9 +2,9 @@
 return {
     "nvim-mini/mini.hipatterns",
     event = "BufEdit",
+    enabled = false,
     opts = function()
         local hipatterns = require("mini.hipatterns")
-        local colors = require("config.colors")
         local colorspace = require("helpers.colorspace")
         local filetypes = require("config.constant").filetypes
 
@@ -96,29 +96,6 @@ return {
                         l = (l_unit == "%") and (l / 100) or l
 
                         local hex = colorspace.oklch_to_hex(l, c, h)
-                        color_cache[color_str] = hex
-                        return hipatterns.compute_hex_color_group(hex, "bg")
-                    end,
-                },
-
-                -- Highlight Tailwind CSS colors (e.g., bg-blue-500)
-                tailwind = {
-                    pattern = function()
-                        if not vim.tbl_contains(filetypes.web, vim.bo.filetype) then return end
-                        return "[%w:-]+%-[a-z%-]+%-%d+"
-                    end,
-                    group = function(_, _, data)
-                        local color_str = data.full_match
-                        -- Ignore negative variants or css variable declarations (e.g., -mt-4 or --color-primary-500)
-                        if color_str:sub(1, 1) == "-" then return end
-
-                        local cached_hex = color_cache[color_str]
-                        if cached_hex then return hipatterns.compute_hex_color_group(cached_hex, "bg") end
-
-                        local color, shade = data.full_match:match("[%w-]+%-([a-z%-]+)%-(%d+)")
-                        local hex = vim.tbl_get(colors.tailwind, color, tonumber(shade))
-
-                        if not hex then return end
                         color_cache[color_str] = hex
                         return hipatterns.compute_hex_color_group(hex, "bg")
                     end,
