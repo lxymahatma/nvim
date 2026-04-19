@@ -41,11 +41,6 @@ return {
     {
         provider = function(self) return " %2(" .. self.mode_names[self.mode] .. "%) " end,
         hl = function(self) return { fg = "surface0", bg = self.mode_colors[self.mode_key], bold = true } end,
-        update = {
-            "ModeChanged",
-            pattern = "*:*",
-            callback = vim.schedule_wrap(function() vim.cmd("redrawstatus") end),
-        },
     },
     {
         provider = function(self) return self.sep.left_section end,
