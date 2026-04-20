@@ -44,6 +44,6 @@ return {
     },
     {
         provider = function(self) return self.sep.left_section end,
-        hl = function(self) return { fg = self.mode_colors[self.mode_key], bg = "surface0" } end,
+        hl = function(self) return { fg = self.mode_colors[self.mode_key], bg = self.has_git and "surface0" or "mantle" } end,
     },
 }

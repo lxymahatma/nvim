@@ -16,10 +16,8 @@ local function get_git_branch()
     return branch and branch or content:sub(1, 6)
 end
 
-local function has_git() return vim.b.minidiff_summary ~= nil end
-
 local Git = {
-    condition = has_git,
+    condition = function(self) return self.has_git end,
     hl = { bg = "surface0" },
     init = function(self)
         self.git_status = vim.b.minidiff_summary
@@ -53,7 +51,7 @@ local Git = {
 }
 
 return {
-    condition = function() return has_git() end,
+    condition = function(self) return self.has_git end,
     Git,
     {
         provider = function(self) return self.sep.left_section end,

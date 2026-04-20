@@ -39,6 +39,7 @@ return {
         self.line = vim.fn.line(".")
         self.charcol = vim.fn.charcol(".")
         self.total = vim.fn.line("$")
+        self.has_git = vim.b.minidiff_summary ~= nil
     end,
     SectionA,
     SectionB,
