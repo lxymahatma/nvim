@@ -70,7 +70,7 @@ map("n", "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Go
 map("n", "<leader>ci", function() Snacks.picker.lsp_incoming_calls() end, { desc = "Calls Incoming", lsp = { method = "callHierarchy/incomingCalls" } })
 map("n", "<leader>co", function() Snacks.picker.lsp_outgoing_calls() end, { desc = "Calls Outgoing", lsp = { method = "callHierarchy/outgoingCalls" } })
 map("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols", lsp = { method = "textDocument/documentSymbol" } })
-map("n", "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "LSP Workspace Symbols", lsp = { method = "workspace/symbols" } })
+map("n", "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "LSP Workspace Symbols", lsp = { method = "workspace/symbol" } })
 
 -- Git
 map("n", "<leader>gl", function() Snacks.picker.git_log() end, { desc = "Git Log" })
