@@ -23,7 +23,7 @@ end
 
 ---@param opts snacks.picker.ast_grep.Config
 ---@param ctx snacks.picker.finder.ctx
----@return snacks.picker.finder
+---@return snacks.picker.finder.result
 function M.find(opts, ctx)
     if opts.need_search ~= false and ctx.filter.search == "" then
         return function() end
