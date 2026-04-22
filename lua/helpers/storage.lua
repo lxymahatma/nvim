@@ -18,9 +18,6 @@ end
 ---@param key string
 ---@param data table
 function M.write_json(key, data)
-    assert(key and key ~= "", "Key cannot be empty")
-    assert(type(data) == "table", "Data must be a table")
-
     local path = json_path(key)
     local ok, json = pcall(vim.json.encode, data, { indent = "  ", sort_keys = true })
     assert(ok, "Failed to encode JSON: " .. tostring(json))
@@ -34,12 +31,8 @@ end
 ---@param key string
 ---@return table
 function M.read_json(key)
-    assert(key and key ~= "", "Key cannot be empty")
-
     local path = json_path(key)
-    assert(vim.fn.filereadable(path) == 1, "JSON file not found: " .. path)
-
-    local f = assert(io.open(path, "r"))
+    local f = assert(io.open(path, "r"), "JSON file not found: " .. path)
     local content = f:read("*all")
     f:close()
 
@@ -62,9 +55,6 @@ end
 ---@param key string
 ---@param data table
 function M.write_mpack(key, data)
-    assert(key and key ~= "", "Key cannot be empty")
-    assert(type(data) == "table", "Data must be a table")
-
     local path = mpack_path(key)
     local encoded = vim.mpack.encode(data)
 
@@ -77,12 +67,8 @@ end
 ---@param key string
 ---@return table
 function M.read_mpack(key)
-    assert(key and key ~= "", "Key cannot be empty")
-
     local path = mpack_path(key)
-    assert(vim.fn.filereadable(path) == 1, "MsgPack file not found: " .. path)
-
-    local f = assert(io.open(path, "rb"))
+    local f = assert(io.open(path, "rb"), "MsgPack file not found: " .. path)
     local bytes = f:read("*all")
     f:close()
 

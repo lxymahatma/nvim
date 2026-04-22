@@ -42,13 +42,21 @@
       {
         "path": "$HOME/.local/share/nvim/lazy",
         "ignoreGlobs": [
-          "**/*_spec.lua"
+          "**/*_spec.lua",
+          "**/scripts/**",
+          "**/test/**",
+          "**/tests/**",
+          "**/spec/**"
         ]
       },
       {
         "path": "$USERPROFILE/AppData/Local/nvim-data/lazy",
         "ignoreGlobs": [
-          "**/*_spec.lua"
+          "**/*_spec.lua",
+          "**/scripts/**",
+          "**/test/**",
+          "**/tests/**",
+          "**/spec/**"
         ]
       }
     ]
