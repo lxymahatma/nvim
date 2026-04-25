@@ -70,44 +70,37 @@ return {
             local mini_icons = require("mini.icons")
             local colorful_menu = require("colorful-menu")
 
+            local function get_mini_icon(ctx)
+                if ctx.source_id == "lsp" then
+                    if ctx.kind == "File" then
+                        return mini_icons.get("file", ctx.item.detail)
+                    elseif ctx.kind == "Folder" then
+                        return mini_icons.get("directory", ctx.item.label)
+                    end
+                    return mini_icons.get("lsp", ctx.kind)
+                elseif ctx.source_id == "path" then
+                    local is_unknown = vim.tbl_contains({ "link", "socket", "fifo", "char", "block", "unknown" }, ctx.item.data.type)
+                    return mini_icons.get(is_unknown and "os" or ctx.item.data.type, is_unknown and "" or ctx.label)
+                end
+                return mini_icons.get("lsp", ctx.kind)
+            end
+
             opts.completion.menu.draw.components = vim.tbl_extend("force", opts.completion.menu.draw.components or {}, {
                 kind_icon = {
                     ellipsis = false,
                     text = function(ctx)
-                        local icon = ctx.kind_icon
-                        if ctx.source_id == "lsp" then
-                            if ctx.kind == "File" then
-                                icon, _ = mini_icons.get("file", ctx.item.detail)
-                            elseif ctx.kind == "Folder" then
-                                icon, _ = mini_icons.get("directory", ctx.item.label)
-                            else
-                                icon, _ = mini_icons.get("lsp", ctx.kind)
-                            end
-                        elseif ctx.source_id == "path" then
-                            if ctx.item.data.type ~= "link" then
-                                icon, _ = mini_icons.get(ctx.item.data.type, ctx.label)
-                            end
-                        end
-
-                        return icon .. ctx.icon_gap
+                        local icon = get_mini_icon(ctx)
+                        return (icon or ctx.kind_icon) .. ctx.icon_gap
                     end,
                     highlight = function(ctx)
-                        local hl = ctx.kind_hl
-                        if ctx.source_id == "lsp" then
-                            if ctx.kind == "File" then
-                                _, hl = mini_icons.get("file", ctx.item.detail)
-                            elseif ctx.kind == "Folder" then
-                                _, hl = mini_icons.get("directory", ctx.item.label)
-                            else
-                                _, hl = mini_icons.get("lsp", ctx.kind)
-                            end
-                        elseif ctx.source_id == "path" then
-                            if ctx.item.data.type ~= "link" then
-                                _, hl = mini_icons.get(ctx.item.data.type, ctx.label)
-                            end
-                        end
-
-                        return hl
+                        local _, hl = get_mini_icon(ctx)
+                        return hl or ctx.kind_hl
+                    end,
+                },
+                kind = {
+                    highlight = function(ctx)
+                        local _, hl = get_mini_icon(ctx)
+                        return hl or ctx.kind_hl
                     end,
                 },
                 label = {
