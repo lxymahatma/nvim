@@ -1,6 +1,19 @@
 local mr = require("mason-registry")
-local mlsp = require("mason-lspconfig")
-local mappings = mlsp.get_mappings().lspconfig_to_package
+
+local mappings = {
+    bashls = "bash-language-server",
+    cssls = "css-lsp",
+    docker_compose_language_service = "docker-compose-language-service",
+    docker_language_server = "docker-language-server",
+    dockerls = "dockerfile-language-server",
+    html = "html-lsp",
+    jsonls = "json-lsp",
+    rust_analyzer = "rust-analyzer",
+    systemd_lsp = "systemd-lsp",
+    tailwindcss = "tailwindcss-language-server",
+    vue_ls = "vue-language-server",
+    yamlls = "yaml-language-server",
+}
 
 local M = {}
 

@@ -33,15 +33,4 @@ return {
         },
     },
 
-    -- Mason-lspconfig
-    {
-        "mason-org/mason-lspconfig.nvim",
-        dependencies = { "mason-org/mason.nvim" },
-        lazy = true,
-
-        ---@type MasonLspconfigSettings
-        opts = {
-            automatic_enable = false,
-        },
-    },
 }
