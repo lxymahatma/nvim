@@ -3,6 +3,7 @@ return {
     -- Mason
     {
         "mason-org/mason.nvim",
+        event = "VeryLazy",
         cmd = "Mason",
 
         ---@type MasonSettings
