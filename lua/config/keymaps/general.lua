@@ -16,9 +16,6 @@ map("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 map("n", "<leader>lz", "<cmd>Lazy<cr>", { desc = "Open Lazy.nvim" })
 map("n", "<leader>lp", "<cmd>Lazy profile<cr>", { desc = "Profile Lazy.nvim plugins" })
 
--- Code Actions
-map({ "n", "v" }, "<leader>ca", function() vim.lsp.buf.code_action() end, { desc = "Code action", lsp = { method = "textDocument/codeAction" } })
-
 -- Preview
 map("n", "<leader>up", "<cmd>Markview<cr>", { desc = "Toggle Preview" })
 map("n", "<leader>uP", "<cmd>Markview splitToggle<cr>", { desc = "Toggle Split Preview" })

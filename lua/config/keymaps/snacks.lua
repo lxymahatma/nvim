@@ -61,17 +61,6 @@ map("n", "<leader>sR", function() Snacks.picker.registers() end, { desc = "Regis
 map({ "n", "x" }, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Selection or Word" })
 map("n", "<leader>sz", function() Snacks.picker.zoxide() end, { desc = "Zoxide" })
 
--- LSP Pickers
-map("n", "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition", lsp = { method = "textDocument/definition" } })
-map("n", "gD", function() Snacks.picker.lsp_declarations() end, { desc = "Goto Declaration", lsp = { method = "textDocument/declaration" } })
-map("n", "gR", function() Snacks.picker.lsp_references() end, { desc = "Goto References", lsp = { method = "textDocument/references" }, nowait = true })
-map("n", "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation", lsp = { method = "textDocument/implementation" } })
-map("n", "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto Type Definition", lsp = { method = "textDocument/typeDefinition" } })
-map("n", "<leader>ci", function() Snacks.picker.lsp_incoming_calls() end, { desc = "Calls Incoming", lsp = { method = "callHierarchy/incomingCalls" } })
-map("n", "<leader>co", function() Snacks.picker.lsp_outgoing_calls() end, { desc = "Calls Outgoing", lsp = { method = "callHierarchy/outgoingCalls" } })
-map("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols", lsp = { method = "textDocument/documentSymbol" } })
-map("n", "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "LSP Workspace Symbols", lsp = { method = "workspace/symbol" } })
-
 -- Git
 map("n", "<leader>gl", function() Snacks.picker.git_log() end, { desc = "Git Log" })
 map("n", "<leader>gf", function() Snacks.picker.git_log_file() end, { desc = "Git Log File" })

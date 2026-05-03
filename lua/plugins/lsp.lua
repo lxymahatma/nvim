@@ -4,6 +4,8 @@ return {
     "neovim/nvim-lspconfig",
     event = "BufEdit",
     config = vim.schedule_wrap(function()
+        require("config.keymaps.lsp").setup()
+
         Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
             ---@cast buffer integer
             vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
