@@ -1,6 +1,6 @@
 ---@type LanguageSpec
 return {
     treesitter = true,
-    mason = "zls",
+    mason = { "zls", condition = { missing = true } },
     lsp = "zls",
 }
