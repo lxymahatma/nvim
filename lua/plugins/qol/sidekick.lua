@@ -2,7 +2,7 @@
 ---@type LazyPluginSpec
 return {
     "folke/sidekick.nvim",
-    Event = "VeryLazy",
+    event = "VeryLazy",
 
     ---@type sidekick.Config
     opts = {
