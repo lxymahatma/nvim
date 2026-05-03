@@ -13,7 +13,7 @@ return {
     formatter = "markdownlint-cli2",
     plugin = {
         "OXY2DEV/markview.nvim",
-        lazy = false,
+        ft = { "markdown", "html", "tex", "typst", "yaml" },
         opts = function()
             local presets = require("markview.presets")
 
