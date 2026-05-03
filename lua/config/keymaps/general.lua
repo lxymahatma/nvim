@@ -17,7 +17,7 @@ map("n", "<leader>lz", "<cmd>Lazy<cr>", { desc = "Open Lazy.nvim" })
 map("n", "<leader>lp", "<cmd>Lazy profile<cr>", { desc = "Profile Lazy.nvim plugins" })
 
 -- Code Actions
-map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action", lsp = { method = "textDocument/codeAction" } })
+map({ "n", "v" }, "<leader>ca", function() vim.lsp.buf.code_action() end, { desc = "Code action", lsp = { method = "textDocument/codeAction" } })
 
 -- Preview
 map("n", "<leader>up", "<cmd>Markview<cr>", { desc = "Toggle Preview" })
