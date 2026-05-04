@@ -33,10 +33,10 @@ return {
                 inside = "i",
 
                 -- Next/last variants
-                around_next = "an",
-                inside_next = "in",
-                around_last = "al",
-                inside_last = "il",
+                around_next = "aN",
+                inside_next = "iN",
+                around_last = "aL",
+                inside_last = "iL",
 
                 -- Move cursor to corresponding edge of `a` textobject
                 goto_left = "g[",
