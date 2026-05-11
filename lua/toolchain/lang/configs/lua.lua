@@ -7,7 +7,6 @@ return {
     },
     mason = {
         "emmylua_ls",
-        "selene",
         "stylua",
     },
     lsp = {
@@ -32,6 +31,5 @@ return {
             },
         },
     },
-    linter = "selene",
     formatter = { "stylua", lsp_format = "last" },
 }
