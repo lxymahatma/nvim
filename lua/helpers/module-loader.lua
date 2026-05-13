@@ -28,20 +28,6 @@ function M.get_extra_modules(storage_key)
     return {}
 end
 
---- Get enabled modules (default + extra)
----@param default_modules string[]
----@param storage_key string
----@return string[]
-function M.get_enabled_modules(default_modules, storage_key)
-    local extra_modules = M.get_extra_modules(storage_key)
-    local enabled_modules = {}
-    vim.list_extend(enabled_modules, default_modules)
-    for _, module in ipairs(extra_modules) do
-        if not vim.tbl_contains(enabled_modules, module) then table.insert(enabled_modules, module) end
-    end
-    return enabled_modules
-end
-
 --- Save extra modules to storage
 ---@param storage_key string
 ---@param extra_modules string[]

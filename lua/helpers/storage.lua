@@ -3,16 +3,11 @@ local constant = require("config.constant")
 local M = {}
 
 local function json_path(key) return constant.storage_dir .. "/" .. key .. ".json" end
-local function mpack_path(key) return constant.storage_dir .. "/" .. key .. ".mpack" end
 
 function M.init()
     local storage_dir = constant.storage_dir
     if vim.fn.isdirectory(storage_dir) == 0 then vim.fn.mkdir(storage_dir, "p") end
 end
-
------------
--- JSON ---
------------
 
 ---Write table to JSON
 ---@param key string
@@ -45,42 +40,6 @@ end
 function M.exists_json(key)
     if not key or key == "" then return false end
     return vim.fn.filereadable(json_path(key)) == 1
-end
-
-------------------
--- MessagePack ---
-------------------
-
----Write table to MessagePack
----@param key string
----@param data table
-function M.write_mpack(key, data)
-    local path = mpack_path(key)
-    local encoded = vim.mpack.encode(data)
-
-    local f = assert(io.open(path, "wb"), "Failed to open file: " .. path)
-    f:write(encoded)
-    f:close()
-end
-
----Read table from MessagePack
----@param key string
----@return table
-function M.read_mpack(key)
-    local path = mpack_path(key)
-    local f = assert(io.open(path, "rb"), "MsgPack file not found: " .. path)
-    local bytes = f:read("*all")
-    f:close()
-
-    return vim.mpack.decode(bytes)
-end
-
----Check if MessagePack file exists
----@param key string
----@return boolean
-function M.exists_mpack(key)
-    if not key or key == "" then return false end
-    return vim.fn.filereadable(mpack_path(key)) == 1
 end
 
 return M
