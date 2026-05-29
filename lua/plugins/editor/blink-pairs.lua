@@ -4,6 +4,7 @@ return {
     event = "BufEdit",
     version = "*",
     dependencies = "saghen/blink.lib",
+    build = function() require('blink.pairs').download():pwait(60000) end,
 
     ---@type blink.pairs.Config
     opts = {
