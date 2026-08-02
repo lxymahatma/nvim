@@ -28,7 +28,9 @@ M.default_langs = {
     "yaml",
 }
 
-M.default_tools = {}
+M.default_tools = {
+    "harper"
+}
 
 M.storage_dir = vim.fn.stdpath("data") .. "/storage"
 
