@@ -92,7 +92,7 @@ function State:toggle_current()
 
     if item.is_default then return nil, "Cannot disable default: " .. item.name end
 
-    local type_key = item.type --[[@as string]]
+    local type_key = item.type
     local extra = loader.extra[type_key]
 
     if item.enabled then
