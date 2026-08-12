@@ -3,11 +3,11 @@ return {
     treesitter = {
         "lua",
         "luadoc",
-        "luap",
+        "luap"
     },
     mason = {
         "emmylua_ls",
-        "stylua",
+        "luafmt"
     },
     lsp = {
         emmylua_ls = {
@@ -18,18 +18,18 @@ return {
                         extensions = { ".lua" },
                         requirePattern = {
                             "lua/?.lua",
-                            "lua/?/init.lua",
-                        },
+                            "lua/?/init.lua"
+                        }
                     },
                     workspace = {
                         library = {
                             "$VIMRUNTIME",
-                            "$HOME/.local/share/nvim/lazy",
-                        },
-                    },
-                },
-            },
-        },
+                            "$HOME/.local/share/nvim/lazy"
+                        }
+                    }
+                }
+            }
+        }
     },
-    formatter = { "stylua", lsp_format = "last" },
+    formatter = { "luafmt" }
 }
