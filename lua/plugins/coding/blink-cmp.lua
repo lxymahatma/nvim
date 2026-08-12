@@ -1,107 +1,109 @@
 -- Code Completion
 return {
-    ---@type LazyPluginSpec
-    {
-        "saghen/blink.cmp",
-        event = { "InsertEnter", "CmdlineEnter" },
-        version = "*",
+  ---@type LazyPluginSpec
+  {
+    "saghen/blink.cmp",
+    event = { "InsertEnter", "CmdlineEnter" },
+    version = "*",
 
-        ---@type blink.cmp.Config
-        opts = {
-            appearance = { nerd_font_variant = "normal" },
-            cmdline = {
-                enabled = true,
-                keymap = { preset = "inherit" },
-                completion = { menu = { auto_show = true } },
-            },
-            term = {
-                enabled = false,
-                keymap = { preset = "inherit" },
-            },
-            completion = {
-                keyword = { range = "full" },
-                accept = {
-                    auto_brackets = { enabled = true },
-                },
-                menu = {
-                    auto_show = true,
-                    draw = {
-                        columns = { { "kind_icon" }, { "label", gap = 1 }, { "kind" } },
-                    },
-                },
-                documentation = {
-                    auto_show = true,
-                    auto_show_delay_ms = 200,
-                },
-                ghost_text = { enabled = true },
-            },
-            sources = {
-                default = { "lsp", "path", "snippets", "buffer" },
-            },
-            keymap = {
-                preset = "none",
-                ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
-                ["<Tab>"] = {
-                    "select_and_accept",
-                    function() return require("copilot.suggestion").accept() end,
-                    "fallback",
-                },
-                ["<Up>"] = { "select_prev", "fallback" },
-                ["<Down>"] = { "select_next", "fallback" },
-                ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
-                ["<C-n>"] = { "select_next", "fallback_to_mappings" },
-                ["<C-u>"] = { "scroll_documentation_up", "fallback" },
-                ["<C-d>"] = { "scroll_documentation_down", "fallback" },
-            },
+    ---@type blink.cmp.Config
+    opts = {
+      appearance = { nerd_font_variant = "normal" },
+      cmdline = {
+        enabled = true,
+        keymap = { preset = "inherit" },
+        completion = { menu = { auto_show = true } },
+      },
+      term = {
+        enabled = false,
+        keymap = { preset = "inherit" },
+      },
+      completion = {
+        keyword = { range = "full" },
+        accept = {
+          auto_brackets = { enabled = true },
         },
+        menu = {
+          auto_show = true,
+          draw = {
+            columns = { { "kind_icon" }, { "label", gap = 1 }, { "kind" } },
+          },
+        },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 200,
+        },
+        ghost_text = { enabled = true },
+      },
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+      },
+      keymap = {
+        preset = "none",
+        ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<Tab>"] = {
+          "select_and_accept",
+          function() return require("copilot.suggestion").accept() end,
+          "fallback",
+        },
+        ["<Up>"] = { "select_prev", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
+        ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+        ["<C-n>"] = { "select_next", "fallback_to_mappings" },
+        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+      },
     },
+  },
 
-    -- Completion Icon and Highlighting
+  -- Completion Icon and Highlighting
     ---@type LazyPluginSpec
-    {
-        "saghen/blink.cmp",
-        opts = function(_, opts)
-            local mini_icons = require("mini.icons")
-            local colorful_menu = require("colorful-menu")
+  {
+    "saghen/blink.cmp",
+    opts = function(_, opts)
+      local mini_icons = require("mini.icons")
+      local colorful_menu = require("colorful-menu")
 
-            local function get_mini_icon(ctx)
-                if ctx.source_id == "lsp" then
-                    if ctx.kind == "File" then
-                        return mini_icons.get("file", ctx.item.detail)
-                    elseif ctx.kind == "Folder" then
-                        return mini_icons.get("directory", ctx.item.label)
-                    end
-                    return mini_icons.get("lsp", ctx.kind)
-                elseif ctx.source_id == "path" then
-                    local is_unknown = vim.tbl_contains({ "link", "socket", "fifo", "char", "block", "unknown" }, ctx.item.data.type)
-                    return mini_icons.get(is_unknown and "os" or ctx.item.data.type, is_unknown and "" or ctx.label)
-                end
-                return mini_icons.get("lsp", ctx.kind)
-            end
+      local function get_mini_icon(ctx)
+        if ctx.source_id == "lsp" then
+          if ctx.kind == "File" then
+            return mini_icons.get("file", ctx.item.detail)
+          elseif ctx.kind == "Folder" then
+            return mini_icons.get("directory", ctx.item.label)
+          end
+          return mini_icons.get("lsp", ctx.kind)
+        elseif ctx.source_id == "path" then
+          local is_unknown = vim.tbl_contains(
+            { "link", "socket", "fifo", "char", "block", "unknown" }, ctx.item.data.type
+          )
+          return mini_icons.get(is_unknown and "os" or ctx.item.data.type, is_unknown and "" or ctx.label)
+        end
+        return mini_icons.get("lsp", ctx.kind)
+      end
 
-            opts.completion.menu.draw.components = vim.tbl_extend("force", opts.completion.menu.draw.components or {}, {
-                kind_icon = {
-                    ellipsis = false,
-                    text = function(ctx)
-                        local icon = get_mini_icon(ctx)
-                        return (icon or ctx.kind_icon) .. ctx.icon_gap
-                    end,
-                    highlight = function(ctx)
-                        local _, hl = get_mini_icon(ctx)
-                        return hl or ctx.kind_hl
-                    end,
-                },
-                kind = {
-                    highlight = function(ctx)
-                        local _, hl = get_mini_icon(ctx)
-                        return hl or ctx.kind_hl
-                    end,
-                },
-                label = {
-                    text = function(ctx) return colorful_menu.blink_components_text(ctx) end,
-                    highlight = function(ctx) return colorful_menu.blink_components_highlight(ctx) end,
-                },
-            })
-        end,
-    },
+      opts.completion.menu.draw.components = vim.tbl_extend("force", opts.completion.menu.draw.components or {}, {
+        kind_icon = {
+          ellipsis = false,
+          text = function(ctx)
+            local icon = get_mini_icon(ctx)
+            return (icon or ctx.kind_icon) .. ctx.icon_gap
+          end,
+          highlight = function(ctx)
+            local _, hl = get_mini_icon(ctx)
+            return hl or ctx.kind_hl
+          end,
+        },
+        kind = {
+          highlight = function(ctx)
+            local _, hl = get_mini_icon(ctx)
+            return hl or ctx.kind_hl
+          end,
+        },
+        label = {
+          text = function(ctx) return colorful_menu.blink_components_text(ctx) end,
+          highlight = function(ctx) return colorful_menu.blink_components_highlight(ctx) end,
+        },
+      })
+    end,
+  },
 }

@@ -1,32 +1,36 @@
 -- Which key
 ---@type LazyPluginSpec
 return {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
+  "folke/which-key.nvim",
+  event = "VeryLazy",
 
-    ---@type wk.Opts
-    opts = {
-        preset = "helix",
+  ---@type wk.Opts
+  opts = {
+    preset = "helix",
 
-        ---@type wk.Spec
-        spec = {
-            { "<leader>a",  group = "AI" },
-            { "<leader>b",  group = "Buffer" },
-            { "<leader>c",  group = "Code" },
-            { "<leader>d",  group = "Debug" },
-            { "<leader>f",  group = "Find" },
-            { "<leader>g",  group = "Git" },
-            { "<leader>gh", group = "Hunk" },
-            { "<leader>l",  group = "Lazy" },
-            { "<leader>o",  group = "Overseer" },
-            { "<leader>s",  group = "Search" },
-            { "<leader>u",  group = "Toggle" },
-            { "<leader>w",  group = "Window" },
-            { "<leader>x",  group = "Trouble" },
-        },
-        icons = { mappings = false },
+    ---@type wk.Spec
+    spec = {
+      { "<leader>a", group = "AI" },
+      { "<leader>b", group = "Buffer" },
+      { "<leader>c", group = "Code" },
+      { "<leader>d", group = "Debug" },
+      { "<leader>f", group = "Find" },
+      { "<leader>g", group = "Git" },
+      { "<leader>gh", group = "Hunk" },
+      { "<leader>l", group = "Lazy" },
+      { "<leader>o", group = "Overseer" },
+      { "<leader>s", group = "Search" },
+      { "<leader>u", group = "Toggle" },
+      { "<leader>w", group = "Window" },
+      { "<leader>x", group = "Trouble" },
     },
-    keys = {
-        { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps" },
+    icons = { mappings = false },
+  },
+  keys = {
+    {
+      "<leader>?",
+      function() require("which-key").show({ global = false }) end,
+      desc = "Buffer Local Keymaps",
     },
+  },
 }

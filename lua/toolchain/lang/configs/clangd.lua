@@ -1,37 +1,37 @@
 ---@type LanguageSpec
 return {
-    filetype = {
-        "c",
-        "cpp",
-    },
-    treesitter = {
-        "c",
-        "cpp",
-    },
-    mason = {
-        { "clangd",       condition = { missing = true } },
-        { "clang-format", condition = { missing = true } },
-    },
-    lsp = {
-        clangd = {
-            capabilities = {
-                offsetEncoding = { "utf-8", "utf-16" },
-                textDocument = {
-                    completion = {
-                        editsNearCursor = true,
-                    },
-                },
-            },
-            cmd = {
-                "clangd",
-                "--background-index",
-                "--clang-tidy",
-            },
+  filetype = {
+    "c",
+    "cpp",
+  },
+  treesitter = {
+    "c",
+    "cpp",
+  },
+  mason = {
+    { "clangd", condition = { missing = true } },
+    { "clang-format", condition = { missing = true } },
+  },
+  lsp = {
+    clangd = {
+      capabilities = {
+        offsetEncoding = { "utf-8", "utf-16" },
+        textDocument = {
+          completion = {
+            editsNearCursor = true,
+          },
         },
+      },
+      cmd = {
+        "clangd",
+        "--background-index",
+        "--clang-tidy",
+      },
     },
-    formatter = "clang-format",
-    plugin = {
-        "p00f/clangd_extensions.nvim",
-        lazy = true,
-    },
+  },
+  formatter = "clang-format",
+  plugin = {
+    "p00f/clangd_extensions.nvim",
+    lazy = true,
+  },
 }

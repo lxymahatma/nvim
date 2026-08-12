@@ -1,5 +1,5 @@
 ---@type LazyPluginSpec
 return {
-    "saghen/blink.lib",
-    lazy = true,
+  "saghen/blink.lib",
+  lazy = true,
 }

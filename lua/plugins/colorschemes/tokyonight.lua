@@ -1,10 +1,10 @@
 -- tokyonight
 ---@type LazyPluginSpec
 return {
-    "folke/tokyonight.nvim",
-    lazy = true,
-    enabled = false,
+  "folke/tokyonight.nvim",
+  lazy = true,
+  enabled = false,
 
-    ---@type tokyonight.Config
-    opts = {},
+  ---@type tokyonight.Config
+  opts = {},
 }

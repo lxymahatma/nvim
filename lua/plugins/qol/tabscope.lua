@@ -1,14 +1,14 @@
 -- Tab scoped buffers
 ---@type LazyPluginSpec
 return {
-    "lxymahatma/tabscope.nvim",
-    lazy = true,
+  "lxymahatma/tabscope.nvim",
+  lazy = true,
 
-    ---@type Tabscope.Config
-    opts = {
-        branch = true,
-        integrations = {
-            persistence = true,
-        },
+  ---@type Tabscope.Config
+  opts = {
+    branch = true,
+    integrations = {
+      persistence = true,
     },
+  },
 }

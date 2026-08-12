@@ -1,6 +1,6 @@
 ---@type LanguageSpec
 return {
-    treesitter = "java",
-    mason = "jdtls",
-    lsp = "jdtls",
+  treesitter = "java",
+  mason = "jdtls",
+  lsp = "jdtls",
 }

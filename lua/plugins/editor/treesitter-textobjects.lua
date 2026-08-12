@@ -1,7 +1,7 @@
 -- Treesitter textobjects
 ---@type LazyPluginSpec
 return {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    event = "BufEdit",
-    opts = {},
+  "nvim-treesitter/nvim-treesitter-textobjects",
+  event = "BufEdit",
+  opts = {},
 }

@@ -1,5 +1,5 @@
 ---@type LazyPluginSpec
 return {
-    "nvim-mini/mini.extra",
-    lazy = true,
+  "nvim-mini/mini.extra",
+  lazy = true,
 }

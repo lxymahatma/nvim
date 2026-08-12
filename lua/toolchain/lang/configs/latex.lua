@@ -1,16 +1,16 @@
 ---@type LanguageSpec
 return {
-    filetype = "tex",
-    treesitter = true,
-    mason = {
-        "texlab",
-        "tex-fmt",
-    },
-    lsp = "texlab",
-    formatter = "tex-fmt",
-    plugin = {
-        "lervag/vimtex",
-        ft = { "tex", "bib", "cls" },
-        init = function() vim.g.vimtex_view_method = "zathura" end,
-    },
+  filetype = "tex",
+  treesitter = true,
+  mason = {
+    "texlab",
+    "tex-fmt",
+  },
+  lsp = "texlab",
+  formatter = "tex-fmt",
+  plugin = {
+    "lervag/vimtex",
+    ft = { "tex", "bib", "cls" },
+    init = function() vim.g.vimtex_view_method = "zathura" end,
+  },
 }

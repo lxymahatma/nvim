@@ -1,4 +1,4 @@
 ---@type LanguageSpec
 return {
-    treesitter = "ini",
+  treesitter = "ini",
 }

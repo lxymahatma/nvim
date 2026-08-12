@@ -1,9 +1,9 @@
 ---@type LanguageSpec
 return {
-    treesitter = {
-        "css",
-        "scss",
-    },
-    mason = "cssls",
-    lsp = "cssls",
+  treesitter = {
+    "css",
+    "scss",
+  },
+  mason = "cssls",
+  lsp = "cssls",
 }

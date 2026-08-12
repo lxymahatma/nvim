@@ -4,6 +4,8 @@ local M = {}
 
 ---@param opts? ToolchainUIOptions
 ---@return ToolchainUI
-function M.open(opts) return UI(opts):open() end
+function M.open(opts)
+  return UI(opts):open()
+end
 
 return M

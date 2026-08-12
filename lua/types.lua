@@ -2,7 +2,7 @@
 
 -- Mason Package Specification
 ---@class ConditionOptions
----@field missing? string|boolean If string, checks that specific executable. If true, use the package name as executable name.
+---@field missing? string | boolean If string, checks that specific executable. If true, use the package name as executable name.
 
 ---@alias ConditionSpec fun(): boolean | ConditionOptions
 
@@ -14,15 +14,15 @@
 
 -- Types for Snacks Pickers
 ---@class snacks.picker
----@field filetypes fun(opts?:snacks.picker.filetypes.Config|{}): snacks.Picker
----@field ast_grep fun(opts?:snacks.picker.ast_grep.Config|{}): snacks.Picker
----@field todo_comments fun(opts?:snacks.picker.todo.Config|{}): snacks.Picker
+---@field filetypes fun(opts?: snacks.picker.filetypes.Config | { }): snacks.Picker
+---@field ast_grep fun(opts?: snacks.picker.ast_grep.Config | { }): snacks.Picker
+---@field todo_comments fun(opts?: snacks.picker.todo.Config | { }): snacks.Picker
 
 -- Picker Configs
----@class snacks.picker.filetypes.Config : snacks.picker.Config
----@class snacks.picker.ast_grep.Config : snacks.picker.grep.Config
+---@class snacks.picker.filetypes.Config: snacks.picker.Config
+---@class snacks.picker.ast_grep.Config: snacks.picker.grep.Config
 
----@class FiletypeInfo : snacks.picker.Item
+---@class FiletypeInfo: snacks.picker.Item
 ---@field treesitter string[]
 ---@field lsp string[]
 ---@field formatters string[]

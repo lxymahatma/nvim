@@ -1,35 +1,35 @@
 ---@type LanguageSpec
 return {
-    treesitter = {
-        "lua",
-        "luadoc",
-        "luap"
+  treesitter = {
+    "lua",
+    "luadoc",
+    "luap",
+  },
+  mason = {
+    "emmylua_ls",
+    "luafmt",
+  },
+  lsp = {
+    emmylua_ls = {
+      settings = {
+        Lua = {
+          runtime = {
+            version = "LuaJIT",
+            extensions = { ".lua" },
+            requirePattern = {
+              "lua/?.lua",
+              "lua/?/init.lua",
+            },
+          },
+          workspace = {
+            library = {
+              "$VIMRUNTIME",
+              "$HOME/.local/share/nvim/lazy",
+            },
+          },
+        },
+      },
     },
-    mason = {
-        "emmylua_ls",
-        "luafmt"
-    },
-    lsp = {
-        emmylua_ls = {
-            settings = {
-                Lua = {
-                    runtime = {
-                        version = "LuaJIT",
-                        extensions = { ".lua" },
-                        requirePattern = {
-                            "lua/?.lua",
-                            "lua/?/init.lua"
-                        }
-                    },
-                    workspace = {
-                        library = {
-                            "$VIMRUNTIME",
-                            "$HOME/.local/share/nvim/lazy"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    formatter = { "luafmt" }
+  },
+  formatter = { "luafmt" },
 }

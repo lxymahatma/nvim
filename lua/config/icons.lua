@@ -3,31 +3,31 @@ local M = {}
 M.branch = " "
 
 M.copilot = {
-    Error = " ",
-    Inactive = " ",
-    Warning = " ",
-    Normal = " ",
+  Error = " ",
+  Inactive = " ",
+  Warning = " ",
+  Normal = " ",
 }
 
 M.diagnostics = {
-    Error = " ",
-    Warn = " ",
-    Info = " ",
-    Hint = " ",
+  Error = " ",
+  Warn = " ",
+  Info = " ",
+  Hint = " ",
 }
 
 M.fileformat = {
-    unix = "",
-    dos = "",
-    mac = "",
+  unix = "",
+  dos = "",
+  mac = "",
 }
 
 M.bufferline = {
-    active = "▎",
-    modified = "●",
-    separator = "│",
-    trunc_left = " ",
-    trunc_right = " ",
+  active = "▎",
+  modified = "●",
+  separator = "│",
+  trunc_left = " ",
+  trunc_right = " ",
 }
 
 M.LeftSectionSep = ""
@@ -36,11 +36,11 @@ M.LeftComponentSep = ""
 M.RightComponentSep = ""
 
 M.toolchain = {
-    enabled = "",
-    disabled = "",
-    default = "★",
-    tab_active = "●",
-    tab_inactive = "○",
+  enabled = "",
+  disabled = "",
+  default = "★",
+  tab_active = "●",
+  tab_inactive = "○",
 }
 
 return M

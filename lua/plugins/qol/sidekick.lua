@@ -1,67 +1,65 @@
 -- AI sidekick
 ---@type LazyPluginSpec
 return {
-    "folke/sidekick.nvim",
-    event = "VeryLazy",
+  "folke/sidekick.nvim",
+  event = "VeryLazy",
 
-    ---@type sidekick.Config
-    opts = {
-        nes = {
-            diff = { inline = "chars" },
-        },
-        cli = {
-            mux = {
-                backend = "tmux",
-                enabled = true,
-            },
-        },
+  ---@type sidekick.Config
+  opts = {
+    nes = {
+      diff = { inline = "chars" },
     },
-    keys = {
-        {
-            "<Tab>",
-            function()
-                if not require("sidekick").nes_jump_or_apply() then return "<Tab>" end
-            end,
-            expr = true,
-            desc = "Goto/Apply Next Edit Suggestion",
-        },
-        {
-            "<C-.>",
-            function() require("sidekick.cli").focus() end,
-            desc = "Sidekick Focus",
-            mode = { "n", "t", "i", "x" },
-        },
-        {
-            "<leader>aa",
-            function() require("sidekick.cli").toggle() end,
-            desc = "Sidekick Toggle CLI",
-        },
-        {
-            "<leader>as",
-            function() require("sidekick.cli").select() end,
-            desc = "Select CLI",
-        },
-        {
-            "<leader>ad",
-            function() require("sidekick.cli").close() end,
-            desc = "Detach a CLI Session",
-        },
-        {
-            "<leader>at",
-            function() require("sidekick.cli").send({ msg = "{this}" }) end,
-            mode = { "x", "n" },
-            desc = "Send This",
-        },
-        {
-            "<leader>af",
-            function() require("sidekick.cli").send({ msg = "{file}" }) end,
-            desc = "Send File",
-        },
-        {
-            "<leader>av",
-            function() require("sidekick.cli").send({ msg = "{selection}" }) end,
-            mode = { "x" },
-            desc = "Send Visual Selection",
-        },
+    cli = {
+      mux = {
+        backend = "tmux",
+        enabled = true,
+      },
     },
+  },
+  keys = {
+    {
+      "<Tab>",
+      function() if not require("sidekick").nes_jump_or_apply() then return "<Tab>" end end,
+      expr = true,
+      desc = "Goto/Apply Next Edit Suggestion",
+    },
+    {
+      "<C-.>",
+      function() require("sidekick.cli").focus() end,
+      desc = "Sidekick Focus",
+      mode = { "n", "t", "i", "x" },
+    },
+    {
+      "<leader>aa",
+      function() require("sidekick.cli").toggle() end,
+      desc = "Sidekick Toggle CLI",
+    },
+    {
+      "<leader>as",
+      function() require("sidekick.cli").select() end,
+      desc = "Select CLI",
+    },
+    {
+      "<leader>ad",
+      function() require("sidekick.cli").close() end,
+      desc = "Detach a CLI Session",
+    },
+    {
+      "<leader>at",
+      function() require("sidekick.cli").send({ msg = "{this}" }) end,
+      mode = { "x", "n" },
+      desc = "Send This",
+    },
+    {
+      "<leader>af",
+      function() require("sidekick.cli").send({ msg = "{file}" }) end,
+      desc = "Send File",
+    },
+    {
+      "<leader>av",
+      function() require("sidekick.cli").send({ msg = "{selection}" }) end,
+      mode = { "x" },
+      desc = "Send Visual Selection",
+    },
+  },
 }

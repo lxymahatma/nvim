@@ -1,6 +1,6 @@
 ---@type LanguageSpec
 return {
-    filetype = "nu",
-    treesitter = "nu",
-    lsp = "nushell",
+  filetype = "nu",
+  treesitter = "nu",
+  lsp = "nushell",
 }
