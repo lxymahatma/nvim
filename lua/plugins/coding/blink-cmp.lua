@@ -3,6 +3,7 @@ return {
   ---@type LazyPluginSpec
   {
     "saghen/blink.cmp",
+    dependencies = { "rafamadriz/friendly-snippets" },
     event = { "InsertEnter", "CmdlineEnter" },
     version = "*",
 
