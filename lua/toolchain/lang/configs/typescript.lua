@@ -12,6 +12,6 @@ return {
     "jsx",
     "tsx",
   },
-  mason = "tsgo",
-  lsp = "tsgo",
+  mason = "tsc",
+  lsp = "tsc",
 }
