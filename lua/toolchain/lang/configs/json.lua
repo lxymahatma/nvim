@@ -1,5 +1,10 @@
 ---@type LanguageSpec
 return {
+  filetype = {
+    "json",
+    "jsonc",
+    "json5",
+  },
   treesitter = {
     "json",
     "json5",
@@ -9,5 +14,6 @@ return {
     "jsonlint",
   },
   lsp = "jsonls",
-  linter = "jsonlint",
+  -- jsonlint rejects comments, so keep it off jsonc/json5
+  linter = { json = "jsonlint" },
 }
