@@ -3,6 +3,7 @@
 return {
   "neovim/nvim-lspconfig",
   event = "BufEdit",
+  dependencies = { "mason-org/mason.nvim" },
   config = vim.schedule_wrap(function()
     require("config.keymaps.lsp")
 
