@@ -86,7 +86,7 @@ return {
             ["<M-s>"] = { "flash", mode = { "n", "i" } },
             ["s"] = { "flash" },
             ["<M-t>"] = { "trouble_open", mode = { "n", "i" } },
-            ["M-a"] = { "sidekick_send", mode = { "n", "i" } },
+            ["<M-a>"] = { "sidekick_send", mode = { "n", "i" } },
           },
         },
         preview = { wo = { wrap = true } },
