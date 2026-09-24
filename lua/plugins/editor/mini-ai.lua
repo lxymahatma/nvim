@@ -28,23 +28,12 @@ return {
         N = extra.number(),
       },
       mappings = {
-        -- Main textobject prefixes
-        around = "a",
-        inside = "i",
-
         -- Next/last variants
         around_next = "",
         inside_next = "",
         around_last = "",
         inside_last = "",
-
-        -- Move cursor to corresponding edge of `a` textobject
-        goto_left = "g[",
-        goto_right = "g]",
       },
-      n_lines = 50,
-      search_method = "cover_or_next",
-      silent = false,
     }
   end,
 }

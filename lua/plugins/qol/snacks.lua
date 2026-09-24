@@ -48,19 +48,12 @@ return {
         },
       },
     },
-    explorer = {
-      enabled = true,
-      replace_netrw = true,
-    },
+    explorer = { enabled = true },
     image = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
     lazygit = { enabled = true, configure = false },
-    notifier = {
-      enabled = true,
-      timeout = 3000,
-      top_down = true,
-    },
+    notifier = { enabled = true },
     picker = {
       enabled = true,
       matcher = {

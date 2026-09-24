@@ -6,8 +6,6 @@ return {
   opts = {
     mappings = {
       toggle = "gz",
-      split = "",
-      join = "",
     },
   },
 }

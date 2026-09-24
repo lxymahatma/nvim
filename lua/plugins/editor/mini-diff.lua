@@ -12,11 +12,6 @@ return {
       },
     },
     mappings = {
-      apply = "gh",
-      reset = "gH",
-      textobject = "gh",
-      goto_first = "[H",
-      goto_last = "]H",
       goto_prev = "[c",
       goto_next = "]c",
     },

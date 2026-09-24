@@ -11,21 +11,12 @@ return {
     opts = {
       appearance = { nerd_font_variant = "normal" },
       cmdline = {
-        enabled = true,
         keymap = { preset = "inherit" },
         completion = { menu = { auto_show = true } },
       },
-      term = {
-        enabled = false,
-        keymap = { preset = "inherit" },
-      },
       completion = {
         keyword = { range = "full" },
-        accept = {
-          auto_brackets = { enabled = true },
-        },
         menu = {
-          auto_show = true,
           draw = {
             columns = { { "kind_icon" }, { "label", gap = 1 }, { "kind" } },
           },
@@ -35,9 +26,6 @@ return {
           auto_show_delay_ms = 200,
         },
         ghost_text = { enabled = true },
-      },
-      sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
       },
       keymap = {
         preset = "none",
@@ -84,7 +72,6 @@ return {
 
       opts.completion.menu.draw.components = vim.tbl_extend("force", opts.completion.menu.draw.components or {}, {
         kind_icon = {
-          ellipsis = false,
           text = function(ctx)
             local icon = get_mini_icon(ctx)
             return (icon or ctx.kind_icon) .. ctx.icon_gap

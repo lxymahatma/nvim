@@ -10,30 +10,26 @@ return {
         parsers = {
           css = true,
           tailwind = { enable = true, lsp = true, update_names = true },
-          hex = { default = true, rrggbbaa = true, hash_aarrggbb = false },
         },
       },
 
       sass = {
         parsers = {
           css = true,
-          sass = { enable = true, parsers = { css = true } },
-          hex = { default = true, rrggbbaa = true, hash_aarrggbb = false },
+          sass = { enable = true },
         },
       },
 
       scss = {
         parsers = {
           css = true,
-          sass = { enable = true, parsers = { css = true } },
-          hex = { default = true, rrggbbaa = true, hash_aarrggbb = false },
+          sass = { enable = true },
         },
       },
 
       html = {
         parsers = {
           css = true,
-          hex = { default = true, rrggbbaa = true, hash_aarrggbb = false },
         },
       },
 
@@ -41,7 +37,6 @@ return {
         parsers = {
           css = true,
           tailwind = { enable = true, lsp = true, update_names = true },
-          hex = { default = true, rrggbbaa = true, hash_aarrggbb = false },
         },
       },
 
@@ -49,7 +44,6 @@ return {
         parsers = {
           css = true,
           tailwind = { enable = true, lsp = true, update_names = true },
-          hex = { default = true, rrggbbaa = true, hash_aarrggbb = false },
         },
       },
 
@@ -66,22 +60,9 @@ return {
           enabled = false,
           lowercase = false,
           camelcase = false,
-          uppercase = false,
-          strip_digits = false,
         },
-        hex = {
-          default = true,
-          rgb = true,
-          rgba = true,
-          rrggbb = true,
-          rrggbbaa = true,
-          hash_aarrggbb = false,
-          aarrggbb = true,
-          no_hash = false,
-        },
-      },
-      display = {
-        disable_document_color = true,
+        -- `default = true` turns on every hex format that isn't set explicitly
+        hex = { default = true },
       },
     },
   },

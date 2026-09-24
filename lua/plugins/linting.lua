@@ -3,7 +3,6 @@
 return {
   "mfussenegger/nvim-lint",
   event = "BufEdit",
-  opts = {},
   config = function()
     require("lint").linters_by_ft = require("toolchain").get_linters()
 

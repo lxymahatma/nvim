@@ -13,21 +13,8 @@ return {
     ---@type oil.SetupOpts
     return {
       default_file_explorer = false,
-      columns = {
-        "icon",
-      },
-      buf_options = {
-        buflisted = false,
-        bufhidden = "hide",
-      },
-      delete_to_trash = false,
       skip_confirm_for_simple_edits = true,
-      lsp_file_methods = {
-        enabled = true,
-        timeout_ms = 1000,
-        autosave_changes = false,
-      },
-      constrain_cursor = "editable",
+      -- use_default_keymaps = false, so every keymap must be listed here
       keymaps = {
         ["g?"] = { "actions.show_help", mode = "n" },
         ["<CR>"] = "actions.select",
