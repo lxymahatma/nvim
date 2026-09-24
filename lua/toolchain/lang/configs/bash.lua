@@ -8,6 +8,5 @@ return {
     "shfmt",
   },
   lsp = "bashls",
-  linter = "shellcheck",
   formatter = "shfmt",
 }
