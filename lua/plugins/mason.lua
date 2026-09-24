@@ -12,10 +12,10 @@ return {
         package_pending = "➜",
         package_uninstalled = "✗",
       },
-    },
-    keymaps = {
-      toggle_package_expand = "l",
-      toggle_package_install_log = "l",
+      keymaps = {
+        toggle_package_expand = "l",
+        toggle_package_install_log = "l",
+      },
     },
   },
   config = function(_, opts)
