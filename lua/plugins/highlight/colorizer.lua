@@ -57,7 +57,7 @@ return {
     options = {
       parsers = {
         names = {
-          enabled = false,
+          enable = false,
           lowercase = false,
           camelcase = false,
         },
