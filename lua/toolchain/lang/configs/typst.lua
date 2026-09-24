@@ -26,9 +26,9 @@ return {
   on_attach = function(bufnr)
     vim.bo[bufnr].spelllang = "en_us"
 
-    vim.wo.wrap = true
-    vim.wo.linebreak = true
-    vim.wo.breakindent = true
-    vim.wo.spell = true
+    vim.wo[0][0].wrap = true
+    vim.wo[0][0].linebreak = true
+    vim.wo[0][0].breakindent = true
+    vim.wo[0][0].spell = true
   end,
 }
