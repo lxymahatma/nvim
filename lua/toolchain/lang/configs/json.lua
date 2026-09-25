@@ -9,11 +9,6 @@ return {
     "json",
     "json5",
   },
-  mason = {
-    "jsonls",
-    "jsonlint",
-  },
+  mason = "jsonls",
   lsp = "jsonls",
-  -- jsonlint rejects comments, so keep it off jsonc/json5
-  linter = { json = "jsonlint" },
 }
