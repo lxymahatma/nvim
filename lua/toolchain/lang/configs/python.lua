@@ -5,7 +5,9 @@ return {
     "ty",
     "ruff",
   },
-  lsp = "ty",
-  linter = "ruff",
-  formatter = "ruff",
+  lsp = {
+    "ty",
+    "ruff",
+  },
+  formatter = "ruff_format",
 }
