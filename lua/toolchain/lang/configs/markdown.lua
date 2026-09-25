@@ -1,3 +1,5 @@
+local markview_ft = { "markdown", "html", "tex", "typst", "yaml" }
+
 ---@type LanguageSpec
 return {
   treesitter = {
@@ -13,7 +15,7 @@ return {
   formatter = "markdownlint-cli2",
   plugin = {
     "OXY2DEV/markview.nvim",
-    ft = { "markdown", "html", "tex", "typst", "yaml" },
+    ft = markview_ft,
     opts = function()
       local presets = require("markview.presets")
 
@@ -57,5 +59,19 @@ return {
         },
       }
     end,
+  },
+  keymaps = {
+    {
+      mode = "n",
+      lhs = "<leader>up",
+      rhs = "<cmd>Markview<cr>",
+      opts = { ft = markview_ft, desc = "Toggle Preview" },
+    },
+    {
+      mode = "n",
+      lhs = "<leader>uP",
+      rhs = "<cmd>Markview splitToggle<cr>",
+      opts = { ft = markview_ft, desc = "Toggle Split Preview" },
+    },
   },
 }
