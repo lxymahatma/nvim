@@ -16,7 +16,6 @@ return {
       { "<leader>d", group = "Debug" },
       { "<leader>f", group = "Find" },
       { "<leader>g", group = "Git" },
-      { "<leader>gh", group = "Hunk" },
       { "<leader>l", group = "Lazy" },
       { "<leader>o", group = "Overseer" },
       { "<leader>s", group = "Search" },
