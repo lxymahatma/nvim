@@ -15,9 +15,9 @@ return {
       self.filename = self.filename:sub(1, self.filename_max_length) .. "..."
     end
 
-    local diagnostics = vim.diagnostic.get(self.bufnr)
-    self.errors = #vim.tbl_filter(function(d) return d.severity == vim.diagnostic.severity.ERROR end, diagnostics)
-    self.warnings = #vim.tbl_filter(function(d) return d.severity == vim.diagnostic.severity.WARN end, diagnostics)
+    local counts = vim.diagnostic.count(self.bufnr)
+    self.errors = counts[vim.diagnostic.severity.ERROR] or 0
+    self.warnings = counts[vim.diagnostic.severity.WARN] or 0
     self.has_errors = self.errors > 0
     self.has_warnings = self.warnings > 0
 
