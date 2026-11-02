@@ -10,4 +10,5 @@ return {
     "scss",
   },
   formatter = true,
+  exclusive = "web-formatter",
 }

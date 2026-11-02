@@ -8,5 +8,5 @@ return {
   },
   lsp = "biome",
   formatter = true,
-  linter = "biomejs",
+  exclusive = "web-formatter",
 }
