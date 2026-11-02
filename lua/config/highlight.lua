@@ -14,6 +14,8 @@ Snacks.util.set_hl({
   TabInactive = { fg = colors.overlay0 },
   Enabled = { fg = colors.green },
   Disabled = { fg = colors.overlay0 },
+  Blocked = { fg = colors.red },
+  BlockedBy = { fg = colors.overlay0, italic = true },
   Name = { fg = colors.text },
   TypeLang = { fg = colors.yellow },
   TypeTool = { fg = colors.sky },

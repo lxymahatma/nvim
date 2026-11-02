@@ -1,5 +1,3 @@
-require("helpers.storage").init()
-
 local colorscheme = "catppuccin-nvim"
 
 -- leader key

@@ -44,15 +44,16 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-local lang_parser = require("toolchain.lang.parser")
-local filetypes = lang_parser.get_filetypes()
-local group = vim.api.nvim_create_augroup("LangConfig", { clear = true })
+local toolchain = require("toolchain")
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = group,
-  pattern = filetypes,
+  group = vim.api.nvim_create_augroup("Toolchain", { clear = true }),
   callback = function(args)
-    local ft_config = lang_parser.get_config_by_ft(args.match)
-    if ft_config and ft_config.on_attach then ft_config.on_attach(args.buf) end
+    local cfg = toolchain.get_config_by_ft(args.match)
+    if not cfg then return end
+
+    for _, on_attach in ipairs(cfg.on_attach) do
+      on_attach(args.buf)
+    end
   end,
 })

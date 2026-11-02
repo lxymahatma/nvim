@@ -1,53 +1,132 @@
 local loader = require("toolchain.loader")
-local lang_parser = require("toolchain.lang.parser")
-local tool_parser = require("toolchain.tool.parser")
 local table_helper = require("helpers.table")
+
+---@class ToolchainFtConfig
+---@field treesitter string[]
+---@field lsp string[]
+---@field formatters? conform.FiletypeFormatterInternal
+---@field linters? string[]
+---@field on_attach fun(bufnr: integer)[]
+
+---@class ToolchainCache
+---@field configs_by_ft table<string, ToolchainFtConfig> Configurations by filetype
+---@field parsers string[] Treesitter parsers to install
+---@field mason MasonPackageSpec[] Mason packages to install
+---@field servers table<string, vim.lsp.Config> LSP server configurations
+---@field formatter_opts table<string, conform.FormatterConfigOverride> Conform formatter overrides
+---@field plugins LazyPluginSpec[] Extra plugins
+---@field keymaps snacks.Keymap[]
+
+---@type ToolchainCache
+local cache = {
+  configs_by_ft = {},
+  parsers = {},
+  mason = {},
+  servers = {},
+  formatter_opts = {},
+  plugins = {},
+  keymaps = {},
+}
 
 local M = {}
 
+---@param spec ToolchainParsedSpec
+local function add_spec(spec)
+  vim.list_extend(cache.parsers, spec.parsers)
+  vim.list_extend(cache.mason, spec.mason)
+  vim.list_extend(cache.plugins, spec.plugins)
+  cache.formatter_opts = vim.tbl_deep_extend("force", cache.formatter_opts, spec.formatter_opts)
+
+  for server, config in pairs(spec.servers) do
+    cache.servers[server] = vim.tbl_deep_extend("force", cache.servers[server] or {}, config)
+  end
+
+  for _, km in ipairs(spec.keymaps) do
+    local opts = vim.tbl_extend("keep", km.opts or {}, { ft = spec.filetypes })
+    table.insert(cache.keymaps, { mode = km.mode, lhs = km.lhs, rhs = km.rhs, opts = opts })
+  end
+
+  local servers = vim.tbl_keys(spec.servers)
+  table.sort(servers)
+  for _, ft in ipairs(spec.filetypes) do
+    cache.configs_by_ft[ft] = cache.configs_by_ft[ft] or { treesitter = {}, lsp = {}, on_attach = {} }
+    local config = cache.configs_by_ft[ft]
+    vim.list_extend(config.treesitter, spec.parsers)
+    vim.list_extend(config.lsp, servers)
+    if spec.on_attach then table.insert(config.on_attach, spec.on_attach) end
+  end
+
+  -- A later spec's formatters replace an earlier one's
+  for ft, formatters in pairs(spec.formatters) do
+    cache.configs_by_ft[ft].formatters = formatters
+  end
+
+  -- Linters of all specs are merged
+  for ft, linters in pairs(spec.linters) do
+    local config = cache.configs_by_ft[ft]
+    config.linters = table_helper.list_merge(config.linters or {}, linters)
+  end
+end
+
 function M.setup()
-  loader.load()
-  lang_parser.load_all()
-  tool_parser.load_all()
+  for _, spec in ipairs(loader.load()) do
+    add_spec(spec)
+  end
 end
 
----@param filetype string
-function M.get_config_by_ft(filetype)
-  local lang_cfg = lang_parser.get_config_by_ft(filetype)
-  local tool_cfg = tool_parser.get_config_by_ft(filetype)
-
-  if not lang_cfg and not tool_cfg then return nil end
-  return vim.tbl_deep_extend("force", lang_cfg or {}, tool_cfg or {})
+--- Get configuration for a specific filetype
+---@param ft string
+---@return ToolchainFtConfig?
+function M.get_config_by_ft(ft)
+  return cache.configs_by_ft[ft]
 end
 
+--- Get all treesitter parsers
+---@return string[]
+function M.get_treesitter_parsers()
+  return cache.parsers
+end
+
+--- Get all mason packages
 ---@return MasonPackageSpec[]
 function M.get_mason_packages()
-  return table_helper.list_merge(lang_parser.get_mason_packages(), tool_parser.get_mason_packages())
+  return cache.mason
 end
 
----@return table<string, vim.lsp.ClientConfig>
+--- Get all LSP server configurations
+---@return table<string, vim.lsp.Config>
 function M.get_lsp_servers()
-  return vim.tbl_extend("force", lang_parser.get_lsp_servers(), tool_parser.get_lsp_servers())
+  return cache.servers
 end
 
----@return table<string, conform.FiletypeFormatter>
+--- Get formatters by filetype
+---@return table<string, conform.FiletypeFormatterInternal>
 function M.get_formatters()
-  return vim.tbl_deep_extend("force", lang_parser.get_formatters(), tool_parser.get_formatters())
+  return vim.tbl_map(function(config) return config.formatters end, cache.configs_by_ft)
 end
 
+--- Get all conform formatter overrides
 ---@return table<string, conform.FormatterConfigOverride>
 function M.get_formatter_overrides()
-  return vim.tbl_deep_extend("force", lang_parser.get_formatter_overrides(), tool_parser.get_formatter_overrides())
+  return cache.formatter_opts
 end
 
+--- Get linters by filetype
 ---@return table<string, string[]>
 function M.get_linters()
-  return vim.tbl_extend("force", lang_parser.get_linters(), tool_parser.get_linters())
+  return vim.tbl_map(function(config) return config.linters end, cache.configs_by_ft)
 end
 
+--- Get all extra plugins
 ---@return LazyPluginSpec[]
 function M.get_extra_plugins()
-  return table_helper.list_merge(lang_parser.get_extra_plugins(), tool_parser.get_extra_plugins())
+  return cache.plugins
+end
+
+--- Get all keymaps
+---@return snacks.Keymap[]
+function M.get_keymaps()
+  return cache.keymaps
 end
 
 return M

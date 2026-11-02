@@ -1,10 +1,5 @@
 local M = {}
 
-M.toolchain_types = {
-  "lang",
-  "tool",
-}
-
 M.default_parsers = {
   "diff",
   "query",
@@ -32,12 +27,15 @@ M.default_tools = {
   "harper",
 }
 
+---@type ToolchainTypeConfig[]
+M.toolchain_types = {
+  { name = "lang", defaults = M.default_langs },
+  { name = "tool", defaults = M.default_tools },
+}
+
 M.storage_dir = vim.fn.stdpath("data") .. "/storage"
 
 M.picker_dir = vim.fn.stdpath("config") .. "/lua/config/pickers"
-
-M.lang_dir = vim.fn.stdpath("config") .. "/lua/toolchain/lang/configs"
-M.tool_dir = vim.fn.stdpath("config") .. "/lua/toolchain/tool/configs"
 
 M.filetypes = {
   web = {

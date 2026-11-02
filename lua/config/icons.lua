@@ -38,6 +38,7 @@ M.RightComponentSep = ""
 M.toolchain = {
   enabled = "",
   disabled = "",
+  blocked = "",
   default = "★",
   tab_active = "●",
   tab_inactive = "○",

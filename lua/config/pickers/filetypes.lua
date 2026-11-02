@@ -23,8 +23,8 @@ function M.find()
 
     return {
       text = ft,
-      treesitter = cfg.treesitter or {},
-      lsp = cfg.lsp or {},
+      treesitter = cfg.treesitter,
+      lsp = cfg.lsp,
       formatters = cfg.formatters or {},
       linters = cfg.linters or {},
       has_config = true,
