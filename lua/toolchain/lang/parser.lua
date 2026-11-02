@@ -79,20 +79,15 @@ local function parse_spec(lang_name, spec)
       ---@cast spec.mason string
       table.insert(M._cache.mason_packages, spec.mason)
     elseif type(spec.mason) == "table" then
-      if type(spec.mason[1]) == "string" then
-        if type(spec.mason[2]) == "string" then
-          -- mason = { "package1", "package2" }
-          ---@cast spec.mason string[]
-          vim.list_extend(M._cache.mason_packages, spec.mason)
-        elseif spec.mason.condition ~= nil then
-          -- mason = { "package", condition = {...} }
-          ---@cast spec.mason MasonPackageStruct
-          table.insert(M._cache.mason_packages, spec.mason)
-        end
-      elseif type(spec.mason[1]) == "table" then
+      ---@cast spec.mason table
+      if vim.islist(spec.mason) then
+        -- mason = { "package1", "package2" }
         -- mason = { { "package1", ... }, { "package2", ... } }
-        ---@cast spec.mason MasonPackageSpec[]
         vim.list_extend(M._cache.mason_packages, spec.mason)
+      elseif spec.mason.condition ~= nil then
+        -- mason = { "package", condition = {...} }
+        ---@cast spec.mason MasonPackageStruct
+        table.insert(M._cache.mason_packages, spec.mason)
       end
     end
   end
