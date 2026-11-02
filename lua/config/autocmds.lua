@@ -5,7 +5,6 @@ vim.api.nvim_create_autocmd("FileType", {
     "grug-far",
     "help",
     "man",
-    "notify",
     "qf",
     "vim",
   },
