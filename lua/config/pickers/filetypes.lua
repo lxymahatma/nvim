@@ -36,7 +36,7 @@ end
 
 ---@param item FiletypeInfo
 ---@param picker snacks.Picker
----@return snacks.picker.format
+---@return snacks.picker.Highlight[]
 function M.format(item, picker)
   local align = Snacks.picker.util.align
 
@@ -147,11 +147,9 @@ M.source = {
   format = M.format,
   preview = M.preview,
 
-  ---@param picker snacks.Picker
-  ---@param item FiletypeInfo
   confirm = function(picker, item)
     picker:close()
-    vim.bo.filetype = item.text
+    if item then vim.bo.filetype = item.text end
   end,
 }
 
