@@ -79,7 +79,6 @@ return {
             ["<M-s>"] = { "flash", mode = { "n", "i" } },
             ["s"] = { "flash" },
             ["<M-t>"] = { "trouble_open", mode = { "n", "i" } },
-            ["<M-a>"] = { "sidekick_send", mode = { "n", "i" } },
           },
         },
         preview = { wo = { wrap = true } },
@@ -103,7 +102,6 @@ return {
         end,
         ---@diagnostic disable-next-line: need-check-nil
         trouble_open = function(...) return require("trouble.sources.snacks").actions.trouble_open.action(...) end,
-        sidekick_send = function(...) return require("sidekick.cli.picker.snacks").send(...) end,
       },
     },
     quickfile = { enabled = true },

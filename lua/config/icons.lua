@@ -2,13 +2,6 @@ local M = {}
 
 M.branch = " "
 
-M.copilot = {
-  Error = " ",
-  Inactive = " ",
-  Warning = " ",
-  Normal = " ",
-}
-
 M.diagnostics = {
   Error = " ",
   Warn = " ",

@@ -30,11 +30,7 @@ return {
       keymap = {
         preset = "none",
         ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
-        ["<Tab>"] = {
-          "select_and_accept",
-          function() return require("copilot.suggestion").accept() end,
-          "fallback",
-        },
+        ["<Tab>"] = { "select_and_accept", "fallback" },
         ["<Up>"] = { "select_prev", "fallback" },
         ["<Down>"] = { "select_next", "fallback" },
         ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
