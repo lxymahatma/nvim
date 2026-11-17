@@ -37,4 +37,12 @@ M.toolchain = {
   tab_inactive = "○",
 }
 
+M.dap = {
+  Stopped = "󰁕 ",
+  Breakpoint = " ",
+  BreakpointCondition = " ",
+  BreakpointRejected = " ",
+  LogPoint = ".>",
+}
+
 return M

@@ -11,6 +11,12 @@ return {
       dap.configurations = toolchain.get_dap_configurations()
       dap.adapters = toolchain.get_dap_adapters()
     end,
+    init = function()
+      for name, icon in pairs(require("config.icons").dap) do
+        vim.fn.sign_define("Dap" .. name, { text = icon, texthl = "Dap" .. name })
+      end
+      vim.fn.sign_define("DapStopped", { linehl = "debugPC" })
+    end,
     keys = {
       {
         "<leader>dB",
