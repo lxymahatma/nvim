@@ -4,7 +4,10 @@ return {
     "rust",
     "ron",
   },
-  mason = { "rust_analyzer", condition = { missing = "rust-analyzer" } },
-  lsp = "rust_analyzer",
+  mason = {
+    { "rust_analyzer", condition = { missing = "rust-analyzer" } },
+    "codelldb",
+  },
   formatter = "rustfmt",
+  plugin = { "mrcjkb/rustaceanvim", ft = "rust" },
 }
