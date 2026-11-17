@@ -2,7 +2,11 @@
 
 ---@param direction "h" | "j" | "k" | "l"
 local function term_nav(direction)
-  return vim.schedule_wrap(function() vim.cmd.wincmd(direction) end)
+  ---@param self snacks.terminal
+  return function(self)
+    -- A floating terminal gets the key itself
+    return self:is_floating() and "<C-" .. direction .. ">" or vim.schedule(function() vim.cmd.wincmd(direction) end)
+  end
 end
 
 ---@type LazyPluginSpec
