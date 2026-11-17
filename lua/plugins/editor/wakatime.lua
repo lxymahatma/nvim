@@ -1,7 +1,7 @@
 ---@type LazyPluginSpec
 return {
   "wakatime/vim-wakatime",
-  lazy = false,
+  event = "VeryLazy",
   init = function() vim.g.loaded_wakatime = 1 end,
   opts = {},
 }
