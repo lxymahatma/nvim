@@ -5,6 +5,7 @@ return {
     "mfussenegger/nvim-dap",
     dependencies = {
       "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
     },
     config = function()
       local dap, toolchain = require("dap"), require("toolchain")
@@ -121,5 +122,12 @@ return {
         mode = { "n", "x" },
       },
     },
+  },
+
+  -- DAP Virtual Text
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    lazy = true,
+    opts = {},
   },
 }
