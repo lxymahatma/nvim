@@ -8,6 +8,8 @@ local M = {}
 ---@field formatters table<string, conform.FiletypeFormatterInternal>
 ---@field formatter_opts table<string, conform.FormatterConfigOverride>
 ---@field linters table<string, string[]>
+---@field dap_configurations dap.Configuration[]
+---@field dap_adapters table<string, dap.Adapter | dap.AdapterFactory>
 ---@field plugins LazyPluginSpec[]
 ---@field keymaps snacks.Keymap[]
 ---@field on_attach? fun(bufnr: integer)
@@ -170,6 +172,8 @@ function M.parse(name, spec, type_name)
     formatters = parse_formatter(spec.formatter, filetypes, name),
     formatter_opts = spec.formatter_opts or {},
     linters = parse_linter(spec.linter, filetypes),
+    dap_configurations = spec.dap_configurations or {},
+    dap_adapters = spec.dap_adapters or {},
     plugins = parse_plugin(spec.plugin),
     keymaps = spec.keymaps or {},
     on_attach = spec.on_attach,

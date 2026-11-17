@@ -3,6 +3,11 @@ return {
   -- DAP Core
   {
     "mfussenegger/nvim-dap",
+    config = function()
+      local dap, toolchain = require("dap"), require("toolchain")
+      dap.configurations = toolchain.get_dap_configurations()
+      dap.adapters = toolchain.get_dap_adapters()
+    end,
     keys = {
       {
         "<leader>dB",
