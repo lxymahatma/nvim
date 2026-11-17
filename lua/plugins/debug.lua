@@ -3,6 +3,9 @@ return {
   -- DAP Core
   {
     "mfussenegger/nvim-dap",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+    },
     config = function()
       local dap, toolchain = require("dap"), require("toolchain")
       dap.configurations = toolchain.get_dap_configurations()
@@ -92,6 +95,13 @@ return {
     "rcarriga/nvim-dap-ui",
     dependencies = { "nvim-neotest/nvim-nio" },
     opts = {},
+    config = function(_, opts)
+      local dap, dapui = require("dap"), require("dapui")
+      dapui.setup(opts)
+      dap.listeners.after.event_initialized.dapui = function() dapui.open() end
+      dap.listeners.before.event_terminated.dapui = function() dapui.close() end
+      dap.listeners.before.event_exited.dapui = function() dapui.close() end
+    end,
     keys = {
       {
         "<leader>du",
