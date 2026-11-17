@@ -13,20 +13,9 @@ return {
       "TextChanged",
     }
 
-    local function debounce(ms, fn)
-      local timer = vim.uv.new_timer()
-      ---@cast timer uv.uv_timer_t
-      return function()
-        timer:start(ms, 0, function()
-          timer:stop()
-          vim.schedule_wrap(fn)()
-        end)
-      end
-    end
-
     vim.api.nvim_create_autocmd(events, {
       group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
-      callback = debounce(100, function() require("lint").try_lint() end),
+      callback = Snacks.util.debounce(function() require("lint").try_lint() end, { ms = 100 }),
     })
   end,
 }
