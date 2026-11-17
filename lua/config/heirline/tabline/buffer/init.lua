@@ -16,10 +16,8 @@ return {
     end
 
     local counts = vim.diagnostic.count(self.bufnr)
-    self.errors = counts[vim.diagnostic.severity.ERROR] or 0
-    self.warnings = counts[vim.diagnostic.severity.WARN] or 0
-    self.has_errors = self.errors > 0
-    self.has_warnings = self.warnings > 0
+    self.has_errors = counts[vim.diagnostic.severity.ERROR] ~= nil
+    self.has_warnings = counts[vim.diagnostic.severity.WARN] ~= nil
 
     local current_width = 4 + #self.filename
     local padding_needed = math.max(0, self.buffer_min_width - current_width) --[[@as integer]]
