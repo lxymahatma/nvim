@@ -7,14 +7,8 @@ return {
   config = vim.schedule_wrap(function()
     require("config.keymaps.lsp")
 
-    Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
-      ---@cast buffer integer
-      vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
-    end)
-    Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
-      ---@cast buffer integer
-      vim.lsp.codelens.enable(true, { bufnr = buffer })
-    end)
+    vim.lsp.inlay_hint.enable(true)
+    vim.lsp.codelens.enable(true)
 
     local servers = require("toolchain").get_lsp_servers()
     for server, config in pairs(servers) do
