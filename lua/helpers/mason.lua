@@ -61,6 +61,8 @@ function M.install_package(pkg_name)
   end
 
   ---@cast pkg Package
+  if pkg:is_installing() then return end
+
   local function install_package()
     pkg:once("install:success", function()
       vim.schedule(function() vim.notify(("[mason.nvim] %s installation complete"):format(pkg_name)) end)
