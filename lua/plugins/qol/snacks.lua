@@ -133,4 +133,13 @@ return {
       notification_history = { wo = { wrap = true } },
     },
   },
+  config = function(_, opts)
+    table.insert(require("snacks.image.terminal").envs(), {
+      name = "rex",
+      terminal = "rex",
+      supported = true,
+      placeholders = true,
+    })
+    require("snacks").setup(opts)
+  end,
 }
