@@ -1,6 +1,6 @@
 ---@type overseer.TemplateFileDefinition
 return {
-  name = "clangd build",
+  name = "clang build",
   builder = function()
     local file = vim.fn.expand("%:p")
     return {
