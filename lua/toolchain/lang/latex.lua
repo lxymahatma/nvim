@@ -10,7 +10,7 @@ return {
   formatter = "tex-fmt",
   plugin = {
     "lervag/vimtex",
-    ft = { "tex", "bib", "cls" },
+    ft = { "tex", "bib" },
     init = function() vim.g.vimtex_view_method = "zathura" end,
   },
 }
