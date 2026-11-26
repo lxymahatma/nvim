@@ -13,7 +13,7 @@ return {
     local servers = require("toolchain").get_lsp_servers()
     for server, config in pairs(servers) do
       vim.lsp.config(server, config)
-      vim.lsp.enable(server)
     end
+    vim.lsp.enable(vim.tbl_keys(servers))
   end),
 }
