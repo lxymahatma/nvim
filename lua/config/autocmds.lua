@@ -6,7 +6,6 @@ vim.api.nvim_create_autocmd("FileType", {
     "help",
     "man",
     "qf",
-    "vim",
   },
   callback = function(args)
     vim.bo[args.buf].buflisted = false
