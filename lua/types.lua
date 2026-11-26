@@ -25,6 +25,8 @@
 ---@class FiletypeInfo: snacks.picker.Item
 ---@field treesitter string[]
 ---@field lsp string[]
+---@field running string[]
 ---@field formatters string[]
 ---@field linters string[]
----@field has_config boolean
+---@field dap dap.Configuration[]
+---@field active boolean

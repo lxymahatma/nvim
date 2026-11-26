@@ -1,37 +1,58 @@
+local table_helper = require("helpers.table")
+
 local M = {}
 
----@type FiletypeInfo[]?
-local cache = nil
+---@type string[]?
+local filetypes = nil
 
 ---@return FiletypeInfo[]
 function M.find()
-  if cache then return cache end
+  filetypes = filetypes or vim.fn.getcompletion("", "filetype")
 
-  cache = vim.tbl_map(function(ft)
-    local cfg = require("toolchain").get_config_by_ft(ft)
+  local installed = {}
+  for _, path in ipairs(vim.api.nvim_get_runtime_file("parser/*", true)) do
+    installed[vim.fn.fnamemodify(path, ":t:r")] = true
+  end
 
-    if not cfg then
-      return {
-        text = ft,
-        treesitter = {},
-        lsp = {},
-        formatters = {},
-        linters = {},
-        has_config = false,
-      }
+  ---@type table<string, table<string, boolean>>
+  local clients = {}
+  for _, client in ipairs(vim.lsp.get_clients()) do
+    for buf in pairs(client.attached_buffers) do
+      local ft = vim.bo[buf].filetype
+      clients[ft] = clients[ft] or {}
+      clients[ft][client.name] = true
     end
+  end
+
+  local formatters_by_ft = require("conform").formatters_by_ft
+  local linters_by_ft = require("lint").linters_by_ft
+  local dap_configurations = require("dap").configurations
+
+  return vim.tbl_map(function(ft)
+    local lang = vim.treesitter.language.get_lang(ft)
+    local treesitter = installed[lang] and { lang } or {}
+
+    local running = vim.tbl_keys(clients[ft] or {})
+    local configs = vim.lsp.get_configs({ enabled = true, filetype = ft })
+    local enabled = vim.tbl_map(function(config) return config.name end, configs)
+    local lsp = vim.list.unique(table_helper.list_merge(enabled, running))
+    table.sort(lsp)
+
+    local formatters = formatters_by_ft[ft] or {}
+    local linters = linters_by_ft[ft] or {}
+    local dap = dap_configurations[ft] or {}
 
     return {
       text = ft,
-      treesitter = cfg.treesitter,
-      lsp = cfg.lsp,
-      formatters = cfg.formatters or {},
-      linters = cfg.linters or {},
-      has_config = true,
+      treesitter = treesitter,
+      lsp = lsp,
+      running = running,
+      formatters = formatters,
+      linters = linters,
+      dap = dap,
+      active = #treesitter > 0 or #lsp > 0 or #formatters > 0 or #linters > 0 or #dap > 0,
     }
-  end, vim.fn.getcompletion("", "filetype"))
-
-  return cache
+  end, filetypes)
 end
 
 ---@param item FiletypeInfo
@@ -49,20 +70,24 @@ function M.format(item, picker)
   local lsp_icon = #item.lsp > 0 and "" or " "
   local fmt_icon = #item.formatters > 0 and "󰉼" or " "
   local lint_icon = #item.linters > 0 and "󰁨" or " "
+  local dap_icon = #item.dap > 0 and "󰃤" or " "
 
-  local name_width = width - 10
+  local lsp_running = #item.running == #item.lsp
+
+  local name_width = width - 12
   local icon_width = 2
 
   return {
     { align(ft_icon, icon_width), ft_hl },
     {
       align(item.text, name_width, { truncate = true }),
-      item.has_config and "" or "SnacksPickerDimmed",
+      item.active and "" or "SnacksPickerDimmed",
     },
     { align(ts_icon, icon_width), "SnacksPickerFtTreesitter" },
-    { align(lsp_icon, icon_width), "SnacksPickerFtLsp" },
+    { align(lsp_icon, icon_width), lsp_running and "SnacksPickerFtLsp" or "SnacksPickerDimmed" },
     { align(fmt_icon, icon_width), "SnacksPickerFtFormatter" },
     { align(lint_icon, icon_width), "SnacksPickerFtLinter" },
+    { align(dap_icon, icon_width), "SnacksPickerFtDap" },
   }
 end
 
@@ -74,29 +99,20 @@ function M.preview(ctx)
   lines[#lines + 1] = "# " .. item.text
   lines[#lines + 1] = ""
 
-  if not item.has_config then
-    lines[#lines + 1] = "**Status**: ✗ Not configured"
-    lines[#lines + 1] = ""
-    ctx.preview:set_lines(lines)
-    ctx.preview:highlight({ ft = "markdown" })
-    return
-  end
-
-  lines[#lines + 1] = "**Status**: ✓ Configured"
-  lines[#lines + 1] = ""
-
   -- Treesitter
-  lines[#lines + 1] = "##  Treesitter"
-  for _, parser in ipairs(item.treesitter) do
-    lines[#lines + 1] = "- " .. parser
+  if #item.treesitter > 0 then
+    lines[#lines + 1] = "##  Treesitter"
+    for _, parser in ipairs(item.treesitter) do
+      lines[#lines + 1] = "- " .. parser
+    end
+    lines[#lines + 1] = ""
   end
-  lines[#lines + 1] = ""
 
   -- LSP
   if #item.lsp > 0 then
     lines[#lines + 1] = "##  LSP Servers"
     for _, server in ipairs(item.lsp) do
-      lines[#lines + 1] = "- " .. server
+      lines[#lines + 1] = "- " .. server .. (vim.list_contains(item.running, server) and " (running)" or "")
     end
     lines[#lines + 1] = ""
   end
@@ -115,6 +131,15 @@ function M.preview(ctx)
     lines[#lines + 1] = "## 󰁨 Linters"
     for _, linter in ipairs(item.linters) do
       lines[#lines + 1] = "- " .. linter
+    end
+    lines[#lines + 1] = ""
+  end
+
+  -- DAP
+  if #item.dap > 0 then
+    lines[#lines + 1] = "## 󰃤 Debug Configurations"
+    for _, config in ipairs(item.dap) do
+      lines[#lines + 1] = "- " .. config.name
     end
     lines[#lines + 1] = ""
   end
@@ -141,7 +166,7 @@ M.source = {
       { win = "preview", height = 0, border = true, title = "{preview}" },
     },
   },
-  sort = { fields = { "has_config", "text" } },
+  sort = { fields = { "active", "text" } },
   matcher = { sort_empty = true },
   finder = M.find,
   format = M.format,

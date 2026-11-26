@@ -6,6 +6,7 @@ Snacks.util.set_hl({
   Lsp = { fg = colors.blue },
   Formatter = { fg = colors.peach },
   Linter = { fg = colors.red },
+  Dap = { fg = colors.mauve },
 }, { prefix = "SnacksPickerFt", default = true })
 
 -- Toolchain UI highlights
