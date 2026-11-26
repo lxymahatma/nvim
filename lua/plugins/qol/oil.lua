@@ -21,7 +21,6 @@ return {
         ["\\"] = { "actions.select", opts = { horizontal = true } },
         ["|"] = { "actions.select", opts = { vertical = true } },
         ["<C-t>"] = { "actions.select", opts = { tab = true } },
-        ["<C-r>"] = "actions.refresh",
         ["<C-p>"] = "actions.preview",
         ["<C-c>"] = { "actions.close", mode = "n" },
         ["<S-h>"] = { "actions.toggle_hidden", mode = "n" },
