@@ -9,7 +9,7 @@ return {
       ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
     },
     filetype = {
-      dotenv = { glyph = "", hl = "MiniIconsYellow" },
+      env = { glyph = "", hl = "MiniIconsYellow" },
     },
   },
   init = function() require("mini.icons").mock_nvim_web_devicons() end,
