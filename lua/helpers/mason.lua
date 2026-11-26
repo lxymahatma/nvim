@@ -3,7 +3,6 @@ local mr = require("mason-registry")
 local mappings = {
   bashls = "bash-language-server",
   cssls = "css-lsp",
-  docker_compose_language_service = "docker-compose-language-service",
   docker_language_server = "docker-language-server",
   dockerls = "dockerfile-language-server",
   html = "html-lsp",
