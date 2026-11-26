@@ -54,6 +54,7 @@ return {
         preview = {
           enable = true,
           enable_hybrid_mode = true,
+          hybrid_modes = { "n" },
           linewise_hybrid_mode = true,
           icon_provider = "mini",
         },
