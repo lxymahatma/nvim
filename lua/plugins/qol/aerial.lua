@@ -23,7 +23,6 @@ return {
       "Package",
       "Property",
       "Struct",
-      "Trait",
     },
     show_guides = true,
   },

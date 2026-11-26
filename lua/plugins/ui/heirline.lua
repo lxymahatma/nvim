@@ -16,7 +16,6 @@ return {
         disable_winbar_cb = function(args)
           return conditions.buffer_matches({
             buftype = { "nofile" },
-            filetype = { "snacks_picker_list" },
           }, args.buf)
         end,
       },
