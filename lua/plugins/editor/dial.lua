@@ -33,12 +33,6 @@ return {
           augend.date.alias["%Y/%m/%d"],
           augend.date.alias["%m/%d/%Y"],
           augend.date.alias["%Y年%-m月%-d日"],
-          augend.date.new({
-            pattern = "%Y/%m/%d",
-            default_kind = "day",
-            only_valid = true,
-            word = false,
-          }),
           augend.semver.alias.semver,
         },
         lua = {
