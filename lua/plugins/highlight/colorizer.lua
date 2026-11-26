@@ -56,11 +56,7 @@ return {
 
     options = {
       parsers = {
-        names = {
-          enable = false,
-          lowercase = false,
-          camelcase = false,
-        },
+        names = { enable = false },
         -- `default = true` turns on every hex format that isn't set explicitly
         hex = { default = true },
       },
