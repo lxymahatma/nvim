@@ -29,8 +29,7 @@ function M.find(opts, ctx)
     return function() end
   end
 
-  local absolute = (opts.dirs and #opts.dirs > 0) or opts.buffers or opts.rtp
-  local cwd = not absolute and svim.fs.normalize(opts and opts.cwd or vim.uv.cwd() or ".") or nil
+  local cwd = vim.fs.normalize(opts.cwd or vim.uv.cwd() or ".")
   local cmd, args = get_cmd(opts, ctx.filter)
 
   return require("snacks.picker.source.proc").proc(ctx:opts({

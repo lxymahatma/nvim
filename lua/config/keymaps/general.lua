@@ -1,5 +1,4 @@
 local map = Snacks.keymap.set
-local del = Snacks.keymap.del
 
 -- Insert mode
 -- ctrl + h / ctrl + l move to the beginning and end of the line

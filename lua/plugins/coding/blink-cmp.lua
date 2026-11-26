@@ -42,7 +42,7 @@ return {
   },
 
   -- Completion Icon and Highlighting
-    ---@type LazyPluginSpec
+  ---@type LazyPluginSpec
   {
     "saghen/blink.cmp",
     opts = function(_, opts)

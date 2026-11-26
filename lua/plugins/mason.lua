@@ -1,4 +1,4 @@
----@type LazyPluginSpec[]
+---@type LazyPluginSpec
 return {
   "mason-org/mason.nvim",
   event = "VeryLazy",
