@@ -1,4 +1,4 @@
-local markview_ft = { "markdown", "html", "tex", "typst", "yaml" }
+local markview_ft = { "markdown", "typst" }
 
 ---@type LanguageSpec
 return {
