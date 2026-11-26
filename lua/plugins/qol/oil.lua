@@ -6,7 +6,7 @@ return {
   opts = function()
     local hidden_names = {
       ".DS_Store",
-      "thumbs.db",
+      "Thumbs.db",
     }
     local hidden_set = require("helpers.table").to_set(hidden_names)
 
