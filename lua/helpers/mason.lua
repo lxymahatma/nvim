@@ -34,12 +34,13 @@ function M.ensure_packages_installed(package_list)
           -- { "package", condition = function() ... end }
           should_install = condition()
         elseif type(condition) == "table" then
+          local installed = mr.is_installed(mappings[pkg_name] or pkg_name)
           if condition.missing == true then
             -- { "package", condition = { missing = true } }
-            should_install = vim.fn.executable(pkg_name) == 0
+            should_install = installed or vim.fn.executable(pkg_name) == 0
           elseif type(condition.missing) == "string" then
             -- { "package", condition = { missing = "executable" } }
-            should_install = vim.fn.executable(condition.missing) == 0
+            should_install = installed or vim.fn.executable(condition.missing) == 0
           end
         end
       end
