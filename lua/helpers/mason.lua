@@ -32,10 +32,8 @@ function M.ensure_packages_installed(package_list)
 
         if type(condition) == "function" then
           -- { "package", condition = function() ... end }
-          ---@cast condition fun(): boolean
           should_install = condition()
         elseif type(condition) == "table" then
-          ---@cast condition ConditionOptions
           if condition.missing == true then
             -- { "package", condition = { missing = true } }
             should_install = vim.fn.executable(pkg_name) == 0

@@ -4,7 +4,7 @@
 ---@class ConditionOptions
 ---@field missing? string | boolean If string, checks that specific executable. If true, use the package name as executable name.
 
----@alias ConditionSpec fun(): boolean | ConditionOptions
+---@alias ConditionSpec (fun(): boolean) | ConditionOptions
 
 ---@class MasonPackageStruct
 ---@field [1] string Package name
