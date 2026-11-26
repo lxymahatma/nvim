@@ -76,6 +76,9 @@ return {
         grep = {
           hidden = true,
         },
+        grep_word = {
+          hidden = true,
+        },
       },
       win = {
         input = {
