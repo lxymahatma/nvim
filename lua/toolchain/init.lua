@@ -1,32 +1,30 @@
 local loader = require("toolchain.loader")
 local table_helper = require("helpers.table")
 
----@class ToolchainFtConfig
----@field treesitter string[]
----@field lsp string[]
----@field formatters? conform.FiletypeFormatterInternal
----@field linters? string[]
----@field dap_configurations dap.Configuration[]
----@field on_attach fun(bufnr: integer)[]
-
 ---@class ToolchainCache
----@field configs_by_ft table<string, ToolchainFtConfig> Configurations by filetype
 ---@field parsers string[] Treesitter parsers to install
 ---@field mason MasonPackageSpec[] Mason packages to install
 ---@field servers table<string, vim.lsp.Config> LSP server configurations
+---@field formatters table<string, conform.FiletypeFormatterInternal> Conform formatters by filetype
 ---@field formatter_opts table<string, conform.FormatterConfigOverride> Conform formatter overrides
+---@field linters table<string, string[]> nvim-lint linters by filetype
+---@field dap_configurations table<string, dap.Configuration[]> nvim-dap configurations by filetype
 ---@field dap_adapters table<string, dap.Adapter | dap.AdapterFactory> nvim-dap adapters
+---@field on_attach table<string, fun(bufnr: integer)[]> `on_attach` functions by filetype
 ---@field plugins LazyPluginSpec[] Extra plugins
----@field keymaps snacks.Keymap[]
+---@field keymaps snacks.Keymap[] Filetype keymaps
 
 ---@type ToolchainCache
 local cache = {
-  configs_by_ft = {},
   parsers = {},
   mason = {},
   servers = {},
+  formatters = {},
   formatter_opts = {},
+  linters = {},
+  dap_configurations = {},
   dap_adapters = {},
+  on_attach = {},
   plugins = {},
   keymaps = {},
 }
@@ -50,32 +48,17 @@ local function add_spec(spec)
     table.insert(cache.keymaps, { mode = km.mode, lhs = km.lhs, rhs = km.rhs, opts = opts })
   end
 
-  local servers = vim.tbl_keys(spec.servers)
-  table.sort(servers)
   for _, ft in ipairs(spec.filetypes) do
-    cache.configs_by_ft[ft] = cache.configs_by_ft[ft]
-      or {
-        treesitter = {},
-        lsp = {},
-        dap_configurations = {},
-        on_attach = {},
-      }
-    local config = cache.configs_by_ft[ft]
-    vim.list_extend(config.treesitter, spec.parsers)
-    vim.list_extend(config.lsp, servers)
-    vim.list_extend(config.dap_configurations, spec.dap_configurations)
-    if spec.on_attach then table.insert(config.on_attach, spec.on_attach) end
+    cache.dap_configurations[ft] = table_helper.list_merge(cache.dap_configurations[ft] or {}, spec.dap_configurations)
+    cache.on_attach[ft] = table_helper.list_merge(cache.on_attach[ft] or {}, { spec.on_attach })
   end
 
   -- A later spec's formatters replace an earlier one's
-  for ft, formatters in pairs(spec.formatters) do
-    cache.configs_by_ft[ft].formatters = formatters
-  end
+  cache.formatters = vim.tbl_extend("force", cache.formatters, spec.formatters)
 
   -- Linters of all specs are merged
   for ft, linters in pairs(spec.linters) do
-    local config = cache.configs_by_ft[ft]
-    config.linters = table_helper.list_merge(config.linters or {}, linters)
+    cache.linters[ft] = table_helper.list_merge(cache.linters[ft] or {}, linters)
   end
 end
 
@@ -83,13 +66,6 @@ function M.setup()
   for _, spec in ipairs(loader.load()) do
     add_spec(spec)
   end
-end
-
---- Get configuration for a specific filetype
----@param ft string
----@return ToolchainFtConfig?
-function M.get_config_by_ft(ft)
-  return cache.configs_by_ft[ft]
 end
 
 --- Get all treesitter parsers
@@ -113,7 +89,7 @@ end
 --- Get formatters by filetype
 ---@return table<string, conform.FiletypeFormatterInternal>
 function M.get_formatters()
-  return vim.tbl_map(function(config) return config.formatters end, cache.configs_by_ft)
+  return cache.formatters
 end
 
 --- Get all conform formatter overrides
@@ -125,19 +101,25 @@ end
 --- Get linters by filetype
 ---@return table<string, string[]>
 function M.get_linters()
-  return vim.tbl_map(function(config) return config.linters end, cache.configs_by_ft)
+  return cache.linters
 end
 
 --- Get DAP configurations by filetype
 ---@return table<string, dap.Configuration[]>
 function M.get_dap_configurations()
-  return vim.tbl_map(function(config) return config.dap_configurations end, cache.configs_by_ft)
+  return cache.dap_configurations
 end
 
 --- Get all DAP adapters
 ---@return table<string, dap.Adapter | dap.AdapterFactory>
 function M.get_dap_adapters()
   return cache.dap_adapters
+end
+
+--- Get `on_attach` functions by filetype
+---@return table<string, fun(bufnr: integer)[]>
+function M.get_on_attach()
+  return cache.on_attach
 end
 
 --- Get all extra plugins

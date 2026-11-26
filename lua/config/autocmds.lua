@@ -48,10 +48,7 @@ local toolchain = require("toolchain")
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("Toolchain", { clear = true }),
   callback = function(args)
-    local cfg = toolchain.get_config_by_ft(args.match)
-    if not cfg then return end
-
-    for _, on_attach in ipairs(cfg.on_attach) do
+    for _, on_attach in ipairs(toolchain.get_on_attach()[args.match] or {}) do
       on_attach(args.buf)
     end
   end,
