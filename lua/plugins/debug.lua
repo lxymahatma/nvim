@@ -75,11 +75,6 @@ return {
         desc = "Toggle REPL",
       },
       {
-        "<leader>ds",
-        function() require("dap").session() end,
-        desc = "Session",
-      },
-      {
         "<leader>dt",
         function() require("dap").terminate() end,
         desc = "Terminate",
